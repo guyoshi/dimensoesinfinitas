@@ -1,0 +1,1 @@
+(()=>{const R=window.RS,{D,E,st}=R;const f=(c,a)=>`<article class="panel"><h2>${a.length} capítulos</h2><div class="list">${a.map(n=>`<div class="row click" data-go="capitulo/${n}"><strong>Capítulo ${n} — ${E(D.chapters[n-1].t)}</strong><p>${st.tab==='trajetoria'?E(D.chapters[n-1].s):''}</p></div>`).join('')}</div></article>`;R.charTabs.trajetoria=f;R.charTabs.aparicoes=f;})();
