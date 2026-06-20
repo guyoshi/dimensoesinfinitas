@@ -10,21 +10,36 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body data-theme="jesed" data-book="guerras-de-sangue">
-  <div id="particleLayer" class="particle-layer" aria-hidden="true"></div>
+  <div id="atmosphereBack" class="atmosphere-layer atmosphere-back" aria-hidden="true"></div>
+  <div id="particleLayer" class="particle-layer particle-back-layer" aria-hidden="true"></div>
+  <div id="particleFrontLayer" class="particle-layer particle-front-layer" aria-hidden="true"></div>
+  <div id="atmosphereFront" class="atmosphere-layer atmosphere-front" aria-hidden="true"></div>
   <div id="transitionVeil" class="transition-veil" aria-hidden="true"><span class="veil-mark">✦</span></div>
+
   <div id="portal" class="portal-screen"></div>
+
   <div id="appShell" class="app-shell is-hidden">
     <aside id="sidebar" class="sidebar" aria-label="Navegação principal">
       <div class="sidebar-brand">
-        <button class="brand-button" data-route="dashboard" aria-label="Ir para o início da saga"><span class="brand-sigil">⌘</span><span class="brand-copy"><strong>Ciclo de Jesed</strong><small>Arquivo cartográfico</small></span></button>
+        <button class="brand-button" data-route="dashboard" aria-label="Ir para o início da saga">
+          <span class="brand-sigil">⌘</span>
+          <span class="brand-copy"><strong>Ciclo de Jesed</strong><small>Arquivo cartográfico</small></span>
+        </button>
         <button id="sidebarToggle" class="icon-button sidebar-toggle" aria-label="Encolher painel lateral" title="Encolher painel lateral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       </div>
       <nav id="sidebarNav" class="sidebar-nav"></nav>
-      <div class="sidebar-footer"><button class="nav-item compact-only" data-action="open-settings" title="Configurações"><span class="nav-icon" data-icon="settings"></span><span class="nav-label">Configurações</span></button><div class="status-stamp"><span class="status-dot"></span><span class="status-copy">Etapa 4D</span></div></div>
+      <div class="sidebar-footer">
+        <button class="nav-item compact-only" data-action="open-settings" title="Configurações"><span class="nav-icon" data-icon="settings"></span><span class="nav-label">Configurações</span></button>
+        <div class="status-stamp"><span class="status-dot"></span><span class="status-copy">Etapa 4D</span></div>
+      </div>
     </aside>
+
     <div class="workspace">
       <header class="topbar">
-        <div class="topbar-left"><button id="mobileMenu" class="icon-button mobile-only" aria-label="Abrir menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div id="breadcrumbs" class="breadcrumbs"></div></div>
+        <div class="topbar-left">
+          <button id="mobileMenu" class="icon-button mobile-only" aria-label="Abrir menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+          <div id="breadcrumbs" class="breadcrumbs"></div>
+        </div>
         <div class="topbar-actions">
           <button id="sagaSelector" class="selector-button" aria-haspopup="dialog"><span class="selector-icon" data-icon="compass"></span><span>Ciclo de Jesed</span><span class="chevron">⌄</span></button>
           <button id="bookLens" class="selector-button book-lens" aria-haspopup="dialog"><span class="selector-icon" data-icon="book"></span><span>Guerras de Sangue</span><span class="chevron">⌄</span></button>
@@ -36,15 +51,41 @@
       <main id="mainContent" class="main-content" tabindex="-1"></main>
     </div>
   </div>
-  <div id="searchModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-search"></div><section class="modal-panel search-modal-panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle"><div class="search-box-large"><span data-icon="search"></span><input id="searchInput" type="search" autocomplete="off" placeholder="Pesquisar nome, título, alcunha ou categoria…" /><kbd>Esc</kbd></div><div class="search-mode-row"><button class="filter-chip active" data-search-mode="titles">Títulos e nomes</button><button class="filter-chip" data-search-mode="deep">Procurar em descrições</button></div><div id="searchResults" class="search-results"></div></section></div>
-  <div id="settingsDrawer" class="drawer" aria-hidden="true"><div class="drawer-backdrop" data-action="close-settings"></div><aside class="drawer-panel settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="drawer-header"><div><p class="eyebrow">Preferências locais</p><h2 id="settingsTitle">Configurações visuais</h2></div><button class="icon-button" data-action="close-settings" aria-label="Fechar configurações"><span data-icon="close"></span></button></div><div id="settingsContent" class="settings-content"></div></aside></div>
+
+  <div id="searchModal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-action="close-search"></div>
+    <section class="modal-panel search-modal-panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+      <div class="search-box-large"><span data-icon="search"></span><input id="searchInput" type="search" autocomplete="off" placeholder="Pesquisar nome, título, alcunha ou categoria…" /><kbd>Esc</kbd></div>
+      <div class="search-mode-row"><button class="filter-chip active" data-search-mode="titles">Títulos e nomes</button><button class="filter-chip" data-search-mode="deep">Procurar em descrições</button></div>
+      <div id="searchResults" class="search-results"></div>
+    </section>
+  </div>
+
+  <div id="settingsDrawer" class="drawer" aria-hidden="true">
+    <div class="drawer-backdrop" data-action="close-settings"></div>
+    <aside class="drawer-panel settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+      <div class="drawer-header"><div><p class="eyebrow">Preferências locais</p><h2 id="settingsTitle">Configurações visuais</h2></div><button class="icon-button" data-action="close-settings" aria-label="Fechar configurações"><span data-icon="close"></span></button></div>
+      <div id="settingsContent" class="settings-content"></div>
+    </aside>
+  </div>
+
   <div id="selectorModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-selector"></div><section class="modal-panel selector-modal-panel" role="dialog" aria-modal="true"><div id="selectorContent"></div></section></div>
+
   <script src="data/content.js"></script>
   <script src="data/guerras-4d-chapters.js"></script>
   <script src="data/guerras-4d-characters.js"></script>
   <script src="data/guerras-4d-events.js"></script>
-  <script src="app.js"></script>
-  <script src="etapa4d-ui.js"></script>
-  <script src="ruinas-bridge.js"></script>
+  <script src="ruinas-data.js"></script>
+  <script src="data/map-eterea-tiny.js"></script>
+  <script src="data/map-nadirion-tiny.js"></script>
+  <script src="data/map-book1-override.js"></script>
+  <script src="data/unified-adapter-packed-01.js"></script>
+  <script src="data/unified-adapter-packed-02.js"></script>
+  <script src="data/unified-adapter-packed-03.js"></script>
+  <script src="data/unified-style-packed-01.js"></script>
+  <script src="data/unified-style-packed-02.js"></script>
+  <script src="data/unified-app-packed-01.js"></script>
+  <script src="data/unified-app-packed-02.js"></script>
+  <script src="data/content-loader.js"></script>
 </body>
 </html>
