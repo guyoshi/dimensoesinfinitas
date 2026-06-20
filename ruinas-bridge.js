@@ -43,4 +43,8 @@
 
   new MutationObserver(unlockRuinas).observe(document.documentElement, { childList: true, subtree: true });
   unlockRuinas();
+
+  const musicLoader = document.createElement("script");
+  musicLoader.src = "book-music-loader.js";
+  document.head.appendChild(musicLoader);
 })();
