@@ -71,12 +71,24 @@
     setVolume(volume > 0 ? 0 : lastAudibleVolume || 0.35);
   }
 
+  function clearSource(){
+    audio.pause();
+    audio.removeAttribute('src');
+    audio.load();
+    ready = false;
+    waitingForGesture = false;
+  }
+
   function togglePower(){
-    if(missing) return;
+    if(!currentTrack) return;
     enabled = !enabled;
     write(storage.enabled, enabled);
-    if(enabled) attemptPlay();
-    else {
+    if(enabled){
+      missing = false;
+      sourceIndex = 0;
+      if(!audio.getAttribute('src')) setSource();
+      else attemptPlay();
+    }else{
       waitingForGesture = false;
       audio.pause();
       updateUi();
@@ -97,7 +109,7 @@
   }
 
   function attemptPlay(){
-    if(!enabled || missing || !currentTrack) return;
+    if(!enabled || missing || !currentTrack || !audio.getAttribute('src')) return;
     waitingForGesture = false;
     const promise = audio.play();
     if(promise && typeof promise.catch === 'function'){
@@ -130,16 +142,18 @@
     currentBook = book;
     currentTrack = config[book] || null;
     sourceIndex = 0;
-    audio.pause();
+    missing = false;
+    clearSource();
     if(titleNode) titleNode.textContent = currentTrack?.title || 'Música do livro';
-    setSource();
+    if(enabled && currentTrack) setSource();
+    else updateUi();
   }
 
   function updateUi(){
     if(!player) return;
     const isPlaying = enabled && !audio.paused && !missing;
     player.dataset.state = missing ? 'missing' : isPlaying ? 'playing' : waitingForGesture ? 'waiting' : enabled ? 'loading' : 'off';
-    powerButton.disabled = missing;
+    powerButton.disabled = !currentTrack;
     powerButton.setAttribute('aria-pressed', String(enabled));
     powerButton.setAttribute('aria-label', enabled ? 'Desligar música' : 'Ligar música');
     powerButton.title = enabled ? 'Desligar música' : 'Ligar música';
@@ -147,7 +161,7 @@
     muteButton.querySelector('span').textContent = volume === 0 ? '🔇' : '🔊';
     muteButton.setAttribute('aria-label', volume === 0 ? 'Restaurar volume' : 'Silenciar música');
     muteButton.title = volume === 0 ? 'Restaurar volume' : 'Silenciar música';
-    if(missing) statusNode.textContent = 'Adicione o áudio na pasta do livro';
+    if(missing) statusNode.textContent = 'Áudio ainda não adicionado';
     else if(waitingForGesture) statusNode.textContent = 'Clique na página para iniciar';
     else if(isPlaying) statusNode.textContent = 'Tocando em loop';
     else if(enabled && !ready) statusNode.textContent = 'Carregando música…';
