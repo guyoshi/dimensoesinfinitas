@@ -1,0 +1,1 @@
+(()=>{const R=window.RS,{E}=R;R.charTabs.conhecimento=c=>`<div class="two"><article class="panel"><h2>Conhecimento confirmado</h2><p>${E(c.s)}</p></article><article class="panel"><h2>Limites</h2><p>A ficha considera somente as revelações disponíveis ao personagem.</p></article></div>`;})();

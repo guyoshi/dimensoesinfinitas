@@ -1,0 +1,1 @@
+.avatar,.symbol{display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#e9f4ed 0 8%,transparent 9%),linear-gradient(145deg,#315f70,#88b3bc 55%,#d4c49e);color:#fff;font-size:3rem}.avatar.big,.symbol.big{font-size:5rem}.avatar b{filter:drop-shadow(0 2px 5px #173845)}

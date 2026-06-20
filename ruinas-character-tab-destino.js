@@ -1,0 +1,1 @@
+(()=>{const R=window.RS,{E}=R;R.charTabs.destino=c=>`<article class="panel"><h2>Destino escrito</h2><p class="lead">${E(c.st)}</p><p>${E(c.s)}</p></article>`;})();

@@ -1,0 +1,1 @@
+(()=>{const R=window.RS,{H,E}=R;R.pages.simples=(t,a)=>H('Planejamento',t,'')+`<div class="grid">${a.map(x=>`<article class="card"><h3>${E(x[0])}</h3><p>${E(x[1])}</p></article>`).join('')}</div>`;})();
