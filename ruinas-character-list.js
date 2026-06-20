@@ -1,0 +1,3 @@
+(()=>{const R=window.RS,{D,E,S,AP,st,H}=R;
+function personagens(){let a=D.characters.filter(x=>`${x.n} ${x.a} ${x.s} ${x.st}`.toLowerCase().includes(st.q.toLowerCase()));return H('Pessoas','Personagens','Fichas com seis abas.',`<input class="search" data-search placeholder="Pesquisar…" value="${E(st.q)}">`)+`<div class="grid">${a.map(x=>`<article class="card click" data-go="personagem/${S(x.n)}"><div class="portrait avatar"><b>${x.n.split(' ').map(y=>y[0]).slice(0,2).join('')}</b></div><p class="meta">${E(x.st)} · ${(AP[x.n]||[]).length} capítulos</p><h3>${E(x.n)}</h3><p>${E(x.s)}</p><span class="tag">${E(x.a)}</span></article>`).join('')}</div>`}
+R.pages.personagens=personagens;})();
