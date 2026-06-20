@@ -1,0 +1,1 @@
+(()=>{const R=window.RS,{E,S,REL}=R;R.charTabs.relacoes=c=>{const a=REL.filter(x=>x[0]===c.n||x[1]===c.n);return `<article class="panel"><h2>Relações</h2>${a.map(r=>`<div class="row click" data-go="personagem/${S(r[0]===c.n?r[1]:r[0])}"><strong>${E(r[0]===c.n?r[1]:r[0])}</strong><p>${E(r[2])}</p></div>`).join('')||'<p>Sem relação detalhada.</p>'}</article>`};})();
