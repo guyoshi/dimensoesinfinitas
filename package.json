@@ -1,0 +1,10 @@
+{
+  "name": "dimensoes-infinitas-4b",
+  "version": "0.5.0",
+  "private": true,
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 4B, Guerras de Sangue.",
+  "scripts": {
+    "validate": "node scripts/validate-content.js",
+    "serve": "python3 -m http.server 8080"
+  }
+}

@@ -1,0 +1,12 @@
+
+> dimensoes-infinitas-4b@0.5.0 validate
+> node scripts/validate-content.js
+
+Validação Dimensões Infinitas — 2026-06-19T15:42:32.737Z
+Entidades verificadas: 443
+Capítulos escritos: 23
+Personagens: 41
+Clãs: 8
+Itens de lore: 295
+
+OK: nenhum ID duplicado, protegido em falta, asset ausente ou referência quebrada.
