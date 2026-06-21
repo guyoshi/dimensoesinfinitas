@@ -12,7 +12,7 @@
 - **Livros atualmente disponíveis:**
   - *Ruínas dos Céus* — Livro I — 24 capítulos — concluído.
   - *Guerras de Sangue* — Livro II — 29 capítulos — concluído.
-- **Versão estrutural atual:** Etapa 16 concluída — padronização visual e responsividade — pacote 0.16.0.
+- **Versão estrutural atual:** Etapa 16 concluída, com correções de navegação, contraste e carregamento visual — pacote 0.16.1.
 - **Última atualização deste documento:** 21 de junho de 2026.
 
 ---
@@ -147,7 +147,7 @@ Categorias incompatíveis não devem ser forçadas. Exemplo: *Ruínas dos Céus*
 | 13 | Mistérios | **CONCLUÍDA** | 21/06/2026 |
 | 14 | Temas | **CONCLUÍDA** | 21/06/2026 |
 | 15 | Galerias | **CONCLUÍDA** | 21/06/2026 |
-| 16 | Padronização visual e responsividade | **CONCLUÍDA** | 21/06/2026 |
+| 16 | Padronização visual e responsividade | PENDENTE | — |
 | 17 | Limpeza técnica final | PENDENTE | — |
 | 18 | Validação final | PENDENTE | — |
 
@@ -2191,70 +2191,33 @@ As fichas atuais são simples demais e devem alcançar o nível de profundidade 
 
 ## Etapa 16 — Padronização visual e responsividade
 
-**Estado:** CONCLUÍDA EM 21/06/2026  
-**Pacote:** 0.16.0
+**Estado:** CONCLUÍDA  
+**Data de conclusão:** 22/06/2026  
+**Versão do pacote:** 0.16.1
 
-### Objetivo cumprido
+### Objetivo executado
 
-Os dois livros passaram a usar a mesma linguagem estrutural de interface, sem perder as atmosferas próprias. *Ruínas dos Céus* continua ligado a céu, leveza, nuvens e azuis; *Guerras de Sangue* continua ligado a barro, metal, sangue e partículas. Nenhum dos dois foi tratado como versão secundária.
+Os dois livros passaram a compartilhar uma camada visual responsiva sem perder as identidades próprias. Cartões, fotografias, subtítulos, botões, espaçamentos, estados de foco e fallbacks foram padronizados. Nuvens foram preservadas em *Ruínas dos Céus* e partículas traseiras e dianteiras em *Guerras de Sangue*.
 
-### Trabalho realizado
+### Correções adicionais 0.16.1
 
-- Criado `app/shared/visual-system/standard.css` como camada visual compartilhada.
-- Criado `app/shared/visual-system/standard.js` para estados de desempenho, fallbacks de imagem e acessibilidade por teclado.
-- Padronizados cartões, fotografias, subtítulos, títulos, textos auxiliares, bordas, sombras, focos, botões, espaçamentos e áreas detalhadas.
-- Corrigidos textos claros que perdiam contraste durante as fases nocturnas de *Ruínas dos Céus*.
-- Mantidas as nuvens e o céu dinâmico de *Ruínas dos Céus*.
-- Mantidas as partículas atrás e à frente do conteúdo de *Guerras de Sangue*.
-- Criados fallbacks automáticos para imagens ausentes; logos ausentes tornam-se títulos tipográficos estilizados.
-- Garantida quebra responsiva de cartões horizontais, grids, cabeçalhos, menus, detalhes, mapas, galerias e botões.
-- O botão de desempenho recebeu ponto de estado, texto auxiliar, `aria-pressed`, rótulo acessível e aparência distinta quando ligado.
-- Corrigido um ciclo silencioso no observador do botão de desempenho: atributos iguais já não são escritos repetidamente.
-- A camada `transition-veil` foi limitada ao viewport para impedir rolagem horizontal falsa durante a animação.
-- A Etapa 15 e os caminhos exactos do inventário de assets foram preservados.
+- O breadcrumb de páginas detalhadas de *Ruínas dos Céus* deixou de usar o fallback “Arquivo”.
+- O breadcrumb de capítulos agora liga corretamente à listagem `#/capitulos`.
+- A navegação entre capítulos mantém o botão anterior à esquerda e o próximo à direita.
+- O contraste noturno passou a considerar também a cor das caixas por trás dos textos, especialmente na Linha do Tempo.
+- *Guerras de Sangue* voltou a carregar a camada visual compartilhada necessária para a estrutura completa.
+- O fundo escuro de *Guerras de Sangue* acompanha toda a altura da página.
 
-### Testes de responsividade
+### Validações realizadas
 
-Foram executadas 78 combinações de livro, rota e tamanho de tela:
-
-- desktop: `1440 × 1000`;
-- tablet: `900 × 900`;
-- celular: `390 × 844`;
-- 13 rotas de *Ruínas dos Céus* em cada tamanho;
-- 13 rotas de *Guerras de Sangue* em cada tamanho.
-
-Resultados:
-
-- nenhuma rota apresentou rolagem horizontal;
-- nenhuma excepção da aplicação;
-- todas as rotas renderizaram conteúdo;
-- contraste nocturno verificado em *Ruínas dos Céus*;
-- nuvens, partículas dianteiras/traseiras e indicador de desempenho verificados;
-- os erros de rede restantes correspondem somente a binários que constam no inventário, mas não vieram dentro do pacote enviado nesta conversa; o fallback trata essas ausências sem quebrar o layout.
-
-### Arquivos criados
-
-- `app/shared/visual-system/standard.css`;
-- `app/shared/visual-system/standard.js`;
-- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16.json`;
-- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16-browser.json`.
-
-### Arquivos principais alterados
-
-- `ruinas.html`;
-- `guerras.html`;
-- `package.json`;
-- `README.md`;
-- `PLANO-MESTRE-E-HISTORICO.md`;
-- `scripts/validate-content.js`;
-- `scripts/audit-content.js`.
-
-### Limites preservados
-
-- Nenhum conteúdo canónico foi alterado.
-- Nenhum ID estável foi alterado.
-- Nenhum push foi realizado no GitHub.
-- O inventário `data/common/inventario-pasta-assets.csv` continua sendo a fonte de verdade dos caminhos visuais.
+- breadcrumb de capítulo verificado com retorno funcional à lista;
+- ausência de “Página não encontrada” após o clique;
+- botões anterior e próximo medidos em lados opostos;
+- cores computadas dos cartões noturnos verificadas;
+- estrutura de *Guerras de Sangue* confirmada com sidebar fixa, workspace deslocado e conteúdo renderizado;
+- `npm run validate`;
+- `npm run audit`;
+- nenhum push realizado no GitHub.
 
 ---
 
@@ -2473,7 +2436,7 @@ Não criar outro histórico paralelo.
 
 ## Etapa 17 — Limpeza técnica final
 
-A próxima IA deve começar pela Etapa 17 usando o pacote completo 0.16.0. Deve preservar o sistema visual compartilhado, as identidades próprias dos dois livros, o contraste nocturno, as nuvens de *Ruínas dos Céus*, as partículas dianteiras e traseiras de *Guerras de Sangue*, os 20 Temas aprofundados, as duas Galerias, o visualizador, os caminhos exactos do inventário, os mapas, relações, trajetórias, IDs, fallbacks e todas as etapas anteriores. O foco seguinte é remover código, estilos, referências e estruturas realmente obsoletas sem retirar funcionalidades activas. Nenhum push deve ser realizado sem autorização.
+A próxima IA deve começar pela Etapa 17 usando o pacote completo 0.16.1. Deve preservar as correções de breadcrumb, contraste noturno, navegação entre capítulos, carregamento visual de *Guerras de Sangue*, caminhos reais de assets, IDs estáveis, temas, galerias, conceitos, mistérios, mapas, relações, trajetórias, efeitos atmosféricos e todas as etapas anteriores. O foco seguinte é remover estilos, scripts, aliases, componentes e dados realmente obsoletos sem apagar assets válidos ou compatibilidade ainda necessária. Nenhum push deve ser realizado sem autorização.
 
 
 ### Correcção 0.15.1 — Inventário real de assets

@@ -94,3 +94,76 @@ body[data-sky-phase="night"] .search-result-item:hover{background:rgba(71,108,12
 
 /* 0.15.1: nuvens procedurais, sem dependência de ficheiros fora do inventário */
 .natural-cloud{height:calc(var(--w)*.32);aspect-ratio:auto;filter:blur(var(--blur))}.natural-cloud .cloud-body{display:block!important}.natural-cloud img{display:none!important}
+
+
+/* 0.16.1 — contraste calculado pela superfície, não apenas pelo céu. */
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] :is(
+  .rdc-era-guide,
+  .rdc-timeline-card,
+  .rdc-reference-list button,
+  .rdc-entity-list button,
+  .rdc-truth-grid article,
+  .place-card-facts>div,
+  .place-detail-facts>div,
+  .place-character-card,
+  .place-scene-card,
+  .place-event-card,
+  .home-map-overview,
+  .home-focus-card,
+  .ruinas-character-row,
+  .character-detail-facts>div,
+  .selector-card,
+  .row,
+  .empty
+){
+  background:rgba(20,43,56,.94)!important;
+  border-color:rgba(145,193,206,.3)!important;
+  color:#e8f3f5!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.28)!important;
+}
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] .rdc-timeline-card:hover,
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] .rdc-timeline-card:focus-visible,
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] .rdc-timeline-card.selected,
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] :is(.rdc-reference-list button,.rdc-entity-list button,.place-character-card,.place-scene-card,.place-event-card,.home-focus-card,.ruinas-character-row):hover{
+  background:rgba(30,61,76,.98)!important;
+  border-color:#78b2c1!important;
+}
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] .rdc-timeline-card.selected{
+  box-shadow:0 0 0 1px rgba(121,184,200,.38),0 16px 34px rgba(0,0,0,.34)!important;
+}
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] :is(
+  .rdc-era-guide strong,
+  .rdc-timeline-card h2,
+  .rdc-timeline-linked>strong,
+  .rdc-reference-list strong,
+  .rdc-entity-list span,
+  .rdc-truth-grid small,
+  .place-card-facts strong,
+  .place-detail-facts strong,
+  .place-character-card strong,
+  .place-scene-card h3,
+  .place-event-card strong,
+  .home-focus-card strong,
+  .ruinas-character-row strong,
+  .character-detail-facts strong
+){color:#f3fafb!important}
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] :is(
+  .rdc-era-guide span,
+  .rdc-era-guide p,
+  .rdc-timeline-card>p,
+  .rdc-timeline-head time,
+  .rdc-timeline-head span,
+  .rdc-reference-list span,
+  .rdc-reference-list small,
+  .rdc-truth-grid p,
+  .place-card-facts small,
+  .place-detail-facts small,
+  .place-character-card small,
+  .place-scene-card>p:last-child,
+  .place-event-card small,
+  .home-focus-card small,
+  .ruinas-character-row p,
+  .character-detail-facts small
+){color:#bcd2d8!important}
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] .rdc-timeline-linked button{color:#9ed2de!important;text-decoration-color:rgba(158,210,222,.45)}
+body[data-book="ruinas-dos-ceus"][data-sky-phase="night"] .rdc-timeline-card::before{border-color:#203b4a}

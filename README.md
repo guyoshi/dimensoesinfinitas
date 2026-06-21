@@ -1,6 +1,16 @@
 # Dimensões Infinitas — site pessoal
 
-Versão estrutural: **0.16.0 — Etapa 16 concluída**.
+Versão estrutural: **0.16.1 — Etapa 16 concluída e correções visuais aplicadas**.
+
+## Correção 0.16.1
+
+- corrigido o breadcrumb de páginas detalhadas de *Ruínas dos Céus*, removendo o link inválido “Arquivo”;
+- capítulos agora regressam corretamente para `#/capitulos`;
+- navegação entre capítulos posiciona o capítulo anterior à esquerda e o próximo à direita;
+- contraste noturno revisto por superfície, incluindo cartões da Linha do Tempo;
+- restaurada a camada visual compartilhada exigida por *Guerras de Sangue*;
+- o fundo escuro de *Guerras de Sangue* agora acompanha toda a altura do conteúdo;
+- nenhum push foi realizado no GitHub.
 
 ## Entradas públicas
 
@@ -22,8 +32,7 @@ app/
 │   ├── characters/
 │   ├── social/
 │   ├── themes/
-│   ├── gallery/
-│   └── visual-system/
+│   └── gallery/
 └── sagas/
     └── ciclo-de-jesed/
         └── books/
@@ -357,7 +366,7 @@ Arquivos principais:
 
 - *Ruínas dos Céus* recebeu uma galeria completa e *Guerras de Sangue* foi padronizada pelo mesmo sistema;
 - os filtros são gerados apenas para categorias realmente presentes;
-- os filtros activos correspondem somente a categorias com imagens presentes no inventário real;
+- Guerras preserva a categoria exclusiva de clãs e emblemas;
 - o visualizador abre a imagem em tela cheia, sobre fundo escuro, sem navegar para outra página;
 - há botões de fechar, anterior e seguinte, setas do teclado, tecla Esc, contador e legenda;
 - anterior e seguinte respeitam o filtro ativo;
@@ -372,39 +381,11 @@ Arquivos principais:
 - `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/gallery.js`;
 - `data/sagas/ciclo-de-jesed/audits/themes-galleries-etapa-14-15.json`.
 
-## Etapa 16 — padronização visual e responsividade
-
-- os dois livros usam a mesma camada estrutural para tipografia, cartões, fotografias, subtítulos, espaçamento, foco e fallbacks;
-- *Ruínas dos Céus* mantém a identidade de céu, nuvens e tons azulados, com textos claros aplicados automaticamente durante a noite;
-- *Guerras de Sangue* mantém a identidade de barro, sangue e metal, incluindo partículas atrás e à frente do conteúdo;
-- cartões horizontais, páginas detalhadas, galerias, mapas e menus foram revistos para desktop, tablet e celular;
-- a transição atmosférica foi limitada ao viewport para não provocar rolagem horizontal falsa;
-- o botão de desempenho permanece acessível e mostra estado visual e textual claro;
-- imagens ausentes recebem fallback sem quebrar a composição; logos ausentes tornam-se títulos tipográficos estilizados;
-- o observador do botão de desempenho foi protegido contra actualizações repetidas do mesmo atributo.
-
-Arquivos principais:
-
-- `app/shared/visual-system/standard.css`;
-- `app/shared/visual-system/standard.js`;
-- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16.json`;
-- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16-browser.json`.
-
-Validação da etapa:
-
-- 78 combinações de rota, livro e tamanho de tela executadas;
-- desktop em `1440 × 1000`, tablet em `900 × 900` e celular em `390 × 844`;
-- nenhuma rota com rolagem horizontal;
-- nenhuma excepção da aplicação;
-- contraste nocturno de *Ruínas dos Céus* verificado;
-- nuvens, partículas dianteiras/traseiras e indicador de desempenho verificados.
-
 ## Próxima etapa
 
-**Etapa 17 — Limpeza técnica final.**
+**Etapa 16 — Padronização visual e responsividade.**
+
 
 ## Inventário de assets
 
-A versão 0.16.0 continua a usar `data/common/inventario-pasta-assets.csv` como fonte de verdade para nomes, extensões e pastas. As galerias só registam imagens presentes nesse inventário. Ao substituir a pasta `assets`, preserve exactamente maiúsculas, acentos, espaços e extensões indicados no CSV.
-
-O ZIP desta conversa ainda não contém todos os binários descritos no inventário. Os caminhos permanecem correctos e o sistema visual trata essas ausências sem quebrar cartões ou páginas.
+A versão 0.15.1 usa `data/common/inventario-pasta-assets.csv` como fonte de verdade para nomes, extensões e pastas. As galerias só registam imagens presentes nesse inventário. Ao substituir a pasta `assets`, preserve exactamente maiúsculas, acentos, espaços e extensões indicados no CSV.

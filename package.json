@@ -1,8 +1,8 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 16 com sistema visual compartilhado, contraste revisado e responsividade padronizada.",
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 16.1 com correções de carregamento visual, breadcrumbs, navegação de capítulos e contraste nocturno.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",

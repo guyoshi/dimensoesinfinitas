@@ -30,9 +30,22 @@ const media=(src,alt,fallback,cls='')=>`<div class="${cls}"><img src="${E(src)}"
 const st={route:'',tab:'geral',q:'',sort:'alpha',unused:false,mapPhase:'eterea'},H=(k,t,s='',x='')=>`<div class="head"><div><p class="eyebrow">${E(k)}</p><h1>${E(t)}</h1><p>${E(s)}</p></div>${x}</div>`,go=r=>location.hash='#/'+r,find=(a,id)=>a.find(x=>S(x.n)===id||x.n===id),err=()=>'<div class="empty"><h2>Página não encontrada</h2></div>';
 function crumbSegments(){
   const [b,id]=st.route.split('/');
-  const baseLabel=(NAV.flatMap(x=>x[1]).find(x=>x[0]===b)?.[1])||'Arquivo';
+  const detailParents={
+    capitulo:{route:'capitulos',label:'Capítulos'},
+    personagem:{route:'personagens',label:'Personagens'},
+    lugar:{route:'lugares',label:'Lugares'},
+    misterio:{route:'misterios',label:'Mistérios'},
+    tema:{route:'temas',label:'Temas'},
+    conceito:{route:'conceitos',label:'Conceitos e leis'},
+    linha:{route:'linha',label:'Linha do Tempo'},
+    livro:{route:'livros',label:'Livros'}
+  };
+  const navEntry=NAV.flatMap(x=>x[1]).find(x=>x[0]===b);
+  const parent=id?detailParents[b]:null;
+  const baseLabel=parent?.label||navEntry?.[1]||'Início';
+  const baseRoute=parent?.route||b;
   const segs=[{label:'Ciclo de Jesed'},{label:'Ruínas dos Céus',go:'inicio'}];
-  if(b!=='inicio') segs.push({label:baseLabel,go:id?b:undefined});
+  if(b!=='inicio') segs.push({label:baseLabel,go:id?baseRoute:undefined});
   if(id){
     let detail=null;
     if(b==='personagem'){const c=find(D.characters,id);detail=c?.n;}

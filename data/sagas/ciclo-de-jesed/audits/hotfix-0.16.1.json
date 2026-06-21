@@ -1,0 +1,37 @@
+{
+  "version": "0.16.1",
+  "date": "2026-06-22",
+  "scope": "Correções relatadas após a Etapa 16.",
+  "ruinasDosCeus": {
+    "chapterBreadcrumb": {
+      "before": "Arquivo",
+      "after": "Capítulos",
+      "parentRoute": "#/capitulos",
+      "notFoundAfterClick": false
+    },
+    "chapterPagination": {
+      "previousAligned": "left",
+      "nextAligned": "right",
+      "desktopButtonWidth": 380
+    },
+    "nightTimelineContrast": {
+      "cardBackground": "rgba(20, 43, 56, 0.94)",
+      "heading": "rgb(243, 250, 251)",
+      "paragraph": "rgb(188, 210, 216)",
+      "surfaceAndTextReviewedTogether": true
+    }
+  },
+  "guerrasDeSangue": {
+    "sharedVisualSystemLoaded": true,
+    "sidebarPosition": "fixed",
+    "sidebarWidth": "260px",
+    "workspaceMarginLeft": "260px",
+    "fullHeightDarkBackground": true,
+    "unstyledFallbackResolved": true
+  },
+  "validation": {
+    "npmValidate": "passed",
+    "npmAudit": "passed",
+    "githubPush": false
+  }
+}
