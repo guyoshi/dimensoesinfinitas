@@ -102,7 +102,7 @@
     main: $("#mainContent"), breadcrumbs: $("#breadcrumbs"), searchModal: $("#searchModal"),
     searchInput: $("#searchInput"), searchResults: $("#searchResults"), settingsDrawer: $("#settingsDrawer"),
     settingsContent: $("#settingsContent"), selectorModal: $("#selectorModal"), selectorContent: $("#selectorContent"),
-    transitionVeil: $("#transitionVeil"), particles: $("#particleLayer")
+    transitionVeil: $("#transitionVeil"), particles: $("#particleLayer"), particlesFront: $("#particleLayerFront")
   };
 
   const getBook = id => D.books.find(item => item.id === id);
@@ -158,23 +158,45 @@
       : `<span class="${cls} visual-fallback">${icon(iconName)}</span>`;
   }
 
-  function createParticles() {
-    refs.particles.innerHTML = "";
-    if (!state.settings.particles || state.settings.preset === "performance") return;
-    const count = Math.max(4, Math.min(50, state.settings.particleAmount));
+  function fillParticleLayer(layer, count, sizeMin, sizeMax) {
+    layer.innerHTML = "";
     for (let i = 0; i < count; i += 1) {
       const particle = document.createElement("span");
       particle.className = "particle";
       particle.style.left = `${Math.random() * 100}%`;
-      particle.style.setProperty("--size", `${1 + Math.random() * 3.5}px`);
+      particle.style.setProperty("--size", `${sizeMin + Math.random() * (sizeMax - sizeMin)}px`);
       particle.style.setProperty("--duration", `${12 + Math.random() * 24}s`);
       particle.style.setProperty("--delay", `${-Math.random() * 25}s`);
       particle.style.setProperty("--sway", `${-90 + Math.random() * 180}px`);
-      refs.particles.appendChild(particle);
+      layer.appendChild(particle);
     }
   }
 
+  function createParticles() {
+    refs.particles.innerHTML = "";
+    if (refs.particlesFront) refs.particlesFront.innerHTML = "";
+    if (!state.settings.particles || state.settings.preset === "performance") return;
+    const count = Math.max(4, Math.min(50, state.settings.particleAmount));
+    fillParticleLayer(refs.particles, count, 1, 4.5);
+    if (refs.particlesFront) fillParticleLayer(refs.particlesFront, Math.max(2, Math.round(count * .4)), 2.5, 6);
+  }
+
+  const PRESET_VALUES = {
+    full: { particles: true, transitions: true, textures: true, blur: true, shadows: true, motion: true, particleAmount: 34 },
+    normal: { particles: true, transitions: true, textures: true, blur: true, shadows: true, motion: true, particleAmount: 22 },
+    performance: { particles: false, transitions: false, textures: false, blur: false, shadows: false, motion: false }
+  };
+  function detectPreset() {
+    const s = state.settings;
+    for (const key of Object.keys(PRESET_VALUES)) {
+      const values = PRESET_VALUES[key];
+      if (Object.keys(values).every(k => s[k] === values[k])) return key;
+    }
+    return "custom";
+  }
+
   function applySettings() {
+    state.settings.preset = detectPreset();
     const body = document.body;
     body.classList.toggle("no-particles", !state.settings.particles || state.settings.preset === "performance");
     body.classList.toggle("no-transitions", !state.settings.transitions);
@@ -183,6 +205,15 @@
     body.classList.toggle("no-shadows", !state.settings.shadows);
     body.classList.toggle("no-motion", !state.settings.motion);
     body.classList.toggle("performance-mode", state.settings.preset === "performance");
+    const perfOn = state.settings.preset === "performance";
+    const perfButton = $("#performanceToggle");
+    if (perfButton) {
+      perfButton.classList.toggle("active", perfOn);
+      perfButton.setAttribute("aria-pressed", String(perfOn));
+      const label = perfOn ? "Modo desempenho activado" : "Modo desempenho desactivado";
+      perfButton.setAttribute("aria-label", label);
+      perfButton.title = label;
+    }
     createParticles();
   }
 
@@ -239,7 +270,7 @@
   }
 
   function canonNotice() {
-    return `<aside class="canon-notice">${icon("seal")}<div><strong>Limite canónico da 4B</strong><span>${escapeHtml(D.meta.canonicalCutoff)}. Resumos posteriores ao último capítulo escrito não são tratados como acontecimentos concluídos.</span></div></aside>`;
+    return "";
   }
 
   function miniEntity(title, subtitle, iconName, route, stateText = "", image = null) {
@@ -264,8 +295,8 @@
       <section class="hero-map-card">
         <img src="assets/mapa-guerras-de-sangue.webp" alt="Mapa de Jesed na época de Guerras de Sangue">
         <div class="hero-map-content">
-          <p class="eyebrow">Ciclo de Jesed · Lente activa</p>
-          <h1>Guerras<br>de Sangue</h1>
+          <p class="eyebrow">Ciclo de Jesed · Guia do livro</p>
+          <img class="hero-logo glow-title" src="assets/branding/guerras-de-sangue-logo.png" alt="Guerras de Sangue">
           <p>Um arquivo cartográfico de pessoas, territórios, segredos e consequências, limitado aos capítulos realmente escritos.</p>
           <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button></div>
         </div>
@@ -284,16 +315,16 @@
 
   function renderBooks() {
     refs.main.innerHTML = `<div class="page-enter">
-      ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Todos ocupam o seu lugar na saga. Apenas Guerras de Sangue pode ser aberto nesta etapa.")}
+      ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Todos ocupam o seu lugar na saga. Ruínas dos Céus e Guerras de Sangue já podem ser abertos nesta etapa.")}
       ${canonNotice()}
       <section class="bookshelf enhanced-bookshelf">
         ${D.books.map(book => `
           <article class="book-card cover-book-card ${book.status} ${book.cover ? "has-cover" : ""}" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]};${book.cover ? `--book-cover:url('${book.cover}')` : ""}" ${book.status === "active" ? `data-route="book/${book.id}"` : ""}>
             <div class="book-cover-overlay"></div>
             <span class="book-number readable-book-number">Livro ${book.order}</span>
-            <div class="book-symbol">${icon(book.icon)}</div>
-            <div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.visual)}</p></div>
-            <div class="book-status"><span>${book.status === "active" ? "Em escrita" : "Bloqueado"}</span><span>${book.status === "active" ? "Abrir" : "Em preparação"}</span></div>
+            ${book.cover ? "" : `<div class="book-symbol">${icon(book.icon)}</div>`}
+            <div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.synopsis || book.visual)}</p></div>
+            <div class="book-status"><span>${book.status === "active" ? "Livro concluído" : "Bloqueado"}</span><span>${book.status === "active" ? "Abrir" : "Em preparação"}</span></div>
           </article>`).join("")}
       </section>
     </div>`;
@@ -303,12 +334,22 @@
   function renderBook(id) {
     const book = getBook(id) || getBook("guerras-de-sangue");
     const cover = book.cover ? `<img src="${book.cover}" alt="Capa de ${escapeHtml(book.name)}">` : icon(book.icon);
+    if (book.id !== "guerras-de-sangue") {
+      const externalLinks = { "ruinas-dos-ceus": "ruinas.html" };
+      const href = externalLinks[book.id];
+      refs.main.innerHTML = `<div class="page-enter">
+        ${pageHeader(`Livro ${book.order} · Ciclo de Jesed`, book.name, book.status === "active" ? "Livro disponível, com sistema de navegação próprio." : "Ainda em preparação nesta etapa.")}
+        <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">${book.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</p><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.visual)}</p>${href ? `<div class="hero-actions"><button class="primary-button" data-external-href="${href}">${icon("arrow")} Ir para a página do livro</button></div>` : ""}</div></section>
+      </div>`;
+      setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Livros",route:"books"},{label:book.name}]);
+      return;
+    }
     refs.main.innerHTML = `<div class="page-enter">
-      ${pageHeader(`Livro ${book.order} · Ciclo de Jesed`, book.name, "Livro ainda em escrita, organizado apenas até o último capítulo narrativo existente.", `<button class="secondary-button" data-route="chapters">${icon("chapter")} Capítulos</button><button class="primary-button" data-route="map">${icon("map")} Mapa do período</button>`)}
+      ${pageHeader(`Livro ${book.order} · Ciclo de Jesed`, book.name, "Livro concluído, organizado em todos os seus capítulos.", `<button class="secondary-button" data-route="chapters">${icon("chapter")} Capítulos</button><button class="primary-button" data-route="map">${icon("map")} Mapa do período</button>`)}
       ${canonNotice()}
-      <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">Estado editorial</p><h2>${D.chapters.length} capítulos escritos</h2><p>${escapeHtml(book.visual)}</p><div class="tag-row"><span class="tag">Conteúdo canónico até o Capítulo 23</span><span class="tag">Mapa disponível</span><span class="tag">Em desenvolvimento</span></div></div></section>
+      <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">Estado editorial</p><h2>${D.chapters.length} capítulos escritos</h2><p>${escapeHtml(book.synopsis || book.visual)}</p><div class="tag-row"><span class="tag">${D.chapters[D.chapters.length - 1].number} capítulos no total</span><span class="tag">Mapa disponível</span><span class="tag">Livro concluído</span></div></div></section>
       <section class="metrics-grid">${[[D.chapters.length,"capítulos escritos","chapters"],[D.characters.length,"personagens","characters"],[D.events.length,"acontecimentos","events"],[D.mysteries.length,"mistérios","mysteries"],[D.clans.length,"clãs","clans"],[D.places.length,"lugares","places"]].map(item => `<article class="metric-card" data-route="${item[2]}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}</section>
-      <section class="dark-panel section-card"><div class="section-heading"><div><h2>Capítulos escritos</h2><p>O Capítulo 23 é o limite actual.</p></div></div><div class="mini-list">${D.chapters.map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`, `${ch.wordCount.toLocaleString("pt-BR")} palavras`)).join("")}</div></section>
+      <section class="dark-panel section-card"><div class="section-heading"><div><h2>Capítulos escritos</h2><p>O Capítulo ${D.chapters[D.chapters.length - 1].number} é o limite actual.</p></div></div><div class="mini-list">${D.chapters.map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`, `${ch.wordCount.toLocaleString("pt-BR")} palavras`)).join("")}</div></section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Livros",route:"books"},{label:book.name}]);
   }
@@ -342,7 +383,7 @@
         <article class="parchment-panel character-summary"><p class="eyebrow">${escapeHtml(clan?.name || "Sem clã registado")}</p><h1>${escapeHtml(character.name)}</h1><span class="alias">${escapeHtml(character.alias)}</span><p>${escapeHtml(character.summary)}</p><div class="character-meta-grid"><div class="character-meta"><small>Estado</small><strong>${escapeHtml(character.status)}</strong></div><div class="character-meta"><small>Localização</small><strong>${escapeHtml(place?.name || "Não registada")}</strong></div><div class="character-meta"><small>Importância</small><strong>${escapeHtml(character.importance)}</strong></div><div class="character-meta"><small>Última aparição</small><strong>${escapeHtml(character.lastSeen.chapter)}</strong></div></div></article>
       </section>
       <section class="parchment-panel leave-card"><div class="section-heading"><div><p class="eyebrow">Retomar a escrita</p><h2>Onde deixei ${escapeHtml(character.name)}?</h2></div></div><div class="leave-grid">${Object.entries({"Última aparição":character.lastSeen.chapter,"Localização":character.lastSeen.location,"Com quem estava":character.lastSeen.with,"Estado físico":character.lastSeen.physical,"Estado emocional":character.lastSeen.emotional,"Objectivo":character.lastSeen.objective,"Última decisão":character.lastSeen.decision,"Descoberta":character.lastSeen.discovered,"Risco actual":character.lastSeen.risk}).map(([key,value]) => `<div class="leave-item"><small>${key}</small><strong>${escapeHtml(value || "Informação ainda não registada")}</strong></div>`).join("")}</div></section>
-      <div class="tabs">${[["overview","Visão geral"],["trajectory","Trajectória"],["relations","Relações"],["knowledge","Conhecimento"],["appearances","Aparições"],["destiny","Destino"]].map(tab => `<button class="tab-button ${state.characterTab === tab[0] ? "active" : ""}" data-character-tab="${tab[0]}" data-character-slug="${character.slug}">${tab[1]}</button>`).join("")}</div>
+      <div class="tabs">${[["overview","Visão geral"],["trajectory","Trajectória"],["relations","Relações"],["knowledge","Conhecimento"],["destiny","Destino"]].map(tab => `<button class="tab-button ${state.characterTab === tab[0] ? "active" : ""}" data-character-tab="${tab[0]}" data-character-slug="${character.slug}">${tab[1]}</button>`).join("")}</div>
       <section class="dark-panel tab-panel">${characterTabHtml(character, state.characterTab)}</section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Personagens",route:"characters"},{label:character.name}]);
@@ -353,14 +394,14 @@
     if (tab === "overview") return `<div class="info-columns"><div class="info-box"><h3>Personalidade</h3>${character.personality.length ? `<ul>${character.personality.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : `<p class="empty-inline">Informação ainda não registada.</p>`}</div><div class="info-box"><h3>Modo de falar</h3><p>${escapeHtml(character.voice || "Informação ainda não registada.")}</p></div><div class="info-box wide-info"><h3>Descrição</h3><p>${linkifyText(character.summary)}</p></div><div class="info-box"><h3>Fontes</h3><ul>${character.sources.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul></div></div>`;
     if (tab === "trajectory") {
       const chapters = character.appearanceChapters.map(getChapter).filter(Boolean);
-      return chapters.length ? `<div class="timeline-list">${chapters.map(ch => `<article class="timeline-item" data-route="chapter/${ch.id}"><small>Capítulo ${ch.number}</small><h3>${escapeHtml(ch.title)}</h3><p>${escapeHtml(ch.summary)}</p></article>`).join("")}</div>` : `<p class="empty-inline">Trajectória ainda não registada.</p>`;
+      return chapters.length ? `<div class="timeline-list">${chapters.map(ch => {
+        const companions = ch.characters.filter(id => id !== character.id).map(getCharacter).filter(Boolean).slice(0, 5);
+        const chPlaces = ch.places.map(getPlace).filter(Boolean);
+        return `<article class="timeline-item" data-route="chapter/${ch.id}"><small>Capítulo ${ch.number}</small><h3>${escapeHtml(ch.title)}</h3><p>${escapeHtml(ch.summary)}</p><div class="tag-row">${chPlaces.map(p => `<span class="tag">${icon("pin")}${escapeHtml(p.name)}</span>`).join("")}${companions.map(c => `<span class="tag">${icon("person")}${escapeHtml(c.name)}</span>`).join("")}</div></article>`;
+      }).join("")}</div>` : `<p class="empty-inline">Trajectória ainda não registada.</p>`;
     }
     if (tab === "relations") return relationships.length ? `<div class="relationship-detail-list">${relationships.map(r => { const other = getCharacter(r.from === character.id ? r.to : r.from); return `<article class="relationship-detail-card"><button class="relationship-person" data-route="character/${other?.slug || ""}">${other?.image ? `<img src="${other.image}" alt="">` : icon("person")}<span><strong>${escapeHtml(other?.name || "Entidade não encontrada")}</strong><small>${escapeHtml(r.type)}</small></span></button><p><strong>Estado:</strong> ${escapeHtml(r.state)}</p><p>${escapeHtml(r.from === character.id ? r.fromView : r.toView)}</p><div class="tag-row">${r.evolution.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("")}</div></article>`; }).join("")}</div>` : `<p class="empty-inline">Nenhuma relação registada neste período.</p>`;
     if (tab === "knowledge") return `<div class="info-columns">${[["O que sabe",character.knowledge.knows],["O que suspeita",character.knowledge.suspects],["Crenças erradas",character.knowledge.falseBeliefs],["O que desconhece",character.knowledge.unknown],["Segredos",character.knowledge.secrets]].map(([key, values]) => `<div class="info-box"><h3>${key}</h3>${values.length ? `<ul>${values.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : `<p class="empty-inline">Nada registado.</p>`}</div>`).join("")}</div>`;
-    if (tab === "appearances") {
-      const chapters = character.appearanceChapters.map(getChapter).filter(Boolean);
-      return chapters.length ? `<div class="mini-list">${chapters.map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`, ch.status)).join("")}</div>` : `<p class="empty-inline">Nenhuma aparição registada.</p>`;
-    }
     return `<div class="info-columns"><div class="info-box"><h3>Destino escrito</h3><p>${escapeHtml(character.destiny.written)}</p></div><div class="info-box"><h3>Estado</h3><p>${escapeHtml(character.destiny.state)}</p></div><div class="info-box"><h3>Planeado</h3><p>${escapeHtml(character.destiny.planned)}</p></div></div>`;
   }
 
@@ -405,11 +446,11 @@
 
   function renderChapters() {
     refs.main.innerHTML = `<div class="page-enter">
-      ${pageHeader("Guerras de Sangue", "Capítulos", "Os 23 capítulos com narrativa escrita. Os capítulos ainda existentes apenas como resumo futuro ficam fora desta lista.")}
+      ${pageHeader("Guerras de Sangue", "Capítulos", `Os ${D.chapters.length} capítulos com narrativa escrita. Os capítulos ainda existentes apenas como resumo futuro ficam fora desta lista.`)}
       ${canonNotice()}
       <section class="chapter-grid">${D.chapters.map(ch => {
-        const hero = ch.characters.map(getCharacter).find(c => c?.image);
-        return `<article class="chapter-card" data-route="chapter/${ch.id}">${hero ? `<img class="chapter-card-image" src="${hero.image}" alt="">` : `<div class="chapter-card-image fallback">${icon("chapter")}</div>`}<div class="chapter-card-copy"><span class="chapter-number">Capítulo ${ch.number}</span><h2>${escapeHtml(ch.title)}</h2><p>${escapeHtml(ch.summary)}</p><div class="tag-row"><span class="tag">${ch.wordCount.toLocaleString("pt-BR")} palavras</span><span class="tag">${ch.characters.length} personagens ligados</span></div></div></article>`;
+        const heroImage = ch.image || ch.characters.map(getCharacter).find(c => c?.image)?.image;
+        return `<article class="chapter-card" data-route="chapter/${ch.id}">${heroImage ? `<img class="chapter-card-image" src="${escapeHtml(heroImage)}" alt="">` : `<div class="chapter-card-image fallback">${icon("chapter")}</div>`}<div class="chapter-card-copy"><span class="chapter-number">Capítulo ${ch.number}</span><h2>${escapeHtml(ch.title)}</h2><p>${escapeHtml(ch.summary)}</p><div class="tag-row"><span class="tag">${ch.wordCount.toLocaleString("pt-BR")} palavras</span><span class="tag">${ch.characters.length} personagens ligados</span></div></div></article>`;
       }).join("")}</section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Capítulos"}]);
@@ -423,10 +464,10 @@
     const characters = chapter.characters.map(getCharacter).filter(Boolean);
     const places = chapter.places.map(getPlace).filter(Boolean);
     const events = D.events.filter(event => event.period === `Capítulo ${chapter.number}` || event.chapterId === chapter.id);
-    const hero = characters.find(c => c.image);
+    const heroImage = chapter.image || characters.find(c => c.image)?.image;
     refs.main.innerHTML = `<div class="page-enter chapter-detail-page">
       ${pageHeader(`Guerras de Sangue · Capítulo ${chapter.number}`, chapter.title, chapter.status, `<button class="secondary-button" data-copy-chapter="${chapter.id}">${icon("copy")} Copiar acontecimentos</button>`)}
-      <section class="chapter-hero-panel ${hero ? "has-art" : ""}">${hero ? `<img src="${hero.image}" alt="Ilustração associada ao capítulo">` : ""}<div><p class="eyebrow">Resumo rápido</p><h2>${escapeHtml(chapter.summary)}</h2><div class="tag-row"><span class="tag">${chapter.wordCount.toLocaleString("pt-BR")} palavras no manuscrito</span><span class="tag">${chapter.status}</span></div></div></section>
+      <section class="chapter-hero-panel ${heroImage ? "has-art" : ""}">${heroImage ? `<img src="${escapeHtml(heroImage)}" alt="Ilustração associada ao capítulo">` : ""}<div><p class="eyebrow">Resumo rápido</p><h2>${escapeHtml(chapter.summary)}</h2><div class="tag-row"><span class="tag">${chapter.wordCount.toLocaleString("pt-BR")} palavras no manuscrito</span><span class="tag">${chapter.status}</span></div></div></section>
       <section class="chapter-layout">
         <article class="parchment-panel chapter-longform"><div class="section-heading"><div><p class="eyebrow">Acontecimentos do capítulo</p><h2>Tudo o que acontece</h2><p>Clique nos nomes destacados para abrir personagens, lugares, clãs, animais, plantas, alimentos ou conceitos.</p></div></div><div class="chapter-prose">${chapter.details.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</div></article>
         <aside class="chapter-context-column">
@@ -499,7 +540,7 @@
   }
 
   function renderPlaces() {
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Mundo", "Lugares", "Cidades, aldeias, regiões e espaços narrativos no período de Guerras de Sangue.")}<section class="entity-grid place-grid">${D.places.map(place => { const clan = getClan(place.clanId); return `<article class="entity-card place-card" data-route="place/${place.slug}"><div class="entity-card-top"><span class="entity-avatar">${icon("pin")}</span><div><h3>${escapeHtml(place.name)}</h3><span class="alias">${escapeHtml(place.type)}</span></div></div><p>${escapeHtml(place.summary)}</p><div class="place-card-facts"><div><small>Estado</small><strong>${escapeHtml(place.state)}</strong></div><div><small>Clã associado</small><strong>${escapeHtml(clan?.name || "Nenhum")}</strong></div></div></article>`; }).join("")}</section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Mundo", "Lugares", "Cidades, aldeias, regiões e espaços narrativos no período de Guerras de Sangue.")}<section class="entity-grid place-grid">${D.places.map(place => { const clan = getClan(place.clanId); return `<article class="entity-card place-card" data-route="place/${place.slug}"><div class="entity-card-top"><span class="entity-avatar ${place.image ? "has-image" : ""}">${place.image ? `<img src="${escapeHtml(place.image)}" alt="${escapeHtml(place.name)}">` : icon("pin")}</span><div><h3>${escapeHtml(place.name)}</h3><span class="alias">${escapeHtml(place.type)}</span></div></div><p>${escapeHtml(place.summary)}</p><div class="place-card-facts"><div><small>Estado</small><strong>${escapeHtml(place.state)}</strong></div><div><small>Clã associado</small><strong>${escapeHtml(clan?.name || "Nenhum")}</strong></div></div></article>`; }).join("")}</section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Lugares"}]);
   }
 
@@ -509,7 +550,7 @@
     const clan = getClan(place.clanId);
     const present = D.characters.filter(c => c.locationId === place.id);
     const chapters = D.chapters.filter(ch => ch.places.includes(place.id));
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Lugar", place.name, place.type, place.x != null ? `<button class="primary-button" data-route="map">${icon("map")} Ver no mapa</button>` : "")}<section class="place-detail-hero"><div class="place-illustration">${clan?.emblem ? `<img src="${clan.emblem}" alt="Brasão ${escapeHtml(clan.name)}">` : icon("fortress")}</div><article class="parchment-panel place-summary-panel"><p>${escapeHtml(place.summary)}</p><div class="place-detail-facts"><div><small>Estado</small><strong>${escapeHtml(place.state)}</strong></div><div><small>Clã associado</small><strong>${escapeHtml(clan?.name || "Nenhum")}</strong></div><div><small>Livro</small><strong>Guerras de Sangue</strong></div><div><small>Mapa</small><strong>${place.x != null ? "Localização marcada" : "Sem coordenada visual"}</strong></div></div></article></section><section class="dashboard-columns"><article class="dark-panel section-card"><h2>Personagens no último estado</h2><div class="context-chip-list">${present.length ? present.map(c => `<button class="context-chip" data-route="character/${c.slug}">${c.image ? `<img src="${c.image}" alt="">` : icon("person")}<span>${escapeHtml(c.name)}</span></button>`).join("") : `<p class="empty-inline">Nenhuma personagem marcada neste lugar no estado actual.</p>`}</div></article><article class="dark-panel section-card"><h2>Capítulos ligados</h2><div class="mini-list">${chapters.length ? chapters.map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`)).join("") : `<p class="empty-inline">Nenhum capítulo ligado.</p>`}</div></article></section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Lugar", place.name, place.type, place.x != null ? `<button class="primary-button" data-route="map">${icon("map")} Ver no mapa</button>` : "")}<section class="place-detail-hero"><div class="place-illustration ${place.image ? "has-photo" : ""}">${place.image ? `<img src="${escapeHtml(place.image)}" alt="${escapeHtml(place.name)}">` : clan?.emblem ? `<img src="${clan.emblem}" alt="Brasão ${escapeHtml(clan.name)}">` : icon("fortress")}</div><article class="parchment-panel place-summary-panel"><p>${escapeHtml(place.summary)}</p><div class="place-detail-facts"><div><small>Estado</small><strong>${escapeHtml(place.state)}</strong></div><div><small>Clã associado</small><strong>${escapeHtml(clan?.name || "Nenhum")}</strong></div><div><small>Livro</small><strong>Guerras de Sangue</strong></div><div><small>Mapa</small><strong>${place.x != null ? "Localização marcada" : "Sem coordenada visual"}</strong></div></div></article></section><section class="dashboard-columns"><article class="dark-panel section-card"><h2>Personagens no último estado</h2><div class="context-chip-list">${present.length ? present.map(c => `<button class="context-chip" data-route="character/${c.slug}">${c.image ? `<img src="${c.image}" alt="">` : icon("person")}<span>${escapeHtml(c.name)}</span></button>`).join("") : `<p class="empty-inline">Nenhuma personagem marcada neste lugar no estado actual.</p>`}</div></article><article class="dark-panel section-card"><h2>Capítulos ligados</h2><div class="mini-list">${chapters.length ? chapters.map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`)).join("") : `<p class="empty-inline">Nenhum capítulo ligado.</p>`}</div></article></section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Lugares",route:"places"},{label:place.name}]);
   }
 
@@ -563,14 +604,14 @@
   }
 
   function loreListHtml(kind, items, iconName = loreKindInfo(kind)[2]) {
-    return `<section class="lore-grid">${items.map(item => `<article class="lore-card" data-route="lore-item/${kind}/${item.slug}"><span class="lore-icon">${icon(item.icon || iconName)}</span><span class="citation-count">${item.citations} citações</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.summary)}</p><div class="tag-row">${item.clans.slice(0, 4).map(clan => `<span class="tag">${escapeHtml(clan)}</span>`).join("")}</div></article>`).join("")}</section>`;
+    return `<section class="lore-grid">${items.map(item => `<article class="lore-card ${item.image ? "has-image" : ""}" data-route="lore-item/${kind}/${item.slug}">${item.image ? `<img class="lore-card-image" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy">` : `<span class="lore-icon">${icon(item.icon || iconName)}</span>`}<span class="citation-count">${item.citations} citações</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.summary)}</p><div class="tag-row">${item.clans.slice(0, 4).map(clan => `<span class="tag">${escapeHtml(clan)}</span>`).join("")}</div></article>`).join("")}</section>`;
   }
 
   function renderLoreItem(kind, slug) {
     const item = getLoreItem(kind, slug);
     if (!item) return renderNotFound();
     const [title,,iconName] = loreKindInfo(kind);
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader(title, item.name, item.type)}<section class="lore-detail-layout"><article class="parchment-panel lore-detail"><div class="lore-detail-symbol">${icon(item.icon || iconName)}</div><p class="lore-lead">${linkifyText(item.summary)}</p>${item.details.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</article><aside class="dark-panel section-card"><div class="citation-big"><strong>${item.citations}</strong><span>vezes citado no texto escrito</span></div><h3>Clãs que usam ou conhecem</h3><div class="tag-row">${item.clans.length ? item.clans.map(name => { const clan = getClan(slugText(name).replaceAll(" ","-")); return `<button class="tag clickable-tag" ${clan ? `data-route="clan/${clan.slug}"` : ""}>${escapeHtml(name)}</button>`; }).join("") : `<span class="empty-inline">Nenhum clã registado.</span>`}</div><h3>Menções por capítulo</h3><div class="mini-list">${item.chapterMentions.length ? item.chapterMentions.map(m => { const ch = getChapter(m.chapter); return miniEntity(`Capítulo ${m.chapter} — ${ch?.title || ""}`, `${m.count} ${m.count === 1 ? "menção" : "menções"}`, "chapter", `chapter/${ch?.id || m.chapter}`); }).join("") : `<p class="empty-inline">Ainda não citado directamente no manuscrito.</p>`}</div></aside></section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader(title, item.name, item.type)}<section class="lore-detail-layout"><article class="parchment-panel lore-detail">${item.image ? `<img class="lore-detail-image" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">` : `<div class="lore-detail-symbol">${icon(item.icon || iconName)}</div>`}<p class="lore-lead">${linkifyText(item.summary)}</p>${item.details.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</article><aside class="dark-panel section-card"><div class="citation-big"><strong>${item.citations}</strong><span>vezes citado no texto escrito</span></div><h3>Clãs que usam ou conhecem</h3><div class="tag-row">${item.clans.length ? item.clans.map(name => { const clan = getClan(slugText(name).replaceAll(" ","-")); return `<button class="tag clickable-tag" ${clan ? `data-route="clan/${clan.slug}"` : ""}>${escapeHtml(name)}</button>`; }).join("") : `<span class="empty-inline">Nenhum clã registado.</span>`}</div><h3>Menções por capítulo</h3><div class="mini-list">${item.chapterMentions.length ? item.chapterMentions.map(m => { const ch = getChapter(m.chapter); return miniEntity(`Capítulo ${m.chapter} — ${ch?.title || ""}`, `${m.count} ${m.count === 1 ? "menção" : "menções"}`, "chapter", `chapter/${ch?.id || m.chapter}`); }).join("") : `<p class="empty-inline">Ainda não citado directamente no manuscrito.</p>`}</div></aside></section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:title,route:kind === "concepts" ? "lore" : kind},{label:item.name}]);
   }
 
@@ -702,13 +743,21 @@
   function settingToggle(key, title, description, enabled) { return `<div class="setting-row"><span class="setting-copy"><strong>${title}</strong><small>${description}</small></span><button class="switch ${enabled ? "on" : ""}" data-setting="${key}" aria-pressed="${enabled}"></button></div>`; }
   function renderSettings() {
     const s = state.settings;
-    refs.settingsContent.innerHTML = `<div class="settings-group"><h3>Perfis rápidos</h3><div class="preset-row">${[["full","Completo"],["normal","Equilibrado"],["performance","Desempenho"]].map(item => `<button class="preset-button ${s.preset === item[0] ? "active" : ""}" data-preset="${item[0]}">${item[1]}</button>`).join("")}</div></div><div class="settings-group"><h3>Controlo individual</h3>${settingToggle("particles","Partículas","Poeira e elementos suspensos.",s.particles)}${settingToggle("transitions","Transições temáticas","Véu de pergaminho entre páginas.",s.transitions)}${settingToggle("textures","Texturas","Grão, papel e marcas sobre superfícies.",s.textures)}${settingToggle("blur","Desfoque de painéis","Efeito de vidro nas barras e janelas.",s.blur)}${settingToggle("shadows","Sombras profundas","Profundidade dos cartões.",s.shadows)}${settingToggle("motion","Movimento e animações","Entradas, deslocamentos e efeitos.",s.motion)}<div class="setting-row range-row"><span class="setting-copy"><strong>Quantidade de partículas</strong><small>Ajuste fino do fundo.</small></span><input type="range" min="4" max="50" value="${s.particleAmount}" data-setting-range="particleAmount"></div></div>`;
+    refs.settingsContent.innerHTML = `<div class="settings-group"><h3>Perfis rápidos</h3><div class="preset-row">${[["full","Completo"],["normal","Equilibrado"],["performance","Desempenho"],["custom","Personalizado"]].map(item => `<button class="preset-button ${s.preset === item[0] ? "active" : ""} ${item[0] === "custom" ? "preset-custom" : ""}" data-preset="${item[0]}" ${item[0] === "custom" ? "disabled" : ""}>${item[1]}</button>`).join("")}</div></div><div class="settings-group"><h3>Controlo individual</h3>${settingToggle("particles","Partículas","Poeira e elementos suspensos.",s.particles)}${settingToggle("transitions","Transições temáticas","Véu de pergaminho entre páginas.",s.transitions)}${settingToggle("textures","Texturas","Grão, papel e marcas sobre superfícies.",s.textures)}${settingToggle("blur","Desfoque de painéis","Efeito de vidro nas barras e janelas.",s.blur)}${settingToggle("shadows","Sombras profundas","Profundidade dos cartões.",s.shadows)}${settingToggle("motion","Movimento e animações","Entradas, deslocamentos e efeitos.",s.motion)}<div class="setting-row range-row"><span class="setting-copy"><strong>Quantidade de partículas</strong><small>Ajuste fino do fundo.</small></span><input type="range" min="4" max="50" value="${s.particleAmount}" data-setting-range="particleAmount"></div></div>`;
   }
 
   function openSelector(type) {
     const books = type === "books";
     const list = books ? D.books : D.sagas;
-    refs.selectorContent.innerHTML = `<div class="section-heading"><div><p class="eyebrow">${books ? "Lente do livro" : "Dimensão"}</p><h2>${books ? "Escolher período" : "Escolher saga"}</h2></div><button class="icon-button" data-action="close-selector">${icon("close")}</button></div><div class="selector-grid">${list.map(item => `<button class="selector-card ${item.status}" ${item.status !== "active" ? "disabled" : ""} ${item.status === "active" ? `data-route="${books ? `book/${item.id}` : "dashboard"}" data-action="close-selector"` : ""}><span>${item.cover ? `<img src="${item.cover}" alt="">` : icon(item.icon || item.symbol)}</span><strong>${escapeHtml(item.name)}</strong><small>${item.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</small></button>`).join("")}</div>`;
+    const externalBookLinks = { "ruinas-dos-ceus": "ruinas.html" };
+    refs.selectorContent.innerHTML = `<div class="section-heading"><div><p class="eyebrow">${books ? "Livro" : "Dimensão"}</p><h2>${books ? "Escolher livro" : "Escolher saga"}</h2></div><button class="icon-button" data-action="close-selector">${icon("close")}</button></div><div class="selector-grid">${list.map(item => {
+      let attrs = "";
+      if (item.status === "active") {
+        if (books && externalBookLinks[item.id]) attrs = `data-external-href="${externalBookLinks[item.id]}"`;
+        else attrs = `data-route="${books ? "dashboard" : "dashboard"}" data-action="close-selector"`;
+      }
+      return `<button class="selector-card ${item.status}" ${item.status !== "active" ? "disabled" : ""} ${attrs}><span>${item.cover ? `<img src="${item.cover}" alt="">` : icon(item.icon || item.symbol)}</span><strong>${escapeHtml(item.name)}</strong><small>${item.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</small></button>`;
+    }).join("")}</div>`;
     refs.selectorModal.classList.add("open");
     refs.selectorModal.setAttribute("aria-hidden", "false");
   }
@@ -738,6 +787,8 @@
   document.addEventListener("click", event => {
     const enter = event.target.closest("[data-enter-saga]");
     if (enter) { routeTo("dashboard"); return; }
+    const externalLink = event.target.closest("[data-external-href]");
+    if (externalLink) { window.location.href = externalLink.dataset.externalHref; return; }
     const routeElement = event.target.closest("[data-route]");
     if (routeElement && routeElement.dataset.route) { closeSearch(); closeSelector(); routeTo(routeElement.dataset.route); return; }
 
@@ -762,7 +813,7 @@
     const loreFilter = event.target.closest("[data-lore-filter]"); if (loreFilter) { $$("[data-lore-filter]").forEach(x => x.classList.toggle("active", x === loreFilter)); const kind = loreFilter.dataset.loreKind, value = loreFilter.dataset.loreFilter; const items = value === "all" ? D.lore[kind] : D.lore[kind].filter(item => item.clans.includes(value)); $("#loreList").innerHTML = loreListHtml(kind, items); }
     const clanSection = event.target.closest("[data-clan-section]"); if (clanSection) { $$("[data-clan-section]").forEach(x => x.classList.toggle("active", x === clanSection)); const clan = getClan(clanSection.dataset.clanSlug); $("#clanSectionPanel").innerHTML = clanSectionHtml(clan, clanSection.dataset.clanSection); }
     const searchMode = event.target.closest("[data-search-mode]"); if (searchMode) { state.searchMode = searchMode.dataset.searchMode; $$("[data-search-mode]").forEach(x => x.classList.toggle("active", x === searchMode)); renderSearchResults(refs.searchInput.value); }
-    const setting = event.target.closest("[data-setting]"); if (setting) { const key = setting.dataset.setting; state.settings[key] = !state.settings[key]; state.settings.preset = "normal"; persistSettings(); }
+    const setting = event.target.closest("[data-setting]"); if (setting) { const key = setting.dataset.setting; state.settings[key] = !state.settings[key]; persistSettings(); }
     const preset = event.target.closest("[data-preset]"); if (preset) { state.settings.preset = preset.dataset.preset; if (state.settings.preset === "full") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:34}); if (state.settings.preset === "normal") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:22}); if (state.settings.preset === "performance") Object.assign(state.settings,{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false}); persistSettings(); }
     const mapAction = event.target.closest("[data-map-action]")?.dataset.mapAction;
     if (mapAction) { if (mapAction === "zoom-in") state.map.zoom = Math.min(2.8, state.map.zoom + .2); if (mapAction === "zoom-out") state.map.zoom = Math.max(.65, state.map.zoom - .2); if (mapAction === "center") Object.assign(state.map,{zoom:1,x:0,y:0}); if (mapAction === "fullscreen") $(".map-page")?.requestFullscreen?.(); applyMapTransform(); }
@@ -787,9 +838,9 @@
   });
   $("#sagaSelector").addEventListener("click", () => openSelector("sagas"));
   $("#bookLens").addEventListener("click", () => openSelector("books"));
-  refs.settingsContent.addEventListener("input", event => { if (event.target.matches("[data-setting-range]")) { state.settings[event.target.dataset.settingRange] = Number(event.target.value); state.settings.preset = "normal"; persistSettings(); } });
+  refs.settingsContent.addEventListener("input", event => { if (event.target.matches("[data-setting-range]")) { state.settings[event.target.dataset.settingRange] = Number(event.target.value); persistSettings(); } });
   document.addEventListener("keydown", event => { if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); } if (event.key === "Escape") { closeSearch(); closeSettings(); closeSelector(); refs.sidebar.classList.remove("mobile-open"); } });
-  window.addEventListener("hashchange", () => routeTo(location.hash.replace(/^#\//, "") || "portal", { replace: true }));
+  window.addEventListener("hashchange", () => routeTo(location.hash.replace(/^#\//, "") || "dashboard", { replace: true }));
 
   document.addEventListener("pointerdown", event => {
     const stage = event.target.closest("#mapStage");
@@ -810,7 +861,7 @@
     renderNav();
     refs.sidebar.classList.toggle("collapsed", state.sidebarCollapsed);
     applySettings();
-    const route = location.hash.replace(/^#\//, "") || "portal";
+    const route = location.hash.replace(/^#\//, "") || "dashboard";
     routeTo(route, { replace: true });
   }
   init();

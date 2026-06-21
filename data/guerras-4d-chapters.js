@@ -3,7 +3,7 @@
   if(!D) return;
   const chapters=[
     {
-      id:"jesed-chapter-gs-24",number:24,title:"De Volta à Kaendar",status:"Escrito",pov:"Múltiplo",
+      id:"jesed-chapter-gs-24",number:24,image:"assets/chapters/guerras-de-sangue/capitulo-24.png",title:"De Volta à Kaendar",status:"Escrito",pov:"Múltiplo",
       places:["jesed-place-kaendar"],
       characters:["jesed-character-kaelina-polar","jesed-character-rendar","jesed-character-markoso","jesed-character-daryon-vess","jesed-character-ylvena","jesed-character-alyra-polar"],
       summary:"Rendar leva Kaelina como refém até Kaendar e usa sua vida para abrir o Cais dos Zírrios, permitindo que a guerra entre na fortaleza.",
@@ -13,7 +13,7 @@
       ],wordCount:6444,source:"Guerras de Sangue — Capítulo 24"
     },
     {
-      id:"jesed-chapter-gs-25",number:25,title:"O Segredo de Daryon",status:"Escrito",pov:"Múltiplo",
+      id:"jesed-chapter-gs-25",number:25,image:"assets/chapters/guerras-de-sangue/capitulo-25.png",title:"O Segredo de Daryon",status:"Escrito",pov:"Múltiplo",
       places:["jesed-place-kaendar"],
       characters:["jesed-character-kaelina-polar","jesed-character-markoso","jesed-character-daryon-vess","jesed-character-ylvena","jesed-character-orionus-polar","jesed-character-alyra-polar","jesed-character-yvenn-raiz-branca"],
       summary:"Kaelina escuta a confissão que liga Daryon e Ylvena às mortes que iniciaram a guerra, à morte de Orionus e ao envenenamento de Yvenn.",
@@ -23,7 +23,7 @@
       ],wordCount:5190,source:"Guerras de Sangue — Capítulo 25"
     },
     {
-      id:"jesed-chapter-gs-26",number:26,title:"A Mão de Fogo",status:"Escrito",pov:"Múltiplo",
+      id:"jesed-chapter-gs-26",number:26,image:"assets/chapters/guerras-de-sangue/capitulo-26.png",title:"A Mão de Fogo",status:"Escrito",pov:"Múltiplo",
       places:["jesed-place-kaendar"],
       characters:["jesed-character-rendar","jesed-character-tavra-vendrar","jesed-character-alyra-polar","jesed-character-iressa-mao-de-sal"],
       summary:"Enquanto Kaendar arde, Rendar tenta abrir os portões principais e Tavra procura Alyra para transformar a guerra numa vingança pessoal.",
@@ -33,7 +33,7 @@
       ],wordCount:6831,source:"Guerras de Sangue — Capítulo 26"
     },
     {
-      id:"jesed-chapter-gs-27",number:27,title:"A Última Caça do Caçador",status:"Escrito",pov:"Múltiplo",
+      id:"jesed-chapter-gs-27",number:27,image:"assets/chapters/guerras-de-sangue/capitulo-27.png",title:"A Última Caça do Caçador",status:"Escrito",pov:"Múltiplo",
       places:["jesed-place-kaendar"],
       characters:["jesed-character-kaelina-polar","jesed-character-varron-meio-olho","jesed-character-nynestra-buldar","jesed-character-kharvok","jesed-character-sarkan-boca-partida","jesed-character-rendar","jesed-character-alyra-polar","jesed-character-daryon-vess"],
       summary:"Kaelina divide a aliança diante de Kaendar, enquanto Rendar alcança o trono e força Daryon a confessar os crimes que construíram a guerra.",
@@ -43,7 +43,7 @@
       ],wordCount:8425,source:"Guerras de Sangue — Capítulo 27"
     },
     {
-      id:"jesed-chapter-gs-28",number:28,title:"Guerra de Sangue",status:"Escrito",pov:"Múltiplo",
+      id:"jesed-chapter-gs-28",number:28,image:"assets/chapters/guerras-de-sangue/capitulo-28.png",title:"Guerra de Sangue",status:"Escrito",pov:"Múltiplo",
       places:["jesed-place-kaendar"],
       characters:["jesed-character-kaelina-polar","jesed-character-rendar","jesed-character-alyra-polar","jesed-character-daryon-vess"],
       summary:"Kaelina oferece julgamento e passagem a Rendar, mas Alyra rompe a palavra da irmã e transforma o fim da guerra num duelo entre as soberanas.",
@@ -53,7 +53,7 @@
       ],wordCount:6403,source:"Guerras de Sangue — Capítulo 28"
     },
     {
-      id:"jesed-chapter-gs-29",number:29,title:"A Raiz que Ficou",status:"Escrito",pov:"Múltiplo",
+      id:"jesed-chapter-gs-29",number:29,image:"assets/chapters/guerras-de-sangue/capitulo-29.png",title:"A Raiz que Ficou",status:"Escrito",pov:"Múltiplo",
       places:["jesed-place-kaendar"],
       characters:["jesed-character-kaelina-polar","jesed-character-alyra-polar","jesed-character-cal-kadrir","jesed-character-iressa-mao-de-sal","jesed-character-lurok","jesed-character-sarkan-boca-partida","jesed-character-markoso","jesed-character-rendar","jesed-character-daryon-vess"],
       summary:"O Conselho condena Alyra à morte, mas Kaelina realiza um golpe, suspende a autoridade executiva do Conselho e escolhe o exílio para preservar a irmã e a criança.",

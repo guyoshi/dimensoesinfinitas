@@ -35,17 +35,45 @@
 
   audio.volume = volume;
 
+  const FADE_MS = 700;
+  let fadeTimer = null;
+
+  function clearFade(){
+    if(fadeTimer){ clearInterval(fadeTimer); fadeTimer = null; }
+  }
+
+  function fadeTo(target, duration, done){
+    clearFade();
+    target = clamp(target);
+    if(duration <= 0){
+      audio.volume = target;
+      if(done) done();
+      return;
+    }
+    const start = audio.volume;
+    const startTime = performance.now();
+    fadeTimer = setInterval(() => {
+      const t = Math.min(1, (performance.now() - startTime) / duration);
+      audio.volume = start + (target - start) * t;
+      if(t >= 1){
+        clearFade();
+        if(done) done();
+      }
+    }, 30);
+  }
+
   function buildPlayer(){
+    const dock = document.getElementById('musicDock');
     player = document.createElement('section');
     player.id = 'bookMusicPlayer';
-    player.className = 'book-music-player';
+    player.className = 'book-music-player' + (dock ? ' docked' : '');
     player.setAttribute('aria-label','Música de fundo do livro');
     player.innerHTML = `
       <button class="music-power" type="button" data-music-power aria-pressed="false" aria-label="Ligar música" title="Ligar música"><span aria-hidden="true">▶</span></button>
       <div class="music-copy"><strong data-music-title>Música do livro</strong><small data-music-status>Música desligada</small></div>
       <button class="music-mute" type="button" data-music-mute aria-label="Silenciar música" title="Silenciar música"><span aria-hidden="true">🔊</span></button>
       <label class="music-volume-label"><span>Volume</span><input data-music-volume type="range" min="0" max="1" step="0.01" value="${volume}" aria-label="Volume da música"></label>`;
-    document.body.appendChild(player);
+    (dock || document.body).appendChild(player);
     powerButton = player.querySelector('[data-music-power]');
     muteButton = player.querySelector('[data-music-mute]');
     volumeInput = player.querySelector('[data-music-volume]');
@@ -59,6 +87,7 @@
   }
 
   function setVolume(value){
+    clearFade();
     volume = clamp(value);
     if(volume > 0) lastAudibleVolume = volume;
     audio.volume = volume;
@@ -72,9 +101,11 @@
   }
 
   function clearSource(){
+    clearFade();
     audio.pause();
     audio.removeAttribute('src');
     audio.load();
+    audio.volume = volume;
     ready = false;
     waitingForGesture = false;
   }
@@ -90,7 +121,11 @@
       else attemptPlay();
     }else{
       waitingForGesture = false;
-      audio.pause();
+      if(!audio.paused){
+        fadeTo(0, FADE_MS, () => { audio.pause(); audio.volume = volume; updateUi(); });
+      }else{
+        audio.pause();
+      }
       updateUi();
     }
   }
@@ -111,13 +146,18 @@
   function attemptPlay(){
     if(!enabled || missing || !currentTrack || !audio.getAttribute('src')) return;
     waitingForGesture = false;
+    clearFade();
+    audio.volume = 0;
     const promise = audio.play();
     if(promise && typeof promise.catch === 'function'){
-      promise.then(updateUi).catch(() => {
+      promise.then(() => { fadeTo(volume, FADE_MS); updateUi(); }).catch(() => {
+        audio.volume = volume;
         waitingForGesture = true;
         armGestureResume();
         updateUi();
       });
+    }else{
+      fadeTo(volume, FADE_MS);
     }
     updateUi();
   }
@@ -139,14 +179,19 @@
   function applyBook(force=false){
     const book = detectBook();
     if(!force && book === currentBook) return;
+    const wasPlaying = !force && enabled && !audio.paused && !!audio.getAttribute('src');
     currentBook = book;
     currentTrack = config[book] || null;
     sourceIndex = 0;
     missing = false;
-    clearSource();
     if(titleNode) titleNode.textContent = currentTrack?.title || 'Música do livro';
-    if(enabled && currentTrack) setSource();
-    else updateUi();
+    const swap = () => {
+      clearSource();
+      if(enabled && currentTrack) setSource();
+      else updateUi();
+    };
+    if(wasPlaying) fadeTo(0, FADE_MS, swap);
+    else swap();
   }
 
   function updateUi(){
