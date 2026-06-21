@@ -1,0 +1,137 @@
+{
+  "stage": "Etapa 10",
+  "version": "0.10.0",
+  "title": "Clãs de Guerras de Sangue",
+  "clans": 8,
+  "profileFields": 15,
+  "profilesComplete": 8,
+  "politicalRelationsRendered": 56,
+  "charactersAssociated": 45,
+  "clansWithoutIndividualCharacters": [
+    "cendar"
+  ],
+  "separateLoreSections": [
+    "foods",
+    "fauna",
+    "flora"
+  ],
+  "prioritisedLoreCards": 186,
+  "archiveSectionsPreserved": 578,
+  "archiveGroupsRendered": 177,
+  "genericLoreBlockRemoved": true,
+  "archivesPreserved": true,
+  "fendelarFormalEmblemCreated": false,
+  "fendelarContextMark": "assets/clans/temp/fendelar-mark.webp",
+  "temporaryLorePlaceholders": [
+    "assets/lore/temp/food-placeholder.webp",
+    "assets/lore/temp/fauna-placeholder.webp",
+    "assets/lore/temp/flora-placeholder.webp"
+  ],
+  "requiredFiles": [
+    "data/sagas/ciclo-de-jesed/books/guerras-de-sangue/clans.js",
+    "app/shared/clans/presentation.css",
+    "assets/lore/temp/food-placeholder.webp",
+    "assets/lore/temp/fauna-placeholder.webp",
+    "assets/lore/temp/flora-placeholder.webp"
+  ],
+  "screenshots": [
+    "docs/screenshots/etapa-10/guerras-clans.png",
+    "docs/screenshots/etapa-10/guerras-clan-polar.png",
+    "docs/screenshots/etapa-10/guerras-clan-fendelar.png",
+    "docs/screenshots/etapa-10/guerras-clans-mobile.png",
+    "docs/screenshots/etapa-10/guerras-clan-polar-mobile.png"
+  ],
+  "browserTests": {
+    "runtimeExceptions": 0,
+    "consoleErrors": [],
+    "desktopNoHorizontalOverflow": true,
+    "mobileNoHorizontalOverflow": true,
+    "clansRendered": 8,
+    "details": {
+      "polar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 26,
+        "loreSections": 3,
+        "loreCards": 24,
+        "archiveGroups": 23,
+        "horizontalOverflow": false
+      },
+      "tondrar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 4,
+        "loreSections": 3,
+        "loreCards": 24,
+        "archiveGroups": 25,
+        "horizontalOverflow": false
+      },
+      "buldar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 3,
+        "loreSections": 3,
+        "loreCards": 24,
+        "archiveGroups": 25,
+        "horizontalOverflow": false
+      },
+      "fendelar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 5,
+        "loreSections": 3,
+        "loreCards": 24,
+        "archiveGroups": 19,
+        "horizontalOverflow": false
+      },
+      "glydar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 3,
+        "loreSections": 3,
+        "loreCards": 24,
+        "archiveGroups": 19,
+        "horizontalOverflow": false
+      },
+      "vendrar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 3,
+        "loreSections": 3,
+        "loreCards": 21,
+        "archiveGroups": 22,
+        "horizontalOverflow": false
+      },
+      "cendar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 0,
+        "loreSections": 3,
+        "loreCards": 23,
+        "archiveGroups": 23,
+        "horizontalOverflow": false
+      },
+      "urtistar": {
+        "profileCards": 10,
+        "relations": 7,
+        "members": 1,
+        "loreSections": 3,
+        "loreCards": 22,
+        "archiveGroups": 21,
+        "horizontalOverflow": false
+      }
+    },
+    "memberCardNavigation": true,
+    "relationNavigation": true,
+    "loreNavigation": true,
+    "archiveExpandable": true
+  },
+  "idsChanged": 0,
+  "canonicalChanges": 0,
+  "githubChanged": false,
+  "knownLimits": [
+    "População e força militar são estimativas editoriais baseadas nos documentos atuais.",
+    "A contagem definitiva de citações e a revisão individual de fauna, flora e alimentos pertencem à Etapa 11.",
+    "Os assets canônicos completos não acompanham o pacote intermediário; imagens ausentes usam fallback seguro."
+  ]
+}

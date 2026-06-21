@@ -12,6 +12,7 @@
   const externalPages = { 'ruinas-dos-ceus': 'ruinas.html', 'guerras-de-sangue': 'guerras.html' };
   const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/Ruínas dos Céus white.webp', 'guerras-de-sangue': 'assets/branding/Guerras de Sangue white.webp' };
   const icons = { compass: '✦', journal: '✦', crown: '♕', stars: '✧', portal: '◎', eye: '◉', union: '⬡', wind: '☁', 'crossed-swords': '⚔', fortress: '⛁', embers: '♨', hourglass: '⏳' };
+  const synopsisHtml = value => String(value || '').split(/\n\s*\n/).filter(Boolean).map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
   const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   function showView(name) {
@@ -36,7 +37,7 @@
       const style = b.cover ? ` style="background-image:url('${escapeHtml(b.cover)}')"` : '';
       return `<article class="dim-card book-dim-card ${active ? 'active' : 'locked'}"${style} ${active ? `data-book="${escapeHtml(b.id)}"` : ''}>
         <h3>Livro ${b.order} — ${escapeHtml(b.name)}</h3>
-        <p>${escapeHtml(b.synopsis || b.visual)}</p>
+        <p>${escapeHtml(b.teaser || b.synopsis || b.visual)}</p>
         <div class="dim-state">${active ? 'Disponível' : 'Em preparação'}</div>
       </article>`;
     }).join('');
@@ -48,7 +49,7 @@
     const href = externalPages[b.id];
     const logo = bookLogos[b.id];
     const titleHtml = logo ? `<img class="detail-logo" src="${escapeHtml(logo)}" alt="${escapeHtml(b.name)}">` : `<h2 class="section-title">${escapeHtml(b.name)}</h2>`;
-    detailView.innerHTML = `<button class="back-link" data-back="books">← Voltar</button><div class="detail-card">${b.cover ? `<img class="detail-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}">` : ''}<p class="kicker">Livro ${b.order} · Ciclo de Jesed</p>${titleHtml}<p class="subtitle">${escapeHtml(b.synopsis || b.visual)}</p>${href ? `<button class="go-button" data-go-href="${href}">Ir para a página do livro</button>` : '<p class="subtitle">Ainda em preparação.</p>'}</div>`;
+    detailView.innerHTML = `<button class="back-link" data-back="books">← Voltar</button><div class="detail-card">${b.cover ? `<img class="detail-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}">` : ''}<p class="kicker">Livro ${b.order} · Ciclo de Jesed</p>${titleHtml}<div class="subtitle book-full-synopsis">${synopsisHtml(b.synopsis || b.visual)}</div>${href ? `<button class="go-button" data-go-href="${href}">Ir para a página do livro</button>` : '<p class="subtitle">Ainda em preparação.</p>'}</div>`;
   }
 
   function route() {

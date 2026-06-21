@@ -1,4 +1,5 @@
 (() => {
-  const X=window.JESED_RUINAS_CONTEXT;if(!X)return;const {C,R,BOOK_ID}=X;
-  C.setCollection(BOOK_ID,'flora',C.asArray(R.LORE.flora).map(item=>{const [name,citations,image,note]=C.asArray(item),slug=C.slugify(name);return{id:C.stableId(null,'flora',name,BOOK_ID),slug,name:C.text(name),summary:C.text(note),citations:Number(citations||0),image:image||null,chapterIds:[],route:`flora/${slug}`,sourceRef:item};}));
+  const X=window.JESED_RUINAS_CONTEXT;if(!X)return;const {C,BOOK_ID}=X;
+  const items=Object.values(window.RUINAS_LORE_STAGE11?.flora||{});
+  C.setCollection(BOOK_ID,'flora',items.map(item=>({...item,id:item.name==='Rhaukar'?'jesed-fauna-raukhar':C.stableId(null,'flora',item.name,BOOK_ID),route:`flora/${item.slug}`,chapterIds:item.chapterMentions.map(m=>`jesed-chapter-rdc-${String(m.chapter).padStart(2,'0')}`),sourceRef:item})));
 })();

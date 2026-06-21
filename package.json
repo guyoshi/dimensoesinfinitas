@@ -1,8 +1,8 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.9.9",
+  "version": "0.11.0",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 9 com Relações, Família, Organizações e atmosfera rasterizada substituível por imagens definitivas.",
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 11 com citações verificadas de fauna, flora e alimentos, ciclo celeste acelerado e sinopses editoriais completas.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",

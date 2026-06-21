@@ -60,12 +60,16 @@
     night:{top:'#081625',mid:'#193247',bottom:'#4b5061',light:'#7792a8',shadow:'#182b3d'}
   };
   const session={get(key,fallback=null){try{const v=sessionStorage.getItem(key);return v===null?fallback:v}catch{return fallback}},set(key,value){try{sessionStorage.setItem(key,String(value))}catch{}}};
+  const CYCLE_DURATION_MS=10*60*1000;
   let autoTime=session.get(P+'time-mode')!=='manual';
   let manualMinutes=Number(session.get(P+'test-minutes',1110)||1110);
+  let cycleAnchorReal=Number(session.get(P+'cycle-anchor-real',Date.now())||Date.now());
+  let cycleAnchorMinutes=Number(session.get(P+'cycle-anchor-minutes',360)||360);
   let timer=null;
   const pad=n=>String(n).padStart(2,'0');
-  const timeLabel=m=>`${pad(Math.floor(m/60)%24)}:${pad(m%60)}`;
-  function currentMinutes(){const d=new Date();return d.getHours()*60+d.getMinutes()}
+  const timeLabel=m=>{m=Math.floor(Number(m)||0);return `${pad(Math.floor(m/60)%24)}:${pad(m%60)}`};
+  function currentMinutes(){const elapsed=((Date.now()-cycleAnchorReal)%CYCLE_DURATION_MS+CYCLE_DURATION_MS)%CYCLE_DURATION_MS;return (cycleAnchorMinutes+(elapsed/CYCLE_DURATION_MS)*1440)%1440}
+  function anchorCycle(minutes){cycleAnchorMinutes=(Number(minutes)+1440)%1440;cycleAnchorReal=Date.now();session.set(P+'cycle-anchor-minutes',cycleAnchorMinutes);session.set(P+'cycle-anchor-real',cycleAnchorReal)}
   function phaseFor(m){if(m>=300&&m<480)return'dawn';if(m>=480&&m<990)return'day';if(m>=990&&m<1200)return'dusk';return'night'}
   function updateSky(minutes=autoTime?currentMinutes():manualMinutes){
     minutes=(minutes+1440)%1440;const phase=phaseFor(minutes),c=phases[phase],root=document.documentElement;
@@ -81,7 +85,7 @@
     document.querySelectorAll('[data-time-slider]').forEach(i=>{if(document.activeElement!==i)i.value=minutes});
     document.querySelectorAll('[data-time-auto]').forEach(b=>{b.classList.toggle('active',autoTime);b.setAttribute('aria-pressed',String(autoTime))});
   }
-  function timeControlHtml(){return `<div class="time-test-control" data-time-control><label>Horário de teste</label><input data-time-slider type="range" min="0" max="1439" step="1" value="${autoTime?currentMinutes():manualMinutes}" aria-label="Horário de teste"><output data-time-output>${timeLabel(autoTime?currentMinutes():manualMinutes)}</output><button class="time-auto-button ${autoTime?'active':''}" data-time-auto type="button" aria-pressed="${autoTime}">Auto</button></div>`}
+  function timeControlHtml(){return `<div class="time-test-control" data-time-control><label>Horário de teste</label><input data-time-slider type="range" min="0" max="1439" step="1" value="${autoTime?currentMinutes():manualMinutes}" aria-label="Horário de teste"><output data-time-output>${timeLabel(autoTime?currentMinutes():manualMinutes)}</output><button class="time-auto-button ${autoTime?'active':''}" data-time-auto type="button" aria-pressed="${autoTime}" title="Ciclo automático: 24 horas em cerca de 10 minutos">Ciclo 10 min</button></div>`}
   function ensureTimeControls(){
     const utility=document.querySelector('.utility-controls');if(!utility)return;
     if(!utility.querySelector('[data-time-control]'))utility.insertAdjacentHTML('beforeend',timeControlHtml());
@@ -89,10 +93,10 @@
   }
   document.addEventListener('input',e=>{if(!e.target.matches('[data-time-slider]'))return;autoTime=false;manualMinutes=Number(e.target.value);session.set(P+'time-mode','manual');session.set(P+'test-minutes',manualMinutes);updateSky(manualMinutes)});
   document.addEventListener('click',e=>{
-    if(e.target.closest('[data-time-auto]')){autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo automático do céu restaurado')}
+    if(e.target.closest('[data-time-auto]')){anchorCycle(manualMinutes);autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo acelerado do céu restaurado: uma volta em cerca de 10 minutos')}
     const mobile=e.target.closest('[data-time-mobile]');if(mobile){document.querySelector('.topbar [data-time-control]')?.classList.toggle('mobile-open')}
   });
-  function startClock(){clearInterval(timer);updateSky();timer=setInterval(()=>{if(autoTime&&!document.hidden)updateSky()},60000)}
+  function startClock(){clearInterval(timer);updateSky();timer=setInterval(()=>{if(autoTime&&!document.hidden)updateSky()},500)}
 
   function applyVisualSettings(){
     const root=document.documentElement;

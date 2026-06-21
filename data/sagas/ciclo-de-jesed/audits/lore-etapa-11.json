@@ -1,0 +1,109 @@
+{
+  "stage": "Etapa 11",
+  "completed": "2026-06-21",
+  "sourceManuscripts": [
+    "Ciclo de Jesed - Ruínas dos Céus.txt",
+    "Ciclo de Jesed - Guerras de Sangue.txt"
+  ],
+  "books": {
+    "ruinas-dos-ceus": {
+      "items": 18,
+      "citations": 149,
+      "uncited": 0,
+      "itemsWithCitations": 18,
+      "byKind": {
+        "fauna": {
+          "items": 6,
+          "citations": 61,
+          "uncited": 0,
+          "itemsWithCitations": 6
+        },
+        "flora": {
+          "items": 6,
+          "citations": 10,
+          "uncited": 0,
+          "itemsWithCitations": 6
+        },
+        "foods": {
+          "items": 6,
+          "citations": 78,
+          "uncited": 0,
+          "itemsWithCitations": 6
+        }
+      }
+    },
+    "guerras-de-sangue": {
+      "items": 291,
+      "citations": 463,
+      "uncited": 168,
+      "itemsWithCitations": 123,
+      "byKind": {
+        "fauna": {
+          "items": 75,
+          "citations": 243,
+          "uncited": 32,
+          "itemsWithCitations": 43
+        },
+        "flora": {
+          "items": 110,
+          "citations": 167,
+          "uncited": 62,
+          "itemsWithCitations": 48
+        },
+        "foods": {
+          "items": 106,
+          "citations": 53,
+          "uncited": 74,
+          "itemsWithCitations": 32
+        }
+      }
+    }
+  },
+  "rules": {
+    "singularPlural": true,
+    "accentInsensitive": true,
+    "hyphenVariants": true,
+    "rhaukarIndirectReferencesReviewed": true,
+    "citationSnippets": true,
+    "chapterLinks": true,
+    "visibleRuinasFiltersRemoved": true,
+    "conceptFiltersRemoved": true
+  },
+  "clock": {
+    "mode": "accelerated",
+    "cycleRealMinutes": 10,
+    "manualSimulator": true,
+    "resumesFromSelectedTime": true
+  },
+  "synopses": {
+    "ruinas-dos-ceus": "complete",
+    "guerras-de-sangue": "complete"
+  },
+  "version": "0.11.0",
+  "browserTests": {
+    "runtimeExceptions": 0,
+    "ruinasFaunaCards": 6,
+    "guerrasFloraCards": 110,
+    "ruinasConceptFilters": 0,
+    "guerrasConceptFilters": 0,
+    "clockAdvanceInAboutTwoSeconds": 5,
+    "manualSimulatorTime": "18:30",
+    "manualSimulatorPhase": "dusk",
+    "autoResumed": true,
+    "synopsisParagraphs": {
+      "ruinas-dos-ceus": 3,
+      "guerras-de-sangue": 3
+    },
+    "mobileNoHorizontalOverflow": true
+  },
+  "screenshots": [
+    "docs/screenshots/etapa-11/ruinas-fauna-detalhe.png",
+    "docs/screenshots/etapa-11/guerras-flora-detalhe.png",
+    "docs/screenshots/etapa-11/ruinas-relogio.png",
+    "docs/screenshots/etapa-11/ruinas-sinopse.png",
+    "docs/screenshots/etapa-11/guerras-sinopse.png"
+  ],
+  "idsChanged": 0,
+  "canonicalChanges": 0,
+  "githubChanged": false
+}

@@ -85,6 +85,8 @@
     searchMode: "titles",
     relationshipFilter: "all",
     chapterQuery: "",
+    loreSort: "alpha",
+    loreFilter: "all",
     timelineSelection: storage.get("di-gs-timeline-selection") || "",
     settings: {
       preset: storage.get("di-preset") || "normal",
@@ -323,6 +325,8 @@
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed"},{label:"Início"}]);
   }
 
+  function synopsisHtml(value) { return String(value || '').split(/\n\s*\n/).filter(Boolean).map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join(''); }
+
   function renderBooks() {
     refs.main.innerHTML = `<div class="page-enter">
       ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Clique num livro para ver os detalhes.")}
@@ -333,7 +337,7 @@
             <div class="book-cover-overlay"></div>
             <span class="book-number readable-book-number">Livro ${book.order}</span>
             ${book.cover ? "" : `<div class="book-symbol">${icon(book.icon)}</div>`}
-            <div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.synopsis || book.visual)}</p></div>
+            <div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.teaser || book.synopsis || book.visual)}</p></div>
             <div class="book-status"><span>${book.status === "active" ? "Livro concluído" : "Bloqueado"}</span><span>${book.status === "active" ? "Abrir" : "Em preparação"}</span></div>
           </article>`).join("")}
       </section>
@@ -352,7 +356,7 @@
       const titleHtml = logo ? `<img class="hero-logo" src="${logo}" alt="${escapeHtml(book.name)}">` : `<h2>${escapeHtml(book.name)}</h2>`;
       refs.main.innerHTML = `<div class="page-enter">
         ${pageHeader(`Livro ${book.order} · Ciclo de Jesed`, book.name, book.status === "active" ? "Livro disponível, com sistema de navegação próprio." : "Ainda em preparação nesta etapa.")}
-        <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">${book.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</p>${titleHtml}<p>${escapeHtml(book.visual)}</p>${href ? `<div class="hero-actions"><button class="primary-button" data-external-href="${href}">${icon("arrow")} Ir para a página do livro</button></div>` : ""}</div></section>
+        <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">${book.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</p>${titleHtml}<div class="book-full-synopsis">${synopsisHtml(book.synopsis || book.visual)}</div>${href ? `<div class="hero-actions"><button class="primary-button" data-external-href="${href}">${icon("arrow")} Ir para a página do livro</button></div>` : ""}</div></section>
       </div>`;
       setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Livros",route:"books"},{label:book.name}]);
       return;
@@ -360,7 +364,7 @@
     refs.main.innerHTML = `<div class="page-enter">
       ${pageHeader(`Livro ${book.order} · Ciclo de Jesed`, book.name, "Livro concluído, organizado em todos os seus capítulos.", `<button class="secondary-button" data-route="chapters">${icon("chapter")} Capítulos</button><button class="primary-button" data-route="map">${icon("map")} Mapa do período</button>`)}
       ${canonNotice()}
-      <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">Estado editorial</p><h2>${D.chapters.length} capítulos escritos</h2><p>${escapeHtml(book.synopsis || book.visual)}</p><div class="tag-row"><span class="tag">${D.chapters[D.chapters.length - 1].number} capítulos no total</span><span class="tag">Mapa disponível</span><span class="tag">Livro concluído</span></div></div></section>
+      <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">Estado editorial</p><h2>${D.chapters.length} capítulos escritos</h2><div class="book-full-synopsis">${synopsisHtml(book.synopsis || book.visual)}</div><div class="tag-row"><span class="tag">${D.chapters[D.chapters.length - 1].number} capítulos no total</span><span class="tag">Mapa disponível</span><span class="tag">Livro concluído</span></div></div></section>
       <section class="metrics-grid">${[[D.chapters.length,"capítulos escritos","chapters"],[D.characters.length,"personagens","characters"],[timelineEntries().length,"eventos na linha do tempo","timeline"],[D.mysteries.length,"mistérios","mysteries"],[D.clans.length,"clãs","clans"],[D.places.length,"lugares","places"]].map(item => `<article class="metric-card" data-route="${item[2]}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}</section>
       <section class="dark-panel section-card"><div class="section-heading"><div><h2>Capítulos escritos</h2><p>O Capítulo ${D.chapters[D.chapters.length - 1].number} é o limite actual.</p></div></div><div class="mini-list">${D.chapters.map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`, `${ch.wordCount.toLocaleString("pt-BR")} palavras`)).join("")}</div></section>
     </div>`;
@@ -599,25 +603,136 @@
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Mistérios",route:"mysteries"},{label:mystery.name}]);
   }
 
+  const foldText = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
+
+  function clanMarkImage(clan) {
+    return clan.emblem || clan.contextMark || "assets/clans/temp/fendelar-mark.webp";
+  }
+
+  function clanTerritory(clan) {
+    return getPlace(clan.placeId);
+  }
+
+  function clanProfileCard(title, iconName, text, wide = false) {
+    if (!text) return "";
+    return `<article class="clan-profile-card ${wide ? "wide" : ""}"><h2>${icon(iconName)} ${escapeHtml(title)}</h2><p>${linkifyText(text)}</p></article>`;
+  }
+
+  function clanRelationshipEntries(clan) {
+    const relationSection = (sourceClan, targetClan) => {
+      const own = foldText(sourceClan.name);
+      const target = foldText(targetClan.name);
+      return (sourceClan.sections || []).find(section => {
+        if (!(section.paragraphs || []).length) return false;
+        const title = foldText(section.title);
+        return title === target
+          || title.includes(`relacao com ${target}`)
+          || title.includes(`${own} e ${target}`)
+          || title.includes(`${target} e ${own}`)
+          || (title.includes(target) && (title.includes("relacao") || title.includes("outros clas")));
+      });
+    };
+    return D.clans.filter(other => other.id !== clan.id).map(other => {
+      const direct = relationSection(clan, other);
+      const reverse = direct ? null : relationSection(other, clan);
+      const section = direct || reverse;
+      return {
+        clan: other,
+        text: section?.paragraphs?.join(" ") || `A relação entre ${clan.name} e ${other.name} ainda não foi descrita separadamente nos documentos de clã.`,
+        reverse: Boolean(reverse)
+      };
+    });
+  }
+
+  function clanRelationGrid(clan) {
+    const entries = clanRelationshipEntries(clan);
+    if (!entries.length) return `<p class="empty-inline">As relações políticas ainda não foram individualizadas.</p>`;
+    return `<div class="clan-relations-grid">${entries.map(entry => `<article class="clan-relation-card"><h3><button class="inline-entity-link" data-route="clan/${escapeHtml(entry.clan.slug)}">${escapeHtml(entry.clan.name)}</button></h3><p>${linkifyText(characterShortText(entry.text, 360))}</p></article>`).join("")}</div>`;
+  }
+
+  function clanMembers(clan) {
+    const characters = D.characters.filter(character => character.clanId === clan.id);
+    if (!characters.length) return `<div class="clan-empty-members">Nenhum personagem individualizado deste clã participa diretamente do manuscrito atual.</div>`;
+    return `<div class="clan-member-strip" aria-label="Personagens do clã ${escapeHtml(clan.name)}">${characters.map(character => `<button class="clan-member-card" data-route="character/${escapeHtml(character.slug)}"><span class="clan-member-media">${character.image ? `<img src="${escapeHtml(character.image)}" alt="Retrato de ${escapeHtml(character.name)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span hidden>${icon("person")}</span>` : icon("person")}</span><span class="clan-member-copy"><strong>${escapeHtml(character.name)}</strong><small>${escapeHtml(character.alias || character.importance || "Integrante do clã")}</small></span></button>`).join("")}</div>`;
+  }
+
+  function clanLoreItems(clan, kind, limit = 8) {
+    const source = foldText((clan.sections || []).flatMap(section => [section.title, ...(section.paragraphs || [])]).join(" "));
+    return (D.lore[kind] || [])
+      .filter(item => (item.clans || []).includes(clan.name))
+      .map(item => ({
+        ...item,
+        kind,
+        clanScore: (source.includes(foldText(item.name)) ? 1000 : 0) + Number(item.citations || 0) * 4 + (item.image ? 30 : 0)
+      }))
+      .sort((a, b) => b.clanScore - a.clanScore || a.name.localeCompare(b.name, "pt-BR"))
+      .slice(0, limit);
+  }
+
+  function clanLoreSection(clan, kind, title, iconName, categoryRoute) {
+    const items = clanLoreItems(clan, kind);
+    const fallback = {
+      foods: "assets/lore/temp/food-placeholder.webp",
+      fauna: "assets/lore/temp/fauna-placeholder.webp",
+      flora: "assets/lore/temp/flora-placeholder.webp"
+    }[kind];
+    return `<section class="clan-lore-section"><div class="clan-lore-section-header"><div><h2>${icon(iconName)} ${escapeHtml(title)}</h2><p>${kind === "foods" ? "Comidas e ingredientes ligados ao cotidiano do clã." : kind === "fauna" ? "Animais usados, caçados, criados ou temidos no território." : "Plantas com relevância territorial, alimentar, medicinal ou cultural."}</p></div><button class="secondary-button" data-route="${categoryRoute}">Ver categoria</button></div>${items.length ? `<div class="clan-lore-grid">${items.map(item => { const src = item.image || fallback; return `<button class="clan-lore-card" data-route="lore-item/${kind}/${escapeHtml(item.slug)}"><span class="clan-lore-media"><img src="${escapeHtml(src)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null;this.src='${escapeHtml(fallback)}'"></span><span class="clan-lore-copy"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(characterShortText(item.summary || item.type, 112))}</small></span></button>`; }).join("")}</div>` : `<p class="empty-inline">Nenhum item diretamente ligado foi registrado.</p>`}</section>`;
+  }
+
+  function clanArchiveGroups(clan) {
+    const groups = new Map();
+    for (const section of clan.sections || []) {
+      const rootNumber = String(section.number || "").split(".")[0] || "0";
+      if (!groups.has(rootNumber)) groups.set(rootNumber, { number: rootNumber, title: "Arquivo do clã", sections: [] });
+      const group = groups.get(rootNumber);
+      if (!String(section.number || "").includes(".") && section.title) group.title = section.title;
+      group.sections.push(section);
+    }
+    return [...groups.values()].sort((a, b) => Number(a.number) - Number(b.number));
+  }
+
+  function clanArchive(clan) {
+    const groups = clanArchiveGroups(clan);
+    return `<section class="clan-archive"><header><p class="eyebrow">Documento de referência</p><h2>Arquivo aprofundado do clã</h2><p>O conteúdo extenso anterior foi preservado e reorganizado em grupos recolhíveis. Ele complementa a ficha orientadora sem esconder as informações canônicas já registradas.</p></header>${groups.map(group => `<details class="clan-archive-group"><summary><span>${escapeHtml(group.number)}. ${escapeHtml(group.title)}</span><small>${group.sections.length} ${group.sections.length === 1 ? "parte" : "partes"}</small></summary><div class="clan-archive-content">${group.sections.map(section => `<section class="clan-archive-subsection"><h3>${escapeHtml(section.number)} · ${escapeHtml(section.title)}</h3>${(section.paragraphs || []).length ? section.paragraphs.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("") : `<p class="empty-inline">Seção introdutória do grupo.</p>`}</section>`).join("")}</div></details>`).join("")}</section>`;
+  }
+
   function renderClans() {
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Mundo", "Clãs", "Os oito clãs com cultura, território, virtude, corrupção e brasão quando existente.")}<section class="clan-grid">${D.clans.map(clan => `<article class="clan-card" style="--clan-color:${clan.colour}" data-route="clan/${clan.slug}"><div class="clan-emblem-wrap">${clan.emblem ? `<img class="clan-emblem" src="${clan.emblem}" alt="Brasão do clã ${escapeHtml(clan.name)}">` : `<div class="no-emblem-mark">${icon("eye")}<small>Sem brasão</small></div>`}</div><div><p class="eyebrow">Clã de ${escapeHtml(clan.essence)}</p><h2>${escapeHtml(clan.name)}</h2><p>${escapeHtml(clan.summary)}</p><div class="tag-row"><span class="tag">Virtude: ${escapeHtml(clan.virtue)}</span><span class="tag">Corrupção: ${escapeHtml(clan.corruption)}</span></div></div></article>`).join("")}</section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Mundo", "Clãs", "Oito povos moldados por território, memória, trabalho, fome e guerra. Abra uma ficha para consultar cultura, economia, personagens e recursos ligados ao clã.")}<section class="clan-overview-grid">${D.clans.map(clan => {
+      const place = clanTerritory(clan);
+      const profile = clan.profile || {};
+      const mark = clanMarkImage(clan);
+      return `<article class="clan-overview-card" style="--clan-color:${escapeHtml(clan.colour)}" data-route="clan/${escapeHtml(clan.slug)}" tabindex="0" role="link"><div class="clan-overview-landscape">${place?.image ? `<img src="${escapeHtml(place.image)}" alt="${escapeHtml(place.name)}" loading="lazy" onerror="this.hidden=true">` : ""}</div><div class="clan-overview-top"><span class="clan-overview-mark"><img src="${escapeHtml(mark)}" alt="${clan.emblem ? `Brasão do clã ${escapeHtml(clan.name)}` : `Marca contextual dos ${escapeHtml(clan.name)}`}" loading="lazy" onerror="this.hidden=true"></span><span class="clan-overview-type">Clã de ${escapeHtml(clan.essence)}</span></div><div class="clan-overview-copy"><p class="eyebrow">${escapeHtml(place?.name || "Território não registrado")}</p><h2>${escapeHtml(clan.name)}</h2><p>${escapeHtml(characterShortText(clan.summary, 245))}</p><div class="clan-overview-facts"><span>População<strong>${escapeHtml(profile.populationLabel || "Não estimada")}</strong></span><span>Força de batalha<strong>${escapeHtml(profile.militaryLabel || "Não estimada")}</strong></span></div></div></article>`;
+    }).join("")}</section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Clãs"}]);
   }
 
   function renderClan(slug) {
     const clan = getClan(slug);
     if (!clan) return renderNotFound();
-    const place = getPlace(clan.placeId);
-    const characters = D.characters.filter(c => c.clanId === clan.id);
-    const loreItems = ["fauna","flora","foods","concepts"].flatMap(kind => D.lore[kind].filter(item => item.clans.includes(clan.name)).map(item => ({...item, kind})));
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Clã", clan.name, `Essência: ${clan.essence}`, `<button class="secondary-button" data-route="relationships">${icon("network")} Relações políticas</button>${place ? `<button class="primary-button" data-route="place/${place.slug}">${icon("pin")} Território</button>` : ""}`)}<section class="clan-detail-hero" style="--clan-color:${clan.colour}"><div class="clan-detail-emblem">${clan.emblem ? `<img src="${clan.emblem}" alt="Brasão do clã ${escapeHtml(clan.name)}">` : `<div class="no-emblem-large">${icon("eye")}<strong>Fendelar</strong><span>Único clã sem brasão</span></div>`}</div><div><p>${escapeHtml(clan.summary)}</p><div class="clan-principles"><div><small>Grande virtude</small><strong>${escapeHtml(clan.virtue)}</strong></div><div><small>Grande corrupção</small><strong>${escapeHtml(clan.corruption)}</strong></div></div></div></section><section class="clan-content-layout"><article class="dark-panel section-card"><div class="tabs clan-section-tabs">${clan.sections.slice(0, 10).map((section, index) => `<button class="tab-button ${index === 0 ? "active" : ""}" data-clan-section="${index}" data-clan-slug="${clan.slug}">${escapeHtml(section.title)}</button>`).join("")}</div><div id="clanSectionPanel">${clanSectionHtml(clan, 0)}</div></article><aside><article class="dark-panel section-card"><h3>Personagens do clã</h3><div class="context-chip-list">${characters.map(c => `<button class="context-chip" data-route="character/${c.slug}">${c.image ? `<img src="${c.image}" alt="">` : icon("person")}<span>${escapeHtml(c.name)}</span></button>`).join("")}</div></article><article class="dark-panel section-card"><h3>Lore relacionada</h3><div class="mini-list">${loreItems.slice(0, 12).map(item => miniEntity(item.name, item.type, item.icon, `lore-item/${item.kind}/${item.slug}`, `${item.citations} citações`)).join("") || `<p class="empty-inline">Nada registado.</p>`}</div></article></aside></section></div>`;
+    const place = clanTerritory(clan);
+    const profile = clan.profile || {};
+    const mark = clanMarkImage(clan);
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Clã", clan.name, `Essência: ${clan.essence}`, `<button class="secondary-button" data-route="relationships">${icon("network")} Relações políticas</button>${place ? `<button class="primary-button" data-route="place/${place.slug}">${icon("pin")} Território</button>` : ""}`)}
+      <section class="clan-stage10-hero" style="--clan-color:${escapeHtml(clan.colour)}"><div class="clan-stage10-hero-bg">${place?.image ? `<img src="${escapeHtml(place.image)}" alt="${escapeHtml(place.name)}" onerror="this.hidden=true">` : ""}</div><div class="clan-stage10-mark"><div class="clan-stage10-mark-frame"><img src="${escapeHtml(mark)}" alt="${clan.emblem ? `Brasão do clã ${escapeHtml(clan.name)}` : `Marca contextual dos ${escapeHtml(clan.name)}`}" onerror="this.hidden=true"></div></div><div class="clan-stage10-hero-copy"><p class="eyebrow">${clan.emblem ? "Brasão e território" : "Clã sem brasão formal"}</p><h1>${escapeHtml(clan.name)}</h1><p>${escapeHtml(clan.summary)}</p><div class="clan-stage10-core"><div><small>Território principal</small><strong>${escapeHtml(place?.name || "Não registrado")}</strong></div><div><small>População estimada</small><strong>${escapeHtml(profile.populationLabel || "Não estimada")}</strong></div><div><small>Força de batalha</small><strong>${escapeHtml(profile.militaryLabel || "Não estimada")}</strong></div><div><small>Essência</small><strong>${escapeHtml(clan.essence)}</strong></div></div></div></section>
+      <section class="clan-profile-grid">
+        ${clanProfileCard("Origem", "root", profile.origin)}
+        ${clanProfileCard("Território", "map", profile.territory)}
+        ${clanProfileCard("Cultura", "scroll", profile.culture)}
+        ${clanProfileCard("Modo de vida", "home", profile.wayOfLife)}
+        ${clanProfileCard("Economia", "grain", profile.economy)}
+        ${clanProfileCard("Estrutura social", "people", profile.socialStructure)}
+        ${clanProfileCard("Alimentação", "bowl", profile.food, true)}
+        <article class="clan-profile-card wide"><h2>${icon("network")} Relações com outros clãs</h2>${clanRelationGrid(clan)}</article>
+      </section>
+      <section class="clan-strength-grid"><article class="clan-list-panel strengths"><h2>Forças</h2><ul>${(profile.strengths || []).map(item => `<li>${linkifyText(item)}</li>`).join("")}</ul></article><article class="clan-list-panel weaknesses"><h2>Fragilidades</h2><ul>${(profile.weaknesses || []).map(item => `<li>${linkifyText(item)}</li>`).join("")}</ul></article></section>
+      <section class="clan-profile-grid">${clanProfileCard("Participação na guerra", "crossed-swords", profile.warRole, true)}${clanProfileCard("Situação ao final do livro", "timeline", profile.finalSituation, true)}</section>
+      <div class="clan-section-heading"><div><p class="eyebrow">Pessoas</p><h2>Personagens do clã</h2><p>Fotos, nomes e funções aparecem depois dos textos gerais, em cartões clicáveis.</p></div><button class="secondary-button" data-route="characters">Ver personagens</button></div>
+      ${clanMembers(clan)}
+      <div class="clan-section-heading"><div><p class="eyebrow">Território e cotidiano</p><h2>Alimentos, fauna e flora</h2><p>Itens associados ao clã aparecem separados por função, e não como um bloco genérico de lore.</p></div></div>
+      <div class="clan-lore-groups">${clanLoreSection(clan,"foods","Alimentos","bowl","foods")}${clanLoreSection(clan,"fauna","Fauna","paw","fauna")}${clanLoreSection(clan,"flora","Flora","leaf","flora")}</div>
+      ${clanArchive(clan)}
+    </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Clãs",route:"clans"},{label:clan.name}]);
-  }
-
-  function clanSectionHtml(clan, index) {
-    const section = clan.sections[Number(index)] || clan.sections[0];
-    if (!section) return `<p class="empty-inline">Informação ainda não registrada.</p>`;
-    return `<div class="clan-section-content"><p class="eyebrow">${escapeHtml(section.number)}</p><h2>${escapeHtml(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</div>`;
   }
 
   function placePopulationLabel(place) {
@@ -753,23 +868,40 @@
     }[kind] || ["Lore", "Conteúdo do mundo.", "scroll"];
   }
 
+  function loreSortedItems(kind) {
+    let items = [...(D.lore[kind] || [])];
+    if (state.loreFilter !== "all" && kind !== "concepts") items = items.filter(item => item.clans.includes(state.loreFilter));
+    items.sort(state.loreSort === "count" ? (a,b) => (b.citations||0)-(a.citations||0) || a.name.localeCompare(b.name,"pt-BR") : (a,b) => a.name.localeCompare(b.name,"pt-BR"));
+    return items;
+  }
+
   function renderLore(kind) {
     const actualKind = kind === "lore" ? "concepts" : kind;
     const [title, subtitle, iconName] = loreKindInfo(actualKind);
-    const items = D.lore[actualKind] || [];
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Lore", title, subtitle)}<div class="filter-toolbar"><span class="filter-label">${icon("filter")} Filtrar por clã:</span><button class="filter-chip active" data-lore-filter="all" data-lore-kind="${actualKind}">Todos</button>${D.clans.map(clan => `<button class="filter-chip" data-lore-filter="${clan.name}" data-lore-kind="${actualKind}">${escapeHtml(clan.name)}</button>`).join("")}</div><div id="loreList">${loreListHtml(actualKind, items, iconName)}</div></div>`;
+    const items = loreSortedItems(actualKind);
+    const clanFilters = actualKind === "concepts" ? "" : `<div class="filter-toolbar lore-clan-filter"><span class="filter-label">${icon("filter")} Filtrar por clã:</span><button class="filter-chip ${state.loreFilter === "all" ? "active" : ""}" data-lore-filter="all" data-lore-kind="${actualKind}">Todos</button>${D.clans.map(clan => `<button class="filter-chip ${state.loreFilter === clan.name ? "active" : ""}" data-lore-filter="${clan.name}" data-lore-kind="${actualKind}">${escapeHtml(clan.name)}</button>`).join("")}</div>`;
+    const orderTools = actualKind === "concepts" ? "" : `<div class="filter-toolbar lore-order-tools"><span class="filter-label">Ordenar:</span><button class="filter-chip ${state.loreSort === "alpha" ? "active" : ""}" data-lore-sort="alpha" data-lore-kind="${actualKind}">A–Z</button><button class="filter-chip ${state.loreSort === "count" ? "active" : ""}" data-lore-sort="count" data-lore-kind="${actualKind}">Mais citados</button><button class="secondary-button" data-lore-export="${actualKind}">Exportar não citados</button></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Lore", title, subtitle)}${clanFilters}${orderTools}<div id="loreList">${loreListHtml(actualKind, items, iconName)}</div></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:title}]);
   }
 
   function loreListHtml(kind, items, iconName = loreKindInfo(kind)[2]) {
-    return `<section class="lore-grid">${items.map(item => `<article class="lore-card ${item.image ? "has-image" : ""}" data-route="lore-item/${kind}/${item.slug}">${item.image ? `<img class="lore-card-image" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy">` : `<span class="lore-icon">${icon(item.icon || iconName)}</span>`}<span class="citation-count">${item.citations} citações</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(item.summary)}</p><div class="tag-row">${item.clans.slice(0, 4).map(clan => `<span class="tag">${escapeHtml(clan)}</span>`).join("")}</div></article>`).join("")}</section>`;
+    const fallback = kind === "foods" ? "assets/lore/temp/food-placeholder.webp" : `assets/lore/temp/${kind}-placeholder.webp`;
+    return `<section class="lore-grid lore-stage11-grid">${items.map(item => `<article class="lore-card lore-stage11-card has-image" data-route="lore-item/${kind}/${item.slug}"><img class="lore-card-image" src="${escapeHtml(item.image || fallback)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'"><span class="citation-count">${item.citations||0} ${(item.citations||0)===1?"citação":"citações"}</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(characterShortText(item.summary,190))}</p></article>`).join("")}</section>`;
   }
 
   function renderLoreItem(kind, slug) {
     const item = getLoreItem(kind, slug);
     if (!item) return renderNotFound();
     const [title,,iconName] = loreKindInfo(kind);
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader(title, item.name, item.type)}<section class="lore-detail-layout"><article class="parchment-panel lore-detail">${item.image ? `<img class="lore-detail-image" src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}">` : `<div class="lore-detail-symbol">${icon(item.icon || iconName)}</div>`}<p class="lore-lead">${linkifyText(item.summary)}</p>${item.details.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</article><aside class="dark-panel section-card"><div class="citation-big"><strong>${item.citations}</strong><span>vezes citado no texto escrito</span></div><h3>Clãs que usam ou conhecem</h3><div class="tag-row">${item.clans.length ? item.clans.map(name => { const clan = getClan(slugText(name).replaceAll(" ","-")); return `<button class="tag clickable-tag" ${clan ? `data-route="clan/${clan.slug}"` : ""}>${escapeHtml(name)}</button>`; }).join("") : `<span class="empty-inline">Nenhum clã registado.</span>`}</div><h3>Menções por capítulo</h3><div class="mini-list">${item.chapterMentions.length ? item.chapterMentions.map(m => { const ch = getChapter(m.chapter); return miniEntity(`Capítulo ${m.chapter} — ${ch?.title || ""}`, `${m.count} ${m.count === 1 ? "menção" : "menções"}`, "chapter", `chapter/${ch?.id || m.chapter}`); }).join("") : `<p class="empty-inline">Ainda não citado directamente no manuscrito.</p>`}</div></aside></section></div>`;
+    const fallback = kind === "foods" ? "assets/lore/temp/food-placeholder.webp" : `assets/lore/temp/${kind}-placeholder.webp`;
+    const mentions = item.citationDetails || [];
+    const fields = [
+      ["Características", item.characteristics],
+      ["Habitat e origem", item.habitat],
+      ["Usos", Array.isArray(item.uses) ? item.uses.join("\n") : item.uses]
+    ].filter(([,value]) => value && String(value).trim());
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader(title, item.name, item.type)}<section class="lore-detail-layout lore-stage11-detail"><article class="parchment-panel lore-detail"><img class="lore-detail-image" src="${escapeHtml(item.image || fallback)}" alt="${escapeHtml(item.name)}" onerror="this.onerror=null;this.src='${fallback}'"><p class="lore-lead">${linkifyText(item.summary)}</p><div class="lore-full-description">${String(item.fullDescription||item.details?.join("\n\n")||item.summary||"").split(/\n\s*\n/).filter(Boolean).map(paragraph=>`<p>${linkifyText(paragraph)}</p>`).join("")}</div></article><aside class="dark-panel section-card"><h3>Relação com povos e clãs</h3><div class="tag-row">${item.clans.length ? item.clans.map(name => { const clan = getClan(slugText(name).replaceAll(" ","-")); return `<button class="tag clickable-tag" ${clan ? `data-route="clan/${clan.slug}"` : ""}>${escapeHtml(name)}</button>`; }).join("") : `<span class="empty-inline">Nenhum povo ou clã específico registrado.</span>`}</div>${fields.map(([label,value])=>`<h3>${escapeHtml(label)}</h3>${String(value).split("\n").filter(Boolean).map(x=>`<p>${linkifyText(x)}</p>`).join("")}`).join("")}</aside></section><section class="parchment-panel lore-citations-section"><div class="section-heading"><div><p class="eyebrow">Citações no livro</p><h2>${item.citations||0} ${(item.citations||0)===1?"vez citado":"vezes citado"}</h2><p>Todas as menções localizadas no manuscrito canônico usado nesta etapa.</p></div></div>${mentions.length ? `<div class="lore-citation-list">${mentions.map(m=>{const ch=getChapter(m.chapter);return `<article class="lore-citation"><button class="lore-citation-chapter" data-route="chapter/${ch?.id||m.chapter}">Capítulo ${m.chapter} — ${escapeHtml(ch?.title||m.chapterTitle||"")}</button><blockquote>“${escapeHtml(m.quote)}”</blockquote><p>${escapeHtml(m.context||"")}</p></article>`}).join("")}</div>` : `<p class="empty-inline">Este item ainda não foi citado diretamente no manuscrito.</p>`}</section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:title,route:kind === "concepts" ? "lore" : kind},{label:item.name}]);
   }
 
@@ -950,8 +1082,9 @@
     const charFilter = event.target.closest("[data-char-filter]"); if (charFilter) { state.characterFilter = charFilter.dataset.charFilter; renderCharacters(); }
     const tab = event.target.closest("[data-character-tab]"); if (tab) { state.characterTab = tab.dataset.characterTab; renderCharacter(tab.dataset.characterSlug); }
     const relFilter = event.target.closest("[data-rel-filter]"); if (relFilter) { state.relationshipFilter = relFilter.dataset.relFilter; renderRelationships(); }
-    const loreFilter = event.target.closest("[data-lore-filter]"); if (loreFilter) { $$("[data-lore-filter]").forEach(x => x.classList.toggle("active", x === loreFilter)); const kind = loreFilter.dataset.loreKind, value = loreFilter.dataset.loreFilter; const items = value === "all" ? D.lore[kind] : D.lore[kind].filter(item => item.clans.includes(value)); $("#loreList").innerHTML = loreListHtml(kind, items); }
-    const clanSection = event.target.closest("[data-clan-section]"); if (clanSection) { $$("[data-clan-section]").forEach(x => x.classList.toggle("active", x === clanSection)); const clan = getClan(clanSection.dataset.clanSlug); $("#clanSectionPanel").innerHTML = clanSectionHtml(clan, clanSection.dataset.clanSection); }
+    const loreFilter = event.target.closest("[data-lore-filter]"); if (loreFilter) { state.loreFilter = loreFilter.dataset.loreFilter; renderLore(loreFilter.dataset.loreKind); }
+    const loreSort = event.target.closest("[data-lore-sort]"); if (loreSort) { state.loreSort = loreSort.dataset.loreSort; renderLore(loreSort.dataset.loreKind); }
+    const loreExport = event.target.closest("[data-lore-export]"); if (loreExport) { const kind=loreExport.dataset.loreExport; const names=(D.lore[kind]||[]).filter(item=>(item.citations||0)===0).map(item=>item.name); const blob=new Blob([names.join("\n")],{type:"text/plain"}); const link=document.createElement("a"); link.href=URL.createObjectURL(blob); link.download=`guerras-${kind}-nao-citados.txt`; link.click(); URL.revokeObjectURL(link.href); }
     const searchMode = event.target.closest("[data-search-mode]"); if (searchMode) { state.searchMode = searchMode.dataset.searchMode; $$("[data-search-mode]").forEach(x => x.classList.toggle("active", x === searchMode)); renderSearchResults(refs.searchInput.value); }
     const setting = event.target.closest("[data-setting]"); if (setting) { const key = setting.dataset.setting; state.settings[key] = !state.settings[key]; storage.set("di-guerras-customized","1"); persistSettings(); }
     const preset = event.target.closest("[data-preset]"); if (preset) { state.settings.preset = preset.dataset.preset; if(state.settings.preset === "custom"){storage.set("di-guerras-customized","1");persistSettings();} else {storage.set("di-guerras-customized","0"); if (state.settings.preset === "full") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:34}); if (state.settings.preset === "normal") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:22}); if (state.settings.preset === "performance") Object.assign(state.settings,{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false}); persistSettings();} }

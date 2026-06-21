@@ -12,7 +12,7 @@
 - **Livros atualmente disponíveis:**
   - *Ruínas dos Céus* — Livro I — 24 capítulos — concluído.
   - *Guerras de Sangue* — Livro II — 29 capítulos — concluído.
-- **Versão estrutural atual:** Etapa 9 concluída — pacote 0.9.9.
+- **Versão estrutural atual:** Etapa 11 concluída — pacote 0.11.0.
 - **Última atualização deste documento:** 21 de junho de 2026.
 
 ---
@@ -139,10 +139,10 @@ Categorias incompatíveis não devem ser forçadas. Exemplo: *Ruínas dos Céus*
 | 5.5 | Identidade visual, atmosfera, modo contemplativo e desempenho | **CONCLUÍDA** | 21/06/2026 |
 | 6 | Mapas interativos | **CONCLUÍDA** | 21/06/2026 |
 | 7 | Páginas iniciais | **CONCLUÍDA** | 21/06/2026 |
-| 8 | Personagens | PENDENTE | — |
+| 8 | Personagens | **CONCLUÍDA** | 21/06/2026 |
 | 9 | Relações, família, organizações e atmosfera com imagens | CONCLUÍDA | 21/06/2026 |
-| 10 | Clãs | PENDENTE | — |
-| 11 | Fauna, flora e alimentos | PENDENTE | — |
+| 10 | Clãs | **CONCLUÍDA** | 21/06/2026 |
+| 11 | Fauna, flora e alimentos | **CONCLUÍDA** | 21/06/2026 |
 | 12 | Conceitos | PENDENTE | — |
 | 13 | Mistérios | PENDENTE | — |
 | 14 | Temas | PENDENTE | — |
@@ -1608,15 +1608,16 @@ Todos os quarenta caminhos possuem placeholders WebP locais. As artes definitiva
 
 ## Etapa 10 — Clãs
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA EM 21/06/2026  
+**Pacote:** 0.10.0
 
 ### Aplicação
 
-Principalmente *Guerras de Sangue*.
+A etapa foi aplicada aos oito clãs de *Guerras de Sangue*: Polar, Tondrar, Buldar, Fendelar, Glydar, Vendrar, Cendar e Urtistar.
 
-### Textos
+### Fichas orientadoras
 
-Reescrever e completar:
+Cada clã recebeu uma ficha principal com:
 
 - origem;
 - território;
@@ -1625,130 +1626,297 @@ Reescrever e completar:
 - modo de vida;
 - estrutura social;
 - alimentação;
-- relações com outros clãs;
+- população estimada e explicação;
+- força militar estimada e explicação;
+- relações com todos os outros clãs;
 - forças;
 - fragilidades;
 - participação na guerra;
 - situação ao final do livro.
 
+As estimativas foram registradas como faixas editoriais, sem transformar números aproximados em informação absoluta.
+
+### Relações políticas
+
+- cada ficha apresenta os sete outros clãs;
+- quando a seção está registrada no documento do outro povo, a interface usa essa perspectiva sem duplicar a informação;
+- nenhuma aliança, hostilidade ou neutralidade nova foi inventada;
+- o acesso ao outro clã é clicável.
+
 ### Personagens
 
-Mover personagens do clã para baixo dos textos.
+- os personagens foram movidos para depois dos textos estruturais;
+- aparecem horizontalmente em cartões com fotografia, nome e função;
+- os cartões são clicáveis e possuem quebra responsiva;
+- ausência de retrato utiliza fallback sem imagem quebrada;
+- Cendar permanece sem personagem individualizado no manuscrito atual e recebe uma mensagem explícita, sem criação artificial de figura.
 
-Mostrar horizontalmente:
+### Alimentos, fauna e flora
 
-- fotos;
-- nomes;
-- funções;
-- cartões clicáveis;
-- quebra responsiva.
+Foram criadas três seções independentes em cada ficha:
 
-### Remover
+- **Alimentos:** comidas e ingredientes associados ao cotidiano do clã;
+- **Fauna:** animais usados, criados, caçados, transportados ou temidos;
+- **Flora:** plantas com relevância territorial, alimentar, medicinal ou cultural.
 
-- Lore relacionada como bloco genérico na página do clã.
+Os cartões apresentam imagem, nome, descrição curta e ligação para a ficha correspondente. O sistema prioriza itens mencionados diretamente no arquivo do clã e depois considera citações e disponibilidade de imagem.
 
-### Adicionar abaixo
+Foram criados fallbacks locais seguros:
 
-#### Alimentos
+- `assets/lore/temp/food-placeholder.webp`;
+- `assets/lore/temp/fauna-placeholder.webp`;
+- `assets/lore/temp/flora-placeholder.webp`.
 
-- comidas e ingredientes ligados ao clã;
-- cards com fotos;
-- links para as fichas.
+### Conteúdo aprofundado preservado
 
-#### Fauna
+O antigo conteúdo extenso não foi apagado. Ele passou a aparecer como **Arquivo aprofundado do clã**, organizado em grupos recolhíveis. Assim, a ficha inicial orienta a leitura sem sacrificar as dezenas de seções canônicas já existentes.
 
-- animais comuns nas terras;
-- caça;
-- criação;
-- transporte;
-- alimentação;
-- guerra;
-- significado cultural.
+### Fendelar
 
-#### Flora
+- continuam sendo o único clã sem brasão formal;
+- `assets/clans/temp/fendelar-mark.webp` permanece apenas como marca contextual neutra;
+- nenhum símbolo heráldico novo foi criado.
 
-Adicionar quando houver relevância territorial clara.
+### Arquivos principais criados
+
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/clans.js`;
+- `app/shared/clans/presentation.css`;
+- `data/sagas/ciclo-de-jesed/audits/clans-etapa-10.json`;
+- três placeholders locais para Alimentos, Fauna e Flora;
+- capturas em `docs/screenshots/etapa-10/`.
+
+### Arquivos principais alterados
+
+- `guerras.html`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`;
+- `scripts/validate-content.js`;
+- `scripts/audit-content.js`;
+- `package.json`;
+- `README.md`;
+- `AI_UPDATE_RULES.md`;
+- `PLANO-MESTRE-E-HISTORICO.md`.
+
+### Validações
+
+- oito clãs com os quinze campos estruturais obrigatórios;
+- sete relações políticas apresentadas em cada ficha;
+- personagens e rotas internas válidos;
+- seções separadas de Alimentos, Fauna e Flora;
+- bloco genérico “Lore relacionada” ausente;
+- arquivos aprofundados preservados;
+- nenhum brasão Fendelar criado;
+- nenhum ID alterado;
+- nenhuma mudança canônica;
+- sintaxe JavaScript validada;
+- `npm run validate` e `npm run audit` concluídos;
+- páginas de Clãs testadas em desktop e largura móvel sem exceções ou scroll horizontal.
+
+### Limitações conhecidas
+
+- as imagens canônicas completas não acompanham o pacote intermediário; quando ausentes, a interface oculta a imagem ou usa fallback;
+- números de população e força militar são estimativas editoriais baseadas nos documentos atuais e podem ser refinados sem mudar IDs;
+- a contagem definitiva de citações e a revisão completa de cada item de fauna, flora e alimentos pertencem à Etapa 11.
+
+### Não realizado
+
+- nenhuma criação de brasão Fendelar;
+- nenhuma mudança de cânone;
+- nenhuma publicação ou push no GitHub;
+- nenhuma execução antecipada da Etapa 11.
 
 ---
 
 ## Etapa 11 — Fauna, flora e alimentos
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA EM 21/06/2026  
+**Versão do pacote:** 0.11.0
 
-### Contagens
+### Objetivo executado
 
-Recontar todas as citações com base no manuscrito canônico mais recente.
+Recontar e estruturar todas as fichas de fauna, flora e alimentos com base nos manuscritos canônicos disponíveis, criar listagens e páginas individuais equivalentes nos dois livros, corrigir o ciclo visual do céu e substituir as descrições atmosféricas da seção Livros por sinopses editoriais completas.
 
-Verificar:
+### Contagens finais
+
+#### Ruínas dos Céus
+
+- 6 itens de fauna;
+- 6 itens de flora;
+- 6 alimentos;
+- 149 citações localizadas:
+  - fauna: 61;
+  - flora: 10;
+  - alimentos: 78;
+- nenhum dos 18 itens está sem citação no manuscrito atual.
+
+#### Guerras de Sangue
+
+- 75 itens de fauna;
+- 110 itens de flora;
+- 106 alimentos;
+- 463 citações localizadas:
+  - fauna: 243;
+  - flora: 167;
+  - alimentos: 53;
+- 168 itens ainda não aparecem diretamente no manuscrito:
+  - fauna: 32;
+  - flora: 62;
+  - alimentos: 74.
+
+### Método de recontagem
+
+Foram considerados:
 
 - singular e plural;
-- grafias variantes;
-- aliases;
-- nomes indiretos;
-- a Fera como Raukhar, quando for a mesma criatura.
+- diferenças de acento;
+- hífen e espaço;
+- aliases registrados;
+- grafias alternativas;
+- títulos de capítulo;
+- nomes indiretos quando o contexto confirma a mesma entidade;
+- a Fera como Rhaukar apenas nas passagens em que a criatura de olhos amarelos é realmente a referida.
 
-### Listagem
+Menções metafóricas ou referentes a outras criaturas não foram mantidas como Rhaukar. O nome canônico exibido é **Rhaukar**, preservando o ID `jesed-fauna-raukhar`, o slug `raukhar` e “Raukhar” como alias histórico.
 
-Nos cartões, mostrar somente:
+### Listagens
 
-- foto;
+Nos dois livros, os cartões de fauna, flora e alimentos mostram somente:
+
+- imagem;
 - nome;
-- breve descrição;
+- descrição breve;
 - total de citações.
 
-Não mostrar o texto completo na listagem.
+O conteúdo integral não aparece antecipadamente na listagem.
 
-### Página individual
+Em *Ruínas dos Céus*:
 
-Ao clicar, mostrar:
+- os 18 cartões receberam imagem ou fallback seguro;
+- todos são clicáveis;
+- não existe filtro por clã;
+- os filtros visíveis anteriores foram removidos;
+- permanecem ordenação A–Z, ordenação por citações e exportação de não citados.
+
+Os filtros de Conceitos foram removidos nos dois livros, sem antecipar a criação das fichas individuais de Conceitos em Ruínas, que pertence à Etapa 12.
+
+### Páginas individuais
+
+Cada ficha apresenta:
 
 - imagem;
 - descrição completa;
 - características;
-- habitat;
+- habitat ou origem;
 - usos;
-- relação com povos ou clãs, quando aplicável;
+- relação com povos ou clãs somente quando aplicável;
 - total de citações;
-- lista completa das citações.
+- lista completa das menções.
 
-### Campo Citações no livro
-
-Cada menção deve mostrar:
+Cada menção contém:
 
 - capítulo;
+- título do capítulo;
 - trecho citado;
 - contexto curto;
-- link para o capítulo.
+- ligação para o capítulo.
 
-O número “X vezes citado” deve aparecer junto da lista, não apenas como selo no topo.
+O texto “X vezes citado” aparece junto da lista de citações.
 
-### Ruínas dos Céus
+### Ciclo do céu de Ruínas dos Céus
 
-Adicionar cartões com fotos para:
+O modo automático deixou de acompanhar a hora real do dispositivo.
 
-- fauna;
-- flora;
-- alimentos.
+Agora:
 
-Todos devem ser clicáveis como em *Guerras de Sangue*.
+- 24 horas visuais completam uma volta em aproximadamente 10 minutos reais;
+- o céu é atualizado a cada meio segundo;
+- o simulador temporário altera imediatamente o horário;
+- amanhecer, dia, entardecer, noite, sol, lua e iluminação respondem ao slider;
+- ao reativar o botão **Ciclo 10 min**, o movimento continua a partir do horário escolhido;
+- a preferência permanece apenas na sessão.
 
-### Campos específicos
+No teste de navegador, o relógio avançou aproximadamente cinco minutos visuais em pouco mais de dois segundos reais, coerente com a volta de dez minutos.
 
-- Não incluir relação com clãs em *Ruínas dos Céus* se isso não fizer sentido para o período.
-- Compartilhar apenas campos pertinentes.
+### Sinopses editoriais
 
-### Filtros e ordenação
+As páginas acessadas por **Livros → Ruínas dos Céus** e **Livros → Guerras de Sangue** agora mostram sinopses completas, vendáveis e divididas em três parágrafos.
 
-Decisão mais recente:
+Também foram criados teasers curtos para os cartões da lista. As antigas frases “Céu pálido...” e “Pergaminho escurecido...” deixaram de ser usadas como sinopses visíveis.
 
-- remover filtros visíveis de fauna, flora e alimentos em *Ruínas dos Céus*;
-- remover filtros de conceitos nos dois livros.
+### Arquivos criados
 
-Pedido anterior conciliado:
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/lore-stage11.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/lore-stage11.js`;
+- `data/sagas/ciclo-de-jesed/audits/lore-etapa-11.json`;
+- `docs/screenshots/etapa-11/ruinas-fauna-detalhe.png`;
+- `docs/screenshots/etapa-11/guerras-flora-detalhe.png`;
+- `docs/screenshots/etapa-11/ruinas-relogio.png`;
+- `docs/screenshots/etapa-11/ruinas-sinopse.png`;
+- `docs/screenshots/etapa-11/guerras-sinopse.png`.
 
-- a ordenação alfabética e por número de citações pode existir como ordenação, sem voltar a criar filtros incompatíveis;
-- a exportação de itens não citados pode continuar como utilitário separado, caso ainda seja útil;
-- não criar filtro por clã em *Ruínas dos Céus*.
+### Arquivos principais alterados
+
+- `ruinas.html`;
+- `guerras.html`;
+- `app/portal/data.js`;
+- `app/portal/app.js`;
+- `app/portal/styles.css`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/base.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/app.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/events.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/lore.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/main.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/fauna.js`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/flora.js`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/foods.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/runtime.js`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`;
+- estilos dos dois livros;
+- `scripts/validate-content.js`;
+- `scripts/audit-content.js`;
+- `package.json`;
+- `README.md`;
+- `AI_UPDATE_RULES.md`;
+- `PLANO-MESTRE-E-HISTORICO.md`.
+
+### Arquivos removidos
+
+- nenhum.
+
+### Validações realizadas
+
+- 309 itens estruturados;
+- 612 citações com trecho e contexto;
+- soma por capítulo conferida contra o total de cada item;
+- 71 arquivos JavaScript verificados sintaticamente;
+- zero exceções no navegador;
+- seis cartões de fauna em Ruínas;
+- 110 cartões de flora em Guerras;
+- zero filtros visíveis de Conceitos;
+- simulador testado em 18:30, com fase de entardecer;
+- retorno ao ciclo automático testado;
+- três parágrafos de sinopse nos dois livros;
+- zero rolagem horizontal em 390 píxeis;
+- `npm run validate` concluído;
+- `npm run audit` concluído;
+- nenhuma alteração no GitHub.
+
+### Limitações e pendências
+
+- 168 itens de *Guerras de Sangue* permanecem sem citação direta; a exportação permite reutilizá-los em livros futuros;
+- a pasta completa de assets canônicos não acompanha este pacote intermediário, mas caminhos e fallbacks foram preservados;
+- fichas individuais de Conceitos em *Ruínas dos Céus* pertencem à Etapa 12.
+
+### IDs e cânone
+
+- IDs alterados: 0;
+- mudanças canônicas: 0;
+- redirecionamentos anteriores: preservados;
+- GitHub alterado: não.
+
+### Próxima etapa recomendada
+
+- Etapa 12 — Conceitos.
 
 ---
 
@@ -2133,6 +2301,6 @@ Não criar outro histórico paralelo.
 
 # 12. Próxima etapa oficial
 
-## Etapa 10 — Clãs
+## Etapa 12 — Conceitos
 
-A próxima IA deve começar pela Etapa 10 usando o pacote completo da Etapa 9. Deve preservar as páginas sociais, o catálogo das quarenta imagens substituíveis, os fallbacks atmosféricos, os IDs, os mapas, as trajetórias e todas as etapas anteriores. O foco seguinte é revisar, completar e padronizar as fichas dos clãs de *Guerras de Sangue*, sem criar brasão para os Fendelar e sem alterar o GitHub.
+A próxima IA deve começar pela Etapa 12 usando o pacote completo da Etapa 11. Deve preservar as novas fichas e contagens de fauna, flora e alimentos, o ciclo celeste acelerado de dez minutos, o simulador temporário, as sinopses editoriais, os clãs, mapas, relações, trajetórias, IDs, fallbacks e todas as etapas anteriores. O foco seguinte é remover definitivamente qualquer filtro residual de Conceitos, criar fichas clicáveis de Conceitos em *Ruínas dos Céus* e aprofundar definição, origem, funcionamento conhecido, interpretações, personagens, capítulos, citações e ambiguidades sem fechar respostas que a narrativa mantém misteriosas. Nenhum push deve ser realizado sem autorização.

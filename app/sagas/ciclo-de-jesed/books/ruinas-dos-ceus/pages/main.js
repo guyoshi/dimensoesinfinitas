@@ -1,11 +1,12 @@
 (()=>{const R=window.RS,{D,E,S,AP,REL,EV,MYS,st,H,find,err,BOOKS,charImage,media,initials,linkify}=R;
+function synopsisHtml(value){return String(value||'').split(/\n\s*\n/).filter(Boolean).map(paragraph=>`<p>${E(paragraph)}</p>`).join('')}
 function livros(){
   return H('Ciclo de Jesed','Os cinco livros','Clique num livro para ver os detalhes.')+`<div class="bookshelf">${BOOKS.map(b=>{
     const active=b.status==='active';
     const current=b.id==='ruinas-dos-ceus';
     return `<article class="book-card ${b.status} ${current?'current':''} ${active?'click':''}" ${active?`data-go="livro/${b.id}"`:'disabled'} style="${b.cover?`--book-cover:url('${E(b.cover)}')`:''}">
       <span class="book-number">Livro ${b.order}</span>
-      <div class="book-card-copy"><h3>${E(b.name)}</h3><p>${E(b.visual)}</p></div>
+      <div class="book-card-copy"><h3>${E(b.name)}</h3><p>${E(b.teaser||b.visual)}</p></div>
       <div class="book-status"><span>${active?(current?'Livro concluído':'Em escrita'):'Bloqueado'}</span><span>${active?(current?'Você está aqui':'Ver detalhes'):'Em preparação'}</span></div>
     </article>`;
   }).join('')}</div>`;
@@ -20,7 +21,7 @@ function livro(id){
   const logo=bookLogos[b.id];
   const titleHtml=logo?`<img class="hero-logo" src="${E(logo)}" alt="${E(b.name)}">`:`<h1>${E(b.name)}</h1>`;
   const stats=current?`<div class="stats"><span class="stat">${D.chapters.length} capítulos</span><span class="stat">${D.characters.length} personagens</span><span class="stat">${D.places.length} lugares</span></div>`:'';
-  return `<button class="back" data-go="livros">← Voltar</button><section class="detailhero">${media(b.cover,`Capa de ${b.name}`,'✦','portrait avatar big')}<article class="panel"><p class="eyebrow">Livro ${b.order} · ${b.status==='active'?(current?'Você está aqui':'Disponível'):'Bloqueado nesta etapa'}</p>${titleHtml}<p class="lead">${E(b.visual)}</p>${stats}${href?`<div class="hero-actions"><button class="primary-button" data-selector-href="${href}">Ir para a página do livro</button></div>`:''}</article></section>`;
+  return `<button class="back" data-go="livros">← Voltar</button><section class="detailhero">${media(b.cover,`Capa de ${b.name}`,'✦','portrait avatar big')}<article class="panel"><p class="eyebrow">Livro ${b.order} · ${b.status==='active'?(current?'Você está aqui':'Disponível'):'Bloqueado nesta etapa'}</p>${titleHtml}<div class="lead book-full-synopsis">${synopsisHtml(b.synopsis||b.visual)}</div>${stats}${href?`<div class="hero-actions"><button class="primary-button" data-selector-href="${href}">Ir para a página do livro</button></div>`:''}</article></section>`;
 }
 function inicio(){
   const focusDescriptors={'Jokara Amaréa':'Peso, verdade e sacrifício','Nestira Amaréa':'Sopro, fé e esperança','Marv':'Construção, cuidado e legado','Loutes':'Mistério além do tempo','Gabasteres':'Força transformada em domínio'};

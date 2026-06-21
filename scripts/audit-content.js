@@ -9,6 +9,8 @@ const assets=JSON.parse(fs.readFileSync(path.join(root,'data/common/assets-manif
 const home=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/home-assets-etapa-7.json'),'utf8'));
 const characters=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/characters-etapa-8.json'),'utf8'));
 const social=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/social-etapa-9.json'),'utf8'));
+const clans=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/clans-etapa-10.json'),'utf8'));
+const lore=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/lore-etapa-11.json'),'utf8'));
 const imageRequirements=JSON.parse(fs.readFileSync(path.join(root,'data/common/image-requirements-etapa-9.json'),'utf8'));
 console.log(`Auditoria canônica preservada — Etapa ${canonical.stage}`);
 console.log(`Correções canônicas aplicadas: ${canonical.correctionsApplied.length}`);
@@ -70,3 +72,24 @@ console.log(`Guerras de Sangue: ${social['guerras-de-sangue'].families} família
 console.log(`Catálogo substituível: ${imageRequirements.items.length} imagens WebP com caminho, dimensão, transparência e função documentados.`);
 console.log(`Referências SVG atmosféricas activas: ${social.atmosphere.activeSvgAtmosphereReferences}; dependências externas adicionadas: ${social.atmosphere.externalDependenciesAdded}.`);
 console.log(`Fallbacks sem erro: ${social.atmosphere.fallbacksEnabled?'activos':'não confirmados'}; GitHub alterado: ${social.githubChanged?'sim':'não'}.`);
+
+console.log('');
+console.log(`Auditoria de Clãs — ${clans.stage} · pacote ${clans.version}`);
+console.log(`Clãs completos: ${clans.profilesComplete}/${clans.clans}; campos estruturais por ficha: ${clans.profileFields}.`);
+console.log(`Relações políticas renderizadas: ${clans.politicalRelationsRendered}; personagens associados: ${clans.charactersAssociated}.`);
+console.log(`Recursos territoriais priorizados: ${clans.prioritisedLoreCards} cartões em Alimentos, Fauna e Flora.`);
+console.log(`Arquivo aprofundado preservado: ${clans.archiveSectionsPreserved} seções em ${clans.archiveGroupsRendered} grupos.`);
+console.log(`Brasão formal Fendelar criado: ${clans.fendelarFormalEmblemCreated?'sim':'não'}; bloco genérico de lore removido: ${clans.genericLoreBlockRemoved?'sim':'não'}.`);
+console.log(`Exceções de execução: ${clans.browserTests.runtimeExceptions}; layout móvel sem rolagem horizontal: ${clans.browserTests.mobileNoHorizontalOverflow?'sim':'não'}.`);
+console.log(`IDs alterados: ${clans.idsChanged}; mudanças canônicas: ${clans.canonicalChanges}; GitHub alterado: ${clans.githubChanged?'sim':'não'}.`);
+
+
+
+console.log('');
+console.log(`Auditoria de Fauna, Flora e Alimentos — ${lore.stage} · pacote ${lore.version}`);
+console.log(`Ruínas dos Céus: ${lore.books['ruinas-dos-ceus'].items} itens e ${lore.books['ruinas-dos-ceus'].citations} citações localizadas.`);
+console.log(`Guerras de Sangue: ${lore.books['guerras-de-sangue'].items} itens, ${lore.books['guerras-de-sangue'].citations} citações e ${lore.books['guerras-de-sangue'].uncited} itens ainda não citados.`);
+console.log(`Ciclo celeste: uma volta em ${lore.clock.cycleRealMinutes} minutos reais; simulador manual ${lore.clock.manualSimulator?'activo':'ausente'}.`);
+console.log(`Sinopses editoriais completas: Ruínas dos Céus e Guerras de Sangue.`);
+console.log(`Exceções de execução: ${lore.browserTests.runtimeExceptions}; layout móvel sem rolagem horizontal: ${lore.browserTests.mobileNoHorizontalOverflow?'sim':'não'}.`);
+console.log(`IDs alterados: ${lore.idsChanged}; mudanças canônicas: ${lore.canonicalChanges}; GitHub alterado: ${lore.githubChanged?'sim':'não'}.`);

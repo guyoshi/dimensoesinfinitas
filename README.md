@@ -1,6 +1,6 @@
 # Dimensões Infinitas — site pessoal
 
-Versão estrutural: **0.9.9 — Etapa 9 concluída**.
+Versão estrutural: **0.11.0 — Etapa 11 concluída**.
 
 ## Entradas públicas
 
@@ -249,6 +249,57 @@ Capturas:
 
 `docs/screenshots/etapa-9/`
 
+## Etapa 10 — clãs
+
+- os oito clãs de *Guerras de Sangue* possuem fichas orientadoras completas;
+- cada ficha apresenta origem, território, cultura, economia, modo de vida, estrutura social e alimentação;
+- população e força militar aparecem como estimativas explicitamente identificadas;
+- relações políticas são exibidas em cartões próprios, incluindo a perspectiva registrada pelo outro clã quando necessário;
+- forças, fragilidades, participação na guerra e situação ao final do livro foram organizadas em blocos distintos;
+- personagens do clã aparecem depois dos textos, em uma faixa horizontal de cartões com fotografia, nome e função;
+- Alimentos, Fauna e Flora possuem seções independentes com imagens e links para as fichas;
+- o antigo bloco genérico “Lore relacionada” foi removido;
+- todo o conteúdo aprofundado anterior foi preservado como Arquivo aprofundado do clã, organizado em grupos recolhíveis;
+- os Fendelar continuam sem brasão formal; a marca usada pela interface permanece neutra e não canônica;
+- os placeholders de alimentos, fauna e flora garantem que imagens ausentes não produzam erro visual.
+
+Arquivos principais:
+
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/clans.js`;
+- `app/shared/clans/presentation.css`;
+- `data/sagas/ciclo-de-jesed/audits/clans-etapa-10.json`.
+
+Capturas:
+
+`docs/screenshots/etapa-10/`
+
+## Etapa 11 — fauna, flora, alimentos, ciclo celeste e sinopses
+
+- 18 itens de fauna, flora e alimentos de *Ruínas dos Céus* foram estruturados em cartões e fichas individuais;
+- 291 itens de *Guerras de Sangue* foram recontados e enriquecidos;
+- foram localizadas 612 citações: 149 em *Ruínas dos Céus* e 463 em *Guerras de Sangue*;
+- cada citação possui capítulo, trecho, contexto curto e ligação para o capítulo;
+- singular, plural, acentos, hífens, aliases e nomes indiretos foram considerados;
+- a Fera do primeiro livro permanece identificada como Rhaukar, preservando o ID e o slug históricos `raukhar`;
+- as listagens mostram somente imagem, nome, descrição breve e total de citações;
+- as fichas mostram descrição completa, características, habitat, usos, relações com povos ou clãs quando aplicável e lista integral de menções;
+- filtros visíveis foram removidos de fauna, flora e alimentos em Ruínas e de Conceitos nos dois livros;
+- ordenação A–Z, por citações e exportação de itens não citados foram preservadas onde aplicáveis;
+- o céu de Ruínas não acompanha a hora real: completa um ciclo de 24 horas em aproximadamente 10 minutos reais;
+- o simulador temporário altera imediatamente horário, fase, sol, lua e iluminação;
+- ao retornar ao ciclo automático, ele continua a partir do horário selecionado;
+- as páginas de Livros agora exibem sinopses editoriais completas, divididas em três parágrafos, nos dois livros.
+
+Arquivos principais:
+
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/lore-stage11.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/lore-stage11.js`;
+- `data/sagas/ciclo-de-jesed/audits/lore-etapa-11.json`.
+
+Capturas:
+
+`docs/screenshots/etapa-11/`
+
 ## Próxima etapa
 
-**Etapa 10 — Clãs.**
+**Etapa 12 — Conceitos.**

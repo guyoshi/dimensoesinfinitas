@@ -15,8 +15,8 @@
       linha:id?()=>P.linhaItem(id):P.linha,
       misterios:P.misterios,misterio:()=>P.misterio(id),
       mapa:P.mapa,lugares:P.lugares,lugar:()=>P.lugar(id),
-      fauna:()=>P.lore('fauna'),flora:()=>P.lore('flora'),
-      alimentos:()=>P.lore('alimentos'),conceitos:()=>P.lore('conceitos'),
+      fauna:id?()=>P.loreItem('fauna',id):()=>P.lore('fauna'),flora:id?()=>P.loreItem('flora',id):()=>P.lore('flora'),
+      alimentos:id?()=>P.loreItem('alimentos',id):()=>P.lore('alimentos'),conceitos:()=>P.lore('conceitos'),
       canon:()=>P.simples('Regras canônicas',[
         ['Sopro','Manter ambiguidade.'],
         ['Tom','Perda pesada e esperança final.'],

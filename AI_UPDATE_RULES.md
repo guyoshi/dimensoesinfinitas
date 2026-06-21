@@ -177,8 +177,8 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 
 ## 17. Estado atual
 
-- Etapas 1, 2, 3, 4, 5, 5.5, 6, 7, 8 e 9 concluídas.
-- Próxima etapa oficial: **Etapa 10 — Clãs**.
+- Etapas 1, 2, 3, 4, 5, 5.5, 6, 7, 8, 9 e 10 concluídas.
+- Próxima etapa oficial: **Etapa 11 — Fauna, flora e alimentos**.
 
 
 ## 18. Identidade visual e desempenho desde a Etapa 5.5
@@ -200,7 +200,7 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 - Recursos em `assets/**/temp/` são substituíveis, não canônicos e devem permanecer documentados.
 - Ao substituir um placeholder, preservar o caminho é preferível; se o caminho mudar, atualizar CSS, documentação e validação.
 - A Etapa 5.5 não autoriza mudanças de nomes, descrições ou informações canônicas.
-- As Etapas 6, 7, 8 e 9 foram concluídas; a próxima etapa funcional é a Etapa 10 — Clãs.
+- As Etapas 6, 7, 8, 9, 10 e 11 foram concluídas; a próxima etapa funcional é a Etapa 12 — Conceitos.
 
 
 ## 19. Mapas interativos desde a Etapa 6
@@ -265,3 +265,40 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 - Sprites de partículas podem falhar sem quebrar o Canvas: preservar o fallback desenhado por código.
 - Imagens sociais e texturas devem possuir fundo visual de segurança para evitar áreas vazias ou erro aparente.
 - Não usar URLs externas para texturas, nuvens, partículas, famílias ou organizações.
+
+## 24. Clãs desde a Etapa 10
+
+- Preservar `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/clans.js` como camada estruturada das fichas de clã.
+- Preservar `app/shared/clans/presentation.css` como apresentação reutilizável; não voltar a espalhar estilos de clã no arquivo principal.
+- Os oito clãs devem manter origem, território, cultura, economia, modo de vida, estrutura social, alimentação, relações, forças, fragilidades, participação na guerra e situação final.
+- População e força militar são estimativas editoriais e devem permanecer apresentadas como faixas, com explicação e possibilidade de revisão sem alteração de ID.
+- Cada ficha deve apresentar os sete outros clãs; quando o texto estiver registrado no documento do outro povo, a interface pode usar essa perspectiva.
+- Personagens aparecem depois dos textos, em cartões clicáveis com foto, nome e função. Não inventar personagem para um clã sem figura individualizada.
+- É proibido restaurar “Lore relacionada” como bloco genérico. Manter Alimentos, Fauna e Flora em seções independentes.
+- Cartões de recursos devem apontar para fichas válidas e usar fallbacks locais quando a imagem não existir.
+- Preservar `assets/lore/temp/food-placeholder.webp`, `fauna-placeholder.webp` e `flora-placeholder.webp` enquanto não houver imagem canônica.
+- O Arquivo aprofundado do clã preserva o conteúdo extenso anterior e não pode ser apagado para simplificar a página.
+- Os Fendelar continuam sem brasão formal. `assets/clans/temp/fendelar-mark.webp` não é brasão e não pode ser promovido a símbolo canônico.
+- A situação final de cada clã deve respeitar o encerramento de *Guerras de Sangue*; não retroceder para estados anteriores ao Capítulo 29.
+- O relatório `data/sagas/ciclo-de-jesed/audits/clans-etapa-10.json` deve continuar válido.
+
+
+
+## 25. Fauna, flora, alimentos, relógio e sinopses desde a Etapa 11
+
+- Preservar `lore-stage11.js` nos dois livros como camada de contagens, descrições e citações verificadas.
+- Toda ficha de fauna, flora ou alimento deve manter imagem, descrição completa, características, habitat, usos, total de citações e lista de menções.
+- Cada menção deve conservar capítulo, trecho, contexto curto e ligação para o capítulo.
+- Contagens devem considerar singular, plural, variações de acento e hífen, aliases e nomes indiretos somente quando o contexto confirmar a mesma entidade.
+- O Rhaukar de *Ruínas dos Céus* conserva o ID `jesed-fauna-raukhar` e o slug histórico `raukhar`; “Raukhar” permanece alias de grafia.
+- Cartões de listagem não devem receber o texto integral da ficha. Mostrar somente foto, nome, descrição breve e total de citações.
+- Não restaurar filtro por clã em fauna, flora ou alimentos de *Ruínas dos Céus*.
+- Conceitos não devem possuir filtros em nenhum dos dois livros. A criação das fichas clicáveis de conceitos em Ruínas pertence à Etapa 12.
+- A exportação de itens não citados pode permanecer como utilitário, separada dos filtros.
+- O relógio de Ruínas não usa a hora real. `CYCLE_DURATION_MS` deve permanecer em aproximadamente dez minutos por volta completa de 24 horas.
+- O simulador de horário deve interromper o ciclo, aplicar imediatamente o minuto selecionado e atualizar fase do céu, sol, lua e nuvens.
+- Ao reativar o ciclo automático, ele deve continuar a partir do horário escolhido no simulador, não saltar para a hora do dispositivo.
+- O botão do ciclo deve indicar claramente “Ciclo 10 min” ou formulação equivalente.
+- Os dois livros devem manter `teaser` curto para cartões e `synopsis` editorial completa para a página individual de Livros.
+- Não voltar a usar descrições puramente atmosféricas como sinopse principal.
+- O relatório `data/sagas/ciclo-de-jesed/audits/lore-etapa-11.json` deve continuar válido.
