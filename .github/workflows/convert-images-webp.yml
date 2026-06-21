@@ -7,6 +7,12 @@ on:
     paths:
       - "tools/convert_images_to_webp.py"
       - ".github/workflows/convert-images-webp.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "tools/convert_images_to_webp.py"
+      - ".github/workflows/convert-images-webp.yml"
   workflow_dispatch:
 
 permissions:
