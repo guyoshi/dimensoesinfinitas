@@ -84,6 +84,7 @@
     characterTab: "overview",
     searchMode: "titles",
     relationshipFilter: "all",
+    chapterQuery: "",
     settings: {
       preset: storage.get("di-preset") || "normal",
       particles: storage.get("di-particles") !== "0",
@@ -315,7 +316,7 @@
 
   function renderBooks() {
     refs.main.innerHTML = `<div class="page-enter">
-      ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Todos ocupam o seu lugar na saga. Ruínas dos Céus e Guerras de Sangue já podem ser abertos nesta etapa.")}
+      ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Clique num livro para ver os detalhes.")}
       ${canonNotice()}
       <section class="bookshelf enhanced-bookshelf">
         ${D.books.map(book => `
@@ -450,13 +451,16 @@
   }
 
   function renderChapters() {
+    const q = state.chapterQuery.trim().toLocaleLowerCase("pt-BR");
+    const filtered = q ? D.chapters.filter(ch => `${ch.number} ${ch.title} ${ch.summary}`.toLocaleLowerCase("pt-BR").includes(q)) : D.chapters;
     refs.main.innerHTML = `<div class="page-enter">
       ${pageHeader("Guerras de Sangue", "Capítulos", `Os ${D.chapters.length} capítulos com narrativa escrita. Os capítulos ainda existentes apenas como resumo futuro ficam fora desta lista.`)}
       ${canonNotice()}
-      <section class="chapter-grid">${D.chapters.map(ch => {
+      <input class="search" data-chapter-search type="search" placeholder="Pesquisar…" value="${escapeHtml(state.chapterQuery)}">
+      <section class="chapter-grid">${filtered.length ? filtered.map(ch => {
         const heroImage = ch.image || ch.characters.map(getCharacter).find(c => c?.image)?.image;
         return `<article class="chapter-card" data-route="chapter/${ch.id}">${heroImage ? `<img class="chapter-card-image" src="${escapeHtml(heroImage)}" alt="">` : `<div class="chapter-card-image fallback">${icon("chapter")}</div>`}<div class="chapter-card-copy"><span class="chapter-number">Capítulo ${ch.number}</span><h2>${escapeHtml(ch.title)}</h2><p>${escapeHtml(ch.summary)}</p><div class="tag-row"><span class="tag">${ch.wordCount.toLocaleString("pt-BR")} palavras</span><span class="tag">${ch.characters.length} personagens ligados</span></div></div></article>`;
-      }).join("")}</section>
+      }).join("") : `<p class="empty-inline">Nenhum capítulo encontrado.</p>`}</section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Capítulos"}]);
   }
@@ -834,6 +838,15 @@
   $("#mobileMenu").addEventListener("click", () => refs.sidebar.classList.toggle("mobile-open"));
   $("#searchButton").addEventListener("click", openSearch);
   refs.searchInput.addEventListener("input", () => renderSearchResults(refs.searchInput.value));
+  refs.main.addEventListener("input", event => {
+    if (event.target.matches("[data-chapter-search]")) {
+      state.chapterQuery = event.target.value;
+      const pos = event.target.selectionStart;
+      renderChapters();
+      const el = $("[data-chapter-search]");
+      if (el) { el.focus(); el.setSelectionRange(pos, pos); }
+    }
+  });
   $("#settingsButton").addEventListener("click", openSettings);
   $("#performanceToggle").addEventListener("click", () => {
     state.settings.preset = state.settings.preset === "performance" ? "normal" : "performance";

@@ -83,6 +83,7 @@ const settings={
   particleAmount:Number(storage.get('di-particle-amount')||22),
   preset:storage.get('di-preset')||'normal'
 };
+R.settings=settings;
 const PRESET_VALUES={
   full:{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:34},
   normal:{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:22},

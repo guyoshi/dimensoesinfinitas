@@ -303,6 +303,9 @@ svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-wi
 .chevron { color: #8f7b5d; margin-left: 3px; }
 .search-trigger { min-width: 220px; justify-content: flex-start; }
 .search-trigger kbd { margin-left: auto; }
+input.search { display: block; width: min(380px, 100%); padding: 11px 13px; margin: 4px 0 18px; border: 1px solid var(--line-strong); border-radius: 11px; background: rgba(0,0,0,.22); color: var(--text); font: inherit; outline: 0; }
+input.search::placeholder { color: var(--muted); }
+input.search:focus { border-color: var(--paper-dark); }
 kbd { font: 600 .68rem/1 ui-monospace, SFMono-Regular, Consolas, monospace; color: #9f8b6d; border: 1px solid rgba(203,170,108,.18); border-bottom-color: rgba(203,170,108,.38); background: rgba(0,0,0,.19); border-radius: 5px; padding: 4px 6px; }
 
 .main-content { min-height: calc(100vh - var(--topbar-h)); padding: 28px clamp(18px, 3vw, 42px) 54px; }

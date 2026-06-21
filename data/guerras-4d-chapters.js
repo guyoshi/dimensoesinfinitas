@@ -65,4 +65,6 @@
   ];
   const numbers=new Set(chapters.map(ch=>ch.number));
   D.chapters=D.chapters.filter(ch=>!numbers.has(ch.number)).concat(chapters).sort((a,b)=>a.number-b.number);
+  const imagePatches={7:"assets/chapters/guerras-de-sangue/capitulo-7.jpg"};
+  for(const ch of D.chapters){if(imagePatches[ch.number]) ch.image=imagePatches[ch.number];}
 })();

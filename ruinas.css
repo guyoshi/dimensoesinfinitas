@@ -104,6 +104,14 @@ body.no-blur .sidebar,body.no-blur .topbar,body.no-blur .search-modal-backdrop,b
 body.no-shadows .panel,body.no-shadows .card,body.no-shadows .selector-card{box-shadow:none!important}
 body.no-motion .click,body.no-motion .click:hover{transition:none!important;transform:none!important}
 body.no-transitions .cloud,body.no-motion .cloud{transition:none}
+.transition-veil{position:fixed;inset:0;z-index:80;display:grid;place-items:center;pointer-events:none;opacity:0;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);background:rgba(24,61,75,0)}
+.transition-veil.active{animation:veilBlurFade 480ms ease-in-out}
+.transition-veil .veil-mark{opacity:0;font-size:2.6rem;color:var(--paper);filter:drop-shadow(0 0 16px rgba(243,232,201,.55))}
+.transition-veil.active .veil-mark{animation:veilMarkFade 480ms ease-in-out}
+@keyframes veilBlurFade{0%{opacity:0;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);background:rgba(24,61,75,0)}45%{opacity:1;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:rgba(24,61,75,.5)}100%{opacity:0;backdrop-filter:blur(0px);-webkit-backdrop-filter:blur(0px);background:rgba(24,61,75,0)}}
+@keyframes veilMarkFade{0%{opacity:0;transform:scale(.85)}45%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.85)}}
+body.no-blur .transition-veil.active{animation-name:veilFadeOnly}
+@keyframes veilFadeOnly{0%{opacity:0;background:rgba(24,61,75,0)}45%{opacity:1;background:rgba(24,61,75,.5)}100%{opacity:0;background:rgba(24,61,75,0)}}
 .selector-modal-panel{width:min(820px,calc(100% - 28px))}
 .selector-head{margin-bottom:14px}
 .selector-head h2{margin:.1em 0}
