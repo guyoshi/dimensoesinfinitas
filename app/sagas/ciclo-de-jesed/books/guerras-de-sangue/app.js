@@ -186,6 +186,7 @@
     performance: { particles: false, transitions: false, textures: false, blur: false, shadows: false, motion: false }
   };
   function detectPreset() {
+    if (storage.get("di-guerras-customized") === "1") return "custom";
     const s = state.settings;
     for (const key of Object.keys(PRESET_VALUES)) {
       const values = PRESET_VALUES[key];
@@ -296,7 +297,7 @@
           <p class="eyebrow">Ciclo de Jesed · Guia do livro</p>
           <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.png" alt="Guerras de Sangue">
           <p>Um arquivo cartográfico de pessoas, territórios, segredos e consequências, limitado aos capítulos realmente escritos.</p>
-          <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button></div>
+          <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button><button class="secondary-button contemplate-button" data-contemplative="guerras">${icon("eye")} Contemplar este mundo</button></div>
         </div>
       </section>
       <section class="quick-grid">${quick.map(item => `<button class="quick-card" data-route="${item[0]}"><span class="quick-icon">${icon(item[1])}</span><strong>${item[2]}</strong><small>${item[3]}</small></button>`).join("")}</section>
@@ -825,7 +826,7 @@
   function settingToggle(key, title, description, enabled) { return `<div class="setting-row"><span class="setting-copy"><strong>${title}</strong><small>${description}</small></span><button class="switch ${enabled ? "on" : ""}" data-setting="${key}" aria-pressed="${enabled}"></button></div>`; }
   function renderSettings() {
     const s = state.settings;
-    refs.settingsContent.innerHTML = `<div class="settings-group"><h3>Perfis rápidos</h3><div class="preset-row">${[["full","Completo"],["normal","Equilibrado"],["performance","Desempenho"],["custom","Personalizado"]].map(item => `<button class="preset-button ${s.preset === item[0] ? "active" : ""} ${item[0] === "custom" ? "preset-custom" : ""}" data-preset="${item[0]}" ${item[0] === "custom" ? "disabled" : ""}>${item[1]}</button>`).join("")}</div></div><div class="settings-group"><h3>Controlo individual</h3>${settingToggle("particles","Partículas","Poeira e elementos suspensos.",s.particles)}${settingToggle("transitions","Transições temáticas","Véu de pergaminho entre páginas.",s.transitions)}${settingToggle("textures","Texturas","Grão, papel e marcas sobre superfícies.",s.textures)}${settingToggle("blur","Desfoque de painéis","Efeito de vidro nas barras e janelas.",s.blur)}${settingToggle("shadows","Sombras profundas","Profundidade dos cartões.",s.shadows)}${settingToggle("motion","Movimento e animações","Entradas, deslocamentos e efeitos.",s.motion)}<div class="setting-row range-row"><span class="setting-copy"><strong>Quantidade de partículas</strong><small>Ajuste fino do fundo.</small></span><input type="range" min="4" max="50" value="${s.particleAmount}" data-setting-range="particleAmount"></div></div>`;
+    refs.settingsContent.innerHTML = `<div class="settings-group"><h3>Perfis rápidos</h3><div class="preset-row">${[["full","Completo"],["normal","Equilibrado"],["performance","Desempenho"],["custom","Personalizado"]].map(item => `<button class="preset-button ${s.preset === item[0] ? "active" : ""} ${item[0] === "custom" ? "preset-custom" : ""}" data-preset="${item[0]}" >${item[1]}</button>`).join("")}</div></div><div class="settings-group"><h3>Controlo individual</h3>${settingToggle("particles","Partículas","Poeira e elementos suspensos.",s.particles)}${settingToggle("transitions","Transições temáticas","Véu de pergaminho entre páginas.",s.transitions)}${settingToggle("textures","Texturas","Grão, papel e marcas sobre superfícies.",s.textures)}${settingToggle("blur","Desfoque de painéis","Efeito de vidro nas barras e janelas.",s.blur)}${settingToggle("shadows","Sombras profundas","Profundidade dos cartões.",s.shadows)}${settingToggle("motion","Movimento e animações","Entradas, deslocamentos e efeitos.",s.motion)}<div class="setting-row range-row"><span class="setting-copy"><strong>Quantidade de partículas</strong><small>Ajuste fino do fundo.</small></span><input type="range" min="4" max="50" value="${s.particleAmount}" data-setting-range="particleAmount"></div></div>`;
   }
 
   function openSelector(type) {
@@ -890,8 +891,8 @@
     const loreFilter = event.target.closest("[data-lore-filter]"); if (loreFilter) { $$("[data-lore-filter]").forEach(x => x.classList.toggle("active", x === loreFilter)); const kind = loreFilter.dataset.loreKind, value = loreFilter.dataset.loreFilter; const items = value === "all" ? D.lore[kind] : D.lore[kind].filter(item => item.clans.includes(value)); $("#loreList").innerHTML = loreListHtml(kind, items); }
     const clanSection = event.target.closest("[data-clan-section]"); if (clanSection) { $$("[data-clan-section]").forEach(x => x.classList.toggle("active", x === clanSection)); const clan = getClan(clanSection.dataset.clanSlug); $("#clanSectionPanel").innerHTML = clanSectionHtml(clan, clanSection.dataset.clanSection); }
     const searchMode = event.target.closest("[data-search-mode]"); if (searchMode) { state.searchMode = searchMode.dataset.searchMode; $$("[data-search-mode]").forEach(x => x.classList.toggle("active", x === searchMode)); renderSearchResults(refs.searchInput.value); }
-    const setting = event.target.closest("[data-setting]"); if (setting) { const key = setting.dataset.setting; state.settings[key] = !state.settings[key]; persistSettings(); }
-    const preset = event.target.closest("[data-preset]"); if (preset) { state.settings.preset = preset.dataset.preset; if (state.settings.preset === "full") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:34}); if (state.settings.preset === "normal") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:22}); if (state.settings.preset === "performance") Object.assign(state.settings,{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false}); persistSettings(); }
+    const setting = event.target.closest("[data-setting]"); if (setting) { const key = setting.dataset.setting; state.settings[key] = !state.settings[key]; storage.set("di-guerras-customized","1"); persistSettings(); }
+    const preset = event.target.closest("[data-preset]"); if (preset) { state.settings.preset = preset.dataset.preset; if(state.settings.preset === "custom"){storage.set("di-guerras-customized","1");persistSettings();} else {storage.set("di-guerras-customized","0"); if (state.settings.preset === "full") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:34}); if (state.settings.preset === "normal") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:22}); if (state.settings.preset === "performance") Object.assign(state.settings,{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false}); persistSettings();} }
     const mapAction = event.target.closest("[data-map-action]")?.dataset.mapAction;
     if (mapAction) { if (mapAction === "zoom-in") state.map.zoom = Math.min(2.8, state.map.zoom + .2); if (mapAction === "zoom-out") state.map.zoom = Math.max(.65, state.map.zoom - .2); if (mapAction === "center") Object.assign(state.map,{zoom:1,x:0,y:0}); if (mapAction === "fullscreen") $(".map-page")?.requestFullscreen?.(); applyMapTransform(); }
     const mapPlace = event.target.closest("[data-map-place]"); if (mapPlace) showMapPopup(mapPlace.dataset.mapPlace, mapPlace);
@@ -918,13 +919,14 @@
   $("#settingsButton").addEventListener("click", openSettings);
   $("#performanceToggle").addEventListener("click", () => {
     state.settings.preset = state.settings.preset === "performance" ? "normal" : "performance";
+    storage.set("di-guerras-customized","0");
     if (state.settings.preset === "performance") Object.assign(state.settings,{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false});
     else Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true});
     persistSettings();
   });
   $("#sagaSelector").addEventListener("click", () => openSelector("sagas"));
   $("#bookLens").addEventListener("click", () => openSelector("books"));
-  refs.settingsContent.addEventListener("input", event => { if (event.target.matches("[data-setting-range]")) { state.settings[event.target.dataset.settingRange] = Number(event.target.value); persistSettings(); } });
+  refs.settingsContent.addEventListener("input", event => { if (event.target.matches("[data-setting-range]")) { state.settings[event.target.dataset.settingRange] = Number(event.target.value); storage.set("di-guerras-customized","1"); persistSettings(); } });
   document.addEventListener("keydown", event => { const card=event.target.closest?.("[data-timeline-card], .place-scene-card[data-route]"); if(card && (event.key==="Enter" || event.key===" ") && !event.target.closest("button,a")){event.preventDefault();routeTo(card.dataset.route);} if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); } if (event.key === "Escape") { closeSearch(); closeSettings(); closeSelector(); refs.sidebar.classList.remove("mobile-open"); } });
   window.addEventListener("hashchange", () => routeTo(location.hash.replace(/^#\//, "") || "dashboard", { replace: true }));
 

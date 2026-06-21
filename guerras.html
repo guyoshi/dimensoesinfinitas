@@ -8,6 +8,8 @@
   <title>Guerras de Sangue — Dimensões Infinitas</title>
   <link rel="preload" href="assets/mapa-guerras-de-sangue.webp" as="image" />
   <link rel="stylesheet" href="app/sagas/ciclo-de-jesed/books/guerras-de-sangue/styles.css" />
+  <link rel="stylesheet" href="app/shared/experience/common.css" />
+  <link rel="stylesheet" href="app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css" />
 </head>
 <body data-theme="jesed" data-book="guerras-de-sangue">
   <div id="particleLayer" class="particle-layer" aria-hidden="true"></div>
@@ -31,9 +33,11 @@
             <button id="sagaSelector" class="selector-button" aria-haspopup="dialog"><span class="selector-icon" data-icon="compass"></span><span>Ciclo de Jesed</span><span class="chevron">⌄</span></button>
             <button id="bookLens" class="selector-button book-lens" aria-haspopup="dialog"><span class="selector-icon" data-icon="book"></span><span>Guerras de Sangue</span><span class="chevron">⌄</span></button>
             <button id="searchButton" class="search-trigger" aria-label="Pesquisar"><span data-icon="search"></span><span class="search-label">Pesquisar</span><kbd>Ctrl K</kbd></button>
-            <button id="performanceToggle" class="icon-button" aria-label="Modo desempenho desactivado" title="Modo desempenho desactivado" aria-pressed="false"><span data-icon="gauge"></span></button>
-            <div id="musicDock" class="music-dock"></div>
-            <button id="settingsButton" class="icon-button" aria-label="Abrir configurações" title="Configurações"><span data-icon="settings"></span></button>
+            <div class="utility-controls">
+              <span class="performance-toggle-wrap"><button id="performanceToggle" class="icon-button" aria-label="Modo desempenho desactivado" title="Modo desempenho desactivado" aria-pressed="false"><span data-icon="gauge"></span></button><span class="performance-state-dot" aria-hidden="true"></span></span>
+              <div id="musicDock" class="music-dock"></div>
+              <button id="settingsButton" class="icon-button" aria-label="Abrir configurações" title="Configurações"><span data-icon="settings"></span></button>
+            </div>
           </div>
         </div>
         <div class="topbar-path"><div id="breadcrumbs" class="breadcrumbs"></div></div>
@@ -64,5 +68,7 @@
   <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/trajectory.js"></script>
   <script src="app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js"></script>
   <script src="app/shared/book-music/loader.js"></script>
+  <script src="app/shared/experience/common.js"></script>
+  <script src="app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js"></script>
 </body>
 </html>

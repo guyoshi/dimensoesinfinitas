@@ -1,0 +1,147 @@
+(()=>{
+  const X=window.DIExperience;if(!X)return;
+  const P='di-ruinas-';
+  const defaults={
+    'distant-clouds':true,'mid-clouds':true,'near-mist':true,'fragments':true,'menu-motion':true,'sky-cycle':true,'distant-elements':true,'parallax':true,'wind-particles':true,
+    'cloud-density':62,'motion-intensity':45,'effect-opacity':72
+  };
+  const getBool=key=>X.bool(P+key,defaults[key]);
+  const getNum=(key,min=0,max=100)=>X.num(P+key,defaults[key],min,max);
+  function setDefault(key,value){if(X.storage.get(P+key)===null)X.storage.set(P+key,typeof value==='boolean'?(value?'1':'0'):value)}
+  Object.entries(defaults).forEach(([k,v])=>setDefault(k,v));
+  if(X.weakDevice&&X.storage.get(P+'auto-reduced')!=='0'){
+    if(X.storage.get(P+'cloud-density')===String(defaults['cloud-density']))X.storage.set(P+'cloud-density','42');
+    if(X.mobile)X.storage.set(P+'near-mist','0');
+  }
+
+  const atmosphere=document.createElement('div');
+  atmosphere.id='ruinasAtmosphere';atmosphere.className='ruinas-atmosphere';atmosphere.setAttribute('aria-hidden','true');
+  atmosphere.innerHTML='<div class="ruinas-stars"></div><div class="ruinas-celestial ruinas-sun"></div><div class="ruinas-celestial ruinas-moon"></div><div class="ruinas-distant-elements"></div>';
+  document.body.prepend(atmosphere);
+  const cloudHost=document.getElementById('clouds');
+  let rebuilding=false;
+  function seeded(index,offset=0){const x=Math.sin((index+1)*9301+offset*49297)*233280;return x-Math.floor(x)}
+  function cloudHtml(layer,count,baseWidth,seedOffset){
+    let html=`<div class="cloud-layer cloud-layer-${layer}">`;
+    for(let i=0;i<count;i++){
+      const r=seeded(i,seedOffset),r2=seeded(i,seedOffset+2),r3=seeded(i,seedOffset+5);
+      const w=baseWidth*(.72+r*.68),top=(layer==='near'?8:layer==='middle'?10:28)+r2*(layer==='distant'?38:52);
+      const duration=(layer==='distant'?145:layer==='middle'?92:54)*(.78+r3*.62),opacity=(layer==='distant'?.23:layer==='middle'?.48:.20)*(.75+r2*.4);
+      html+=`<div class="natural-cloud" style="--top:${top}%;--w:${w}px;--duration:${duration}s;--delay:${-r*duration}s;--opacity:${opacity};--scale:${.82+r2*.42};--rise:${-10+r3*22}px"><span class="cloud-body"></span></div>`;
+    }
+    return html+'</div>';
+  }
+  function buildClouds(){
+    if(!cloudHost||rebuilding)return;rebuilding=true;
+    const performance=document.body.classList.contains('performance-mode');
+    const density=getNum('cloud-density');
+    let factor=density/60;if(X.weakDevice)factor*=.72;if(X.reduced)factor*=.45;
+    let html='';
+    if(!performance&&document.body.classList.contains('no-particles')===false){
+      if(getBool('distant-clouds'))html+=cloudHtml('distant',Math.max(1,Math.round(4*factor)),520,1);
+      if(getBool('mid-clouds'))html+=cloudHtml('middle',Math.max(1,Math.round(6*factor)),340,11);
+      if(getBool('near-mist')&&!X.reduced)html+=cloudHtml('near',Math.max(1,Math.round(2*factor)),650,21);
+    }
+    cloudHost.innerHTML=html;requestAnimationFrame(()=>{rebuilding=false});
+  }
+  if(cloudHost){new MutationObserver(()=>{if(!rebuilding&&!cloudHost.querySelector('.cloud-layer'))buildClouds()}).observe(cloudHost,{childList:true});}
+
+  const phases={
+    dawn:{top:'#426d88',mid:'#aabfc6',bottom:'#e5b889',light:'#fff2d2',shadow:'#708c9b'},
+    day:{top:'#69a7c2',mid:'#b9d8df',bottom:'#e7dcc0',light:'#ffffff',shadow:'#7c9da8'},
+    dusk:{top:'#3d6681',mid:'#aa8990',bottom:'#e29b67',light:'#ffd8b2',shadow:'#6a7186'},
+    night:{top:'#081625',mid:'#193247',bottom:'#4b5061',light:'#7792a8',shadow:'#182b3d'}
+  };
+  const session={get(key,fallback=null){try{const v=sessionStorage.getItem(key);return v===null?fallback:v}catch{return fallback}},set(key,value){try{sessionStorage.setItem(key,String(value))}catch{}}};
+  let autoTime=session.get(P+'time-mode')!=='manual';
+  let manualMinutes=Number(session.get(P+'test-minutes',1110)||1110);
+  let timer=null;
+  const pad=n=>String(n).padStart(2,'0');
+  const timeLabel=m=>`${pad(Math.floor(m/60)%24)}:${pad(m%60)}`;
+  function currentMinutes(){const d=new Date();return d.getHours()*60+d.getMinutes()}
+  function phaseFor(m){if(m>=300&&m<480)return'dawn';if(m>=480&&m<990)return'day';if(m>=990&&m<1200)return'dusk';return'night'}
+  function updateSky(minutes=autoTime?currentMinutes():manualMinutes){
+    minutes=(minutes+1440)%1440;const phase=phaseFor(minutes),c=phases[phase],root=document.documentElement;
+    root.style.setProperty('--rdc-sky-top',c.top);root.style.setProperty('--rdc-sky-mid',c.mid);root.style.setProperty('--rdc-sky-bottom',c.bottom);root.style.setProperty('--rdc-cloud-light',c.light);root.style.setProperty('--rdc-cloud-shadow',c.shadow);
+    root.style.setProperty('--rdc-stars-opacity',phase==='night'?.72:phase==='dusk'?.12:0);
+    let sunOpacity=0,moonOpacity=0,sunX=50,sunY=70,moonX=50,moonY=70;
+    if(minutes>=360&&minutes<=1200){const p=(minutes-360)/840;sunX=6+p*88;sunY=76-Math.sin(Math.PI*p)*62;sunOpacity=Math.min(1,Math.max(0,Math.sin(Math.PI*p)*1.45));}
+    if(minutes>=1200||minutes<=360){const elapsed=minutes>=1200?minutes-1200:minutes+240;const p=elapsed/600;moonX=6+p*88;moonY=72-Math.sin(Math.PI*p)*55;moonOpacity=Math.min(1,Math.max(.15,Math.sin(Math.PI*p)*1.2));}
+    root.style.setProperty('--rdc-sun-x',sunX+'%');root.style.setProperty('--rdc-sun-y',sunY+'%');root.style.setProperty('--rdc-sun-opacity',sunOpacity);
+    root.style.setProperty('--rdc-moon-x',moonX+'%');root.style.setProperty('--rdc-moon-y',moonY+'%');root.style.setProperty('--rdc-moon-opacity',moonOpacity);
+    document.body.dataset.skyPhase=phase;
+    document.querySelectorAll('[data-time-output]').forEach(o=>o.textContent=timeLabel(minutes));
+    document.querySelectorAll('[data-time-slider]').forEach(i=>{if(document.activeElement!==i)i.value=minutes});
+    document.querySelectorAll('[data-time-auto]').forEach(b=>{b.classList.toggle('active',autoTime);b.setAttribute('aria-pressed',String(autoTime))});
+  }
+  function timeControlHtml(){return `<div class="time-test-control" data-time-control><label>Horário de teste</label><input data-time-slider type="range" min="0" max="1439" step="1" value="${autoTime?currentMinutes():manualMinutes}" aria-label="Horário de teste"><output data-time-output>${timeLabel(autoTime?currentMinutes():manualMinutes)}</output><button class="time-auto-button ${autoTime?'active':''}" data-time-auto type="button" aria-pressed="${autoTime}">Auto</button></div>`}
+  function ensureTimeControls(){
+    const utility=document.querySelector('.utility-controls');if(!utility)return;
+    if(!utility.querySelector('[data-time-control]'))utility.insertAdjacentHTML('beforeend',timeControlHtml());
+    if(!utility.querySelector('.time-mobile-toggle'))utility.insertAdjacentHTML('beforeend','<button class="icon-btn time-mobile-toggle" type="button" data-time-mobile aria-label="Abrir relógio de teste" title="Horário de teste">◷</button>');
+  }
+  document.addEventListener('input',e=>{if(!e.target.matches('[data-time-slider]'))return;autoTime=false;manualMinutes=Number(e.target.value);session.set(P+'time-mode','manual');session.set(P+'test-minutes',manualMinutes);updateSky(manualMinutes)});
+  document.addEventListener('click',e=>{
+    if(e.target.closest('[data-time-auto]')){autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo automático do céu restaurado')}
+    const mobile=e.target.closest('[data-time-mobile]');if(mobile){document.querySelector('.topbar [data-time-control]')?.classList.toggle('mobile-open')}
+  });
+  function startClock(){clearInterval(timer);updateSky();timer=setInterval(()=>{if(autoTime&&!document.hidden)updateSky()},60000)}
+
+  function applyVisualSettings(){
+    const root=document.documentElement;
+    root.style.setProperty('--rdc-atmosphere-opacity',getNum('effect-opacity')/100);
+    root.style.setProperty('--rdc-motion-strength',getNum('motion-intensity')/100);
+    atmosphere.querySelector('.ruinas-distant-elements').style.display=getBool('distant-elements')?'block':'none';
+    document.body.classList.toggle('ruinas-no-fragments',!getBool('fragments'));
+    document.body.classList.toggle('ruinas-no-menu-motion',!getBool('menu-motion'));
+    document.body.classList.toggle('ruinas-no-parallax',!getBool('parallax'));
+    buildClouds();updateSky();syncContemplative();
+  }
+
+  const settingsHost=document.getElementById('settingsContent');
+  function injectSettings(){
+    if(!settingsHost||settingsHost.querySelector('[data-ruinas-experience-settings]'))return;
+    settingsHost.insertAdjacentHTML('beforeend',`<section class="experience-settings-section" data-ruinas-experience-settings><h3>Atmosfera de Ruínas dos Céus</h3><p class="experience-settings-note">Controles específicos deste livro. Alterá-los não modifica Guerras de Sangue.</p>${X.makeToggle({key:'distant-clouds',prefix:P,label:'Nuvens distantes',description:'Massas lentas próximas do horizonte.',value:getBool('distant-clouds')})}${X.makeToggle({key:'mid-clouds',prefix:P,label:'Nuvens intermédias',description:'Camada principal com luz e sombra.',value:getBool('mid-clouds')})}${X.makeToggle({key:'near-mist',prefix:P,label:'Névoa próxima',description:'Névoa frontal muito transparente.',value:getBool('near-mist')})}${X.makeToggle({key:'fragments',prefix:P,label:'Fragmentos suspensos',description:'Lascas e fissuras decorativas do menu.',value:getBool('fragments')})}${X.makeToggle({key:'menu-motion',prefix:P,label:'Movimento do menu',description:'Separação quase imperceptível dos fragmentos.',value:getBool('menu-motion')})}${X.makeToggle({key:'sky-cycle',prefix:P,label:'Ciclo do céu',description:'Iluminação automática de amanhecer a noite.',value:getBool('sky-cycle')})}${X.makeToggle({key:'distant-elements',prefix:P,label:'Elementos distantes',description:'Nuaris e vintela quase imperceptíveis.',value:getBool('distant-elements')})}${X.makeToggle({key:'parallax',prefix:P,label:'Parallax de Etérea',description:'Pequena profundidade em dispositivos adequados.',value:getBool('parallax')})}${X.makeRange({key:'cloud-density',prefix:P,label:'Densidade de nuvens',description:'Limite rígido e adaptado ao dispositivo.',value:getNum('cloud-density'),min:15,max:100})}${X.makeRange({key:'motion-intensity',prefix:P,label:'Intensidade do movimento',description:'Amplitude máxima dos movimentos atmosféricos.',value:getNum('motion-intensity'),min:0,max:100})}${X.makeRange({key:'effect-opacity',prefix:P,label:'Opacidade dos efeitos',description:'Visibilidade geral da atmosfera.',value:getNum('effect-opacity'),min:20,max:100})}</section>`);
+  }
+  if(settingsHost){X.attachSettings(settingsHost,()=>{X.storage.set(P+'customized','1');applyVisualSettings();setTimeout(injectSettings)});new MutationObserver(injectSettings).observe(settingsHost,{childList:true});}
+
+  const profileValues={
+    full:{'distant-clouds':1,'mid-clouds':1,'near-mist':1,'fragments':1,'menu-motion':1,'sky-cycle':1,'distant-elements':1,'parallax':1,'cloud-density':82,'motion-intensity':58,'effect-opacity':82},
+    normal:{'distant-clouds':1,'mid-clouds':1,'near-mist':0,'fragments':1,'menu-motion':1,'sky-cycle':1,'distant-elements':1,'parallax':0,'cloud-density':52,'motion-intensity':30,'effect-opacity':68},
+    performance:{'distant-clouds':0,'mid-clouds':0,'near-mist':0,'fragments':1,'menu-motion':0,'sky-cycle':0,'distant-elements':0,'parallax':0,'cloud-density':15,'motion-intensity':0,'effect-opacity':38}
+  };
+  function applyProfile(name){const values=profileValues[name];if(!values)return;Object.entries(values).forEach(([k,v])=>X.storage.set(P+k,v));X.storage.set(P+'customized','0');setTimeout(applyVisualSettings,50)}
+  document.addEventListener('click',e=>{const p=e.target.closest('[data-bpreset]')?.dataset.bpreset;if(p)applyProfile(p);if(e.target.closest('#perfToggle'))setTimeout(()=>X.toast(document.body.classList.contains('performance-mode')?'Modo desempenho ativado':'Modo equilibrado ativado'),70)});
+  X.observePerformance(()=>applyVisualSettings());
+
+  let contemplateShell=null;
+  function contemplativeClouds(){const main=cloudHost?.innerHTML||'';return `<div class="clouds-layer">${main}</div>`}
+  function createContemplative(){
+    if(contemplateShell)return contemplateShell;
+    contemplateShell=document.createElement('section');contemplateShell.id='ruinasContemplative';contemplateShell.className='contemplative-shell ruinas-contemplative';contemplateShell.setAttribute('aria-hidden','true');
+    contemplateShell.innerHTML=`<div class="contemplative-scene"><div class="ruinas-contemplative-art"></div><div class="ruinas-stars"></div><div class="ruinas-celestial ruinas-sun"></div><div class="ruinas-celestial ruinas-moon"></div><div data-contemplative-clouds></div><div class="ruinas-contemplative-vignette"></div><button class="contemplative-back" type="button" data-close-contemplative title="Voltar à página">← Voltar</button><button class="contemplative-music-action" type="button" data-contemplative-music title="Ligar ou desligar música">♪ Música</button><div class="contemplative-caption">Etérea · beleza suspensa, instabilidade silenciosa</div>${timeControlHtml()}</div>`;
+    document.body.append(contemplateShell);return contemplateShell;
+  }
+  function syncContemplative(){if(!contemplateShell)return;const host=contemplateShell.querySelector('[data-contemplative-clouds]');if(host)host.innerHTML=contemplativeClouds();updateSky()}
+  function openContemplative(){const shell=createContemplative();syncContemplative();shell.classList.add('open');shell.setAttribute('aria-hidden','false');document.body.classList.add('contemplative-active');shell.querySelector('.contemplative-back')?.focus();}
+  function closeContemplative(){if(!contemplateShell)return;contemplateShell.classList.remove('open');contemplateShell.setAttribute('aria-hidden','true');document.body.classList.remove('contemplative-active');document.querySelector('[data-contemplative="ruinas"]')?.focus()}
+  document.addEventListener('click',e=>{if(e.target.closest('[data-contemplative="ruinas"]'))openContemplative();if(e.target.closest('[data-close-contemplative]'))closeContemplative();if(e.target.closest('[data-contemplative-music]'))document.querySelector('[data-music-power]')?.click()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('contemplative-active')){e.preventDefault();closeContemplative()}});
+
+  function routeContext(){const route=location.hash.replace(/^#\/?/,'');const match=route.match(/^capitulo\/(\d+)/);let fracture='low';if(match){const n=Number(match[1]);if(n>=8&&n<=10)fracture='high';else if(n>=20)fracture='medium'}if(/ruinas|queda|cataclisma/.test(route))fracture='high';document.body.dataset.storyFracture=fracture}
+  addEventListener('hashchange',routeContext);routeContext();
+
+  let parallaxFrame=0;
+  addEventListener('pointermove',e=>{if(X.reduced||X.weakDevice||!getBool('parallax')||document.body.classList.contains('performance-mode'))return;cancelAnimationFrame(parallaxFrame);parallaxFrame=requestAnimationFrame(()=>{const strength=getNum('motion-intensity')/100;const x=(e.clientX/innerWidth-.5)*5*strength,y=(e.clientY/innerHeight-.5)*3*strength;atmosphere.style.transform=`translate3d(${x}px,${y}px,0)`})},{passive:true});
+  addEventListener('pointerleave',()=>{atmosphere.style.transform=''});
+  document.addEventListener('visibilitychange',()=>{cloudHost?.classList.toggle('experience-paused',document.hidden)});
+
+
+  const sidebar=document.getElementById('side'),sidebarToggle=document.getElementById('ruinasSidebarToggle');
+  let sidebarCollapsed=X.storage.get(P+'sidebar-collapsed','0')==='1';
+  function applySidebarState(){if(!sidebar)return;sidebar.classList.toggle('collapsed',sidebarCollapsed);if(sidebarToggle){sidebarToggle.setAttribute('aria-expanded',String(!sidebarCollapsed));sidebarToggle.setAttribute('aria-label',sidebarCollapsed?'Expandir menu':'Recolher menu');sidebarToggle.title=sidebarCollapsed?'Expandir menu':'Recolher menu'}}
+  sidebarToggle?.addEventListener('click',()=>{sidebarCollapsed=!sidebarCollapsed;X.storage.set(P+'sidebar-collapsed',sidebarCollapsed?'1':'0');applySidebarState()});
+  applySidebarState();
+
+  ensureTimeControls();startClock();applyVisualSettings();injectSettings();
+})();

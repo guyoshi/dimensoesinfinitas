@@ -1,0 +1,193 @@
+{
+  "stage": "Etapa 5.5",
+  "version": "0.9.5",
+  "completedAt": "2026-06-21",
+  "scope": "Identidade visual, atmosfera, modo contemplativo e desempenho dos dois livros, sem alteração do cânone.",
+  "global": {
+    "profiles": [
+      "Completo",
+      "Equilibrado",
+      "Desempenho",
+      "Personalizado"
+    ],
+    "performanceButtonAlwaysVisible": true,
+    "globalPreferences": [
+      "movimento",
+      "blur",
+      "sombras",
+      "transições",
+      "música",
+      "volume",
+      "silenciar"
+    ],
+    "protections": [
+      "prefers-reduced-motion",
+      "saveData",
+      "conexão lenta",
+      "hardware limitado",
+      "visibilidade da aba",
+      "redução móvel",
+      "limites rígidos de partículas"
+    ],
+    "externalDependenciesAdded": 0
+  },
+  "ruinas-dos-ceus": {
+    "sidebar": [
+      "textura de céu e pedra",
+      "fragmentos na borda",
+      "fissura",
+      "raízes partidas",
+      "identidade preservada quando recolhido"
+    ],
+    "atmosphere": [
+      "nuvens distantes",
+      "nuvens intermédias",
+      "névoa próxima",
+      "sol móvel",
+      "lua móvel",
+      "estrelas",
+      "elementos distantes"
+    ],
+    "skyPhases": [
+      "amanhecer",
+      "dia",
+      "entardecer",
+      "noite"
+    ],
+    "temporaryClock": true,
+    "contemplativeMode": true,
+    "preferencePrefix": "di-ruinas-",
+    "dynamicDomCloudLimit": 18
+  },
+  "guerras-de-sangue": {
+    "sidebar": [
+      "couro e pergaminho",
+      "linhas cartográficas",
+      "selos irregulares",
+      "contexto de clã",
+      "marca Fendelar não canônica e temporária"
+    ],
+    "particles": [
+      "brasas",
+      "faíscas",
+      "cinzas",
+      "poeira quente",
+      "turbulência"
+    ],
+    "canvasLayers": 2,
+    "contemplativeMode": true,
+    "preferencePrefix": "di-guerras-",
+    "dynamicParticleHardLimit": 120
+  },
+  "temporaryAssets": [
+    {
+      "path": "assets/textures/temp/ruinas-sidebar-texture.svg",
+      "purpose": "Textura leve de céu, rocha, fissuras e raízes do menu de Ruínas.",
+      "replacement": "Substituir por WebP/SVG final mantendo o caminho ou atualizar a variável CSS documentada."
+    },
+    {
+      "path": "assets/textures/temp/guerras-sidebar-texture.svg",
+      "purpose": "Textura histórica e cartográfica do menu de Guerras.",
+      "replacement": "Substituir por textura final otimizada, sem padrão repetitivo."
+    },
+    {
+      "path": "assets/contemplative/temp/eterea-sky-placeholder.svg",
+      "purpose": "Composição atmosférica temporária do modo contemplativo de Ruínas.",
+      "replacement": "Substituir por ilustração canônica de Etérea preservando o enquadramento e o caminho."
+    },
+    {
+      "path": "assets/contemplative/temp/kaendar-night-placeholder.svg",
+      "purpose": "Silhueta temporária de Kaendar à noite junto do Rio Grande.",
+      "replacement": "Substituir pela imagem canônica de Kaendar noturna, sem alterar controles ou camadas atmosféricas."
+    },
+    {
+      "path": "assets/clans/temp/fendelar-mark.svg",
+      "purpose": "Marca neutra de trilha/floresta para indicar a ausência deliberada de brasão Fendelar.",
+      "replacement": "Pode ser mantida como marca não heráldica ou substituída por recurso aprovado; nunca converter em brasão."
+    }
+  ],
+  "createdFiles": [
+    "app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js",
+    "app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css",
+    "app/shared/experience/common.css",
+    "app/shared/experience/common.js",
+    "assets/clans/temp/fendelar-mark.svg",
+    "assets/contemplative/temp/eterea-sky-placeholder.svg",
+    "assets/contemplative/temp/kaendar-night-placeholder.svg",
+    "assets/textures/temp/guerras-sidebar-texture.svg",
+    "assets/textures/temp/ruinas-sidebar-texture.svg",
+    "data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json",
+    "docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md",
+    "docs/screenshots/guerras-contemplative.png",
+    "docs/screenshots/guerras-home.png",
+    "docs/screenshots/guerras-menu-collapsed.png",
+    "docs/screenshots/guerras-mobile.png",
+    "docs/screenshots/guerras-particles.png",
+    "docs/screenshots/guerras-performance.png",
+    "docs/screenshots/guerras-settings.png",
+    "docs/screenshots/ruinas-contemplative.png",
+    "docs/screenshots/ruinas-day.png",
+    "docs/screenshots/ruinas-dusk.png",
+    "docs/screenshots/ruinas-home.png",
+    "docs/screenshots/ruinas-menu-collapsed.png",
+    "docs/screenshots/ruinas-mobile.png",
+    "docs/screenshots/ruinas-night.png",
+    "docs/screenshots/ruinas-performance.png",
+    "docs/screenshots/ruinas-settings.png"
+  ],
+  "modifiedFiles": [
+    "app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/base.js",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/events.js",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/main.js",
+    "guerras.html",
+    "ruinas.html",
+    "package.json",
+    "README.md",
+    "AI_UPDATE_RULES.md",
+    "PLANO-MESTRE-E-HISTORICO.md",
+    "scripts/validate-content.js",
+    "scripts/audit-content.js"
+  ],
+  "removedFiles": [],
+  "screenshots": [
+    "docs/screenshots/guerras-contemplative.png",
+    "docs/screenshots/guerras-home.png",
+    "docs/screenshots/guerras-menu-collapsed.png",
+    "docs/screenshots/guerras-mobile.png",
+    "docs/screenshots/guerras-particles.png",
+    "docs/screenshots/guerras-performance.png",
+    "docs/screenshots/guerras-settings.png",
+    "docs/screenshots/ruinas-contemplative.png",
+    "docs/screenshots/ruinas-day.png",
+    "docs/screenshots/ruinas-dusk.png",
+    "docs/screenshots/ruinas-home.png",
+    "docs/screenshots/ruinas-menu-collapsed.png",
+    "docs/screenshots/ruinas-mobile.png",
+    "docs/screenshots/ruinas-night.png",
+    "docs/screenshots/ruinas-performance.png",
+    "docs/screenshots/ruinas-settings.png"
+  ],
+  "tests": {
+    "javascriptSyntax": true,
+    "contentValidator": true,
+    "contentAudit": true,
+    "desktopSmoke": true,
+    "mobileSmoke": true,
+    "noHorizontalScrollAt390px": true,
+    "contemplativeOpenCloseRepeatedly": true,
+    "escapeClosesContemplative": true,
+    "settingsInjection": true,
+    "performanceState": true,
+    "consolePageErrors": 0
+  },
+  "knownLimits": [
+    "A pasta completa de assets canônicos não acompanhou o pacote de trabalho; recursos definitivos permanecem para ligação posterior.",
+    "As cenas contemplativas usam SVGs neutros temporários, claramente isolados em pastas temp.",
+    "O relógio de Ruínas é uma ferramenta temporária de teste e pode ser removido após aprovação do ciclo visual.",
+    "O ambiente de teste bloqueou navegação direta para localhost e file://; as capturas foram feitas com recursos locais interceptados pelo navegador, sem erros de página.",
+    "A padronização visual detalhada de todas as categorias continua prevista na Etapa 16; esta etapa criou a fundação atmosférica e os sistemas comuns."
+  ]
+}

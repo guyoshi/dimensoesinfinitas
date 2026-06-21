@@ -179,3 +179,25 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 
 - Etapas 1, 2, 3, 4 e 5 concluídas.
 - Próxima etapa oficial: **Etapa 6 — Mapas interativos**.
+
+
+## 17. Identidade visual e desempenho desde a Etapa 5.5
+
+- Preservar `app/shared/experience/` como fundação reutilizável.
+- Efeitos específicos devem permanecer em `app/sagas/<saga>/books/<livro>/experience/`.
+- Preferências globais usam as chaves `di-*`; preferências específicas usam `di-ruinas-*` e `di-guerras-*`.
+- Uma preferência específica de um livro não pode alterar a atmosfera do outro.
+- Os perfis obrigatórios são Completo, Equilibrado, Desempenho e Personalizado.
+- O botão de modo desempenho deve permanecer sempre acessível e seu estado não pode depender apenas de cor.
+- Não adicionar biblioteca pesada para nuvens, partículas, parallax ou transições sem justificativa documentada.
+- Não criar centenas de elementos HTML para partículas; Guerras utiliza Canvas com limites rígidos.
+- Pausar cálculos e Canvas quando a aba estiver oculta ou a experiência não estiver ativa.
+- Respeitar `prefers-reduced-motion`, `navigator.connection.saveData`, dispositivos móveis e hardware limitado.
+- O modo contemplativo deve poder ser fechado por botão e por `Escape`, sem prender o foco ou iniciar áudio contra a política do navegador.
+- Não remover ou contornar preferências de música, volume e silenciar.
+- O relógio visual de Ruínas é temporário e deve continuar identificado como ferramenta de teste até aprovação.
+- Não criar brasão Fendelar. `assets/clans/temp/fendelar-mark.svg` é somente uma marca neutra e não heráldica.
+- Recursos em `assets/**/temp/` são substituíveis, não canônicos e devem permanecer documentados.
+- Ao substituir um placeholder, preservar o caminho é preferível; se o caminho mudar, atualizar CSS, documentação e validação.
+- A Etapa 5.5 não autoriza mudanças de nomes, descrições ou informações canônicas.
+- A próxima etapa funcional é a Etapa 6 — Mapas interativos.

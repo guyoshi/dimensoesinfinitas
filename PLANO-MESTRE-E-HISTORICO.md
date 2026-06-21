@@ -12,7 +12,7 @@
 - **Livros atualmente disponíveis:**
   - *Ruínas dos Céus* — Livro I — 24 capítulos — concluído.
   - *Guerras de Sangue* — Livro II — 29 capítulos — concluído.
-- **Versão estrutural atual:** Etapa 5 concluída — pacote 0.9.0.
+- **Versão estrutural atual:** Etapa 5.5 concluída — pacote 0.9.5.
 - **Última atualização deste documento:** 21 de junho de 2026.
 
 ---
@@ -136,6 +136,7 @@ Categorias incompatíveis não devem ser forçadas. Exemplo: *Ruínas dos Céus*
 | 3 | Auditoria canônica completa e organização escalável | **CONCLUÍDA** | 21/06/2026 |
 | 4 | Nova Linha do Tempo | **CONCLUÍDA** | 21/06/2026 |
 | 5 | Lugares e rotas | **CONCLUÍDA** | 21/06/2026 |
+| 5.5 | Identidade visual, atmosfera, modo contemplativo e desempenho | **CONCLUÍDA** | 21/06/2026 |
 | 6 | Mapas interativos | PENDENTE | — |
 | 7 | Páginas iniciais | PENDENTE | — |
 | 8 | Personagens | PENDENTE | — |
@@ -760,6 +761,281 @@ As estimativas são editoriais, construídas a partir de escala urbana, multidõ
 - ligação definitiva dos assets.
 
 Essas tarefas permanecem reservadas para a Etapa 6.
+
+---
+
+## Etapa 5.5 — Identidade visual, atmosfera, modo contemplativo e desempenho
+
+**Estado:** CONCLUÍDA  
+**Data de conclusão:** 21/06/2026  
+**Versão do pacote:** 0.9.5
+
+### Objetivo executado
+
+Criar uma fundação atmosférica própria para *Ruínas dos Céus* e *Guerras de Sangue*, mantendo ambos dentro do mesmo sistema, ampliando perfis de desempenho, configurações, áudio e responsividade sem modificar o conteúdo canônico.
+
+### Fundação comum
+
+Foi criado `app/shared/experience/`, responsável por:
+
+- armazenamento seguro de preferências;
+- detecção de movimento reduzido;
+- detecção de economia de dados e conexão lenta;
+- redução automática em dispositivos mais fracos;
+- avisos breves de mudança de perfil;
+- componentes reutilizáveis de configurações;
+- observação do estado do modo desempenho;
+- suporte comum aos modos contemplativos.
+
+Os perfis disponíveis são:
+
+- **Completo:** maior densidade, movimento e profundidade;
+- **Equilibrado:** efeitos reduzidos e sem excesso de elementos dianteiros;
+- **Desempenho:** fundos estáticos, sem partículas dinâmicas, parallax ou névoa frontal;
+- **Personalizado:** ativado automaticamente quando o usuário altera controles individuais.
+
+Preferências globais continuam separadas das preferências específicas dos livros.
+
+### Ruínas dos Céus
+
+#### Menu lateral
+
+O menu recebeu:
+
+- textura discreta de céu e pedra suspensa;
+- fissuras e raízes partidas;
+- fragmentos junto à borda direita;
+- névoa suave;
+- movimento mínimo no perfil Completo;
+- versão reduzida no perfil Equilibrado;
+- versão estática no perfil Desempenho;
+- identidade preservada quando o menu está recolhido;
+- ícones e tooltips permanentes no estado recolhido.
+
+#### Céu e nuvens
+
+Foi implantado um sistema de três profundidades:
+
+- nuvens distantes;
+- nuvens intermédias;
+- névoa próxima.
+
+As nuvens possuem volumes compostos, duração, escala, altura e opacidade variadas. O sistema reage às fases:
+
+- amanhecer;
+- dia;
+- entardecer;
+- noite.
+
+Sol e lua percorrem trajetórias visuais coerentes. Estrelas, iluminação e sombras das nuvens mudam gradualmente.
+
+#### Relógio temporário
+
+A barra superior de Ruínas possui um controle temporário que:
+
+- seleciona qualquer horário entre 00:00 e 23:59;
+- atualiza imediatamente céu, sol, lua e nuvens;
+- mostra o horário selecionado;
+- permite retornar ao ciclo automático;
+- usa apenas o estado da sessão, sem transformar o teste em preferência permanente.
+
+#### Personalidade e contemplação
+
+Também foram adicionados:
+
+- cartões com aparência suspensa;
+- pequenos detalhes de vento e fragmentação;
+- transição temática de corrente de vento;
+- fissuras contextuais mais fortes em páginas de queda e ruínas;
+- parallax discreto, desligado no perfil Desempenho;
+- modo contemplativo com Etérea, ilhas, raízes, nuvens, sol, lua e música;
+- saída por botão ou tecla `Escape`.
+
+### Guerras de Sangue
+
+#### Menu lateral
+
+O menu recebeu:
+
+- textura de couro, pergaminho, madeira e cartografia;
+- linhas territoriais e marcas de tinta;
+- selos de clã irregulares e de baixa opacidade;
+- reação discreta ao entrar na seção Clãs;
+- marca contextual do clã aberto;
+- marca Fendelar neutra e não heráldica, sem criação de brasão canônico;
+- versão estática simplificada no perfil Desempenho.
+
+#### Partículas
+
+O sistema anterior foi ampliado para dois Canvas otimizados:
+
+- camada traseira;
+- camada dianteira.
+
+Os tipos são distintos:
+
+- brasas pequenas;
+- faíscas rápidas;
+- cinzas escuras;
+- poeira quente;
+- turbulência por rajadas imprevisíveis.
+
+Existem limites rígidos, redução móvel, pausa quando a aba está oculta e limpeza ao mudar de perfil ou fechar o modo contemplativo.
+
+#### Personalidade e contemplação
+
+Foram adicionados:
+
+- textura cartográfica de fundo;
+- detalhes de tinta e pigmento;
+- reflexo metálico ocasional no perfil Completo;
+- transição temática de mapa e cinzas;
+- modo contemplativo noturno de Kaendar, com Rio Grande, lua, nuvens, cinzas e iluminação distante;
+- saída por botão ou tecla `Escape`.
+
+A imagem de Kaendar é temporária e não pretende substituir a arte canônica.
+
+### Barra superior, áudio e dispositivos móveis
+
+Os controles de utilidade foram agrupados no extremo direito:
+
+- modo desempenho;
+- música;
+- silenciar;
+- volume;
+- configurações;
+- relógio temporário em Ruínas.
+
+Em telas menores:
+
+- controles são compactados;
+- o layout não cria scroll horizontal;
+- sliders deixam de ocupar espaço permanente quando necessário;
+- os modos contemplativos continuam acessíveis;
+- densidade, blur e elementos dianteiros são reduzidos.
+
+O botão de modo desempenho agora possui estado visual inequívoco, tooltip atualizado e aviso breve ao ser ativado ou desativado.
+
+### Acessibilidade e desempenho
+
+Foram preservados ou adicionados:
+
+- foco visível;
+- `aria-label` nos controles;
+- sliders acessíveis;
+- saída com `Escape`;
+- ausência de flashes;
+- estados ativos que não dependem apenas de cor;
+- respeito a `prefers-reduced-motion`;
+- detecção de `saveData`;
+- redução por hardware e viewport;
+- pausa de Canvas e cálculos quando a aba está oculta;
+- uso prioritário de `transform`, `opacity`, CSS e Canvas;
+- nenhuma biblioteca externa nova.
+
+### Preferências específicas
+
+Chaves de Ruínas usam o prefixo:
+
+`di-ruinas-`
+
+Chaves de Guerras usam o prefixo:
+
+`di-guerras-`
+
+Isso impede que nuvens, céu, brasões, brasas ou cinzas de um livro alterem o outro.
+
+### Recursos temporários
+
+Foram criados:
+
+- `assets/textures/temp/ruinas-sidebar-texture.svg`;
+- `assets/textures/temp/guerras-sidebar-texture.svg`;
+- `assets/contemplative/temp/eterea-sky-placeholder.svg`;
+- `assets/contemplative/temp/kaendar-night-placeholder.svg`;
+- `assets/clans/temp/fendelar-mark.svg`.
+
+Instruções completas de substituição estão em:
+
+`docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md`
+
+Os placeholders são neutros, locais e não canônicos. Não foram incorporados em Base64.
+
+### Arquivos criados
+
+- `app/shared/experience/common.js`
+- `app/shared/experience/common.css`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css`
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js`
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css`
+- cinco recursos temporários em `assets/**/temp/`
+- `data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json`
+- `docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md`
+- dezesseis capturas em `docs/screenshots/`
+
+### Arquivos alterados
+
+- `ruinas.html`
+- `guerras.html`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/base.js`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/events.js`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/main.js`
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`
+- `scripts/validate-content.js`
+- `scripts/audit-content.js`
+- `package.json`
+- `README.md`
+- `AI_UPDATE_RULES.md`
+- `PLANO-MESTRE-E-HISTORICO.md`
+
+### Arquivos removidos
+
+- Nenhum.
+
+### Entidades e conteúdo
+
+- Entidades canônicas criadas: **0**.
+- Entidades canônicas removidas: **0**.
+- IDs alterados: **0**.
+- Textos canônicos alterados: **0**.
+- Páginas, filtros, relações e funcionalidades removidos: **0**.
+
+### Validações realizadas
+
+- sintaxe de todos os JavaScript;
+- `npm run validate`;
+- `npm run audit`;
+- carregamento dos dois livros sem erros de página;
+- menu aberto e recolhido;
+- perfis Completo, Equilibrado e Desempenho;
+- alteração manual para Personalizado;
+- painel de configurações e controles específicos;
+- relógio manual, ciclo automático, dia, entardecer e noite;
+- abertura e fechamento repetido dos modos contemplativos;
+- saída por `Escape`;
+- Canvas traseiro e dianteiro;
+- ausência de scroll horizontal em viewport de 390 píxeis;
+- desktop e simulação móvel;
+- ausência de dependências externas novas.
+
+As capturas de revisão estão em `docs/screenshots/`.
+
+### Limitações registradas
+
+- A pasta completa de assets canônicos não acompanhou o pacote de trabalho.
+- Etérea e Kaendar usam composições SVG temporárias e neutras.
+- O relógio de Ruínas continua temporário até a aprovação visual do ciclo.
+- A navegação direta para localhost e `file://` foi bloqueada pelo ambiente de testes; as páginas foram carregadas com todos os recursos locais interceptados pelo navegador, sem erros de console.
+- A Etapa 16 continua responsável pela padronização visual detalhada de todas as categorias; a Etapa 5.5 criou a fundação atmosférica e de desempenho.
+
+### Não realizado nesta etapa
+
+- nenhuma alteração canônica;
+- ligação definitiva de todas as artes e brasões;
+- construção dos mapas interativos;
+- reestruturação de páginas de personagens, relações, clãs ou lore;
+- publicação ou push para o GitHub.
 
 ---
 
@@ -1547,4 +1823,4 @@ Não criar outro histórico paralelo.
 
 ## Etapa 6 — Mapas interativos
 
-A próxima IA deve começar pela Etapa 6 usando o pacote completo da Etapa 5 e sem alterar o GitHub. Deve preservar as fichas aprofundadas, IDs de lugares, cenas localizadas, estimativas de população e rotas históricas concluídas nesta etapa. O trabalho seguinte é transformar os mapas de Etérea, Nadírion e Guerras de Sangue em interfaces interativas, incluir todos os lugares geograficamente localizáveis e revisar pins, zoom, deslocamento, centralização, fichas rápidas e informações estratégicas.
+A próxima IA deve começar pela Etapa 6 usando o pacote completo da Etapa 5.5 e sem alterar o GitHub. Deve preservar as fichas aprofundadas, IDs de lugares, cenas localizadas, estimativas de população e rotas históricas concluídas nesta etapa. O trabalho seguinte é transformar os mapas de Etérea, Nadírion e Guerras de Sangue em interfaces interativas, incluir todos os lugares geograficamente localizáveis e revisar pins, zoom, deslocamento, centralização, fichas rápidas e informações estratégicas.

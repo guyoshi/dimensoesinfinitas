@@ -7,6 +7,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'data/common/entity-
 const canonicalAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/canonical-etapa-3.json'), 'utf8'));
 const timelineAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/timeline-etapa-4.json'), 'utf8'));
 const placesAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/places-etapa-5.json'), 'utf8'));
+const visualAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json'), 'utf8'));
 const errors = [], warnings = [];
 function context(){const c={console,CustomEvent:function(t,i){this.type=t;this.detail=i?.detail},dispatchEvent:()=>{},document:{querySelector:()=>null}};c.window=c;vm.createContext(c);return c;}
 function load(c,files){for(const relative of files){const absolute=path.join(root,relative);if(!fs.existsSync(absolute)){errors.push(`Arquivo ausente: ${relative}`);continue;}vm.runInContext(fs.readFileSync(absolute,'utf8'),c,{filename:relative});}}
@@ -92,14 +93,59 @@ for(const [bookId,items] of [['guerras-de-sangue',gsTimeline],['ruinas-dos-ceus'
   for(const id of protectedIds)if(!currentIds.has(id))errors.push(`${bookId}: ID protegido da Linha do Tempo desapareceu (${id}).`);
   for(const id of currentIds)if(!protectedIds.has(id))errors.push(`${bookId}: novo ID da Linha do Tempo não foi registrado no manifesto (${id}).`);
 }
+
+const requiredVisualFiles=[
+  'app/shared/experience/common.css',
+  'app/shared/experience/common.js',
+  'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css',
+  'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js',
+  'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css',
+  'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js',
+  'assets/textures/temp/ruinas-sidebar-texture.svg',
+  'assets/textures/temp/guerras-sidebar-texture.svg',
+  'assets/contemplative/temp/eterea-sky-placeholder.svg',
+  'assets/contemplative/temp/kaendar-night-placeholder.svg',
+  'assets/clans/temp/fendelar-mark.svg',
+  'docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md',
+  ...visualAudit.screenshots
+];
+for(const file of requiredVisualFiles)if(!fs.existsSync(path.join(root,file)))errors.push(`Etapa 5.5: arquivo obrigatório ausente (${file}).`);
+const visualSourceFiles=[
+  'app/shared/experience/common.js',
+  'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js',
+  'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js',
+  'app/shared/experience/common.css',
+  'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css',
+  'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css'
+];
+for(const file of visualSourceFiles){
+  const text=fs.readFileSync(path.join(root,file),'utf8');
+  if(/https?:\/\//.test(text))errors.push(`Etapa 5.5: dependência externa inesperada em ${file}.`);
+}
+const ruinasHtml=fs.readFileSync(path.join(root,'ruinas.html'),'utf8');
+const guerrasHtml=fs.readFileSync(path.join(root,'guerras.html'),'utf8');
+for(const ref of ['app/shared/experience/common.css','app/shared/experience/common.js','app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css','app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js'])if(!ruinasHtml.includes(ref))errors.push(`Ruínas: recurso da Etapa 5.5 não carregado (${ref}).`);
+for(const ref of ['app/shared/experience/common.css','app/shared/experience/common.js','app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css','app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js'])if(!guerrasHtml.includes(ref))errors.push(`Guerras: recurso da Etapa 5.5 não carregado (${ref}).`);
+const ruinasExperience=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js'),'utf8');
+const guerrasExperience=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js'),'utf8');
+if(!ruinasExperience.includes("const P='di-ruinas-';"))errors.push('Ruínas: prefixo de preferências específicas ausente.');
+if(!guerrasExperience.includes("const P='di-guerras-';"))errors.push('Guerras: prefixo de preferências específicas ausente.');
+if(!ruinasExperience.includes('data-time-slider')||!ruinasExperience.includes('data-time-auto'))errors.push('Ruínas: relógio temporário incompleto.');
+if(!ruinasExperience.includes('[data-contemplative="ruinas"]'))errors.push('Ruínas: modo contemplativo não ligado ao botão da página inicial.');
+if(!guerrasExperience.includes('[data-contemplative="guerras"]'))errors.push('Guerras: modo contemplativo não ligado ao botão da página inicial.');
+if((guerrasExperience.match(/document.createElement\('canvas'\)/g)||[]).length<2)errors.push('Guerras: as duas camadas Canvas de partículas não foram encontradas.');
+if(!visualAudit?.global?.performanceButtonAlwaysVisible)errors.push('Etapa 5.5: botão permanente de desempenho não confirmado na auditoria.');
+if(visualAudit?.global?.externalDependenciesAdded!==0)errors.push('Etapa 5.5: auditoria registra dependência externa não autorizada.');
+
 for(const html of ['index.html','ruinas.html','guerras.html']){const text=fs.readFileSync(path.join(root,html),'utf8');for(const m of text.matchAll(/<(?:script|link)[^>]+(?:src|href)="([^"]+)"/g)){const ref=m[1];if(ref.startsWith('assets/')||/^https?:/.test(ref))continue;if(!fs.existsSync(path.join(root,ref)))errors.push(`${html}: referência ausente (${ref}).`);}}
 const forbidden=['app.js','styles.css','portal.js','portal.css','portal-data.js','ruinas-app.js','ruinas-base.js','ruinas-events.js','ruinas.css','ruinas-avatar.css','ruinas-data.js','ruinas-trajetoria-data.js','book-music-loader.js','book-music.js','book-music.css','book-music.config.js'];for(const f of forbidden)if(fs.existsSync(path.join(root,f)))errors.push(`Arquivo antigo ainda solto na raiz: ${f}`);
 if(!canonicalAudit?.architecture?.appPattern)errors.push('Relatório canônico da Etapa 3 inválido.');
 if(timelineAudit?.stage!==4)errors.push('Relatório da Linha do Tempo da Etapa 4 inválido.');
 if(placesAudit?.stage!=='Etapa 5')errors.push('Relatório de Lugares da Etapa 5 inválido.');
+if(visualAudit?.stage!=='Etapa 5.5')errors.push('Relatório visual da Etapa 5.5 inválido.');
 if(!manifest)errors.push('Manifesto de IDs ausente.');
-if(!fs.existsSync(path.join(root,'assets')))warnings.push('Pasta assets não incluída; caminhos foram preservados e serão conferidos posteriormente.');
-const summary=[`Validação Etapa 5 — ${new Date().toISOString()}`,`Guerras de Sangue: ${models['guerras-de-sangue']?.entities.chapters.length||0} capítulos, ${models['guerras-de-sangue']?.entities.places.length||0} lugares, ${placesAudit.books['guerras-de-sangue'].chapterScenes} cenas localizadas e ${gsTimeline.length} acontecimentos cronológicos.`,`Ruínas dos Céus: ${models['ruinas-dos-ceus']?.entities.chapters.length||0} capítulos, ${models['ruinas-dos-ceus']?.entities.places.length||0} lugares, ${placesAudit.books['ruinas-dos-ceus'].chapterScenes} cenas localizadas e ${rdTimeline.length} acontecimentos cronológicos.`];
+if(!fs.existsSync(path.join(root,'assets/covers'))&&!fs.existsSync(path.join(root,'assets/characters')))warnings.push('Assets canônicos completos não incluídos; apenas recursos temporários da Etapa 5.5 estão presentes.');
+const summary=[`Validação Etapa 5.5 — ${new Date().toISOString()}`,`Guerras de Sangue: ${models['guerras-de-sangue']?.entities.chapters.length||0} capítulos, ${models['guerras-de-sangue']?.entities.places.length||0} lugares, ${placesAudit.books['guerras-de-sangue'].chapterScenes} cenas localizadas e ${gsTimeline.length} acontecimentos cronológicos.`,`Ruínas dos Céus: ${models['ruinas-dos-ceus']?.entities.chapters.length||0} capítulos, ${models['ruinas-dos-ceus']?.entities.places.length||0} lugares, ${placesAudit.books['ruinas-dos-ceus'].chapterScenes} cenas localizadas e ${rdTimeline.length} acontecimentos cronológicos.`];
 if(warnings.length){summary.push('','AVISOS:',...warnings.map(x=>`- ${x}`));}
 if(errors.length){summary.push('','ERROS:',...errors.map(x=>`- ${x}`));console.error(summary.join('\n'));process.exit(1);}
-summary.push('','OK: arquitetura, IDs, rotas históricas, Linha do Tempo e fichas aprofundadas de Lugares da Etapa 5 validados.');console.log(summary.join('\n'));
+summary.push('','OK: arquitetura, IDs, conteúdo das Etapas 1–5 e sistemas visuais, contemplativos e de desempenho da Etapa 5.5 validados.');console.log(summary.join('\n'));

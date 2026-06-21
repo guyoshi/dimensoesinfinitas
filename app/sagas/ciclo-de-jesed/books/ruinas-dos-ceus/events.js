@@ -93,6 +93,7 @@ const PRESET_VALUES={
   performance:{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false}
 };
 function detectPreset(){
+  if(storage.get('di-ruinas-customized')==='1') return 'custom';
   for(const key of Object.keys(PRESET_VALUES)){
     const v=PRESET_VALUES[key];
     if(Object.keys(v).every(k=>settings[k]===v[k])) return key;
@@ -153,25 +154,26 @@ function renderSettingsPanel(){
   const content=$('#settingsContent');
   if(!content) return;
   const s=settings;
-  content.innerHTML=`<div class="settings-group"><h3>Perfis rápidos</h3><div class="preset-row">${[['full','Completo'],['normal','Equilibrado'],['performance','Desempenho'],['custom','Personalizado']].map(([k,l])=>`<button class="preset-button ${s.preset===k?'active':''} ${k==='custom'?'preset-custom':''}" data-bpreset="${k}" ${k==='custom'?'disabled':''}>${l}</button>`).join('')}</div></div><div class="settings-group"><h3>Controlo individual</h3>${settingToggleHtml('particles','Nuvens','Nuvens à deriva no fundo.',s.particles)}${settingToggleHtml('transitions','Transições temáticas','Efeitos de entrada entre páginas.',s.transitions)}${settingToggleHtml('textures','Texturas','Brilhos e manchas sobre superfícies.',s.textures)}${settingToggleHtml('blur','Desfoque de painéis','Efeito de vidro nas barras e janelas.',s.blur)}${settingToggleHtml('shadows','Sombras profundas','Profundidade dos cartões.',s.shadows)}${settingToggleHtml('motion','Movimento e animações','Entradas, deslocamentos e efeitos.',s.motion)}<div class="setting-row range-row"><span class="setting-copy"><strong>Quantidade de nuvens</strong><small>Ajuste fino do fundo.</small></span><input type="range" min="4" max="50" value="${s.particleAmount}" data-brange="particleAmount"></div></div>`;
+  content.innerHTML=`<div class="settings-group"><h3>Perfis rápidos</h3><div class="preset-row">${[['full','Completo'],['normal','Equilibrado'],['performance','Desempenho'],['custom','Personalizado']].map(([k,l])=>`<button class="preset-button ${s.preset===k?'active':''} ${k==='custom'?'preset-custom':''}" data-bpreset="${k}" >${l}</button>`).join('')}</div></div><div class="settings-group"><h3>Controlo individual</h3>${settingToggleHtml('particles','Nuvens','Nuvens à deriva no fundo.',s.particles)}${settingToggleHtml('transitions','Transições temáticas','Efeitos de entrada entre páginas.',s.transitions)}${settingToggleHtml('textures','Texturas','Brilhos e manchas sobre superfícies.',s.textures)}${settingToggleHtml('blur','Desfoque de painéis','Efeito de vidro nas barras e janelas.',s.blur)}${settingToggleHtml('shadows','Sombras profundas','Profundidade dos cartões.',s.shadows)}${settingToggleHtml('motion','Movimento e animações','Entradas, deslocamentos e efeitos.',s.motion)}<div class="setting-row range-row"><span class="setting-copy"><strong>Quantidade de nuvens</strong><small>Ajuste fino do fundo.</small></span><input type="range" min="4" max="50" value="${s.particleAmount}" data-brange="particleAmount"></div></div>`;
 }
 function openSettingsDrawer(){renderSettingsPanel();$('#settingsDrawer')?.classList.add('open');$('#settingsDrawer')?.setAttribute('aria-hidden','false');}
 function closeSettingsDrawer(){$('#settingsDrawer')?.classList.remove('open');$('#settingsDrawer')?.setAttribute('aria-hidden','true');}
 $('#settingsButton')?.addEventListener('click',openSettingsDrawer);
 perfBtn?.addEventListener('click',()=>{
   settings.preset=settings.preset==='performance'?'normal':'performance';
+  storage.set('di-ruinas-customized','0');
   Object.assign(settings,PRESET_VALUES[settings.preset]);
   persistSettingsBook1();
 });
 document.addEventListener('click',e=>{
   if(e.target.closest('[data-drawer-close]'))return closeSettingsDrawer();
   const bsetting=e.target.closest('[data-bsetting]');
-  if(bsetting){const k=bsetting.dataset.bsetting;settings[k]=!settings[k];return persistSettingsBook1();}
+  if(bsetting){const k=bsetting.dataset.bsetting;settings[k]=!settings[k];storage.set('di-ruinas-customized','1');return persistSettingsBook1();}
   const bpreset=e.target.closest('[data-bpreset]');
-  if(bpreset&&PRESET_VALUES[bpreset.dataset.bpreset]){Object.assign(settings,PRESET_VALUES[bpreset.dataset.bpreset]);return persistSettingsBook1();}
+  if(bpreset){const chosen=bpreset.dataset.bpreset;if(chosen==='custom'){storage.set('di-ruinas-customized','1');return persistSettingsBook1();}if(PRESET_VALUES[chosen]){storage.set('di-ruinas-customized','0');Object.assign(settings,PRESET_VALUES[chosen]);return persistSettingsBook1();}}
 });
 document.addEventListener('input',e=>{
-  if(e.target.matches('[data-brange]')){settings[e.target.dataset.brange]=Number(e.target.value);persistSettingsBook1();}
+  if(e.target.matches('[data-brange]')){settings[e.target.dataset.brange]=Number(e.target.value);storage.set('di-ruinas-customized','1');persistSettingsBook1();}
 });
 applySettingsBook1();
 R.render();})();

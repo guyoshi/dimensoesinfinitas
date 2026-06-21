@@ -1,8 +1,8 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.9.0",
+  "version": "0.9.5",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — arquitetura escalável, Linha do Tempo cronológica e fichas aprofundadas de lugares da Etapa 5.",
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 5.5 com identidade visual, atmosfera, modos contemplativos e perfis de desempenho.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",

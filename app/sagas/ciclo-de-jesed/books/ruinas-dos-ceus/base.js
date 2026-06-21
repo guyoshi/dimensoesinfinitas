@@ -44,9 +44,10 @@ function crumbSegments(){
   }
   return segs;
 }
+const NAV_SYMBOLS={inicio:'⌂',livros:'▥',capitulos:'▤',linha:'⌁',personagens:'◌',relacoes:'⌘',familias:'◇',organizacoes:'⚑',mapa:'⌖',lugares:'◉',fauna:'✣',flora:'❧',alimentos:'◡',conceitos:'◫',misterios:'?',canon:'§'};
 function nav(){
   const b=st.route.split('/')[0];
-  $('#nav').innerHTML=NAV.map(([g,a])=>`<div class="group"><span>${g}</span>${a.map(([r,l,href])=>href?`<a class="navb" href="${href}">${l}</a>`:`<button class="navb ${b===r?'active':''}" data-go="${r}">${l}</button>`).join('')}</div>`).join('');
+  $('#nav').innerHTML=NAV.map(([g,a])=>`<div class="group"><span>${g}</span>${a.map(([r,l,href])=>{const icon=NAV_SYMBOLS[r]||'•';return href?`<a class="navb" href="${href}" data-tooltip="${E(l)}" title="${E(l)}"><span class="navb-icon" aria-hidden="true">${icon}</span><span class="navb-label">${E(l)}</span></a>`:`<button class="navb ${b===r?'active':''}" data-go="${r}" data-tooltip="${E(l)}" title="${E(l)}"><span class="navb-icon" aria-hidden="true">${icon}</span><span class="navb-label">${E(l)}</span></button>`}).join('')}</div>`).join('');
   const segs=crumbSegments();
   $('#crumb').innerHTML=segs.map((s,i)=>{
     const isLast=i===segs.length-1;
