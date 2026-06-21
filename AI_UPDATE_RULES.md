@@ -177,11 +177,11 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 
 ## 17. Estado atual
 
-- Etapas 1, 2, 3, 4 e 5 concluídas.
-- Próxima etapa oficial: **Etapa 6 — Mapas interativos**.
+- Etapas 1, 2, 3, 4, 5, 5.5, 6, 7, 8 e 9 concluídas.
+- Próxima etapa oficial: **Etapa 10 — Clãs**.
 
 
-## 17. Identidade visual e desempenho desde a Etapa 5.5
+## 18. Identidade visual e desempenho desde a Etapa 5.5
 
 - Preservar `app/shared/experience/` como fundação reutilizável.
 - Efeitos específicos devem permanecer em `app/sagas/<saga>/books/<livro>/experience/`.
@@ -196,8 +196,72 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 - O modo contemplativo deve poder ser fechado por botão e por `Escape`, sem prender o foco ou iniciar áudio contra a política do navegador.
 - Não remover ou contornar preferências de música, volume e silenciar.
 - O relógio visual de Ruínas é temporário e deve continuar identificado como ferramenta de teste até aprovação.
-- Não criar brasão Fendelar. `assets/clans/temp/fendelar-mark.svg` é somente uma marca neutra e não heráldica.
+- Não criar brasão Fendelar. `assets/clans/temp/fendelar-mark.webp` é somente uma marca neutra e não heráldica.
 - Recursos em `assets/**/temp/` são substituíveis, não canônicos e devem permanecer documentados.
 - Ao substituir um placeholder, preservar o caminho é preferível; se o caminho mudar, atualizar CSS, documentação e validação.
 - A Etapa 5.5 não autoriza mudanças de nomes, descrições ou informações canônicas.
-- A próxima etapa funcional é a Etapa 6 — Mapas interativos.
+- As Etapas 6, 7, 8 e 9 foram concluídas; a próxima etapa funcional é a Etapa 10 — Clãs.
+
+
+## 19. Mapas interativos desde a Etapa 6
+
+- Preservar `app/shared/maps/interactive-map.js` e `app/shared/maps/interactive-map.css` como módulo reutilizável.
+- Dados cartográficos específicos permanecem em `data/sagas/<saga>/books/<livro>/maps.js`.
+- *Ruínas dos Céus* deve manter dois mapas separados: Etérea e A Superfície.
+- Todos os 17 lugares de Ruínas devem continuar associados a um dos dois mapas.
+- *Guerras de Sangue* deve manter os 23 lugares no mapa principal.
+- As cinco entidades com IDs `route-*` continuam sendo lugares e não podem voltar a uma seção independente de Rotas.
+- Não alterar IDs de lugares para ajustar coordenadas. Coordenadas podem ser refinadas sem mudar identidade ou rota.
+- A seção estratégica de Guerras só pode exibir categorias com duas ou mais informações.
+- Preservar zoom, deslocamento, centralização, nomes, pins, ficha rápida, abertura da ficha e responsividade.
+- Os textos de contexto de Etérea e da Superfície devem permanecer integrados às imagens dos mapas.
+- A navegação anterior/próximo dos capítulos deve permanecer no topo das fichas nos dois livros.
+- Personagens em foco devem mostrar apenas figuras principais, sem estado, e com descrições de no máximo quatro palavras.
+- O relatório `data/sagas/ciclo-de-jesed/audits/maps-etapa-6.json` deve continuar válido.
+
+
+## 20. Páginas iniciais e assets desde a Etapa 7
+
+- `data/common/assets-manifest.json` é a referência oficial para nomes, extensões e pastas das imagens entregues pelo autor.
+- Não regredir caminhos WebP para `.png`, `.jpg` ou pastas genéricas.
+- Retratos de *Ruínas dos Céus* ficam em `assets/characters/ruinas/`.
+- Retratos de *Guerras de Sangue* ficam em `assets/characters/guerras-de-sangue/`.
+- Os mapas definitivos usam os caminhos registrados no manifesto.
+- Não inventar imagem para entidade sem arquivo correspondente; usar fallback visual.
+- Os capítulos 19 e 22 de *Ruínas dos Céus* não possuem ilustração no inventário atual.
+- As páginas iniciais dos dois livros devem manter exatamente quatro cartões orientadores: Personagens, Relações, Linha do Tempo e Capítulos.
+- A seção Últimos capítulos não pode voltar às páginas iniciais.
+- As páginas iniciais devem manter Personagens em foco e a seção Lugares com cartões fotográficos.
+- O mapa de Guerras deve permanecer grande e acompanhado de atalhos estratégicos resumidos.
+- Ruínas deve preservar as prévias separadas de Etérea e A Superfície.
+
+## 21. Personagens desde a Etapa 8
+
+- Preservar `app/shared/characters/browser.js` e `app/shared/characters/browser.css` como módulo reutilizável.
+- Os dois livros devem manter pesquisa de personagens e alternância entre cartões grandes e lista compacta.
+- A visualização escolhida é persistida separadamente por livro; não voltar a uma chave global única.
+- Cartões grandes exibem retrato, nome, subtítulo simples e descrição curta; a lista mantém acesso rápido e compacto.
+- Em *Ruínas dos Céus*, subtítulos como “Protagonista e Âncora” permanecem texto simples abaixo do nome, nunca cápsulas ou tags.
+- A ficha de Ruínas não deve recuperar o campo redundante Aparições quando a Trajetória já apresenta os capítulos.
+- Trajetória é conteúdo específico do personagem em cada capítulo. É proibido usar o resumo geral do capítulo como fallback.
+- Todos os capítulos listados na Trajetória devem permanecer clicáveis.
+- Todas as imagens disponíveis no inventário devem permanecer ligadas. A segunda imagem de Orionus é um retrato alternativo, não substituição obrigatória do principal.
+- Eshvar, Maedra e Capitão Lirron não possuem retratos no inventário atual; usar fallback e não inventar caminhos.
+- Preservar as frases-guia específicas das páginas de Personagens de cada livro.
+- O relatório `data/sagas/ciclo-de-jesed/audits/characters-etapa-8.json` deve continuar válido.
+
+
+## 23. Relações, famílias, organizações e imagens desde a Etapa 9
+
+- Preservar `app/shared/social/network.css` como fundação visual compartilhada.
+- Em *Ruínas dos Céus*, a única ficha familiar própria é **Os Amaréa**.
+- Não criar famílias genéricas apenas para preencher a seção.
+- Os tipos visuais de relações de Ruínas são: família, amizade, proteção, influência, conflito, rivalidade, lealdade e relação rompida.
+- Toda relação enriquecida deve manter participantes válidos, tipo, estado, descrição, perspectivas e evolução.
+- Organizações devem existir no cânone do livro; não criar instituições por simetria artificial.
+- Imagens atmosféricas e sociais substituíveis estão listadas em `docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md` e `data/common/image-requirements-etapa-9.json`.
+- Para substituir uma imagem, manter exatamente o mesmo caminho, nome, formato WebP e, quando indicado, canal alfa.
+- Não voltar a incorporar SVG atmosférico quando já houver caminho rasterizado definido.
+- Sprites de partículas podem falhar sem quebrar o Canvas: preservar o fallback desenhado por código.
+- Imagens sociais e texturas devem possuir fundo visual de segurança para evitar áreas vazias ou erro aparente.
+- Não usar URLs externas para texturas, nuvens, partículas, famílias ou organizações.

@@ -1,0 +1,72 @@
+{
+  "stage": "Etapa 7",
+  "version": "0.9.7",
+  "date": "2026-06-21",
+  "sourceManifest": "data/common/assets-manifest.json",
+  "manifestAssetCount": 169,
+  "literalImageReferences": 143,
+  "uniqueLiteralPaths": 128,
+  "canonicalManifestMatches": 124,
+  "temporaryLocalAssets": [
+    "assets/clans/temp/fendelar-mark.webp",
+    "assets/atmosphere/ruinas/eterea-contemplative.webp",
+    "assets/atmosphere/guerras/kaendar-night.webp",
+    "assets/atmosphere/guerras/sidebar-leather-map.webp",
+    "assets/atmosphere/ruinas/sidebar-sky-stone.webp"
+  ],
+  "unresolvedLiteralPaths": [],
+  "legacyImageExtensions": [],
+  "changes": {
+    "branding": "PNG references migrated to the WebP filenames listed in the asset inventory.",
+    "chapters": "All available chapter illustrations linked; Ruínas chapters 19 and 22 remain without an image because no corresponding file exists in the inventory.",
+    "characters": "Guerras portraits moved from the generic assets/characters path to assets/characters/guerras-de-sangue; Ruínas keeps assets/characters/ruinas.",
+    "maps": "Stage 6 map files renamed to the definitive inventory paths.",
+    "homepage": "Both book homepages reorganized; Últimos capítulos removed; four guide cards and photographic place cards added."
+  },
+  "homepages": {
+    "ruinas-dos-ceus": {
+      "guideCards": 4,
+      "focusCharacters": 5,
+      "placeCards": 6,
+      "mapPreviews": 2,
+      "lastChaptersRemoved": true
+    },
+    "guerras-de-sangue": {
+      "guideCards": 4,
+      "focusCharacters": 5,
+      "placeCards": 6,
+      "strategicCategories": 7,
+      "lastChaptersRemoved": true
+    }
+  },
+  "knownMissingAssets": [
+    "assets/chapters/ruinas-dos-ceus/Capítulo 19.webp",
+    "assets/chapters/ruinas-dos-ceus/Capítulo 22.webp"
+  ],
+  "idsChanged": 0,
+  "manifestUniquePaths": 168,
+  "browserTests": {
+    "engine": "Chromium 144 via DevTools Protocol",
+    "method": "HTML, CSS e JavaScript locais carregados de forma inline; binários canônicos ausentes não foram simulados como arte definitiva.",
+    "ruinas": {
+      "guideCards": 4,
+      "focusCharacters": 5,
+      "placeCards": 6,
+      "mapPreviews": 2,
+      "guideHeading": true,
+      "lastChaptersAbsent": true,
+      "runtimeExceptions": 0
+    },
+    "guerras": {
+      "guideCards": 4,
+      "focusCharacters": 5,
+      "placeCards": 6,
+      "strategicCategories": 7,
+      "guideHeading": true,
+      "lastChaptersAbsent": true,
+      "runtimeExceptions": 0
+    },
+    "mobileWidth": 390,
+    "mobileNoHorizontalOverflow": true
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "stage": "Etapa 8",
+  "version": "0.9.8",
+  "completedAt": "2026-06-21",
+  "scope": "Padronização das páginas de Personagens, pesquisa, visualizações, trajetórias e imagens.",
+  "shared": {
+    "views": [
+      "cartões grandes",
+      "lista compacta"
+    ],
+    "search": true,
+    "persistentViewPerBook": true,
+    "clickableChapterTrajectory": true,
+    "chapterSummaryFallbackRemoved": true,
+    "appearanceFieldRemovedWhenRedundant": true,
+    "responsive": true,
+    "reducedMotionSupported": true
+  },
+  "ruinas-dos-ceus": {
+    "characters": 15,
+    "charactersWithPrimaryImage": 15,
+    "availableCharacterAssets": 15,
+    "linkedCharacterAssets": 15,
+    "trajectoryLinks": 149,
+    "trajectoryEntries": 150,
+    "missingTrajectoryEntries": 0,
+    "subtitle": "Habitantes de Etérea e sobreviventes transformados pela Queda, entre a leveza do céu e o peso da superfície.",
+    "plainCardSubtitles": true,
+    "search": true,
+    "views": 2
+  },
+  "guerras-de-sangue": {
+    "characters": 45,
+    "charactersWithPrimaryImage": 42,
+    "charactersWithoutAvailableImage": [
+      "Eshvar",
+      "Maedra",
+      "Capitão Lirron"
+    ],
+    "availableCharacterAssets": 42,
+    "linkedCharacterAssets": 42,
+    "alternateImagesLinked": [
+      "assets/characters/guerras-de-sangue/orionus-polar-2.webp"
+    ],
+    "trajectoryLinks": 293,
+    "trajectoryEntries": 324,
+    "missingTrajectoryEntries": 0,
+    "subtitle": "Figuras de clãs, alianças e rivalidades que atravessam a guerra e disputam memória, território e poder.",
+    "search": true,
+    "views": 2
+  },
+  "requiredFiles": [
+    "app/shared/characters/browser.js",
+    "app/shared/characters/browser.css",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/list.js",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/detail.js",
+    "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/tabs/trajetoria.js"
+  ],
+  "screenshots": [
+    "docs/screenshots/etapa-8/ruinas-personagens-cartoes.png",
+    "docs/screenshots/etapa-8/ruinas-personagens-lista.png",
+    "docs/screenshots/etapa-8/ruinas-personagens-pesquisa.png",
+    "docs/screenshots/etapa-8/ruinas-personagem-detalhe.png",
+    "docs/screenshots/etapa-8/guerras-personagens-cartoes.png",
+    "docs/screenshots/etapa-8/guerras-personagens-lista.png",
+    "docs/screenshots/etapa-8/guerras-personagens-pesquisa.png",
+    "docs/screenshots/etapa-8/guerras-personagem-detalhe.png",
+    "docs/screenshots/etapa-8/ruinas-personagens-mobile.png",
+    "docs/screenshots/etapa-8/guerras-personagens-mobile.png"
+  ],
+  "browserTests": {
+    "runtimeExceptions": 0,
+    "desktop": true,
+    "mobile": true,
+    "mobileNoHorizontalOverflow": true,
+    "searchRuinas": true,
+    "searchGuerras": true,
+    "viewToggleRuinas": true,
+    "viewToggleGuerras": true,
+    "detailRuinas": true,
+    "detailGuerras": true
+  },
+  "canonicalChanges": 0,
+  "idsChanged": 0,
+  "githubChanged": false
+}

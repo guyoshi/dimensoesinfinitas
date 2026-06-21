@@ -21,13 +21,20 @@
   const cloudHost=document.getElementById('clouds');
   let rebuilding=false;
   function seeded(index,offset=0){const x=Math.sin((index+1)*9301+offset*49297)*233280;return x-Math.floor(x)}
+  const cloudAssets={
+    distant:['assets/atmosphere/ruinas/cloud-distant-01.webp','assets/atmosphere/ruinas/cloud-distant-02.webp','assets/atmosphere/ruinas/cloud-distant-03.webp'],
+    middle:['assets/atmosphere/ruinas/cloud-mid-01.webp','assets/atmosphere/ruinas/cloud-mid-02.webp','assets/atmosphere/ruinas/cloud-mid-03.webp'],
+    near:['assets/atmosphere/ruinas/mist-near-01.webp','assets/atmosphere/ruinas/mist-near-02.webp']
+  };
   function cloudHtml(layer,count,baseWidth,seedOffset){
     let html=`<div class="cloud-layer cloud-layer-${layer}">`;
+    const assets=cloudAssets[layer]||cloudAssets.middle;
     for(let i=0;i<count;i++){
       const r=seeded(i,seedOffset),r2=seeded(i,seedOffset+2),r3=seeded(i,seedOffset+5);
       const w=baseWidth*(.72+r*.68),top=(layer==='near'?8:layer==='middle'?10:28)+r2*(layer==='distant'?38:52);
       const duration=(layer==='distant'?145:layer==='middle'?92:54)*(.78+r3*.62),opacity=(layer==='distant'?.23:layer==='middle'?.48:.20)*(.75+r2*.4);
-      html+=`<div class="natural-cloud" style="--top:${top}%;--w:${w}px;--duration:${duration}s;--delay:${-r*duration}s;--opacity:${opacity};--scale:${.82+r2*.42};--rise:${-10+r3*22}px"><span class="cloud-body"></span></div>`;
+      const src=assets[i%assets.length];
+      html+=`<div class="natural-cloud natural-cloud-${layer}" style="--top:${top}%;--w:${w}px;--duration:${duration}s;--delay:${-r*duration}s;--opacity:${opacity};--scale:${.82+r2*.42};--rise:${-10+r3*22}px"><img src="${src}" alt="" draggable="false" onerror="this.hidden=true"></div>`;
     }
     return html+'</div>';
   }

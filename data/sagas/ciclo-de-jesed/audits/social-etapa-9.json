@@ -1,0 +1,55 @@
+{
+  "stage": "Etapa 9",
+  "version": "0.9.9",
+  "title": "Relações, Família, Organizações e atmosfera baseada em imagens",
+  "ruinas-dos-ceus": {
+    "relationshipTypes": 8,
+    "relationships": 12,
+    "families": 1,
+    "familyMembers": 5,
+    "familySections": 7,
+    "organisations": 4
+  },
+  "guerras-de-sangue": {
+    "relationshipsPreserved": true,
+    "families": 3,
+    "organisations": 3
+  },
+  "atmosphere": {
+    "imageRequirements": 40,
+    "rasterPlaceholdersIncluded": 40,
+    "activeSvgAtmosphereReferences": 0,
+    "externalDependenciesAdded": 0,
+    "fallbacksEnabled": true
+  },
+  "requiredFiles": [
+    "app/shared/social/network.css",
+    "data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/social.js",
+    "data/sagas/ciclo-de-jesed/books/guerras-de-sangue/social.js",
+    "docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md",
+    "data/common/image-requirements-etapa-9.json"
+  ],
+  "screenshots": [
+    "docs/screenshots/etapa-9/ruinas-atmosfera.png",
+    "docs/screenshots/etapa-9/ruinas-relacoes.png",
+    "docs/screenshots/etapa-9/ruinas-familia.png",
+    "docs/screenshots/etapa-9/ruinas-organizacoes.png",
+    "docs/screenshots/etapa-9/ruinas-relacoes-390.png",
+    "docs/screenshots/etapa-9/guerras-relacoes.png",
+    "docs/screenshots/etapa-9/guerras-familias.png",
+    "docs/screenshots/etapa-9/guerras-organizacoes.png"
+  ],
+  "browserTests": {
+    "runtimeExceptions": 0,
+    "mobileNoHorizontalOverflow": true,
+    "ruinasRelationshipsRendered": 12,
+    "ruinasFamiliesRendered": 1,
+    "ruinasOrganisationsRendered": 4,
+    "guerrasFamiliesRendered": 3,
+    "guerrasOrganisationsRendered": 3,
+    "desktopNoHorizontalOverflow": true
+  },
+  "idsChanged": 0,
+  "canonicalChanges": 0,
+  "githubChanged": false
+}

@@ -81,27 +81,27 @@
   },
   "temporaryAssets": [
     {
-      "path": "assets/textures/temp/ruinas-sidebar-texture.svg",
+      "path": "assets/atmosphere/ruinas/sidebar-sky-stone.webp",
       "purpose": "Textura leve de céu, rocha, fissuras e raízes do menu de Ruínas.",
       "replacement": "Substituir por WebP/SVG final mantendo o caminho ou atualizar a variável CSS documentada."
     },
     {
-      "path": "assets/textures/temp/guerras-sidebar-texture.svg",
+      "path": "assets/atmosphere/guerras/sidebar-leather-map.webp",
       "purpose": "Textura histórica e cartográfica do menu de Guerras.",
       "replacement": "Substituir por textura final otimizada, sem padrão repetitivo."
     },
     {
-      "path": "assets/contemplative/temp/eterea-sky-placeholder.svg",
+      "path": "assets/atmosphere/ruinas/eterea-contemplative.webp",
       "purpose": "Composição atmosférica temporária do modo contemplativo de Ruínas.",
       "replacement": "Substituir por ilustração canônica de Etérea preservando o enquadramento e o caminho."
     },
     {
-      "path": "assets/contemplative/temp/kaendar-night-placeholder.svg",
+      "path": "assets/atmosphere/guerras/kaendar-night.webp",
       "purpose": "Silhueta temporária de Kaendar à noite junto do Rio Grande.",
       "replacement": "Substituir pela imagem canônica de Kaendar noturna, sem alterar controles ou camadas atmosféricas."
     },
     {
-      "path": "assets/clans/temp/fendelar-mark.svg",
+      "path": "assets/clans/temp/fendelar-mark.webp",
       "purpose": "Marca neutra de trilha/floresta para indicar a ausência deliberada de brasão Fendelar.",
       "replacement": "Pode ser mantida como marca não heráldica ou substituída por recurso aprovado; nunca converter em brasão."
     }
@@ -113,13 +113,13 @@
     "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css",
     "app/shared/experience/common.css",
     "app/shared/experience/common.js",
-    "assets/clans/temp/fendelar-mark.svg",
-    "assets/contemplative/temp/eterea-sky-placeholder.svg",
-    "assets/contemplative/temp/kaendar-night-placeholder.svg",
-    "assets/textures/temp/guerras-sidebar-texture.svg",
-    "assets/textures/temp/ruinas-sidebar-texture.svg",
+    "assets/clans/temp/fendelar-mark.webp",
+    "assets/atmosphere/ruinas/eterea-contemplative.webp",
+    "assets/atmosphere/guerras/kaendar-night.webp",
+    "assets/atmosphere/guerras/sidebar-leather-map.webp",
+    "assets/atmosphere/ruinas/sidebar-sky-stone.webp",
     "data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json",
-    "docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md",
+    "docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md",
     "docs/screenshots/guerras-contemplative.png",
     "docs/screenshots/guerras-home.png",
     "docs/screenshots/guerras-menu-collapsed.png",

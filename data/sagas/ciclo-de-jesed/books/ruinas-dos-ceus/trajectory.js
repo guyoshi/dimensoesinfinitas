@@ -174,3 +174,26 @@ window.RUINAS_TRAJ = {
 "23": "Persegue Nestira e Marv pela floresta, ferido e enfurecido; confessa abertamente ter incendiado o primeiro abrigo, envenenado Malthar, deixado Platisa ser devorada e matado outros grupos de sobreviventes ao longo de cinco ciclos desde seu exílio de Etérea; ataca Marv e ameaça matar Nestira, mas é surpreendido e devorado vivo por uma fera na clareira de ossos, morrendo da mesma \"lei do mais forte\" que pregava."
 }
 };
+
+// Etapa 8 — complementos de trajetória. Mantém cada entrada centrada no personagem,
+// sem reutilizar o resumo geral do capítulo.
+(()=>{
+  const T=window.RUINAS_TRAJ||{};
+  const patch={
+    'Marv':{
+      '20':'Acompanha Jokara, Nestira e Loutes até as ruínas antigas, ajuda a manter o grupo unido depois da perda de Platisa e presencia a descoberta de que Etérea foi construída como refúgio por povos vindos da superfície.',
+      '21':'Permanece junto de Nestira durante a visão provocada pelo cristal e testemunha Jokara compreender o sentido de ser âncora para a irmã; ao despertar, ajuda o grupo a seguir adiante enquanto Loutes se despede e desaparece.'
+    },
+    'Loutes':{
+      '22':'Não aparece presencialmente depois de desaparecer nas ruínas; sua ausência confirma que a despedida do capítulo anterior foi definitiva e deixa Jokara sem a proteção silenciosa que ele representava.'
+    },
+    'Sersi':{
+      '13':'Não aparece presencialmente na superfície; é lembrada como parte do conhecimento de cura e cuidado que os sobreviventes perderam com a Queda.',
+      '14':'Não aparece presencialmente; sua antiga função de curandeira contrasta com a precariedade dos cuidados disponíveis ao grupo na superfície.'
+    },
+    'Platisa':{
+      '20':'Não aparece viva; sua morte recente pesa sobre a decisão do grupo de abandonar a área da Fera e seguir até as ruínas, tornando a descoberta histórica também consequência direta da perda dela.'
+    }
+  };
+  for(const [name,entries] of Object.entries(patch))Object.assign(T[name]||(T[name]={}),entries);
+})();

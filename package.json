@@ -1,8 +1,8 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.9.5",
+  "version": "0.9.9",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 5.5 com identidade visual, atmosfera, modos contemplativos e perfis de desempenho.",
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 9 com Relações, Família, Organizações e atmosfera rasterizada substituível por imagens definitivas.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",

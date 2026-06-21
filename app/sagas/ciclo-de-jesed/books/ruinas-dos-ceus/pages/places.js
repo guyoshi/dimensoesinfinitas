@@ -68,12 +68,43 @@
       <section class="place-linked-grid"><article class="panel"><div class="section-heading"><div><p class="eyebrow">Cenas localizadas</p><h2>Capítulos com cenas neste lugar</h2></div></div>${chapterCards(place)}</article><article class="panel"><div class="section-heading"><div><p class="eyebrow">Cronologia</p><h2>Acontecimentos relacionados</h2></div></div>${eventCards(place)}</article></section>`;
   };
 
+  const mapControl=(action,label,symbol)=>`<button type="button" data-di-map-action="${action}" aria-label="${E(label)}" title="${E(label)}"><span aria-hidden="true">${symbol}</span></button>`;
+  const mapPin=place=>{
+    const point=place.map;if(!point)return'';
+    return `<button class="di-map-pin" style="left:${point.x}%;top:${point.y}%" data-di-map-pin="${E(place.id)}" data-map-x="${point.x}" data-map-y="${point.y}" data-pin-kind="${E(point.kind||'place')}" data-major="${point.major?'true':'false'}" aria-label="Abrir ficha rápida de ${E(place.n)}"><span class="di-map-pin-marker" aria-hidden="true"></span><span class="di-map-pin-label">${E(place.n)}</span></button>`;
+  };
+  R.mountMap=()=>{
+    const phase=st.mapPhase==='nadirion'?'superficie':st.mapPhase;
+    const config=D.maps?.[phase]||D.maps?.eterea;
+    const root=document.getElementById('ruinasInteractiveMap');
+    if(!root||!config||!window.DIMaps)return;
+    window.DIMaps.mount({
+      root,key:'ruinasInteractiveMap',initialZoom:1,minZoom:.72,maxZoom:3.25,
+      getItem:id=>D.places.find(place=>place.id===id),
+      renderPopup:place=>`<p class="eyebrow">${E(place.type||'Lugar')}</p><h2>${E(place.n)}</h2><p>${E(place.s)}</p><div class="di-map-popup-facts"><div><small>Região</small><strong>${E(place.region||'Não estabelecida')}</strong></div><div><small>Período</small><strong>${E(config.title)}</strong></div></div><div class="di-map-popup-actions"><button class="primary-button" data-go="lugar/${E(place.slug||S(place.n))}">Abrir ficha</button></div>`
+    });
+  };
+
   P.mapa=()=>{
-    const maps={
-      eterea:{label:'Etérea',file:'assets/maps/ruinas-dos-ceus/Mapa de Etérea.png',desc:'Ilhas suspensas, pontes vivas, Bosques de Arion, Nivellia, Erílan e Praça da Raiz.'},
-      nadirion:{label:'Nadírion',file:'assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).png',desc:'Floresta, riacho, abrigo, ruínas e Vale.'}
-    };
-    const phase=maps[st.mapPhase]?st.mapPhase:'eterea',m=maps[phase];
-    return H('Mundo','Mapa do período','Etérea, acima das nuvens — Nadírion, na superfície.')+`<div class="filters">${Object.entries(maps).map(([k,v])=>`<button class="${phase===k?'active':''}" data-map-phase="${k}">${E(v.label)}</button>`).join('')}</div><div class="map-page-art"><img src="${encodeURI(m.file)}" alt="Mapa de ${E(m.label)}" loading="lazy"></div><div class="panel"><h2>${E(m.label)}</h2><p>${E(m.desc)}</p></div>`;
+    const requested=st.mapPhase==='nadirion'?'superficie':st.mapPhase;
+    const phase=D.maps?.[requested]?requested:'eterea';
+    st.mapPhase=phase;
+    const config=D.maps?.[phase];
+    if(!config)return H('Mundo','Mapas','Os dados cartográficos ainda não foram carregados.');
+    const places=config.placeIds.map(id=>D.places.find(place=>place.id===id)).filter(Boolean);
+    return H('Mundo','Mapas interativos','Do céu organizado de Etérea à sobrevivência na superfície.')+
+      `<section class="di-map-section ruinas-map-section" data-di-map-fullscreen>
+        <div class="di-map-tabs" role="tablist" aria-label="Períodos cartográficos">${Object.values(D.maps).map(map=>`<button type="button" class="${map.id===phase?'active':''}" data-map-phase="${E(map.id)}" role="tab" aria-selected="${map.id===phase}">${E(map.title)}</button>`).join('')}</div>
+        <div id="ruinasInteractiveMap" class="di-map-shell ruinas-interactive-map" style="--di-map-ratio:${E(config.ratio)};--di-map-accent:#3e8192">
+          <div class="di-map-toolbar" aria-label="Controles do mapa">${mapControl('zoom-in','Aproximar','+')} ${mapControl('zoom-out','Afastar','−')} ${mapControl('center','Centralizar','◎')} ${mapControl('labels','Mostrar ou ocultar nomes','Aa')} ${mapControl('fullscreen','Tela inteira','⛶')}</div>
+          <div class="di-map-context"><p>${E(config.description)}</p><h2>${E(config.title)}</h2><div class="di-map-context-list">${config.context.map(text=>`<span>${E(text)}</span>`).join('')}</div></div>
+          <div class="di-map-viewport" data-di-map-viewport tabindex="0" aria-label="Mapa interativo de ${E(config.shortTitle)}. Arraste para deslocar e use os controles para ampliar.">
+            <div class="di-map-stage" data-di-map-stage><img src="${E(config.image)}" alt="Mapa de ${E(config.shortTitle)}" draggable="false">${places.map(mapPin).join('')}</div>
+            <div data-di-map-popup-host></div>
+          </div>
+          <div class="di-map-helper">Arraste para deslocar · use a roda ou os botões para ampliar · selecione um marcador</div>
+        </div>
+        <article class="panel map-period-summary"><p class="eyebrow">${places.length} lugares localizados</p><h2>${E(config.shortTitle)}</h2><p>${E(config.description)}</p><div class="map-place-links">${places.map(place=>`<button data-di-global-map-focus="${E(place.id)}" data-di-map-root="ruinasInteractiveMap">${E(place.n)}</button>`).join('')}</div></article>
+      </section>`;
   };
 })();

@@ -350,3 +350,117 @@ window.GUERRAS_TRAJ = {
 "jesed-chapter-gs-19": "Acompanha Kaelina a Nhar-Veyr; é ferido protegendo-a de um golpe fatal e morre em combate pouco depois."
 }
 };
+
+// Etapa 8 — complementos de trajetória. Cada entrada descreve a função do
+// personagem no capítulo, inclusive quando ele surge apenas por memória,
+// consequência ou revelação.
+(()=>{
+  const T=window.GUERRAS_TRAJ||{};
+  const patch={
+    'Alyra Polar':{
+      'jesed-chapter-gs-25':'Não aparece presencialmente; torna-se o centro involuntário da confissão de Ylvena, que revela que o Beijo-da-Noite era destinado a Alyra, que Orionus morreu ao beber o veneno por engano e que ela espera um filho de Daryon.'
+    },
+    'Orionus Polar':{
+      'jesed-chapter-gs-03':'Não aparece vivo; sua autoridade continua por trás da primazia que Veyr exige dos Fendelar em nome de Kaendar e da Dinastia Polar.',
+      'jesed-chapter-gs-10':'É lembrado como medida de comparação entre as irmãs e como origem das leis que Kaelina tenta preservar enquanto Alyra transforma governo em domínio.',
+      'jesed-chapter-gs-12':'Não aparece; seu legado permanece em Cal Edran, que age como o último escudo formado para proteger as filhas do antigo soberano.',
+      'jesed-chapter-gs-14':'É invocado como referência política oposta pelas irmãs: Kaelina procura compreender sua prudência, enquanto Alyra reivindica a parte mais dura de seu governo.'
+    },
+    'Daryon Vess':{
+      'jesed-chapter-gs-19':'Não aparece presencialmente; a investigação de Kaelina sobre sua origem conduz a soberana à armadilha de Nhar-Veyr e aproxima a guerra do passado que ele tentou apagar.',
+      'jesed-chapter-gs-22':'Não aparece na marcha; sua influência sobre Alyra e os crimes ligados aos Fendelar permanecem entre as causas que mantêm Rendar e a aliança em movimento contra Kaendar.',
+      'jesed-chapter-gs-23':'Leva Alyra para a Câmara do Primeiro Abrigo, tenta assumir a função de voz política da soberana e confessa que envenenou Yvenn para destruir a negociação e entregar a Alyra a guerra que ela desejava; descobre que o filho dela é seu.',
+      'jesed-chapter-gs-24':'Move-se secretamente dentro de Kaendar durante a invasão e entra numa câmara escondida para encontrar Ylvena, sendo visto por Kaelina e Markoso sem perceber que está sendo seguido.'
+    },
+    'Cal Edran Polar':{
+      'jesed-chapter-gs-17':'Não aparece vivo; sua ausência pesa sobre Kaelina e reforça a diferença entre a proteção leal que ele representava e a influência secreta exercida por Daryon.',
+      'jesed-chapter-gs-18':'É lembrado durante a investigação sobre Orionus e Daryon como testemunha perdida de uma geração que conhecia os corredores antigos de Kaendar.',
+      'jesed-chapter-gs-19':'Não aparece; a morte dele deixa Kaelina sem seu escudo mais experiente quando ela entra na armadilha de Nhar-Veyr com Harrev e Odris.'
+    },
+    'Rendar':{
+      'jesed-chapter-gs-23':'Não entra na Câmara do Primeiro Abrigo; permanece entre as forças que cercam Kaendar e transforma sua vingança em ameaça militar concreta contra a fortaleza.',
+      'jesed-chapter-gs-25':'Não aparece presencialmente; a confissão ouvida por Kaelina esclarece que sua família e Velarim foram usados por Daryon e Ylvena como instrumentos para fabricar a guerra que o levou até Kaendar.'
+    },
+    'Vita Fendelar':{
+      'jesed-chapter-gs-11':'Não aparece viva; sua morte, ao lado de Nara e Ilo, é a ausência que move Rendar durante as negociações com Tondrar, Buldar, Glydar e Vendrar.'
+    },
+    'Nynestra Buldar':{
+      'jesed-chapter-gs-17':'Não aparece presencialmente; sua posição entre os Buldar e a aliança em formação permanece uma das forças externas que Kaendar ainda não consegue medir.'
+    },
+    'Kharvok':{
+      'jesed-chapter-gs-09':'Não aparece presencialmente; a fome e a hostilidade que ele conduz em Khar-Tondr fazem parte do risco avaliado por Nynestra ao ouvir a proposta de Rendar.',
+      'jesed-chapter-gs-11':'Recebe Rendar em Khar-Tondr, transforma o luto por Yvenn em discurso de guerra e aceita discutir uma aliança capaz de usar fome, passagem e medo contra os Polar.',
+      'jesed-chapter-gs-19':'Apresenta Kaelina e Nynestra ao povo Tondrar na Plataforma do Sol Alto, força as duas a lutar e, insatisfeito com o resultado, envia ambas para as Veias de Barro.',
+      'jesed-chapter-gs-21':'Supervisiona o segundo confronto na Plataforma, aceita manter Kaelina viva como instrumento político e muda sua leitura de Nynestra quando ela o salva durante a emboscada Urtistar.',
+      'jesed-chapter-gs-22':'Conduz os Tondrar até o encontro com a aliança, resiste a libertar Nynestra e negocia com Rendar enquanto a verdade sobre a morte de Torgun reorganiza as lealdades.'
+    },
+    'Torgun Ossos-de-Fome':{
+      'jesed-chapter-gs-16':'Integra a força Tondrar reunida na Terra Preta e representa, diante dos demais clãs, a fome e a disciplina que Khar-Tondr leva para a aliança.',
+      'jesed-chapter-gs-21':'Não aparece vivo; sua morte é usada contra Nynestra até que a emboscada Urtistar confirme que ela dizia a verdade sobre quem o matou.',
+      'jesed-chapter-gs-22':'É lembrado durante o reencontro dos clãs; a confirmação de que morreu pelas mãos Urtistar devolve autoridade a Nynestra e altera a posição de Kharvok.'
+    },
+    'Tavra Vendrar':{
+      'jesed-chapter-gs-11':'Surge entre os Vendrar ligados à negociação de fogo e armas, observando a proposta de Rendar transformar o comércio perigoso do clã em força de guerra contra Kaendar.',
+      'jesed-chapter-gs-28':'Não aparece viva; o mecanismo de fogo tomado de seu corpo continua nas mãos de Alyra e explode durante o duelo entre as soberanas, mutilando e queimando Alyra.',
+      'jesed-chapter-gs-29':'É lembrada pelas consequências do mecanismo Vendrar que deixou para trás e pela morte ocorrida dentro de Kaendar durante a guerra.'
+    },
+    'Ossar Glydar':{
+      'jesed-chapter-gs-15':'Não aparece presencialmente; a posição ainda cautelosa dos Glydar e a vulnerabilidade de Varael mantêm Ossar dividido entre neutralidade, sobrevivência e a guerra que se aproxima.'
+    },
+    'Varael Glydar':{
+      'jesed-chapter-gs-22':'Não aparece vivo; sua morte rompe a neutralidade Glydar e é citada como uma das razões para o clã integrar a marcha contra Kaendar.'
+    },
+    'Markoso':{
+      'jesed-chapter-gs-14':'Não aparece presencialmente; as advertências que fez a Kaelina sobre mentira, destino e fogo ajudam a soberana a interpretar a reunião secreta entre Daryon e Sarkan.',
+      'jesed-chapter-gs-26':'Não aparece durante o duelo de Tavra e Alyra; permanece oculto nos túneis de Kaendar depois de conduzir Kaelina até a verdade sobre Ylvena.',
+      'jesed-chapter-gs-28':'Não aparece presencialmente; o conhecimento que deixou sobre o futuro e o fogo ganha novo peso quando o mecanismo Vendrar explode nas mãos de Alyra.'
+    },
+    'Ylvena':{
+      'jesed-chapter-gs-19':'Não aparece presencialmente; as pistas de Noreval e o passado de Daryon aproximam Kaelina do esconderijo onde Ylvena permanece protegida dentro de Kaendar.',
+      'jesed-chapter-gs-27':'Não aparece viva; Daryon confessa que a manteve escondida e revela diante de Rendar parte dos crimes que os dois transformaram em guerra.',
+      'jesed-chapter-gs-28':'Não aparece viva; a verdade de que pretendia envenenar Alyra e matou Orionus por engano é revelada às soberanas e muda o sentido da disputa entre elas.',
+      'jesed-chapter-gs-29':'É julgada por meio das provas e confissões deixadas após sua morte, sendo reconhecida como autora das mortes dos jovens Polar e peça central da fabricação da guerra.'
+    },
+    'Brokan das Forjas':{
+      'jesed-chapter-gs-14':'Participa da crise do Conselho enquanto Kaendar enfrenta falta de água e comida, avaliando a capacidade material da fortaleza e o custo das decisões das soberanas.',
+      'jesed-chapter-gs-17':'Permanece ligado à preparação defensiva e às forjas de Kaendar enquanto as ameaças externas e a divisão entre Kaelina e Alyra se tornam mais abertas.'
+    },
+    'Varron Meio-Olho':{
+      'jesed-chapter-gs-14':'Responde pelas fronteiras e patrulhas durante a crise interna, recebendo ordens contraditórias enquanto Kaelina tenta investigar e Alyra reforça o comando militar.',
+      'jesed-chapter-gs-23':'Participa da defesa de Kaendar e do Conselho de crise quando a aliança cerca a fortaleza, levando informações sobre fronteiras, movimentos e acessos ameaçados.'
+    },
+    'Nalia do Rio':{
+      'jesed-chapter-gs-14':'Avalia a contaminação do Rio Grande e as consequências sobre água, transporte e abastecimento, tornando-se uma das vozes centrais da crise que atinge os anéis de Kaendar.',
+      'jesed-chapter-gs-17':'Continua acompanhando as rotas fluviais e o risco de isolamento de Kaendar enquanto a guerra corta comércio, água e circulação pelo rio.'
+    },
+    'Maelis das Contagens':{
+      'jesed-chapter-gs-05':'Não participa da missão secreta de Alyra; sua função sobre registros e contagens contrasta com a operação deliberadamente escondida dos mecanismos oficiais de Kaendar.',
+      'jesed-chapter-gs-14':'Registra perdas, água e distribuição durante a crise, recebe de Kaelina a tarefa de preparar mensagens e ajuda a transformar decisões emergenciais em ordens verificáveis.',
+      'jesed-chapter-gs-18':'Seus registros e os arquivos de Kaendar servem à investigação de Kaelina sobre Orionus, Daryon e as contradições deixadas na versão oficial da morte do antigo soberano.'
+    },
+    'Harrev':{
+      'jesed-chapter-gs-21':'Não aparece vivo; sua morte em Nhar-Veyr permanece entre as perdas que deixaram Kaelina ferida, capturada e sem seus guardas mais antigos.',
+      'jesed-chapter-gs-22':'É lembrado como um dos homens mortos protegendo Kaelina antes de ela ser levada como refém na marcha contra Kaendar.'
+    },
+    'Odris':{
+      'jesed-chapter-gs-21':'Não aparece vivo; sua morte em Nhar-Veyr permanece ligada à captura de Kaelina e ao preço de sua investigação solitária.',
+      'jesed-chapter-gs-22':'É lembrado ao lado de Harrev como guarda que morreu tentando impedir que Kaelina fosse capturada pelos Tondrar.'
+    },
+    'Seyra Vendrar':{
+      'jesed-chapter-gs-11':'Participa da leitura política da proposta de Rendar entre os Vendrar, avaliando o custo de trocar a posição de comerciantes de fogo pela de integrantes de uma guerra aberta.',
+      'jesed-chapter-gs-26':'Não aparece no duelo; sua posição mais calculada contrasta com a decisão de Tavra de abandonar o objetivo militar para caçar Alyra dentro de Kaendar.',
+      'jesed-chapter-gs-29':'Permanece entre os Vendrar sobreviventes em Varkhama, recebendo as consequências políticas e materiais da morte de Tavra e do fracasso da guerra em controlar Kaendar.'
+    },
+    'Eshvar':{
+      'jesed-chapter-gs-03':'Controla a passagem pela Boca Seca e permite a entrada de Rendar em Khar-Tondr sob vigilância, representando a rigidez defensiva dos Tondrar diante de um comerciante Fendelar.'
+    },
+    'Maedra':{
+      'jesed-chapter-gs-03':'Coordena os tambores e sinais coletivos de Khar-Tondr durante a chegada de Rendar, usando o ritual sonoro para organizar o povo e reforçar a presença política da fortaleza.'
+    },
+    'Capitão Lirron':{
+      'jesed-chapter-gs-01':'Não aparece vivo; é lembrado como o amigo de Orionus executado por matar um emissário sob trégua, exemplo de que a Lei do Portão deveria alcançar até os aliados do soberano.',
+      'jesed-chapter-gs-29':'Seu precedente é retomado durante o julgamento de Alyra: Kaelina confronta a diferença entre a lei que condenou Lirron e a decisão de impedir que a irmã seja executada.'
+    }
+  };
+  for(const [name,entries] of Object.entries(patch))Object.assign(T[name]||(T[name]={}),entries);
+})();

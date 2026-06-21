@@ -30,6 +30,7 @@
       if(veil){veil.classList.remove('active');void veil.offsetWidth;veil.classList.add('active');}
     }
     $('#main').innerHTML=page();
+    if(base==='mapa') requestAnimationFrame(()=>R.mountMap?.());
     if(base==='linha'&&!id){
       requestAnimationFrame(()=>document.querySelector('.rdc-timeline-card.selected')?.scrollIntoView({block:'center',behavior:(settings&&settings.motion)?'smooth':'auto'}));
     }else{

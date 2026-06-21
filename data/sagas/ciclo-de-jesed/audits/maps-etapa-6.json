@@ -1,0 +1,103 @@
+{
+  "stage": "Etapa 6",
+  "version": "0.9.6",
+  "date": "2026-06-21",
+  "summary": "Mapas interactivos dos dois livros, navegação superior entre capítulos e revisão dos personagens em foco.",
+  "ruinas-dos-ceus": {
+    "maps": 2,
+    "places": 17,
+    "pins": 17,
+    "periods": [
+      "Etérea — Capítulos 1 a 9",
+      "A Superfície — Capítulos 10 a 24"
+    ],
+    "contextLinesPerMap": 4,
+    "features": [
+      "zoom",
+      "pan",
+      "centralização",
+      "pins",
+      "nomes",
+      "fichas rápidas",
+      "abertura das fichas",
+      "responsividade"
+    ]
+  },
+  "guerras-de-sangue": {
+    "maps": 1,
+    "places": 23,
+    "pins": 23,
+    "routesAsPlaces": 5,
+    "strategicCategories": 7,
+    "strategicCategoryRule": "Exibir apenas categorias com duas ou mais informações.",
+    "features": [
+      "zoom",
+      "pan",
+      "centralização",
+      "pins",
+      "nomes",
+      "fichas rápidas",
+      "abertura das fichas",
+      "responsividade",
+      "camada de rotas",
+      "leitura estratégica"
+    ]
+  },
+  "chapterNavigation": {
+    "guerras-de-sangue": "Anterior e próximo no topo da ficha de capítulo.",
+    "ruinas-dos-ceus": "Anterior e próximo no topo da ficha de capítulo."
+  },
+  "focusedCharacters": {
+    "rule": "Somente personagens principais, sem estado, com descrição de no máximo quatro palavras.",
+    "guerras-de-sangue": 5,
+    "ruinas-dos-ceus": 5
+  },
+  "assetsAdded": [
+    "assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp",
+    "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp",
+    "assets/maps/ruinas-dos-ceus/mapa-combinado.webp",
+    "assets/maps/guerras-de-sangue/mapa-geral.webp",
+    "assets/maps/guerras-de-sangue/mapa-geral.webp"
+  ],
+  "requiredFiles": [
+    "app/shared/maps/interactive-map.css",
+    "app/shared/maps/interactive-map.js",
+    "data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/maps.js",
+    "data/sagas/ciclo-de-jesed/books/guerras-de-sangue/maps.js",
+    "assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp",
+    "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp",
+    "assets/maps/guerras-de-sangue/mapa-geral.webp"
+  ],
+  "preservation": {
+    "placeIds": true,
+    "routeIds": true,
+    "legacyRoutes": true,
+    "canonicalContentChanged": false,
+    "githubChanged": false
+  },
+  "browserTests": {
+    "ruinasEtereaPins": 11,
+    "ruinasSuperficiePins": 6,
+    "guerrasPins": 23,
+    "guerrasStrategicCards": 7,
+    "guerrasRouteLines": 5,
+    "mapInstancesActive": true,
+    "runtimeExceptions": 0,
+    "mobileNoHorizontalOverflow": true,
+    "focusedCharacters": {
+      "ruinas": 5,
+      "guerras": 5,
+      "statesHidden": true,
+      "maxDescriptionWords": 4
+    }
+  },
+  "screenshots": [
+    "docs/screenshots/etapa-6/ruinas-mapa-eterea.png",
+    "docs/screenshots/etapa-6/ruinas-mapa-superficie.png",
+    "docs/screenshots/etapa-6/guerras-mapa.png",
+    "docs/screenshots/etapa-6/ruinas-capitulo-navegacao.png",
+    "docs/screenshots/etapa-6/guerras-capitulo-navegacao.png",
+    "docs/screenshots/etapa-6/ruinas-mapa-mobile.png",
+    "docs/screenshots/etapa-6/guerras-mapa-mobile.png"
+  ]
+}

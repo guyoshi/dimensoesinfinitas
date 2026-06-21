@@ -65,7 +65,8 @@
     blade: '<path d="M18 3l3 3-11 11-4 1 1-4z"/><path d="M5 17l2 2-3 3-2-2z"/>',
     filter: '<path d="M4 5h16l-6 7v6l-4 2v-8z"/>',
     chevron: '<path d="M8 10l4 4 4-4"/>',
-    location: '<path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12z"/><circle cx="12" cy="9" r="2"/>'
+    location: '<path d="M12 21s6-5.2 6-12a6 6 0 1 0-12 0c0 6.8 6 12 6 12z"/><circle cx="12" cy="9" r="2"/>',
+    labels: '<path d="M4 6h16M4 12h10M4 18h13"/><circle cx="19" cy="12" r="2"/>'
   };
   const icon = (name, cls = "") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${iconPaths[name] || iconPaths.scroll}</svg>`;
 
@@ -77,8 +78,10 @@
   const state = {
     route: "portal",
     sidebarCollapsed: storage.get("di-sidebar-collapsed") === "1",
-    viewMode: storage.get("di-character-view") || "grid",
+    viewMode: window.DI_CHARACTER_BROWSER?.readView("guerras-de-sangue", "di-character-view") || storage.get("di-character-view") || "grid",
     characterTab: "overview",
+    characterQuery: "",
+    characterFilter: "all",
     searchMode: "titles",
     relationshipFilter: "all",
     chapterQuery: "",
@@ -276,38 +279,46 @@
   function miniEntity(title, subtitle, iconName, route, stateText = "", image = null) {
     return `<button class="mini-list-item" data-route="${escapeHtml(route)}">
       <span class="mini-icon ${image ? "has-image" : ""}">${image ? `<img src="${escapeHtml(image)}" alt="" loading="lazy">` : icon(iconName)}</span>
-      <span class="mini-copy"><strong>${escapeHtml(title)}</strong><small>${escapeHtml(subtitle || "Informação não registada")}</small></span>
+      <span class="mini-copy"><strong>${escapeHtml(title)}</strong><small>${escapeHtml(subtitle || "Informação não registrada")}</small></span>
       ${stateText ? `<span class="mini-state">${escapeHtml(stateText)}</span>` : ""}
     </button>`;
   }
 
   function renderDashboard() {
     const quick = [
-      ["characters", "people", "Personagens", "Quem são e onde ficaram"],
-      ["relationships", "network", "Relações", "Vínculos e evolução"],
-      ["mysteries", "question", "Mistérios", "Pistas e revelações"],
-      ["timeline", "timeline", "Linha do Tempo", "Eventos e antecedentes"],
-      ["map", "map", "Mapa", "Jesed em Guerras de Sangue"]
+      ["characters", "people", "Personagens", "Vozes, escolhas e trajetórias"],
+      ["relationships", "network", "Relações", "Alianças, afetos e rupturas"],
+      ["timeline", "timeline", "Linha do Tempo", "Antecedentes e guerra"],
+      ["chapters", "chapter", "Capítulos", `${D.chapters.length} capítulos escritos`]
     ];
+    const focus=[
+      ["jesed-character-kaelina-polar","Paz sob responsabilidade"],
+      ["jesed-character-alyra-polar","Orgulho, poder e domínio"],
+      ["jesed-character-rendar","Caçador movido por vingança"],
+      ["jesed-character-daryon-vess","Estratégia, segredo e manipulação"],
+      ["jesed-character-nynestra-buldar","Colheita, cálculo e comando"]
+    ].map(([id,description])=>({character:getCharacter(id),description})).filter(item=>item.character);
+    const selectedPlaces=["jesed-place-kaendar","jesed-place-khar-tondr","jesed-place-nyn-harad","jesed-place-velarim","jesed-place-varkhama","jesed-place-margem-zirrios"].map(getPlace).filter(Boolean);
+    const strategic=(D.maps?.main?.strategicCategories||[]).filter(category=>(category.items||[]).length>=2);
+    const homePlaceCard=place=>`<article class="home-place-card" data-route="place/${escapeHtml(place.slug)}" tabindex="0" role="link"><div class="home-place-image ${place.image?'has-image':''}">${place.image?`<img src="${escapeHtml(place.image)}" alt="${escapeHtml(place.name)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="home-place-fallback" hidden>${icon('pin')}</span>`:`<span class="home-place-fallback">${icon('pin')}</span>`}</div><div class="home-place-copy"><p class="eyebrow">${escapeHtml(place.type||'Lugar')}</p><h3>${escapeHtml(place.name)}</h3><p>${escapeHtml(place.region||place.summary)}</p></div><span class="home-card-link">Abrir ficha ${icon('arrow')}</span></article>`;
     refs.main.innerHTML = `<div class="page-enter">
       ${canonNotice()}
-      <section class="hero-map-card">
-        <img src="assets/mapa-guerras-de-sangue.webp" alt="Mapa de Jesed na época de Guerras de Sangue">
+      <section class="hero-map-card home-guide-hero">
+        <img src="assets/maps/guerras-de-sangue/mapa-geral.webp" alt="Mapa de Jesed na época de Guerras de Sangue">
         <div class="hero-map-content">
-          <p class="eyebrow">Ciclo de Jesed · Guia do livro</p>
-          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.png" alt="Guerras de Sangue">
-          <p>Um arquivo cartográfico de pessoas, territórios, segredos e consequências, limitado aos capítulos realmente escritos.</p>
+          <p class="eyebrow">Ciclo de Jesed — Guia do Livro</p>
+          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.webp" alt="Guerras de Sangue">
+          <p>Um guia cartográfico de pessoas, clãs, territórios, segredos e consequências.</p>
           <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button><button class="secondary-button contemplate-button" data-contemplative="guerras">${icon("eye")} Contemplar este mundo</button></div>
         </div>
       </section>
-      <section class="quick-grid">${quick.map(item => `<button class="quick-card" data-route="${item[0]}"><span class="quick-icon">${icon(item[1])}</span><strong>${item[2]}</strong><small>${item[3]}</small></button>`).join("")}</section>
+      <section class="home-strategy-strip" aria-label="Leitura estratégica do mapa"><div><p class="eyebrow">Leitura política do território</p><strong>Informações estratégicas</strong></div><div class="home-strategy-links">${strategic.map(category=>`<button data-route="map"><span>${escapeHtml(category.label)}</span><small>${category.items.length} informações</small></button>`).join("")}</div></section>
+      <section class="quick-grid home-guide-grid">${quick.map(item => `<button class="quick-card home-guide-card" data-route="${item[0]}"><span class="quick-icon">${icon(item[1])}</span><strong>${item[2]}</strong><small>${item[3]}</small></button>`).join("")}</section>
       <section class="metrics-grid">
         ${[[D.characters.length,"personagens","characters"],[D.clans.length,"clãs","clans"],[D.places.length,"lugares","places"],[D.chapters.length,"capítulos escritos","chapters"],[timelineEntries().length,"eventos na linha do tempo","timeline"],[D.mysteries.length,"mistérios","mysteries"]].map(item => `<article class="metric-card" data-route="${item[2]}"><strong>${item[0]}</strong><span>${item[1]}</span></article>`).join("")}
       </section>
-      <section class="dashboard-columns">
-        <article class="dark-panel section-card"><div class="section-heading"><div><h2>Personagens em foco</h2><p>Estado no último ponto realmente escrito.</p></div><button class="text-button" data-route="characters">Ver todos</button></div><div class="mini-list">${D.characters.filter(c => c.importance === "Principal").slice(0, 5).map(c => miniEntity(c.name, c.alias, "person", `character/${c.slug}`, c.status, c.image)).join("")}</div></article>
-        <article class="dark-panel section-card"><div class="section-heading"><div><h2>Últimos capítulos</h2><p>Continuação directa da escrita actual.</p></div><button class="text-button" data-route="chapters">Ver todos</button></div><div class="mini-list">${D.chapters.slice(-5).reverse().map(ch => miniEntity(`Capítulo ${ch.number} — ${ch.title}`, ch.summary, "chapter", `chapter/${ch.id}`, ch.status)).join("")}</div></article>
-      </section>
+      <section class="dark-panel section-card home-focus-section"><div class="section-heading"><div><p class="eyebrow">Pessoas no centro da guerra</p><h2>Personagens em foco</h2><p>As figuras principais que sustentam, provocam ou tentam encerrar o conflito.</p></div><button class="text-button" data-route="characters">Ver todos</button></div><div class="home-focus-grid">${focus.map(({character,description})=>`<button class="home-focus-card" data-route="character/${character.slug}"><span class="home-focus-avatar ${character.image?'has-image':''}">${character.image?`<img src="${escapeHtml(character.image)}" alt="Retrato de ${escapeHtml(character.name)}" loading="lazy">`:icon('person')}</span><span><strong>${escapeHtml(character.name)}</strong><small>${escapeHtml(description)}</small></span></button>`).join("")}</div></section>
+      <section class="home-places-section"><div class="section-heading"><div><p class="eyebrow">Território e poder</p><h2>Lugares</h2><p>Cidades, fortalezas e regiões que ajudam a compreender a guerra.</p></div><button class="text-button" data-route="places">Ver todos os lugares</button></div><div class="home-place-grid">${selectedPlaces.map(homePlaceCard).join("")}</div></section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed"},{label:"Início"}]);
   }
@@ -335,7 +346,7 @@
     const cover = book.cover ? `<img src="${book.cover}" alt="Capa de ${escapeHtml(book.name)}">` : icon(book.icon);
     if (book.id !== "guerras-de-sangue") {
       const externalLinks = { "ruinas-dos-ceus": "ruinas.html" };
-      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.png" };
+      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.webp" };
       const href = externalLinks[book.id];
       const logo = bookLogos[book.id];
       const titleHtml = logo ? `<img class="hero-logo" src="${logo}" alt="${escapeHtml(book.name)}">` : `<h2>${escapeHtml(book.name)}</h2>`;
@@ -356,20 +367,41 @@
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Livros",route:"books"},{label:book.name}]);
   }
 
+  function characterShortText(value, max = 178) {
+    return window.DI_CHARACTER_BROWSER?.shortText(value, max) || String(value || "");
+  }
+
+  function filteredCharacters() {
+    const query = state.characterQuery.trim();
+    return D.characters.filter(character => {
+      const clan = getClan(character.clanId);
+      const clanMatches = state.characterFilter === "all" || character.clanId === state.characterFilter;
+      const searchMatches = window.DI_CHARACTER_BROWSER?.matches(character, query, [clan?.name, character.importance])
+        ?? `${character.name} ${character.alias} ${character.summary} ${clan?.name || ""}`.toLocaleLowerCase("pt-BR").includes(query.toLocaleLowerCase("pt-BR"));
+      return clanMatches && searchMatches;
+    });
+  }
+
   function renderCharacters() {
+    const list = filteredCharacters();
     refs.main.innerHTML = `<div class="page-enter">
-      ${pageHeader("Pessoas", "Personagens", "Consulte aparência, trajectória, relações, localização e o último estado conhecido.")}
-      <div class="filter-toolbar"><button class="filter-chip active" data-char-filter="all">Todos</button>${D.clans.map(clan => `<button class="filter-chip" data-char-filter="${clan.id}">${escapeHtml(clan.name)}</button>`).join("")}<div class="view-switch"><button class="icon-button ${state.viewMode === "grid" ? "active" : ""}" data-view="grid" title="Cartões">${icon("image")}</button><button class="icon-button ${state.viewMode === "list" ? "active" : ""}" data-view="list" title="Lista">${icon("timeline")}</button></div></div>
-      <div id="characterList">${characterListHtml(D.characters)}</div>
+      ${pageHeader("Pessoas", "Personagens", "Figuras de clãs, alianças e rivalidades que atravessam a guerra e disputam memória, território e poder.")}
+      <div class="character-browser-toolbar guerras-character-toolbar">
+        <label class="character-browser-search"><span class="sr-only">Pesquisar personagens</span><input type="search" data-character-search autocomplete="off" placeholder="Pesquisar por nome, subtítulo, clã ou descrição…" value="${escapeHtml(state.characterQuery)}"><small class="character-browser-search-count">${list.length}/${D.characters.length}</small></label>
+        <div class="character-view-toggle" role="group" aria-label="Modo de visualização"><button class="character-view-button ${state.viewMode === "grid" ? "active" : ""}" data-character-view="grid" aria-pressed="${state.viewMode === "grid"}" title="Cartões grandes">${icon("image")}<span class="sr-only">Cartões grandes</span></button><button class="character-view-button ${state.viewMode === "list" ? "active" : ""}" data-character-view="list" aria-pressed="${state.viewMode === "list"}" title="Lista compacta">${icon("timeline")}<span class="sr-only">Lista compacta</span></button></div>
+      </div>
+      <div class="filter-toolbar character-clan-filters"><button class="filter-chip ${state.characterFilter === "all" ? "active" : ""}" data-char-filter="all">Todos</button>${D.clans.map(clan => `<button class="filter-chip ${state.characterFilter === clan.id ? "active" : ""}" data-char-filter="${clan.id}">${escapeHtml(clan.name)}</button>`).join("")}</div>
+      <div id="characterList">${characterListHtml(list)}</div>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Personagens"}]);
   }
 
   function characterListHtml(list) {
+    if (!list.length) return `<div class="character-browser-empty dark-panel"><h2>Nenhum personagem encontrado</h2><p>Tente outro nome, clã, função ou descrição.</p></div>`;
     if (state.viewMode === "list") {
-      return `<table class="entity-table"><thead><tr><th>Nome</th><th>Clã</th><th>Estado</th><th>Localização</th><th>Última aparição</th></tr></thead><tbody>${list.map(c => `<tr data-route="character/${c.slug}"><td data-label="Nome"><span class="table-person">${c.image ? `<img src="${c.image}" alt="">` : icon("person")}<strong>${escapeHtml(c.name)}</strong></span></td><td data-label="Clã">${escapeHtml(getClan(c.clanId)?.name || "—")}</td><td data-label="Estado">${escapeHtml(c.status)}</td><td data-label="Localização">${escapeHtml(getPlace(c.locationId)?.name || "Não registada")}</td><td data-label="Última aparição">${escapeHtml(c.lastSeen.chapter)}</td></tr>`).join("")}</tbody></table>`;
+      return `<div class="character-browser-list">${list.map(c => { const clan=getClan(c.clanId); return `<button class="character-browser-row guerras-character-row" data-route="character/${c.slug}"><span class="character-browser-row-media">${c.image ? `<img src="${escapeHtml(c.image)}" alt="Retrato de ${escapeHtml(c.name)}" loading="lazy">` : `<span class="character-browser-card-fallback">${icon("person")}</span>`}</span><span class="character-browser-row-name"><strong>${escapeHtml(c.name)}</strong><small>${escapeHtml(c.alias)}</small></span><span class="character-browser-row-description">${escapeHtml(characterShortText(c.summary, 150))}</span><span class="character-browser-row-meta">${escapeHtml(clan?.name || "Sem clã")} · ${(c.appearanceChapters || []).length} capítulos</span></button>`; }).join("")}</div>`;
     }
-    return `<section class="entity-grid character-grid">${list.map(c => `<article class="entity-card character-card" data-route="character/${c.slug}"><div class="character-card-image">${imageOrIcon(c.image, "person", c.name, "entity-avatar-image")}</div><div class="entity-card-body"><div class="entity-card-top"><div><h3>${escapeHtml(c.name)}</h3><span class="alias">${escapeHtml(c.alias)}</span></div></div><p>${escapeHtml(c.summary)}</p><div class="tag-row"><span class="tag">${escapeHtml(getClan(c.clanId)?.name || "Sem clã")}</span><span class="tag">${escapeHtml(c.status)}</span><span class="tag">${escapeHtml(getPlace(c.locationId)?.name || "Local desconhecido")}</span></div></div></article>`).join("")}</section>`;
+    return `<section class="character-browser-grid">${list.map(c => `<button class="character-browser-card guerras-character-card" data-route="character/${c.slug}"><span class="character-browser-card-media">${c.image ? `<img src="${escapeHtml(c.image)}" alt="Retrato de ${escapeHtml(c.name)}" loading="lazy">` : `<span class="character-browser-card-fallback">${icon("person")}</span>`}</span><span class="character-browser-card-copy"><h2>${escapeHtml(c.name)}</h2><small class="character-browser-subtitle">${escapeHtml(c.alias)}</small><span class="character-browser-description">${escapeHtml(characterShortText(c.summary))}</span></span></button>`).join("")}</section>`;
   }
 
   function renderCharacter(slug) {
@@ -382,10 +414,10 @@
       ${pageHeader("Personagem · Guerras de Sangue", character.name, character.alias, actions)}
       <section class="character-hero">
         <div class="character-portrait ${character.image ? "has-image" : ""}">${imageOrIcon(character.image, "person", character.name, "character-portrait-image")}</div>
-        <article class="parchment-panel character-summary"><p class="eyebrow">${escapeHtml(clan?.name || "Sem clã registado")}</p><h1>${escapeHtml(character.name)}</h1><span class="alias">${escapeHtml(character.alias)}</span><p>${escapeHtml(character.summary)}</p><div class="character-meta-grid"><div class="character-meta"><small>Estado</small><strong>${escapeHtml(character.status)}</strong></div><div class="character-meta"><small>Localização</small><strong>${escapeHtml(place?.name || "Não registada")}</strong></div><div class="character-meta"><small>Importância</small><strong>${escapeHtml(character.importance)}</strong></div><div class="character-meta"><small>Última aparição</small><strong>${escapeHtml(character.lastSeen.chapter)}</strong></div></div></article>
+        <article class="parchment-panel character-summary"><p class="eyebrow">${escapeHtml(clan?.name || "Sem clã registado")}</p><h1>${escapeHtml(character.name)}</h1><span class="alias">${escapeHtml(character.alias)}</span><p>${escapeHtml(character.summary)}</p><div class="character-meta-grid"><div class="character-meta"><small>Estado</small><strong>${escapeHtml(character.status)}</strong></div><div class="character-meta"><small>Localização</small><strong>${escapeHtml(place?.name || "Não registrada")}</strong></div><div class="character-meta"><small>Importância</small><strong>${escapeHtml(character.importance)}</strong></div><div class="character-meta"><small>Última aparição</small><strong>${escapeHtml(character.lastSeen.chapter)}</strong></div></div></article>
       </section>
-      <section class="parchment-panel leave-card"><div class="section-heading"><div><p class="eyebrow">Retomar a escrita</p><h2>Onde deixei ${escapeHtml(character.name)}?</h2></div></div><div class="leave-grid">${Object.entries({"Última aparição":character.lastSeen.chapter,"Localização":character.lastSeen.location,"Com quem estava":character.lastSeen.with,"Estado físico":character.lastSeen.physical,"Estado emocional":character.lastSeen.emotional,"Objectivo":character.lastSeen.objective,"Última decisão":character.lastSeen.decision,"Descoberta":character.lastSeen.discovered,"Risco actual":character.lastSeen.risk}).map(([key,value]) => `<div class="leave-item"><small>${key}</small><strong>${escapeHtml(value || "Informação ainda não registada")}</strong></div>`).join("")}</div></section>
-      <div class="tabs">${[["overview","Visão geral"],["trajectory","Trajectória"],["relations","Relações"],["knowledge","Conhecimento"],["destiny","Destino"]].map(tab => `<button class="tab-button ${state.characterTab === tab[0] ? "active" : ""}" data-character-tab="${tab[0]}" data-character-slug="${character.slug}">${tab[1]}</button>`).join("")}</div>
+      <section class="parchment-panel leave-card"><div class="section-heading"><div><p class="eyebrow">Retomar a escrita</p><h2>Onde deixei ${escapeHtml(character.name)}?</h2></div></div><div class="leave-grid">${Object.entries({"Última aparição":character.lastSeen.chapter,"Localização":character.lastSeen.location,"Com quem estava":character.lastSeen.with,"Estado físico":character.lastSeen.physical,"Estado emocional":character.lastSeen.emotional,"Objectivo":character.lastSeen.objective,"Última decisão":character.lastSeen.decision,"Descoberta":character.lastSeen.discovered,"Risco actual":character.lastSeen.risk}).map(([key,value]) => `<div class="leave-item"><small>${key}</small><strong>${escapeHtml(value || "Informação ainda não registrada")}</strong></div>`).join("")}</div></section>
+      <div class="tabs">${[["overview","Visão geral"],["trajectory","Trajetória"],["relations","Relações"],["knowledge","Conhecimento"],["destiny","Destino"]].map(tab => `<button class="tab-button ${state.characterTab === tab[0] ? "active" : ""}" data-character-tab="${tab[0]}" data-character-slug="${character.slug}">${tab[1]}</button>`).join("")}</div>
       <section class="dark-panel tab-panel">${characterTabHtml(character, state.characterTab)}</section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Personagens",route:"characters"},{label:character.name}]);
@@ -393,18 +425,21 @@
 
   function characterTabHtml(character, tab) {
     const relationships = D.relationships.filter(r => r.from === character.id || r.to === character.id);
-    if (tab === "overview") return `<div class="info-columns"><div class="info-box"><h3>Personalidade</h3>${character.personality.length ? `<ul>${character.personality.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : `<p class="empty-inline">Informação ainda não registada.</p>`}</div><div class="info-box"><h3>Modo de falar</h3><p>${escapeHtml(character.voice || "Informação ainda não registada.")}</p></div><div class="info-box wide-info"><h3>Descrição</h3><p>${linkifyText(character.summary)}</p></div><div class="info-box"><h3>Fontes</h3><ul>${character.sources.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul></div></div>`;
+    if (tab === "overview") {
+      const alternates = (character.alternateImages || []).length ? `<div class="info-box wide-info"><h3>Outras representações disponíveis</h3><div class="character-alternate-gallery">${character.alternateImages.map((src,index)=>`<figure><img src="${escapeHtml(src)}" alt="Representação alternativa ${index+1} de ${escapeHtml(character.name)}" loading="lazy"><figcaption>Imagem alternativa ${index+1}</figcaption></figure>`).join("")}</div></div>` : "";
+      return `<div class="info-columns"><div class="info-box"><h3>Personalidade</h3>${character.personality.length ? `<ul>${character.personality.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : `<p class="empty-inline">Informação ainda não registrada.</p>`}</div><div class="info-box"><h3>Modo de falar</h3><p>${escapeHtml(character.voice || "Informação ainda não registrada.")}</p></div><div class="info-box wide-info"><h3>Descrição</h3><p>${linkifyText(character.summary)}</p></div><div class="info-box"><h3>Fontes</h3><ul>${character.sources.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul></div>${alternates}</div>`;
+    }
     if (tab === "trajectory") {
       const chapters = character.appearanceChapters.map(getChapter).filter(Boolean);
       return chapters.length ? `<div class="timeline-list">${chapters.map(ch => {
         const companions = ch.characters.filter(id => id !== character.id).map(getCharacter).filter(Boolean).slice(0, 5);
         const chPlaces = ch.places.map(getPlace).filter(Boolean);
         const traj = window.GUERRAS_TRAJ && window.GUERRAS_TRAJ[character.name];
-        const eventText = (traj && traj[ch.id]) || ch.summary;
-        return `<article class="timeline-item" data-route="chapter/${ch.id}"><small>Capítulo ${ch.number}</small><h3>${escapeHtml(ch.title)}</h3><p>${escapeHtml(eventText)}</p><div class="tag-row">${chPlaces.map(p => `<span class="tag">${icon("pin")}${escapeHtml(p.name)}</span>`).join("")}${companions.map(c => `<span class="tag">${icon("person")}${escapeHtml(c.name)}</span>`).join("")}</div></article>`;
-      }).join("")}</div>` : `<p class="empty-inline">Trajectória ainda não registada.</p>`;
+        const eventText = (traj && traj[ch.id]) || "Trajetória específica ainda não registrada para este capítulo.";
+        return `<article class="timeline-item character-trajectory-card" tabindex="0" data-route="chapter/${ch.id}"><small>Capítulo ${ch.number}</small><h3>${escapeHtml(ch.title)}</h3><p>${escapeHtml(eventText)}</p><div class="tag-row">${chPlaces.map(p => `<span class="tag">${icon("pin")}${escapeHtml(p.name)}</span>`).join("")}${companions.map(c => `<span class="tag">${icon("person")}${escapeHtml(c.name)}</span>`).join("")}</div></article>`;
+      }).join("")}</div>` : `<p class="empty-inline">Trajetória ainda não registrada.</p>`;
     }
-    if (tab === "relations") return relationships.length ? `<div class="relationship-detail-list">${relationships.map(r => { const other = getCharacter(r.from === character.id ? r.to : r.from); return `<article class="relationship-detail-card"><button class="relationship-person" data-route="character/${other?.slug || ""}">${other?.image ? `<img src="${other.image}" alt="">` : icon("person")}<span><strong>${escapeHtml(other?.name || "Entidade não encontrada")}</strong><small>${escapeHtml(r.type)}</small></span></button><p><strong>Estado:</strong> ${escapeHtml(r.state)}</p><p>${escapeHtml(r.from === character.id ? r.fromView : r.toView)}</p><div class="tag-row">${r.evolution.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("")}</div></article>`; }).join("")}</div>` : `<p class="empty-inline">Nenhuma relação registada neste período.</p>`;
+    if (tab === "relations") return relationships.length ? `<div class="relationship-detail-list">${relationships.map(r => { const other = getCharacter(r.from === character.id ? r.to : r.from); return `<article class="relationship-detail-card"><button class="relationship-person" data-route="character/${other?.slug || ""}">${other?.image ? `<img src="${other.image}" alt="">` : icon("person")}<span><strong>${escapeHtml(other?.name || "Entidade não encontrada")}</strong><small>${escapeHtml(r.type)}</small></span></button><p><strong>Estado:</strong> ${escapeHtml(r.state)}</p><p>${escapeHtml(r.from === character.id ? r.fromView : r.toView)}</p><div class="tag-row">${r.evolution.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("")}</div></article>`; }).join("")}</div>` : `<p class="empty-inline">Nenhuma relação registrada neste período.</p>`;
     if (tab === "knowledge") return `<div class="info-columns">${[["O que sabe",character.knowledge.knows],["O que suspeita",character.knowledge.suspects],["Crenças erradas",character.knowledge.falseBeliefs],["O que desconhece",character.knowledge.unknown],["Segredos",character.knowledge.secrets]].map(([key, values]) => `<div class="info-box"><h3>${key}</h3>${values.length ? `<ul>${values.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul>` : `<p class="empty-inline">Nada registado.</p>`}</div>`).join("")}</div>`;
     return `<div class="info-columns"><div class="info-box"><h3>Destino escrito</h3><p>${escapeHtml(character.destiny.written)}</p></div><div class="info-box"><h3>Estado</h3><p>${escapeHtml(character.destiny.state)}</p></div><div class="info-box"><h3>Planeado</h3><p>${escapeHtml(character.destiny.planned)}</p></div></div>`;
   }
@@ -428,23 +463,24 @@
     const findNode = id => nodes.find(node => node.c.id === id);
     refs.main.innerHTML = `<div class="page-enter">
       ${pageHeader("Pessoas", "Mapa de relações", "Filtros activos alteram tanto as ligações quanto a lista. Clique em qualquer pessoa para abrir a ficha.")}
+      <div class="social-legend" aria-label="Legenda dos tipos de relação">${[["family","Família"],["influence","Influência"],["alliance","Aliança"],["conflict","Conflito e vingança"],["other","Outras relações"]].map(item=>`<span class="social-legend-item" data-type="${item[0]}"><i class="social-legend-swatch"></i>${item[1]}</span>`).join("")}</div>
       <div class="filter-toolbar relationship-filter-toolbar">${[["all","Todas"],["family","Família"],["influence","Influência"],["alliance","Aliança"],["conflict","Conflito e vingança"]].map(item => `<button class="filter-chip ${state.relationshipFilter === item[0] ? "active" : ""}" data-rel-filter="${item[0]}">${item[1]}</button>`).join("")}</div>
       <section class="relationship-canvas ${nodes.length < 3 ? "few-nodes" : ""}">
         <svg class="relationship-svg" viewBox="0 0 100 100" preserveAspectRatio="none">${filtered.map(r => { const a = findNode(r.from), b = findNode(r.to); if (!a || !b) return ""; const category = relationshipCategory(r); return `<line class="${category}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}" data-relationship="${r.id}"/>`; }).join("")}</svg>
         ${nodes.map(node => `<button class="rel-node" style="left:${node.x}%;top:${node.y}%" data-route="character/${node.c.slug}">${node.c.image ? `<img src="${node.c.image}" alt="">` : ""}<strong>${escapeHtml(node.c.name)}</strong><small>${escapeHtml(node.c.alias)}</small></button>`).join("")}
       </section>
-      <section class="dark-panel section-card relationship-results"><div class="section-heading"><div><h2>${filtered.length} relações</h2><p>Perspectivas e evolução registadas.</p></div></div><div class="relationship-detail-list">${filtered.map(r => { const a = getCharacter(r.from), b = getCharacter(r.to); return `<article class="relationship-detail-card"><div class="relationship-pair"><button data-route="character/${a?.slug || ""}">${a?.image ? `<img src="${a.image}" alt="">` : icon("person")}<span>${escapeHtml(a?.name || "—")}</span></button><span>${icon("network")}</span><button data-route="character/${b?.slug || ""}">${b?.image ? `<img src="${b.image}" alt="">` : icon("person")}<span>${escapeHtml(b?.name || "—")}</span></button></div><h3>${escapeHtml(r.type)}</h3><p><strong>${escapeHtml(r.state)}</strong></p><div class="relation-perspectives"><p>${escapeHtml(r.fromView)}</p><p>${escapeHtml(r.toView)}</p></div><div class="tag-row">${r.evolution.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("")}</div></article>`; }).join("")}</div></section>
+      <section class="dark-panel section-card relationship-results"><div class="section-heading"><div><h2>${filtered.length} relações</h2><p>Perspectivas e evolução registradas.</p></div></div><div class="relationship-detail-list">${filtered.map(r => { const a = getCharacter(r.from), b = getCharacter(r.to); return `<article class="relationship-detail-card"><div class="relationship-pair"><button data-route="character/${a?.slug || ""}">${a?.image ? `<img src="${a.image}" alt="">` : icon("person")}<span>${escapeHtml(a?.name || "—")}</span></button><span>${icon("network")}</span><button data-route="character/${b?.slug || ""}">${b?.image ? `<img src="${b.image}" alt="">` : icon("person")}<span>${escapeHtml(b?.name || "—")}</span></button></div><h3>${escapeHtml(r.type)}</h3><p><strong>${escapeHtml(r.state)}</strong></p><div class="relation-perspectives"><p>${escapeHtml(r.fromView)}</p><p>${escapeHtml(r.toView)}</p></div><div class="tag-row">${r.evolution.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("")}</div></article>`; }).join("")}</div></section>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Relações"}]);
   }
 
   function renderFamilies() {
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Pessoas", "Famílias", "Núcleos familiares com membros clicáveis e impacto narrativo.")}<section class="entity-grid">${D.families.map(family => `<article class="entity-card family-card"><div class="entity-card-top"><span class="entity-avatar">${icon("family")}</span><div><h3>${escapeHtml(family.name)}</h3><span class="alias">${family.members.length} membros registados</span></div></div><p>${escapeHtml(family.summary)}</p><div class="portrait-member-row">${family.members.map(id => { const c = getCharacter(id); return c ? `<button data-route="character/${c.slug}" title="${escapeHtml(c.name)}">${c.image ? `<img src="${c.image}" alt="${escapeHtml(c.name)}">` : icon("person")}<span>${escapeHtml(c.shortName || c.name)}</span></button>` : ""; }).join("")}</div></article>`).join("")}</section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Pessoas", "Famílias", "Núcleos familiares com membros clicáveis, memória e impacto narrativo.")}<section class="social-entity-grid">${D.families.map(family => `<article class="social-entity-card"><div class="social-entity-image">${family.image?`<img src="${escapeHtml(family.image)}" alt="Imagem atmosférica de ${escapeHtml(family.name)}" loading="lazy">`:""}</div><div class="social-entity-copy"><span class="social-entity-type">${escapeHtml(family.subtitle||`${family.members.length} membros registados`)}</span><h2>${escapeHtml(family.name)}</h2><p>${escapeHtml(family.summary)}</p>${family.details?.length?`<div class="social-detail-grid">${family.details.map(item=>`<article class="social-detail-card"><p>${escapeHtml(item)}</p></article>`).join("")}</div>`:""}<div class="social-member-row">${family.members.map(id => { const c = getCharacter(id); return c ? `<button class="social-member" data-route="character/${c.slug}" title="${escapeHtml(c.name)}">${c.image ? `<img src="${c.image}" alt="${escapeHtml(c.name)}">` : icon("person")}<span>${escapeHtml(c.shortName || c.name)}</span></button>` : ""; }).join("")}</div></div></article>`).join("")}</section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Famílias"}]);
   }
 
   function renderOrganisations() {
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Pessoas", "Organizações", "Conselhos, grupos e alianças com membros interligados.")}<section class="entity-grid">${D.organisations.map(org => `<article class="entity-card organisation-card"><div class="entity-card-top"><span class="entity-avatar">${icon("banner")}</span><div><h3>${escapeHtml(org.name)}</h3><span class="alias">${escapeHtml(org.type)}</span></div></div><p>${escapeHtml(org.summary)}</p><div class="portrait-member-row">${org.members.slice(0, 12).map(id => { const c = getCharacter(id); return c ? `<button data-route="character/${c.slug}" title="${escapeHtml(c.name)}">${c.image ? `<img src="${c.image}" alt="${escapeHtml(c.name)}">` : icon("person")}<span>${escapeHtml(c.shortName || c.name)}</span></button>` : ""; }).join("")}</div></article>`).join("")}</section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Pessoas", "Organizações", "Conselhos, grupos e alianças com função, atuação e membros interligados.")}<section class="social-entity-grid">${D.organisations.map(org => `<article class="social-entity-card"><div class="social-entity-image">${org.image?`<img src="${escapeHtml(org.image)}" alt="Imagem atmosférica de ${escapeHtml(org.name)}" loading="lazy">`:""}</div><div class="social-entity-copy"><span class="social-entity-type">${escapeHtml(org.type)}</span><h2>${escapeHtml(org.name)}</h2><p>${escapeHtml(org.summary)}</p><dl>${org.function?`<div><dt>Função</dt><dd>${escapeHtml(org.function)}</dd></div>`:""}${org.activity?`<div><dt>Atuação</dt><dd>${escapeHtml(org.activity)}</dd></div>`:""}</dl>${org.themes?.length?`<div class="tag-row">${org.themes.map(item=>`<span class="tag">${escapeHtml(item)}</span>`).join("")}</div>`:""}<div class="social-member-row">${org.members.slice(0, 12).map(id => { const c = getCharacter(id); return c ? `<button class="social-member" data-route="character/${c.slug}" title="${escapeHtml(c.name)}">${c.image ? `<img src="${c.image}" alt="${escapeHtml(c.name)}">` : icon("person")}<span>${escapeHtml(c.shortName || c.name)}</span></button>` : ""; }).join("")}</div></div></article>`).join("")}</section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Organizações"}]);
   }
 
@@ -472,8 +508,10 @@
     const places = chapter.places.map(getPlace).filter(Boolean);
     const events = timelineEntries().filter(event => event.period === `Capítulo ${chapter.number}` || event.chapterId === chapter.id || (event.chapterIds || []).includes(chapter.id));
     const heroImage = chapter.image || characters.find(c => c.image)?.image;
+    const chapterNavigation = `<nav class="chapter-pagination chapter-pagination-top" aria-label="Navegação entre capítulos">${previous ? `<button class="secondary-button" data-route="chapter/${previous.id}">← Capítulo ${previous.number}<small>${escapeHtml(previous.title)}</small></button>` : `<button class="secondary-button" disabled>Primeiro capítulo</button>`}${next ? `<button class="primary-button" data-route="chapter/${next.id}">Capítulo ${next.number} →<small>${escapeHtml(next.title)}</small></button>` : `<button class="secondary-button" disabled>Último capítulo</button>`}</nav>`;
     refs.main.innerHTML = `<div class="page-enter chapter-detail-page">
       ${pageHeader(`Guerras de Sangue · Capítulo ${chapter.number}`, chapter.title, chapter.status, `<button class="secondary-button" data-copy-chapter="${chapter.id}">${icon("copy")} Copiar acontecimentos</button>`)}
+      ${chapterNavigation}
       <section class="chapter-hero-panel ${heroImage ? "has-art" : ""}">${heroImage ? `<img src="${escapeHtml(heroImage)}" alt="Ilustração associada ao capítulo">` : ""}<div><p class="eyebrow">Resumo rápido</p><h2>${escapeHtml(chapter.summary)}</h2><div class="tag-row"><span class="tag">${chapter.wordCount.toLocaleString("pt-BR")} palavras no manuscrito</span><span class="tag">${chapter.status}</span></div></div></section>
       <section class="chapter-layout">
         <article class="parchment-panel chapter-longform"><div class="section-heading"><div><p class="eyebrow">Acontecimentos do capítulo</p><h2>Tudo o que acontece</h2><p>Clique nos nomes destacados para abrir personagens, lugares, clãs, animais, plantas, alimentos ou conceitos.</p></div></div><div class="chapter-prose">${chapter.details.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</div></article>
@@ -483,7 +521,6 @@
           ${events.length ? `<article class="dark-panel section-card"><h3>Linha do Tempo</h3><div class="mini-list">${events.map(e => miniEntity(e.name, e.category, "timeline", `timeline/${e.slug}`, e.period)).join("")}</div></article>` : ""}
         </aside>
       </section>
-      <nav class="chapter-pagination">${previous ? `<button class="secondary-button" data-route="chapter/${previous.id}">← Capítulo ${previous.number}<small>${escapeHtml(previous.title)}</small></button>` : `<span></span>`}${next ? `<button class="primary-button" data-route="chapter/${next.id}">Capítulo ${next.number} →<small>${escapeHtml(next.title)}</small></button>` : `<button class="secondary-button" disabled>Último capítulo escrito</button>`}</nav>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Capítulos",route:"chapters"},{label:`Capítulo ${chapter.number}`}]);
   }
@@ -513,7 +550,7 @@
         const selected=state.timelineSelection===entry.slug;
         return `<article class="timeline-item timeline-entry-card ${selected?'selected':''}" data-route="timeline/${entry.slug}" data-timeline-card="${entry.slug}" tabindex="0" role="link" aria-label="Abrir ${escapeHtml(entry.name)}">
           <div class="timeline-card-heading"><time>${escapeHtml(entry.dateLabel || entry.period || "Data não estabelecida")}</time><span>${escapeHtml(entry.category || "Acontecimento")}</span></div>
-          <h3>${escapeHtml(entry.name)}</h3><p>${escapeHtml(entry.summary || "Descrição ainda não registada.")}</p>
+          <h3>${escapeHtml(entry.name)}</h3><p>${escapeHtml(entry.summary || "Descrição ainda não registrada.")}</p>
           <div class="timeline-card-links">${timelineInlineLinks("Capítulos",chapters)}${timelineInlineLinks("Personagens",participants)}${timelineInlineLinks("Lugares",places,"Sem lugar determinado")}</div>
         </article>`;
       }).join("")}</section></div>`;
@@ -535,7 +572,7 @@
       ${pageHeader("Linha do Tempo",entry.name,entry.dateLabel||entry.period||"Data não estabelecida")}
       <section class="timeline-detail-grid"><article class="parchment-panel timeline-narrative">
         <p class="eyebrow">${escapeHtml(entry.category||"Acontecimento")}</p>
-        <p class="timeline-lead">${linkifyText(entry.summary||"Descrição ainda não registada.")}</p>
+        <p class="timeline-lead">${linkifyText(entry.summary||"Descrição ainda não registrada.")}</p>
         ${entry.context?`<h2>Contexto</h2><p>${linkifyText(entry.context)}</p>`:""}
         ${entry.cause?`<h2>Causa</h2><p>${linkifyText(entry.cause)}</p>`:""}
         ${consequences.length?`<h2>Consequências</h2><ul class="timeline-consequence-list">${consequences.map(item=>`<li>${linkifyText(item)}</li>`).join("")}</ul>`:""}
@@ -579,7 +616,7 @@
 
   function clanSectionHtml(clan, index) {
     const section = clan.sections[Number(index)] || clan.sections[0];
-    if (!section) return `<p class="empty-inline">Informação ainda não registada.</p>`;
+    if (!section) return `<p class="empty-inline">Informação ainda não registrada.</p>`;
     return `<div class="clan-section-content"><p class="eyebrow">${escapeHtml(section.number)}</p><h2>${escapeHtml(section.title)}</h2>${section.paragraphs.map(paragraph => `<p>${linkifyText(paragraph)}</p>`).join("")}</div>`;
   }
 
@@ -595,7 +632,7 @@
 
   function placeCharacterCards(place) {
     const ids = [...new Set(place.characterIds || [])];
-    if (!ids.length) return `<p class="empty-inline">Nenhum personagem tem uma cena direta registada neste lugar.</p>`;
+    if (!ids.length) return `<p class="empty-inline">Nenhum personagem tem uma cena direta registrada neste lugar.</p>`;
     return `<div class="place-character-grid">${ids.map(id => {
       const character = getCharacter(id);
       if (!character) return "";
@@ -655,31 +692,56 @@
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Lugares",route:"places"},{label:place.name}]);
   }
 
+  const mapControl = (action,label,iconName) => `<button type="button" data-di-map-action="${action}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}">${icon(iconName)}</button>`;
+
+  function warMapPin(place) {
+    const point=place.map;
+    if(!point) return "";
+    return `<button class="di-map-pin" style="left:${point.x}%;top:${point.y}%" data-di-map-pin="${escapeHtml(place.id)}" data-map-x="${point.x}" data-map-y="${point.y}" data-pin-kind="${escapeHtml(point.kind || "place")}" data-major="${point.major ? "true" : "false"}" aria-label="Abrir ficha rápida de ${escapeHtml(place.name)}"><span class="di-map-pin-marker" aria-hidden="true"></span><span class="di-map-pin-label">${escapeHtml(place.name)}</span></button>`;
+  }
+
+  function mountWarMap() {
+    const map=D.maps?.main;
+    const root=document.getElementById("guerrasInteractiveMap");
+    if(!root || !map || !window.DIMaps) return;
+    window.DIMaps.mount({
+      root,
+      key:"guerrasInteractiveMap",
+      initialZoom:1,
+      minZoom:.72,
+      maxZoom:3.25,
+      getItem:id=>D.places.find(place=>place.id===id),
+      renderPopup:place=>{
+        const clan=getClan(place.clanId);
+        return `<p class="eyebrow">${escapeHtml(place.type || "Lugar")}</p><h2>${escapeHtml(place.name)}</h2><p>${escapeHtml(place.summary)}</p><div class="di-map-popup-facts"><div><small>Região</small><strong>${escapeHtml(place.region || "Não estabelecida")}</strong></div>${place.population?.label ? `<div><small>População</small><strong>${escapeHtml(place.population.label)}</strong></div>` : `<div><small>Clã associado</small><strong>${escapeHtml(clan?.name || "Nenhum")}</strong></div>`}</div><div class="di-map-popup-actions"><button class="primary-button" data-route="place/${place.slug}">Abrir ficha</button></div>`;
+      }
+    });
+  }
+
   function renderMap() {
-    const places = D.places.filter(place => place.x != null && place.y != null);
-    refs.main.innerHTML = `<div class="page-enter map-page">${pageHeader("Mapa temporal · Livro 2", "Jesed em Guerras de Sangue", "Marcadores ajustados sobre a posição visual das cidades e regiões. Arraste para mover e use a roda do rato para aproximar.")}<section class="map-shell"><div class="map-toolbar"><button class="icon-button" data-map-action="zoom-in" title="Aproximar">${icon("zoomin")}</button><button class="icon-button" data-map-action="zoom-out" title="Afastar">${icon("zoomout")}</button><button class="icon-button" data-map-action="center" title="Centralizar">${icon("center")}</button><button class="icon-button" data-map-action="fullscreen" title="Tela inteira">${icon("fullscreen")}</button><span class="map-helper">Arraste o mapa · clique num marcador</span></div><div id="mapViewport" class="map-viewport"><div id="mapStage" class="map-stage"><img src="assets/mapa-guerras-de-sangue.webp" alt="Mapa de Jesed na época de Guerras de Sangue" draggable="false">${places.map(place => `<button class="map-pin" style="left:${place.x}%;top:${place.y}%" data-map-place="${place.slug}" aria-label="Abrir ${escapeHtml(place.name)}"><span class="pin-icon" aria-hidden="true"></span><span class="map-pin-label">${escapeHtml(place.name)}</span></button>`).join("")}</div><div id="mapPopupHost"></div></div><div class="book-slider"><button class="book-step" disabled><small>Livro 1</small><strong>Ruínas dos Céus</strong></button><button class="book-step active" data-route="map"><small>Livro 2</small><strong>Guerras de Sangue</strong></button><button class="book-step" disabled><small>Livro 3</small><strong>Dinastia Polar</strong></button><button class="book-step" disabled><small>Livro 4</small><strong>Herdeiros das Cinzas</strong></button><button class="book-step" disabled><small>Livro 5</small><strong>Coração de Poeira</strong></button></div></section></div>`;
+    const map=D.maps?.main;
+    if(!map){refs.main.innerHTML=`<div class="page-enter">${pageHeader("Mapa temporal · Livro 2","Jesed em Guerras de Sangue","Os dados cartográficos ainda não foram carregados.")}</div>`;return;}
+    const places=map.placeIds.map(id=>D.places.find(place=>place.id===id)).filter(Boolean);
+    const strategic=(map.strategicCategories || []).filter(category=>(category.items || []).length>=2);
+    const routes=(map.routeLines || []).map(route=>`<polyline class="${route.kind === "water" ? "water-route" : route.kind === "military" ? "military-route" : "land-route"}" points="${escapeHtml(route.points)}" aria-hidden="true"></polyline>`).join("");
+    const strategyHtml=strategic.map(category=>`<article class="di-map-strategy-card"><h3>${escapeHtml(category.label)}</h3><div class="di-map-strategy-list">${category.items.map(item=>`<div class="di-map-strategy-item"><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(item.description)}</small><div class="di-map-strategy-places">${(item.placeIds || []).map(id=>{const place=D.places.find(candidate=>candidate.id===id);return place?`<button type="button" data-di-global-map-focus="${escapeHtml(place.id)}" data-di-map-root="guerrasInteractiveMap">${escapeHtml(place.name)}</button>`:"";}).join("")}</div></div>`).join("")}</div></article>`).join("");
+    refs.main.innerHTML=`<div class="page-enter map-page">${pageHeader("Mapa temporal · Livro 2",map.title,"Todos os lugares, rotas e regiões do livro. Arraste para mover, use os controles para ampliar e selecione um marcador para abrir a ficha.")}
+      <section class="di-map-section guerras-map-section" data-di-map-fullscreen>
+        <div id="guerrasInteractiveMap" class="di-map-shell guerras-interactive-map" style="--di-map-ratio:${escapeHtml(map.ratio)};--di-map-accent:#8d4939">
+          <div class="di-map-toolbar" aria-label="Controles do mapa">${mapControl("zoom-in","Aproximar","zoomin")}${mapControl("zoom-out","Afastar","zoomout")}${mapControl("center","Centralizar","center")}${mapControl("labels","Mostrar ou ocultar nomes","labels")}${mapControl("fullscreen","Tela inteira","fullscreen")}</div>
+          <div class="di-map-context"><p>Mapa político e territorial</p><h2>${escapeHtml(map.title)}</h2><div class="di-map-context-list"><span>${places.length} lugares localizados</span><span>Cidades, regiões e passagens</span><span>Rotas preservadas como lugares</span></div></div>
+          <div class="di-map-viewport" data-di-map-viewport tabindex="0" aria-label="Mapa interativo de Jesed em Guerras de Sangue. Arraste para deslocar e use os controles para ampliar.">
+            <div class="di-map-stage" data-di-map-stage><img src="${escapeHtml(map.image)}" alt="Mapa de Jesed na época de Guerras de Sangue" draggable="false"><svg class="di-map-route-layer" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${routes}</svg>${places.map(warMapPin).join("")}</div>
+            <div data-di-map-popup-host></div>
+          </div>
+          <div class="di-map-helper">Arraste para deslocar · use a roda ou os botões para ampliar · selecione um marcador</div>
+        </div>
+        <article class="parchment-panel map-place-directory"><div class="section-heading"><div><p class="eyebrow">${places.length} lugares localizados</p><h2>Índice cartográfico</h2></div></div><div class="map-place-links">${places.map(place=>`<button type="button" data-di-global-map-focus="${escapeHtml(place.id)}" data-di-map-root="guerrasInteractiveMap">${escapeHtml(place.name)}</button>`).join("")}</div></article>
+        ${strategic.length ? `<section class="di-map-strategy"><div class="section-heading"><div><p class="eyebrow">Leitura política do território</p><h2>Informações estratégicas</h2><p>São exibidas apenas categorias com duas ou mais informações relevantes.</p></div></div><div class="di-map-strategy-grid">${strategyHtml}</div></section>` : ""}
+        <div class="book-slider"><button class="book-step" onclick="location.href='ruinas.html#/mapa'"><small>Livro 1</small><strong>Ruínas dos Céus</strong></button><button class="book-step active" data-route="map"><small>Livro 2</small><strong>Guerras de Sangue</strong></button><button class="book-step" disabled><small>Livro 3</small><strong>Dinastia Polar</strong></button><button class="book-step" disabled><small>Livro 4</small><strong>Herdeiros das Cinzas</strong></button><button class="book-step" disabled><small>Livro 5</small><strong>Coração de Poeira</strong></button></div>
+      </section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Mapa"}]);
-    applyMapTransform();
-  }
-
-  function showMapPopup(slug, pin) {
-    const place = getPlace(slug);
-    if (!place) return;
-    const clan = getClan(place.clanId);
-    const host = $("#mapPopupHost");
-    const viewport = $("#mapViewport");
-    if (!host || !viewport) return;
-    const pinRect = pin.getBoundingClientRect();
-    const viewRect = viewport.getBoundingClientRect();
-    const left = Math.min(Math.max(pinRect.left - viewRect.left + 28, 14), Math.max(14, viewRect.width - 344));
-    const rawTop = pinRect.top - viewRect.top - 44;
-    const top = Math.min(Math.max(rawTop, 84), Math.max(84, viewRect.height - 286));
-    host.innerHTML = `<article class="map-popup" style="left:${left}px;top:${top}px"><button class="map-popup-close" data-map-close aria-label="Fechar">×</button><p class="eyebrow">${escapeHtml(place.type)}</p><h2>${escapeHtml(place.name)}</h2><p>${escapeHtml(place.summary)}</p><div class="map-popup-facts"><div><small>Região</small><strong>${escapeHtml(place.region || "Não estabelecida")}</strong></div>${place.population?.label ? `<div><small>População</small><strong>${escapeHtml(place.population.label)}</strong></div>` : `<div><small>Clã</small><strong>${escapeHtml(clan?.name || "Nenhum")}</strong></div>`}</div><button class="primary-button" data-route="place/${place.slug}">Ir para a página ${icon("arrow")}</button></article>`;
-  }
-
-  function applyMapTransform() {
-    const stage = $("#mapStage");
-    if (stage) stage.style.transform = `translate(${state.map.x}px, ${state.map.y}px) scale(${state.map.zoom})`;
+    requestAnimationFrame(mountWarMap);
   }
 
   function loreKindInfo(kind) {
@@ -852,7 +914,7 @@
   }
   function copyCharacter(id) {
     const c = getCharacter(id); if (!c) return;
-    copyText(`PERSONAGEM: ${c.name}\nSAGA: Ciclo de Jesed\nLIVRO: Guerras de Sangue\nESTADO: ${c.status}\nLOCALIZAÇÃO: ${getPlace(c.locationId)?.name || "não registada"}\nESTADO EMOCIONAL: ${c.lastSeen.emotional}\nOBJECTIVO: ${c.lastSeen.objective}\nÚLTIMA DECISÃO: ${c.lastSeen.decision}\nÚLTIMA APARIÇÃO: ${c.lastSeen.chapter}\nDESCRIÇÃO: ${c.summary}\nREGRA: não inventar campos ausentes e não usar resumos de capítulos futuros.`);
+    copyText(`PERSONAGEM: ${c.name}\nSAGA: Ciclo de Jesed\nLIVRO: Guerras de Sangue\nESTADO: ${c.status}\nLOCALIZAÇÃO: ${getPlace(c.locationId)?.name || "não registrada"}\nESTADO EMOCIONAL: ${c.lastSeen.emotional}\nOBJECTIVO: ${c.lastSeen.objective}\nÚLTIMA DECISÃO: ${c.lastSeen.decision}\nÚLTIMA APARIÇÃO: ${c.lastSeen.chapter}\nDESCRIÇÃO: ${c.summary}\nREGRA: não inventar campos ausentes e não usar resumos de capítulos futuros.`);
   }
   function copyChapter(id) {
     const ch = getChapter(id); if (!ch) return;
@@ -884,8 +946,8 @@
 
     const charCopy = event.target.closest("[data-copy-character]"); if (charCopy) copyCharacter(charCopy.dataset.copyCharacter);
     const chapterCopy = event.target.closest("[data-copy-chapter]"); if (chapterCopy) copyChapter(chapterCopy.dataset.copyChapter);
-    const view = event.target.closest("[data-view]"); if (view) { state.viewMode = view.dataset.view; storage.set("di-character-view", state.viewMode); renderCharacters(); }
-    const charFilter = event.target.closest("[data-char-filter]"); if (charFilter) { $$("[data-char-filter]").forEach(x => x.classList.toggle("active", x === charFilter)); const value = charFilter.dataset.charFilter; $("#characterList").innerHTML = characterListHtml(value === "all" ? D.characters : D.characters.filter(c => c.clanId === value)); }
+    const view = event.target.closest("[data-character-view]"); if (view) { state.viewMode = window.DI_CHARACTER_BROWSER?.writeView("guerras-de-sangue", view.dataset.characterView) || view.dataset.characterView; renderCharacters(); }
+    const charFilter = event.target.closest("[data-char-filter]"); if (charFilter) { state.characterFilter = charFilter.dataset.charFilter; renderCharacters(); }
     const tab = event.target.closest("[data-character-tab]"); if (tab) { state.characterTab = tab.dataset.characterTab; renderCharacter(tab.dataset.characterSlug); }
     const relFilter = event.target.closest("[data-rel-filter]"); if (relFilter) { state.relationshipFilter = relFilter.dataset.relFilter; renderRelationships(); }
     const loreFilter = event.target.closest("[data-lore-filter]"); if (loreFilter) { $$("[data-lore-filter]").forEach(x => x.classList.toggle("active", x === loreFilter)); const kind = loreFilter.dataset.loreKind, value = loreFilter.dataset.loreFilter; const items = value === "all" ? D.lore[kind] : D.lore[kind].filter(item => item.clans.includes(value)); $("#loreList").innerHTML = loreListHtml(kind, items); }
@@ -893,10 +955,6 @@
     const searchMode = event.target.closest("[data-search-mode]"); if (searchMode) { state.searchMode = searchMode.dataset.searchMode; $$("[data-search-mode]").forEach(x => x.classList.toggle("active", x === searchMode)); renderSearchResults(refs.searchInput.value); }
     const setting = event.target.closest("[data-setting]"); if (setting) { const key = setting.dataset.setting; state.settings[key] = !state.settings[key]; storage.set("di-guerras-customized","1"); persistSettings(); }
     const preset = event.target.closest("[data-preset]"); if (preset) { state.settings.preset = preset.dataset.preset; if(state.settings.preset === "custom"){storage.set("di-guerras-customized","1");persistSettings();} else {storage.set("di-guerras-customized","0"); if (state.settings.preset === "full") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:34}); if (state.settings.preset === "normal") Object.assign(state.settings,{particles:true,transitions:true,textures:true,blur:true,shadows:true,motion:true,particleAmount:22}); if (state.settings.preset === "performance") Object.assign(state.settings,{particles:false,transitions:false,textures:false,blur:false,shadows:false,motion:false}); persistSettings();} }
-    const mapAction = event.target.closest("[data-map-action]")?.dataset.mapAction;
-    if (mapAction) { if (mapAction === "zoom-in") state.map.zoom = Math.min(2.8, state.map.zoom + .2); if (mapAction === "zoom-out") state.map.zoom = Math.max(.65, state.map.zoom - .2); if (mapAction === "center") Object.assign(state.map,{zoom:1,x:0,y:0}); if (mapAction === "fullscreen") $(".map-page")?.requestFullscreen?.(); applyMapTransform(); }
-    const mapPlace = event.target.closest("[data-map-place]"); if (mapPlace) showMapPopup(mapPlace.dataset.mapPlace, mapPlace);
-    if (event.target.closest("[data-map-close]")) $("#mapPopupHost").innerHTML = "";
   });
 
   $("#sidebarToggle").addEventListener("click", () => {
@@ -908,6 +966,14 @@
   $("#searchButton").addEventListener("click", openSearch);
   refs.searchInput.addEventListener("input", () => renderSearchResults(refs.searchInput.value));
   refs.main.addEventListener("input", event => {
+    if (event.target.matches("[data-character-search]")) {
+      state.characterQuery = event.target.value;
+      const pos = event.target.selectionStart;
+      renderCharacters();
+      const el = $("[data-character-search]");
+      if (el) { el.focus(); el.setSelectionRange(pos, pos); }
+      return;
+    }
     if (event.target.matches("[data-chapter-search]")) {
       state.chapterQuery = event.target.value;
       const pos = event.target.selectionStart;
@@ -929,19 +995,6 @@
   refs.settingsContent.addEventListener("input", event => { if (event.target.matches("[data-setting-range]")) { state.settings[event.target.dataset.settingRange] = Number(event.target.value); storage.set("di-guerras-customized","1"); persistSettings(); } });
   document.addEventListener("keydown", event => { const card=event.target.closest?.("[data-timeline-card], .place-scene-card[data-route]"); if(card && (event.key==="Enter" || event.key===" ") && !event.target.closest("button,a")){event.preventDefault();routeTo(card.dataset.route);} if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); } if (event.key === "Escape") { closeSearch(); closeSettings(); closeSelector(); refs.sidebar.classList.remove("mobile-open"); } });
   window.addEventListener("hashchange", () => routeTo(location.hash.replace(/^#\//, "") || "dashboard", { replace: true }));
-
-  document.addEventListener("pointerdown", event => {
-    const stage = event.target.closest("#mapStage");
-    if (!stage || event.target.closest(".map-pin,.map-popup")) return;
-    state.map.dragging = true;
-    state.map.startX = event.clientX - state.map.x;
-    state.map.startY = event.clientY - state.map.y;
-    stage.classList.add("dragging");
-    stage.setPointerCapture?.(event.pointerId);
-  });
-  document.addEventListener("pointermove", event => { if (!state.map.dragging) return; state.map.x = event.clientX - state.map.startX; state.map.y = event.clientY - state.map.startY; applyMapTransform(); });
-  document.addEventListener("pointerup", () => { state.map.dragging = false; $("#mapStage")?.classList.remove("dragging"); });
-  document.addEventListener("wheel", event => { const viewport = event.target.closest("#mapViewport"); if (!viewport) return; event.preventDefault(); state.map.zoom = Math.max(.65, Math.min(2.8, state.map.zoom + (event.deltaY < 0 ? .12 : -.12))); applyMapTransform(); }, { passive: false });
 
   function initIcons() { $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); }); }
   function init() {

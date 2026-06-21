@@ -1,21 +1,28 @@
-(()=>{const R=window.RS,{D,E,S,REL,H,charImage,find,linkify}=R,P=R.pages;
-function memberChip(name){const c=find(D.characters,S(name));return c?`<button class="tag click" data-go="personagem/${S(name)}">${E(name)}</button>`:`<span class="tag">${E(name)}</span>`;}
+(()=>{const R=window.RS,{D,E,S,H,charImage,find,linkify}=R,P=R.pages,SOC=window.RUINAS_SOCIAL||{relationshipTypes:[],relationships:[],families:[],organisations:[]};
+const findCharacter=name=>find(D.characters,S(name));
+const characterButton=(name,cls='social-member')=>{const c=findCharacter(name),src=c?.image||charImage(name);return c?`<button class="${cls}" data-go="personagem/${S(name)}" title="Abrir ${E(name)}"><img src="${E(src)}" alt="${E(name)}" loading="lazy" onerror="this.hidden=true"><span>${E(c.n||name)}</span></button>`:`<span class="${cls}"><span>${E(name)}</span></span>`};
+const socialLegend=()=>`<div class="social-legend" aria-label="Legenda dos tipos de relação">${SOC.relationshipTypes.map(type=>`<span class="social-legend-item" data-type="${E(type.key)}" title="${E(type.description)}"><i class="social-legend-swatch"></i>${E(type.label)}</span>`).join('')}</div>`;
 P.relacoes=()=>{
-  const names=[...new Set(REL.flatMap(r=>[r[0],r[1]]))];
-  const nodes=names.map((name,i)=>{
-    const angle=(Math.PI*2*i/Math.max(names.length,1))-Math.PI/2;
-    return {name,x:50+Math.cos(angle)*35,y:50+Math.sin(angle)*34};
-  });
+  const relationships=SOC.relationships||[];
+  const names=[...new Set(relationships.flatMap(r=>[r.from,r.to]))];
+  const nodes=names.map((name,i)=>{const angle=(Math.PI*2*i/Math.max(names.length,1))-Math.PI/2;return{name,x:50+Math.cos(angle)*36,y:50+Math.sin(angle)*35}});
   const findNode=name=>nodes.find(n=>n.name===name);
-  return H('Pessoas','Mapa de relações','Vínculos centrais do Livro I. Clique em qualquer pessoa para abrir a ficha.')+
+  return H('Pessoas','Mapa de relações','Família, amizade, proteção, influência, lealdade e conflito no Livro I. As cores do mapa seguem a legenda.')+
+    socialLegend()+
     `<section class="relationship-canvas ${nodes.length<3?'few-nodes':''}">
-      <svg class="relationship-svg" viewBox="0 0 100 100" preserveAspectRatio="none">${REL.map(r=>{const a=findNode(r[0]),b=findNode(r[1]);return a&&b?`<line x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`:'';}).join('')}</svg>
-      ${nodes.map(n=>`<button class="rel-node" style="left:${n.x}%;top:${n.y}%" data-go="personagem/${S(n.name)}"><img src="${E(charImage(n.name))}" alt="" onerror="this.style.display='none'"><strong>${E(n.name)}</strong></button>`).join('')}
+      <svg class="relationship-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${relationships.map(rel=>{const a=findNode(rel.from),b=findNode(rel.to);return a&&b?`<line class="${E(rel.typeKey)}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/>`:''}).join('')}</svg>
+      ${nodes.map(n=>{const c=findCharacter(n.name);return`<button class="rel-node" style="left:${n.x}%;top:${n.y}%" data-go="personagem/${S(n.name)}"><img src="${E(c?.image||charImage(n.name))}" alt="" onerror="this.style.display='none'"><strong>${E(n.name)}</strong></button>`}).join('')}
     </section>
-    <section class="panel"><h2>${REL.length} relações</h2><div class="list">${REL.map(r=>`<div class="row click" data-go="personagem/${S(r[0])}"><strong>${E(r[0])} ↔ ${E(r[1])}</strong><p>${E(r[2])}</p></div>`).join('')}</div></section>`;
+    <section class="social-relations-grid">${relationships.map(rel=>`<article class="social-relation-card" data-type="${E(rel.typeKey)}" id="${E(rel.slug)}"><div class="social-relation-pair">${characterButton(rel.from,'social-relation-person')}<span class="social-relation-link" aria-hidden="true">⌁</span>${characterButton(rel.to,'social-relation-person')}</div><h3>${E(rel.type)}</h3><p class="social-relation-state">${E(rel.state)}</p><p>${E(rel.description)}</p><div class="social-perspectives"><p><strong>${E(rel.from)}:</strong> ${E(rel.fromView)}</p><p><strong>${E(rel.to)}:</strong> ${E(rel.toView)}</p></div><div class="social-evolution">${(rel.evolution||[]).map(item=>`<span>${E(item)}</span>`).join('')}</div></article>`).join('')}</section>`;
 };
-P.familias=()=>H('Pessoas','Famílias','Laços familiares.')+`<div class="grid"><article class="card"><h3>Família Amaréa</h3><p>O núcleo de Jokara: pais, irmã e o menino acolhido após a Queda.</p><div class="tags">${['Yoral','Mirel Amaréa','Jokara Amaréa','Nestira Amaréa','Loutes'].map(memberChip).join('')}</div></article><article class="card"><h3>A raiz futura</h3><p>Marv recebe o legado de Jokara e Nestira e leva os sobreviventes ao Vale.</p><div class="tags">${['Marv','Jokara Amaréa','Nestira Amaréa'].map(memberChip).join('')}</div></article></div>`;
-P.organizacoes=()=>H('Pessoas','Organizações','Instituições e grupos.')+`<div class="grid">${[['Oradores da Corrente','Guardam ritos, escrituras e segredos.',['Nestira Amaréa','Yrséa']],['Ecoantes','Aprendizes e intérpretes.',['Platisa']],['Tecelões de Vento','Constroem planadores e pontes.',['Efepar']],['Sobreviventes de Nadírion','Grupo formado após a Queda.',['Malthar','Gabasteres','Marv','Jokara Amaréa']]].map(x=>`<article class="card"><h3>${E(x[0])}</h3><p>${E(x[1])}</p><div class="tags">${x[2].map(memberChip).join('')}</div></article>`).join('')}</div>`;
+P.familias=()=>{
+  const family=SOC.families?.[0];if(!family)return H('Pessoas','Famílias','Nenhuma família registada neste período.');
+  return H('Pessoas','Família','Em Ruínas dos Céus, apenas o núcleo Amaréa possui uma ficha familiar própria.')+
+    `<section class="social-hero-card"><img src="${E(family.image)}" alt="Imagem atmosférica de ${E(family.name)}" loading="lazy"><div class="social-hero-copy"><p class="eyebrow">Família de Nivellia</p><h2>${E(family.name)}</h2><p>${E(family.summary)}</p><div class="social-member-row">${family.members.map(name=>characterButton(name)).join('')}</div></div></section>
+    <section class="social-detail-grid">${family.sections.map(section=>`<article class="social-detail-card"><h3>${E(section.title)}</h3><p>${E(section.text)}</p></article>`).join('')}</section>`;
+};
+P.organizacoes=()=>H('Pessoas','Organizações','Instituições, ofícios e grupos realmente presentes em Etérea ou formados depois da Queda.')+
+  `<section class="social-entity-grid">${SOC.organisations.map(org=>`<article class="social-entity-card"><div class="social-entity-image"><img src="${E(org.image)}" alt="Imagem atmosférica de ${E(org.name)}" loading="lazy"></div><div class="social-entity-copy"><span class="social-entity-type">${E(org.type)}</span><h2>${E(org.name)}</h2><p>${E(org.description)}</p><dl><div><dt>Função</dt><dd>${E(org.function)}</dd></div><div><dt>Atuação</dt><dd>${E(org.activity)}</dd></div></dl><div class="social-member-row">${org.members.map(name=>characterButton(name)).join('')}</div></div></article>`).join('')}</section>`;
 
 function timelineItems(){return [...(D.common?.entities?.timeline||D.timeline||[])].sort((a,b)=>(a.sortKey||0)-(b.sortKey||0));}
 const timelineRelationLabel=relation=>({ocorre:'Ocorre no Capítulo',citado:'Citado no Capítulo',recordado:'Recordado no Capítulo',revelado:'Revelado no Capítulo',investigado:'Investigado no Capítulo',consequencia:'Consequência narrada no Capítulo'})[relation]||'Relacionado ao Capítulo';

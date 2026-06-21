@@ -8,13 +8,19 @@ const canonicalAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ci
 const timelineAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/timeline-etapa-4.json'), 'utf8'));
 const placesAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/places-etapa-5.json'), 'utf8'));
 const visualAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json'), 'utf8'));
+const mapsAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/maps-etapa-6.json'), 'utf8'));
+const assetManifest = JSON.parse(fs.readFileSync(path.join(root, 'data/common/assets-manifest.json'), 'utf8'));
+const homeAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/home-assets-etapa-7.json'), 'utf8'));
+const charactersAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/characters-etapa-8.json'), 'utf8'));
+const imageRequirements = JSON.parse(fs.readFileSync(path.join(root, 'data/common/image-requirements-etapa-9.json'), 'utf8'));
+const socialAudit = JSON.parse(fs.readFileSync(path.join(root, 'data/sagas/ciclo-de-jesed/audits/social-etapa-9.json'), 'utf8'));
 const errors = [], warnings = [];
 function context(){const c={console,CustomEvent:function(t,i){this.type=t;this.detail=i?.detail},dispatchEvent:()=>{},document:{querySelector:()=>null}};c.window=c;vm.createContext(c);return c;}
 function load(c,files){for(const relative of files){const absolute=path.join(root,relative);if(!fs.existsSync(absolute)){errors.push(`Arquivo ausente: ${relative}`);continue;}vm.runInContext(fs.readFileSync(absolute,'utf8'),c,{filename:relative});}}
 const common='data/common/schema.js';
 const collections=['chapters','characters','timeline','relationships','places','mysteries','themes','fauna','flora','foods','concepts','gallery'];
-const guerrasFiles=[`${dataBase}/guerras-de-sangue/runtime.js`,common,`${dataBase}/guerras-de-sangue/book.js`,`${dataBase}/guerras-de-sangue/canonical.js`,...collections.map(x=>`${dataBase}/guerras-de-sangue/${x}.js`),`${dataBase}/guerras-de-sangue/index.js`];
-const ruinasFiles=[`${dataBase}/ruinas-dos-ceus/runtime.js`,`${dataBase}/ruinas-dos-ceus/trajectory.js`,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/base.js',common,`${dataBase}/ruinas-dos-ceus/book.js`,`${dataBase}/ruinas-dos-ceus/canonical.js`,...collections.map(x=>`${dataBase}/ruinas-dos-ceus/${x}.js`),`${dataBase}/ruinas-dos-ceus/index.js`];
+const guerrasFiles=[`${dataBase}/guerras-de-sangue/runtime.js`,`${dataBase}/guerras-de-sangue/trajectory.js`,common,`${dataBase}/guerras-de-sangue/book.js`,`${dataBase}/guerras-de-sangue/canonical.js`,`${dataBase}/guerras-de-sangue/social.js`,...collections.map(x=>`${dataBase}/guerras-de-sangue/${x}.js`),`${dataBase}/guerras-de-sangue/maps.js`,`${dataBase}/guerras-de-sangue/index.js`];
+const ruinasFiles=[`${dataBase}/ruinas-dos-ceus/runtime.js`,`${dataBase}/ruinas-dos-ceus/trajectory.js`,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/base.js',common,`${dataBase}/ruinas-dos-ceus/book.js`,`${dataBase}/ruinas-dos-ceus/canonical.js`,`${dataBase}/ruinas-dos-ceus/social.js`,...collections.map(x=>`${dataBase}/ruinas-dos-ceus/${x}.js`),`${dataBase}/ruinas-dos-ceus/maps.js`,`${dataBase}/ruinas-dos-ceus/index.js`];
 const gc=context(),rc=context();load(gc,guerrasFiles);load(rc,ruinasFiles);
 const models={'guerras-de-sangue':gc.DI_DATA?.common,'ruinas-dos-ceus':rc.RUINAS_DATA?.common};
 for(const [bookId,model] of Object.entries(models)){
@@ -101,12 +107,12 @@ const requiredVisualFiles=[
   'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js',
   'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css',
   'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js',
-  'assets/textures/temp/ruinas-sidebar-texture.svg',
-  'assets/textures/temp/guerras-sidebar-texture.svg',
-  'assets/contemplative/temp/eterea-sky-placeholder.svg',
-  'assets/contemplative/temp/kaendar-night-placeholder.svg',
-  'assets/clans/temp/fendelar-mark.svg',
-  'docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md',
+  'assets/atmosphere/ruinas/sidebar-sky-stone.webp',
+  'assets/atmosphere/guerras/sidebar-leather-map.webp',
+  'assets/atmosphere/ruinas/eterea-contemplative.webp',
+  'assets/atmosphere/guerras/kaendar-night.webp',
+  'assets/clans/temp/fendelar-mark.webp',
+  'docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md',
   ...visualAudit.screenshots
 ];
 for(const file of requiredVisualFiles)if(!fs.existsSync(path.join(root,file)))errors.push(`Etapa 5.5: arquivo obrigatório ausente (${file}).`);
@@ -143,9 +149,263 @@ if(!canonicalAudit?.architecture?.appPattern)errors.push('Relatório canônico d
 if(timelineAudit?.stage!==4)errors.push('Relatório da Linha do Tempo da Etapa 4 inválido.');
 if(placesAudit?.stage!=='Etapa 5')errors.push('Relatório de Lugares da Etapa 5 inválido.');
 if(visualAudit?.stage!=='Etapa 5.5')errors.push('Relatório visual da Etapa 5.5 inválido.');
+if(mapsAudit?.stage!=='Etapa 6')errors.push('Relatório de Mapas da Etapa 6 inválido.');
+if(homeAudit?.stage!=='Etapa 7')errors.push('Relatório de páginas iniciais e assets da Etapa 7 inválido.');
+if(charactersAudit?.stage!=='Etapa 8')errors.push('Relatório de Personagens da Etapa 8 inválido.');
+if(socialAudit?.stage!=='Etapa 9')errors.push('Relatório social e atmosférico da Etapa 9 inválido.');
+
+function validateMaps(){
+  const ruinas=rc.RUINAS_DATA,guerras=gc.DI_DATA;
+  const ruinasMaps=ruinas?.maps||{};
+  const warMap=guerras?.maps?.main;
+  if(Object.keys(ruinasMaps).length!==2)errors.push(`Etapa 6: Ruínas deveria possuir 2 mapas, encontrados ${Object.keys(ruinasMaps).length}.`);
+  for(const id of ['eterea','superficie']){
+    const map=ruinasMaps[id];
+    if(!map)continue;
+    if(!fs.existsSync(path.join(root,map.image)))errors.push(`Etapa 6: imagem de mapa ausente (${map.image}).`);
+    if(!Array.isArray(map.context)||map.context.length!==4)errors.push(`Etapa 6: contexto integrado incompleto no mapa ${id}.`);
+    for(const placeId of map.placeIds||[]){const place=ruinas.places.find(x=>x.id===placeId);if(!place)errors.push(`Etapa 6: lugar de Ruínas ausente no mapa (${placeId}).`);else if(!place.map||!Number.isFinite(place.map.x)||!Number.isFinite(place.map.y))errors.push(`Etapa 6: coordenada inválida em ${placeId}.`);}
+  }
+  const ruinasMapped=new Set(Object.values(ruinasMaps).flatMap(map=>map.placeIds||[]));
+  if(ruinasMapped.size!==ruinas.places.length)errors.push(`Etapa 6: nem todos os lugares de Ruínas foram mapeados (${ruinasMapped.size}/${ruinas.places.length}).`);
+  for(const place of ruinas.places)if(!ruinasMapped.has(place.id))errors.push(`Etapa 6: lugar de Ruínas sem mapa (${place.id}).`);
+  if(!warMap)errors.push('Etapa 6: mapa de Guerras de Sangue ausente.');
+  else{
+    if(!fs.existsSync(path.join(root,warMap.image)))errors.push(`Etapa 6: imagem de Guerras ausente (${warMap.image}).`);
+    if((warMap.placeIds||[]).length!==guerras.places.length)errors.push(`Etapa 6: pins de Guerras incompletos (${warMap.placeIds?.length||0}/${guerras.places.length}).`);
+    for(const place of guerras.places)if(!place.map||!Number.isFinite(place.map.x)||!Number.isFinite(place.map.y))errors.push(`Etapa 6: lugar de Guerras sem coordenada (${place.id}).`);
+    for(const category of warMap.strategicCategories||[])if((category.items||[]).length<2)errors.push(`Etapa 6: categoria estratégica com menos de duas informações (${category.id}).`);
+    if((warMap.strategicCategories||[]).length!==mapsAudit['guerras-de-sangue'].strategicCategories)errors.push('Etapa 6: quantidade de categorias estratégicas diverge da auditoria.');
+    if(mapsAudit.browserTests?.guerrasPins!==guerras.places.length||mapsAudit.browserTests?.ruinasEtereaPins+mapsAudit.browserTests?.ruinasSuperficiePins!==ruinas.places.length)errors.push('Etapa 6: resultados de navegador divergem das contagens de lugares.');
+    if(mapsAudit.browserTests?.runtimeExceptions!==0||mapsAudit.browserTests?.mobileNoHorizontalOverflow!==true)errors.push('Etapa 6: testes de navegador não confirmam execução limpa e responsiva.');
+  }
+  for(const file of [...(mapsAudit.requiredFiles||[]),...(mapsAudit.screenshots||[])])if(!fs.existsSync(path.join(root,file)))errors.push(`Etapa 6: arquivo obrigatório ausente (${file}).`);
+  for(const ref of ['app/shared/maps/interactive-map.css','app/shared/maps/interactive-map.js','data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/maps.js'])if(!ruinasHtml.includes(ref))errors.push(`Etapa 6: Ruínas não carrega ${ref}.`);
+  for(const ref of ['app/shared/maps/interactive-map.css','app/shared/maps/interactive-map.js','data/sagas/ciclo-de-jesed/books/guerras-de-sangue/maps.js'])if(!guerrasHtml.includes(ref))errors.push(`Etapa 6: Guerras não carrega ${ref}.`);
+  const warApp=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js'),'utf8');
+  const rdMain=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/main.js'),'utf8');
+  if(!warApp.includes('chapter-pagination chapter-pagination-top'))errors.push('Etapa 6: navegação superior de capítulos ausente em Guerras.');
+  if(!rdMain.includes('chapter-pagination chapter-pagination-top'))errors.push('Etapa 6: navegação superior de capítulos ausente em Ruínas.');
+  if(warApp.includes('Estado no último ponto realmente escrito'))errors.push('Etapa 6: Personagens em foco de Guerras ainda exibe estado.');
+  if(!warApp.includes('Paz sob responsabilidade')||!rdMain.includes('Peso, verdade e sacrifício'))errors.push('Etapa 6: descrições curtas dos personagens em foco não foram preservadas.');
+}
+validateMaps();
+
+function validateStage7AssetsAndHomes(){
+  const canonicalPaths=new Set([...(assetManifest.assets||[]).map(item=>item.caminho),...(imageRequirements.items||[]).map(item=>item.path)]);
+  const knownMissing=new Set(homeAudit.knownMissingAssets||[]);
+  if(assetManifest.count!==169||(assetManifest.assets||[]).length!==169)errors.push(`Etapa 7: inventário deveria conter 169 assets, encontrados ${(assetManifest.assets||[]).length}.`);
+  if(homeAudit.sourceManifest!=='data/common/assets-manifest.json')errors.push('Etapa 7: relatório não aponta para o manifesto oficial de assets.');
+  if((homeAudit.unresolvedLiteralPaths||[]).length)errors.push(`Etapa 7: caminhos literais não resolvidos: ${homeAudit.unresolvedLiteralPaths.join(', ')}.`);
+  if((homeAudit.legacyImageExtensions||[]).length)errors.push(`Etapa 7: extensões antigas ainda registradas: ${homeAudit.legacyImageExtensions.join(', ')}.`);
+  if(homeAudit.idsChanged!==0)errors.push('Etapa 7: a auditoria indica alteração indevida de IDs.');
+
+  const isImage=value=>typeof value==='string'&&/^assets\//.test(value)&&/\.(?:webp|svg|png|jpe?g)$/i.test(value);
+  const isValid=value=>canonicalPaths.has(value)||(value.includes('/temp/')&&fs.existsSync(path.join(root,value)))||knownMissing.has(value);
+  const resolved=new Set();
+  function visit(value,seen=new WeakSet()){
+    if(isImage(value)){resolved.add(value);if(!isValid(value))errors.push(`Etapa 7: caminho de imagem fora do inventário ou dos temporários autorizados (${value}).`);return;}
+    if(!value||typeof value!=='object'||seen.has(value))return;
+    seen.add(value);
+    if(Array.isArray(value)){for(const item of value)visit(item,seen);return;}
+    for(const item of Object.values(value))visit(item,seen);
+  }
+  visit(gc.DI_DATA);visit(rc.RUINAS_DATA);
+
+  const gsChapters=models['guerras-de-sangue'].entities.chapters;
+  const rdChapters=models['ruinas-dos-ceus'].entities.chapters;
+  const gsWithout=gsChapters.filter(ch=>!ch.image).map(ch=>ch.number);
+  if(gsWithout.length)errors.push(`Etapa 7: capítulos de Guerras sem ilustração apesar do inventário completo (${gsWithout.join(', ')}).`);
+  const rdWithout=rdChapters.filter(ch=>!ch.image).map(ch=>ch.number).sort((a,b)=>a-b);
+  if(JSON.stringify(rdWithout)!==JSON.stringify([19,22]))errors.push(`Etapa 7: capítulos de Ruínas sem imagem deveriam ser somente 19 e 22; encontrados ${rdWithout.join(', ')||'nenhum'}.`);
+  for(const ch of [...gsChapters,...rdChapters])if(ch.image&&!canonicalPaths.has(ch.image))errors.push(`Etapa 7: capítulo ${ch.id} usa imagem não listada no inventário (${ch.image}).`);
+
+  const allowedTextExt=new Set(['.js','.css','.html']);
+  const sourceRoots=['app','data'];
+  const legacy=[];const unresolved=[];
+  function walk(dir){
+    for(const entry of fs.readdirSync(dir,{withFileTypes:true})){
+      const full=path.join(dir,entry.name);
+      if(entry.isDirectory()){
+        if(full.includes(`${path.sep}audits`)||full.includes(`${path.sep}screenshots`))continue;
+        walk(full);continue;
+      }
+      if(!allowedTextExt.has(path.extname(entry.name)))continue;
+      if(full.endsWith(path.join('data','common','assets-manifest.json')))continue;
+      const text=fs.readFileSync(full,'utf8');
+      for(const match of text.matchAll(/assets\/[A-Za-zÀ-ÿ0-9_() .\/-]+\.(?:webp|svg|png|jpe?g)/gi)){
+        const assetPath=match[0];
+        if(/\.(?:png|jpe?g)$/i.test(assetPath))legacy.push(`${path.relative(root,full)} → ${assetPath}`);
+        if(!canonicalPaths.has(assetPath)&&!(assetPath.includes('/temp/')&&fs.existsSync(path.join(root,assetPath))))unresolved.push(`${path.relative(root,full)} → ${assetPath}`);
+      }
+    }
+  }
+  for(const relative of sourceRoots)walk(path.join(root,relative));
+  for(const html of ['index.html','ruinas.html','guerras.html']){
+    const full=path.join(root,html),text=fs.readFileSync(full,'utf8');
+    for(const match of text.matchAll(/assets\/[A-Za-zÀ-ÿ0-9_() .\/-]+\.(?:webp|svg|png|jpe?g)/gi)){
+      const assetPath=match[0];
+      if(/\.(?:png|jpe?g)$/i.test(assetPath))legacy.push(`${html} → ${assetPath}`);
+      if(!canonicalPaths.has(assetPath)&&!(assetPath.includes('/temp/')&&fs.existsSync(path.join(root,assetPath))))unresolved.push(`${html} → ${assetPath}`);
+    }
+  }
+  if(legacy.length)errors.push(`Etapa 7: referências com extensão antiga encontradas:\n${legacy.join('\n')}`);
+  if(unresolved.length)errors.push(`Etapa 7: referências de imagem não resolvidas encontradas:\n${unresolved.join('\n')}`);
+
+  const rdMainPath='app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/main.js';
+  const gsAppPath='app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js';
+  const rdMain=fs.readFileSync(path.join(root,rdMainPath),'utf8');
+  const gsApp=fs.readFileSync(path.join(root,gsAppPath),'utf8');
+  for(const [label,text] of [['Ruínas',rdMain],['Guerras',gsApp]]){
+    if(!text.includes('Ciclo de Jesed — Guia do Livro'))errors.push(`Etapa 7: cabeçalho Guia do Livro ausente em ${label}.`);
+    if(text.includes('Últimos capítulos'))errors.push(`Etapa 7: bloco Últimos capítulos ainda existe em ${label}.`);
+    if(!text.includes('home-guide-grid'))errors.push(`Etapa 7: grade orientadora ausente em ${label}.`);
+    if(!text.includes('home-place-grid'))errors.push(`Etapa 7: seção visual de Lugares ausente em ${label}.`);
+  }
+  if((rdMain.match(/data-map-open=/g)||[]).length<2)errors.push('Etapa 7: prévias separadas dos mapas de Etérea e Superfície ausentes na página inicial de Ruínas.');
+  if(!gsApp.includes('home-strategy-strip'))errors.push('Etapa 7: faixa estratégica do mapa ausente na página inicial de Guerras.');
+  const expectedHomes={
+    'ruinas-dos-ceus':{guideCards:4,focusCharacters:5,placeCards:6,mapPreviews:2},
+    'guerras-de-sangue':{guideCards:4,focusCharacters:5,placeCards:6,strategicCategories:7}
+  };
+  for(const [bookId,expected] of Object.entries(expectedHomes))for(const [key,value] of Object.entries(expected))if(homeAudit.homepages?.[bookId]?.[key]!==value)errors.push(`Etapa 7: ${bookId}/${key} deveria ser ${value}, encontrado ${homeAudit.homepages?.[bookId]?.[key]}.`);
+  for(const bookId of Object.keys(expectedHomes))if(homeAudit.homepages?.[bookId]?.lastChaptersRemoved!==true)errors.push(`Etapa 7: remoção de Últimos capítulos não confirmada em ${bookId}.`);
+  return {canonicalPaths:canonicalPaths.size,resolvedPaths:resolved.size};
+}
+
+function validateStage8Characters(){
+  const ruinasModel=models['ruinas-dos-ceus']?.entities;
+  const guerrasModel=models['guerras-de-sangue']?.entities;
+  const canonicalPaths=new Set([...(assetManifest.assets||[]).map(item=>item.caminho),...(imageRequirements.items||[]).map(item=>item.path)]);
+  const ruinasAssets=[...canonicalPaths].filter(value=>value.startsWith('assets/characters/ruinas/'));
+  const guerrasAssets=[...canonicalPaths].filter(value=>value.startsWith('assets/characters/guerras-de-sangue/'));
+  const ruinasImages=new Set((ruinasModel?.characters||[]).flatMap(character=>[character.image,...(character.alternateImages||[])].filter(Boolean)));
+  const guerrasImages=new Set((guerrasModel?.characters||[]).flatMap(character=>[character.image,...(character.alternateImages||[])].filter(Boolean)));
+
+  if((ruinasModel?.characters||[]).length!==charactersAudit['ruinas-dos-ceus'].characters)errors.push(`Etapa 8: quantidade de personagens de Ruínas diverge da auditoria.`);
+  if((guerrasModel?.characters||[]).length!==charactersAudit['guerras-de-sangue'].characters)errors.push(`Etapa 8: quantidade de personagens de Guerras diverge da auditoria.`);
+  for(const asset of ruinasAssets)if(!ruinasImages.has(asset))errors.push(`Etapa 8: imagem disponível de Ruínas não ligada (${asset}).`);
+  for(const asset of guerrasAssets)if(!guerrasImages.has(asset))errors.push(`Etapa 8: imagem disponível de Guerras não ligada (${asset}).`);
+  for(const image of [...ruinasImages,...guerrasImages])if(!canonicalPaths.has(image))errors.push(`Etapa 8: retrato fora do inventário oficial (${image}).`);
+
+  let ruinasLinks=0,guerrasLinks=0,ruinasMissing=0,guerrasMissing=0;
+  for(const character of ruinasModel?.characters||[]){
+    for(const chapterId of character.chapterIds||[]){
+      ruinasLinks++;
+      const number=String(Number(String(chapterId).split('-').pop()));
+      if(!rc.RUINAS_TRAJ?.[character.name]?.[number]){ruinasMissing++;errors.push(`Etapa 8: trajetória ausente em Ruínas (${character.name}/${chapterId}).`);}
+    }
+  }
+  for(const character of guerrasModel?.characters||[]){
+    for(const chapterId of character.appearanceChapters||[]){
+      guerrasLinks++;
+      if(!gc.GUERRAS_TRAJ?.[character.name]?.[chapterId]){guerrasMissing++;errors.push(`Etapa 8: trajetória ausente em Guerras (${character.name}/${chapterId}).`);}
+    }
+  }
+  if(ruinasLinks!==charactersAudit['ruinas-dos-ceus'].trajectoryLinks)errors.push(`Etapa 8: ligações de trajetória de Ruínas deveriam ser ${charactersAudit['ruinas-dos-ceus'].trajectoryLinks}, encontradas ${ruinasLinks}.`);
+  if(guerrasLinks!==charactersAudit['guerras-de-sangue'].trajectoryLinks)errors.push(`Etapa 8: ligações de trajetória de Guerras deveriam ser ${charactersAudit['guerras-de-sangue'].trajectoryLinks}, encontradas ${guerrasLinks}.`);
+  if(ruinasMissing||guerrasMissing)errors.push(`Etapa 8: ainda existem trajetórias sem texto próprio (Ruínas ${ruinasMissing}; Guerras ${guerrasMissing}).`);
+
+  const sharedJs='app/shared/characters/browser.js',sharedCss='app/shared/characters/browser.css';
+  for(const file of [sharedJs,sharedCss,...(charactersAudit.requiredFiles||[]),...(charactersAudit.screenshots||[])])if(!fs.existsSync(path.join(root,file)))errors.push(`Etapa 8: arquivo obrigatório ausente (${file}).`);
+  for(const [html,label] of [[ruinasHtml,'Ruínas'],[guerrasHtml,'Guerras']])for(const ref of [sharedJs,sharedCss])if(!html.includes(ref))errors.push(`Etapa 8: ${label} não carrega ${ref}.`);
+
+  const ruinasList=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/list.js'),'utf8');
+  const ruinasDetail=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/detail.js'),'utf8');
+  const ruinasTrajectory=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/tabs/trajetoria.js'),'utf8');
+  const guerrasApp=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js'),'utf8');
+  for(const [label,text] of [['Ruínas',ruinasList],['Guerras',guerrasApp]]){
+    if(!text.includes('data-character-search'))errors.push(`Etapa 8: pesquisa de personagens ausente em ${label}.`);
+    if(!text.includes('data-character-view'))errors.push(`Etapa 8: alternância cartões/lista ausente em ${label}.`);
+  }
+  if(/aparições/i.test(ruinasDetail))errors.push('Etapa 8: o campo Aparições ainda aparece na ficha de Ruínas.');
+  if(/\|\|\s*ch\.(?:s|summary)/.test(ruinasTrajectory)||/\|\|\s*ch\.summary/.test(guerrasApp))errors.push('Etapa 8: a Trajetória ainda reutiliza resumo geral de capítulo como fallback.');
+  if(!ruinasList.includes(charactersAudit['ruinas-dos-ceus'].subtitle))errors.push('Etapa 8: frase-guia de Personagens de Ruínas ausente.');
+  if(!guerrasApp.includes(charactersAudit['guerras-de-sangue'].subtitle))errors.push('Etapa 8: frase-guia de Personagens de Guerras ausente.');
+  if(!guerrasImages.has('assets/characters/guerras-de-sangue/orionus-polar-2.webp'))errors.push('Etapa 8: retrato alternativo de Orionus não foi ligado.');
+  if(charactersAudit.browserTests?.runtimeExceptions!==0||charactersAudit.browserTests?.mobileNoHorizontalOverflow!==true)errors.push('Etapa 8: auditoria de navegador não confirma execução limpa e responsiva.');
+  return {ruinasLinks,guerrasLinks,ruinasImages:ruinasImages.size,guerrasImages:guerrasImages.size};
+}
+
+
+function validateStage9SocialAndAtmosphere(){
+  const requiredTypes=new Set(['family','friendship','protection','influence','conflict','rivalry','loyalty','broken']);
+  const ruinasSocial=rc.RUINAS_SOCIAL;
+  const guerras=gc.DI_DATA;
+  const ruinasCharacters=new Set((rc.RUINAS_DATA?.characters||[]).map(character=>character.name));
+  const guerrasCharacters=new Set((guerras?.characters||[]).map(character=>character.id));
+  if(!ruinasSocial)errors.push('Etapa 9: RUINAS_SOCIAL ausente.');
+  else{
+    if((ruinasSocial.relationshipTypes||[]).length!==8)errors.push(`Etapa 9: legenda de relações de Ruínas deveria possuir 8 tipos, encontrados ${(ruinasSocial.relationshipTypes||[]).length}.`);
+    for(const type of ruinasSocial.relationshipTypes||[])if(!requiredTypes.has(type.key)||!type.label||!type.description)errors.push(`Etapa 9: tipo de relação inválido em Ruínas (${type.key||'sem chave'}).`);
+    if((ruinasSocial.relationships||[]).length!==12)errors.push(`Etapa 9: Ruínas deveria possuir 12 relações enriquecidas, encontradas ${(ruinasSocial.relationships||[]).length}.`);
+    for(const relation of ruinasSocial.relationships||[]){
+      if(!requiredTypes.has(relation.typeKey))errors.push(`Etapa 9: relação com tipo inválido (${relation.id}).`);
+      if(!ruinasCharacters.has(relation.from)||!ruinasCharacters.has(relation.to))errors.push(`Etapa 9: relação aponta para personagem inexistente (${relation.id}).`);
+      for(const field of ['type','state','description','fromView','toView'])if(!relation[field])errors.push(`Etapa 9: relação incompleta (${relation.id}/${field}).`);
+      if(!Array.isArray(relation.evolution)||relation.evolution.length<2)errors.push(`Etapa 9: evolução insuficiente (${relation.id}).`);
+    }
+    if((ruinasSocial.families||[]).length!==1)errors.push(`Etapa 9: Ruínas deve exibir somente Os Amaréa; encontradas ${(ruinasSocial.families||[]).length} famílias.`);
+    const family=ruinasSocial.families?.[0];
+    if(family){
+      if(family.id!=='jesed-family-amarea'||family.name!=='Os Amaréa')errors.push('Etapa 9: ficha familiar principal de Ruínas não é Os Amaréa.');
+      if((family.members||[]).length!==5)errors.push('Etapa 9: Os Amaréa deveria possuir cinco membros na ficha.');
+      for(const member of family.members||[])if(!ruinasCharacters.has(member))errors.push(`Etapa 9: membro familiar inexistente em Ruínas (${member}).`);
+      if((family.sections||[]).length<7)errors.push('Etapa 9: ficha Os Amaréa não contém todos os blocos narrativos solicitados.');
+      if(!family.image||!fs.existsSync(path.join(root,family.image)))errors.push(`Etapa 9: imagem familiar ausente (${family?.image||'sem caminho'}).`);
+    }
+    if((ruinasSocial.organisations||[]).length!==4)errors.push(`Etapa 9: Ruínas deveria possuir 4 organizações reais, encontradas ${(ruinasSocial.organisations||[]).length}.`);
+    for(const org of ruinasSocial.organisations||[]){
+      for(const field of ['name','type','function','description','activity','image'])if(!org[field])errors.push(`Etapa 9: organização de Ruínas incompleta (${org.id}/${field}).`);
+      if(!fs.existsSync(path.join(root,org.image)))errors.push(`Etapa 9: imagem de organização ausente (${org.image}).`);
+      for(const member of org.members||[])if(!ruinasCharacters.has(member))errors.push(`Etapa 9: membro de organização inexistente em Ruínas (${org.id}/${member}).`);
+    }
+  }
+  if((guerras?.families||[]).length!==3)errors.push(`Etapa 9: Guerras deveria manter 3 famílias, encontradas ${(guerras?.families||[]).length}.`);
+  for(const family of guerras?.families||[]){
+    if(!family.image||!fs.existsSync(path.join(root,family.image)))errors.push(`Etapa 9: imagem de família de Guerras ausente (${family.id}).`);
+    if(!family.subtitle||!Array.isArray(family.details)||family.details.length<3)errors.push(`Etapa 9: família de Guerras incompleta (${family.id}).`);
+    for(const member of family.members||[])if(!guerrasCharacters.has(member))errors.push(`Etapa 9: membro familiar inexistente em Guerras (${family.id}/${member}).`);
+  }
+  if((guerras?.organisations||[]).length!==3)errors.push(`Etapa 9: Guerras deveria manter 3 organizações, encontradas ${(guerras?.organisations||[]).length}.`);
+  for(const org of guerras?.organisations||[]){
+    for(const field of ['image','function','activity'])if(!org[field])errors.push(`Etapa 9: organização de Guerras incompleta (${org.id}/${field}).`);
+    if(org.image&&!fs.existsSync(path.join(root,org.image)))errors.push(`Etapa 9: imagem de organização de Guerras ausente (${org.image}).`);
+    for(const member of org.members||[])if(!guerrasCharacters.has(member))errors.push(`Etapa 9: membro de organização inexistente em Guerras (${org.id}/${member}).`);
+  }
+  const requirementPaths=new Set();
+  if(imageRequirements.stage!=='Etapa 9')errors.push('Etapa 9: catálogo de imagens não está marcado como Etapa 9.');
+  if((imageRequirements.items||[]).length!==40)errors.push(`Etapa 9: catálogo deveria possuir 40 imagens, encontradas ${(imageRequirements.items||[]).length}.`);
+  for(const item of imageRequirements.items||[]){
+    if(requirementPaths.has(item.path))errors.push(`Etapa 9: caminho duplicado no catálogo (${item.path}).`); else requirementPaths.add(item.path);
+    if(!item.path||!item.file||!item.folder||!Number.isFinite(item.width)||!Number.isFinite(item.height)||typeof item.transparent!=='boolean'||!item.function)errors.push(`Etapa 9: entrada incompleta no catálogo (${item.path||'sem caminho'}).`);
+    if(!fs.existsSync(path.join(root,item.path)))errors.push(`Etapa 9: placeholder obrigatório ausente (${item.path}).`);
+  }
+  const requiredRefs={
+    'ruinas.html':['app/shared/social/network.css','data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/social.js'],
+    'guerras.html':['app/shared/social/network.css','data/sagas/ciclo-de-jesed/books/guerras-de-sangue/social.js']
+  };
+  for(const [html,refs] of Object.entries(requiredRefs)){const text=fs.readFileSync(path.join(root,html),'utf8');for(const ref of refs)if(!text.includes(ref))errors.push(`Etapa 9: ${html} não carrega ${ref}.`);}
+  for(const file of [...(socialAudit.requiredFiles||[]),...(socialAudit.screenshots||[])])if(!fs.existsSync(path.join(root,file)))errors.push(`Etapa 9: arquivo obrigatório ausente (${file}).`);
+  const sourceFiles=[];
+  function collect(dir){for(const entry of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,entry.name);if(entry.isDirectory())collect(full);else if(/\.(?:js|css|html)$/i.test(entry.name))sourceFiles.push(full);}}
+  for(const relative of ['app','data'])collect(path.join(root,relative));for(const html of ['index.html','ruinas.html','guerras.html'])sourceFiles.push(path.join(root,html));
+  const svgRefs=[];for(const file of sourceFiles){const text=fs.readFileSync(file,'utf8');if(/assets\/[A-Za-zÀ-ÿ0-9_() .\/-]+\.svg/i.test(text))svgRefs.push(path.relative(root,file));}
+  if(svgRefs.length)errors.push(`Etapa 9: referências SVG atmosféricas ainda ativas em: ${svgRefs.join(', ')}.`);
+  const ruinasExperience=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/experience.js'),'utf8');
+  const guerrasExperience=fs.readFileSync(path.join(root,'app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/experience.js'),'utf8');
+  for(const ref of ['cloud-distant-01.webp','cloud-mid-01.webp','mist-near-01.webp'])if(!ruinasExperience.includes(ref))errors.push(`Etapa 9: sistema de nuvens não referencia ${ref}.`);
+  for(const ref of ['ember-sprite.webp','spark-sprite.webp','ash-sprite-01.webp'])if(!guerrasExperience.includes(ref))errors.push(`Etapa 9: Canvas de Guerras não referencia ${ref}.`);
+  if(socialAudit.browserTests?.runtimeExceptions!==0||socialAudit.browserTests?.mobileNoHorizontalOverflow!==true)errors.push('Etapa 9: auditoria de navegador não confirma execução limpa e responsiva.');
+  return {relationships:ruinasSocial?.relationships?.length||0,families:(ruinasSocial?.families?.length||0)+(guerras?.families?.length||0),organisations:(ruinasSocial?.organisations?.length||0)+(guerras?.organisations?.length||0),images:requirementPaths.size};
+}
+
+const stage7Stats=validateStage7AssetsAndHomes();
+const stage8Stats=validateStage8Characters();
+const stage9Stats=validateStage9SocialAndAtmosphere();
 if(!manifest)errors.push('Manifesto de IDs ausente.');
-if(!fs.existsSync(path.join(root,'assets/covers'))&&!fs.existsSync(path.join(root,'assets/characters')))warnings.push('Assets canônicos completos não incluídos; apenas recursos temporários da Etapa 5.5 estão presentes.');
-const summary=[`Validação Etapa 5.5 — ${new Date().toISOString()}`,`Guerras de Sangue: ${models['guerras-de-sangue']?.entities.chapters.length||0} capítulos, ${models['guerras-de-sangue']?.entities.places.length||0} lugares, ${placesAudit.books['guerras-de-sangue'].chapterScenes} cenas localizadas e ${gsTimeline.length} acontecimentos cronológicos.`,`Ruínas dos Céus: ${models['ruinas-dos-ceus']?.entities.chapters.length||0} capítulos, ${models['ruinas-dos-ceus']?.entities.places.length||0} lugares, ${placesAudit.books['ruinas-dos-ceus'].chapterScenes} cenas localizadas e ${rdTimeline.length} acontecimentos cronológicos.`];
+warnings.push('Os binários canônicos completos da pasta assets não acompanham este pacote; os caminhos foram validados pelo inventário WebP oficial e os mapas/recursos temporários necessários permanecem locais.');
+const summary=[`Validação Etapa 9 — ${new Date().toISOString()}`,`Guerras de Sangue: ${models['guerras-de-sangue']?.entities.chapters.length||0} capítulos, ${models['guerras-de-sangue']?.entities.places.length||0} lugares, ${placesAudit.books['guerras-de-sangue'].chapterScenes} cenas localizadas e ${gsTimeline.length} acontecimentos cronológicos.`,`Ruínas dos Céus: ${models['ruinas-dos-ceus']?.entities.chapters.length||0} capítulos, ${models['ruinas-dos-ceus']?.entities.places.length||0} lugares, ${placesAudit.books['ruinas-dos-ceus'].chapterScenes} cenas localizadas e ${rdTimeline.length} acontecimentos cronológicos.`,`Assets: ${stage7Stats.canonicalPaths} caminhos únicos no inventário; ${stage7Stats.resolvedPaths} caminhos resolvidos nos modelos carregados.`,`Páginas iniciais: 4 acessos orientadores, 5 personagens em foco e 6 lugares destacados em cada livro.`,`Personagens: ${models['ruinas-dos-ceus']?.entities.characters.length||0} em Ruínas e ${models['guerras-de-sangue']?.entities.characters.length||0} em Guerras; ${stage8Stats.ruinasLinks+stage8Stats.guerrasLinks} ligações de trajetória validadas; todas as imagens disponíveis ligadas.`,`Etapa 9: ${stage9Stats.relationships} relações enriquecidas em Ruínas, ${stage9Stats.families} famílias, ${stage9Stats.organisations} organizações e ${stage9Stats.images} imagens atmosféricas/sociais substituíveis.`];
 if(warnings.length){summary.push('','AVISOS:',...warnings.map(x=>`- ${x}`));}
 if(errors.length){summary.push('','ERROS:',...errors.map(x=>`- ${x}`));console.error(summary.join('\n'));process.exit(1);}
-summary.push('','OK: arquitetura, IDs, conteúdo das Etapas 1–5 e sistemas visuais, contemplativos e de desempenho da Etapa 5.5 validados.');console.log(summary.join('\n'));
+summary.push('','OK: Etapas 1–8 preservadas; Relações, Família, Organizações e sistema atmosférico rasterizado da Etapa 9 validados nos dois livros.');console.log(summary.join('\n'));

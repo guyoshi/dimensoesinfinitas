@@ -12,7 +12,7 @@
 - **Livros atualmente disponíveis:**
   - *Ruínas dos Céus* — Livro I — 24 capítulos — concluído.
   - *Guerras de Sangue* — Livro II — 29 capítulos — concluído.
-- **Versão estrutural atual:** Etapa 5.5 concluída — pacote 0.9.5.
+- **Versão estrutural atual:** Etapa 9 concluída — pacote 0.9.9.
 - **Última atualização deste documento:** 21 de junho de 2026.
 
 ---
@@ -137,10 +137,10 @@ Categorias incompatíveis não devem ser forçadas. Exemplo: *Ruínas dos Céus*
 | 4 | Nova Linha do Tempo | **CONCLUÍDA** | 21/06/2026 |
 | 5 | Lugares e rotas | **CONCLUÍDA** | 21/06/2026 |
 | 5.5 | Identidade visual, atmosfera, modo contemplativo e desempenho | **CONCLUÍDA** | 21/06/2026 |
-| 6 | Mapas interativos | PENDENTE | — |
-| 7 | Páginas iniciais | PENDENTE | — |
+| 6 | Mapas interativos | **CONCLUÍDA** | 21/06/2026 |
+| 7 | Páginas iniciais | **CONCLUÍDA** | 21/06/2026 |
 | 8 | Personagens | PENDENTE | — |
-| 9 | Relações, família e organizações | PENDENTE | — |
+| 9 | Relações, família, organizações e atmosfera com imagens | CONCLUÍDA | 21/06/2026 |
 | 10 | Clãs | PENDENTE | — |
 | 11 | Fauna, flora e alimentos | PENDENTE | — |
 | 12 | Conceitos | PENDENTE | — |
@@ -949,15 +949,15 @@ Isso impede que nuvens, céu, brasões, brasas ou cinzas de um livro alterem o o
 
 Foram criados:
 
-- `assets/textures/temp/ruinas-sidebar-texture.svg`;
-- `assets/textures/temp/guerras-sidebar-texture.svg`;
-- `assets/contemplative/temp/eterea-sky-placeholder.svg`;
-- `assets/contemplative/temp/kaendar-night-placeholder.svg`;
-- `assets/clans/temp/fendelar-mark.svg`.
+- `assets/atmosphere/ruinas/sidebar-sky-stone.webp`;
+- `assets/atmosphere/guerras/sidebar-leather-map.webp`;
+- `assets/atmosphere/ruinas/eterea-contemplative.webp`;
+- `assets/atmosphere/guerras/kaendar-night.webp`;
+- `assets/clans/temp/fendelar-mark.webp`.
 
 Instruções completas de substituição estão em:
 
-`docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md`
+`docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md`
 
 Os placeholders são neutros, locais e não canônicos. Não foram incorporados em Base64.
 
@@ -971,7 +971,7 @@ Os placeholders são neutros, locais e não canônicos. Não foram incorporados 
 - `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/experience/styles.css`
 - cinco recursos temporários em `assets/**/temp/`
 - `data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json`
-- `docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md`
+- `docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md`
 - dezesseis capturas em `docs/screenshots/`
 
 ### Arquivos alterados
@@ -1041,256 +1041,568 @@ As capturas de revisão estão em `docs/screenshots/`.
 
 ## Etapa 6 — Mapas interativos
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data de conclusão:** 21/06/2026  
+**Versão do pacote:** 0.9.6
+
+### Objetivo executado
+
+Transformar os mapas dos dois livros em interfaces interativas completas, incluir todos os lugares já existentes, preservar rotas como entidades geográficas e acrescentar a leitura estratégica de *Guerras de Sangue*. A etapa também incorporou dois ajustes solicitados pelo autor: navegação entre capítulos no topo e revisão dos Personagens em foco das páginas iniciais.
+
+### Módulo compartilhado
+
+Foi criado `app/shared/maps/`, contendo:
+
+- `interactive-map.js`;
+- `interactive-map.css`.
+
+O módulo oferece:
+
+- aproximação e afastamento;
+- deslocamento com rato, toque ou caneta;
+- centralização;
+- alternância dos nomes;
+- tela inteira quando suportada;
+- navegação por teclado;
+- pins com nomes;
+- fichas rápidas;
+- abertura da página completa do lugar;
+- foco programático a partir de índices e informações estratégicas;
+- comportamento responsivo;
+- redução de movimento quando solicitada pelo sistema.
 
 ### Ruínas dos Céus
 
-Manter dois mapas separados:
+Foram mantidos dois mapas separados:
 
-- **Etérea — Capítulos 1 a 9**
-- **A Superfície — Capítulos 10 a 24**
+1. **Etérea — Capítulos 1 a 9**;
+2. **A Superfície — Capítulos 10 a 24**.
 
-A seção inteira deve ter o mesmo peso visual do mapa de *Guerras de Sangue*.
+Os textos aparecem integrados sobre cada mapa.
 
-Informações incorporadas ao mapa de Etérea:
+#### Etérea
 
-- civilização suspensa;
-- harmonia ritual;
-- vento e leveza;
-- sociedade organizada.
+- Civilização suspensa;
+- Harmonia ritual;
+- Vento e leveza;
+- Sociedade organizada.
 
-Informações incorporadas ao mapa da superfície:
+#### A Superfície
 
-- natureza desconhecida;
-- sobrevivência;
-- terra, peso e fome;
-- ausência de civilização humana conhecida.
+- Natureza desconhecida;
+- Sobrevivência;
+- Terra, peso e fome;
+- Ausência de civilização humana conhecida.
 
-Os dois mapas devem ter:
+Resultado cartográfico:
 
-- zoom;
-- deslocamento;
-- centralização;
-- pins;
-- nomes;
-- ficha rápida;
-- abertura da página do lugar;
-- responsividade.
-
-Todos os lugares criados de Etérea e Nadírion devem aparecer no mapa correto.
+- 17 lugares localizados;
+- 11 pins no mapa de Etérea;
+- 6 pins no mapa da Superfície;
+- todos os lugares criados vinculados a um dos mapas;
+- Ilhas Baixas preservadas como localização mítica, sem tratá-las como lugar real;
+- índice cartográfico clicável;
+- troca de mapa sem alterar a rota pública;
+- funcionamento em telas menores.
 
 ### Guerras de Sangue
 
-- Verificar todos os lugares criados.
-- Adicionar pins ausentes.
-- Garantir que rotas geograficamente localizáveis também apareçam.
+O mapa principal passou a conter os 23 lugares criados no sistema.
 
-Dentro da seção do mapa, mostrar apenas categorias com **dois ou mais itens**:
+As cinco antigas rotas continuam com seus IDs históricos e aparecem como lugares:
+
+- Rio Grande;
+- Garganta de Kaendar;
+- Garganta Seca;
+- Estrada dos Grãos;
+- Marcha oculta da aliança.
+
+Foi acrescentada uma camada de linhas para indicar rotas fluviais, terrestres e militares sem criar uma seção independente de Rotas.
+
+A área estratégica mostra apenas categorias com duas ou mais informações. Foram incluídas sete categorias válidas:
 
 - clãs em conflito;
 - alianças confirmadas;
 - alianças suspeitas;
 - territórios disputados;
-- rotas ameaçadas ou bloqueadas;
-- recursos estratégicos ameaçados;
-- forças ou exércitos em movimento.
+- rotas ameaçadas;
+- recursos estratégicos;
+- forças em movimento.
 
-Não criar uma grande seção separada para essas informações. Usar legenda, filtro ou indicador relacionado ao mapa.
+Cada informação estratégica liga novamente aos pins dos lugares relacionados.
+
+### Navegação entre capítulos
+
+Em *Guerras de Sangue*:
+
+- os botões de capítulo anterior e seguinte foram retirados da parte inferior;
+- a navegação foi colocada no topo da ficha, logo depois do cabeçalho.
+
+Em *Ruínas dos Céus*:
+
+- foi criada a mesma navegação no topo;
+- primeiro e último capítulo recebem estados desativados claros.
+
+### Personagens em foco
+
+Nas páginas iniciais dos dois livros:
+
+- aparecem somente personagens principais;
+- o estado do personagem deixou de ser exibido;
+- cada personagem recebeu uma descrição leve de no máximo quatro palavras;
+- continuam preservadas foto, nome e ligação para a ficha.
+
+Personagens escolhidos em *Ruínas dos Céus*:
+
+- Jokara;
+- Nestira;
+- Marv;
+- Loutes;
+- Gabasteres.
+
+Personagens escolhidos em *Guerras de Sangue*:
+
+- Kaelina;
+- Alyra;
+- Rendar;
+- Daryon;
+- Nynestra.
+
+### Assets incorporados
+
+Foram incluídas versões WebP otimizadas dos mapas fornecidos pelo autor:
+
+- `assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp`;
+- `assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp`;
+- `assets/maps/ruinas-dos-ceus/mapa-combinado.webp`;
+- `assets/maps/guerras-de-sangue/mapa-geral.webp`;
+- `assets/maps/guerras-de-sangue/mapa-geral.webp`, mantido como caminho de compatibilidade da página inicial.
+
+### Arquivos criados
+
+- `app/shared/maps/interactive-map.js`
+- `app/shared/maps/interactive-map.css`
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/maps.js`
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/maps.js`
+- `data/sagas/ciclo-de-jesed/audits/maps-etapa-6.json`
+- cinco arquivos WebP em `assets/maps/` e no caminho de compatibilidade.
+
+### Arquivos alterados
+
+- `ruinas.html`
+- `guerras.html`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/app.js`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/main.js`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/places.js`
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/styles/main.css`
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/styles.css`
+- `scripts/validate-content.js`
+- `scripts/audit-content.js`
+- `package.json`
+- `README.md`
+- `AI_UPDATE_RULES.md`
+- `PLANO-MESTRE-E-HISTORICO.md`
+
+### Arquivos removidos
+
+- Nenhum.
+
+### Entidades e compatibilidade
+
+- Entidades canônicas criadas: **0**.
+- Entidades canônicas removidas: **0**.
+- IDs alterados: **0**.
+- IDs históricos das rotas preservados: **5**.
+- Rotas antigas e páginas de lugares preservadas.
+- Conteúdo canônico alterado: **0**.
+- GitHub alterado: **não**.
+
+### Validações realizadas
+
+- sintaxe dos arquivos JavaScript;
+- `npm run validate`;
+- `npm run audit`;
+- dois mapas de Ruínas confirmados;
+- 17 de 17 lugares de Ruínas mapeados;
+- 23 de 23 lugares de Guerras mapeados;
+- cinco rotas históricas confirmadas como lugares;
+- sete categorias estratégicas com ao menos duas informações;
+- imagens de mapa presentes no pacote;
+- CSS e JavaScript compartilhados carregados nos dois HTMLs;
+- navegação superior entre capítulos confirmada nos dois livros;
+- descrições curtas dos Personagens em foco confirmadas;
+- páginas servidas localmente com resposta HTTP 200;
+- navegador real com 11 pins em Etérea, 6 na Superfície e 23 em Guerras;
+- sete cartões estratégicos e cinco linhas de rota renderizados;
+- ausência de exceções JavaScript nos mapas;
+- ausência de scroll horizontal em 390 píxeis;
+- sete capturas de revisão em `docs/screenshots/etapa-6/`.
+
+### Limitações registradas
+
+- As coordenadas de pins que não existiam foram posicionadas editorialmente sobre os mapas e podem receber ajustes visuais finos após revisão do autor.
+- O navegador do ambiente bloqueia a abertura direta de endereços locais; os testes visuais foram executados por DevTools com todos os recursos locais interceptados. Os mapas carregaram sem exceções de execução, e a revisão final de gosto visual permanece com o autor.
+- A pasta completa de retratos, brasões e demais artes canônicas continua fora deste pacote; os mapas necessários a esta etapa foram incorporados.
+
+### Não realizado nesta etapa
+
+- revisão visual das páginas iniciais além dos Personagens em foco;
+- remoção da seção Últimos capítulos;
+- criação dos cartões de Lugares nas páginas iniciais;
+- alteração das fichas de personagens, relações, clãs ou lore;
+- publicação ou push para o GitHub.
 
 ---
 
 ## Etapa 7 — Páginas iniciais
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data de conclusão:** 21/06/2026  
+**Versão do pacote:** 0.9.7
+
+### Objetivo executado
+
+Transformar as páginas iniciais dos dois livros em guias de navegação equivalentes, remover a seção redundante de capítulos recentes e alinhar os caminhos de imagens ao inventário WebP real fornecido pelo autor.
 
 ### Ruínas dos Céus
 
-Adicionar no topo:
-
-**Ciclo de Jesed — Guia do Livro**
-
-Dentro da própria página inicial, colocar numa única linha, em desktop:
-
-- Personagens;
-- Relações;
-- Linha do Tempo;
-- Capítulos.
-
-Não é o menu principal. São os cartões internos da página inicial.
-
-Remover:
-
-- Últimos capítulos.
-
-Adicionar:
-
-- seção Lugares;
-- cartões com foto;
-- nome;
-- identificação breve;
-- ligação para a ficha.
-
-Ampliar a seção dos mapas conforme a Etapa 6.
+- o topo passou a usar a identificação **Ciclo de Jesed — Guia do Livro**;
+- os cartões internos foram reduzidos aos quatro caminhos solicitados: Personagens, Relações, Linha do Tempo e Capítulos;
+- em desktop, os quatro cartões permanecem numa única linha;
+- a seção **Últimos capítulos** foi removida;
+- Personagens em foco foi preservado com cinco figuras principais e descrições curtas;
+- foi criada a seção **Lugares**, com seis cartões fotográficos, nome, tipo ou região e ligação para a ficha;
+- foram adicionadas duas prévias cartográficas separadas: Etérea e A Superfície;
+- cada prévia abre o mapa interativo já no período correspondente.
 
 ### Guerras de Sangue
 
-- Manter quatro cartões em uma linha.
-- Usar Linha do Tempo no lugar de Acontecimentos.
-- Adicionar seção Lugares com fotos e cartões clicáveis.
-- Manter mapa grande e informações estratégicas da Etapa 6.
+- o topo passou a usar a identificação **Ciclo de Jesed — Guia do Livro**;
+- os quatro cartões internos são Personagens, Relações, Linha do Tempo e Capítulos;
+- o antigo atalho de Acontecimentos não voltou a existir;
+- a seção **Últimos capítulos** foi removida;
+- Personagens em foco foi preservado com cinco figuras principais e descrições curtas;
+- foi criada a seção **Lugares**, com seis cartões fotográficos e ligações para as fichas;
+- o mapa grande foi mantido no topo;
+- as sete categorias estratégicas da Etapa 6 aparecem como atalhos resumidos, sem duplicar os detalhes da página do mapa.
 
-### Princípio
+### Ajuste dos caminhos de imagens
 
-A página inicial deve orientar. Não duplicar conteúdo profundo que pertence a páginas de personagens, relações, capítulos ou Linha do Tempo.
+O arquivo fornecido pelo autor foi incorporado como:
+
+`data/common/assets-manifest.json`
+
+Foram corrigidos:
+
+- logos e marcas de `.png` para os nomes WebP reais;
+- ilustrações de todos os 29 capítulos de *Guerras de Sangue*;
+- ilustrações disponíveis dos capítulos de *Ruínas dos Céus*;
+- retratos de *Guerras de Sangue* para `assets/characters/guerras-de-sangue/`;
+- caminhos definitivos dos mapas;
+- referências usadas pelo portal e pelas páginas dos dois livros.
+
+Os capítulos 19 e 22 de *Ruínas dos Céus* continuam sem imagem porque o inventário não contém arquivos correspondentes. Nenhum caminho foi inventado para eles.
+
+### Arquivos criados
+
+- `data/common/assets-manifest.json`;
+- `data/sagas/ciclo-de-jesed/audits/home-assets-etapa-7.json`.
+
+### Arquivos alterados
+
+- páginas iniciais e estilos dos dois livros;
+- dados de capítulos e personagens com caminhos de imagem;
+- mapas e arquivos do portal que referenciam branding;
+- `scripts/validate-content.js`;
+- `scripts/audit-content.js`;
+- `README.md`;
+- `AI_UPDATE_RULES.md`;
+- `PLANO-MESTRE-E-HISTORICO.md`;
+- `package.json`.
+
+### Arquivos removidos
+
+- `assets/mapa-guerras-de-sangue.webp`, duplicata temporária da Etapa 6;
+- nomes temporários dos mapas `mapa-eterea.webp`, `mapa-superficie.webp` e `mapa-guerras-de-sangue.webp`, substituídos pelos nomes definitivos do inventário.
+
+### IDs alterados
+
+- **0**.
+
+### Validação realizada
+
+- 169 registros no inventário, correspondendo a 168 caminhos únicos;
+- 143 referências literais de imagem analisadas no código, com 128 caminhos únicos;
+- 124 caminhos canônicos utilizados diretamente e quatro recursos temporários locais utilizados pelo código;
+- nenhuma extensão `.png`, `.jpg` ou `.jpeg` mantida nas referências activas;
+- nenhum caminho de imagem sem correspondência segura;
+- quatro cartões orientadores, cinco personagens em foco e seis lugares em cada página inicial;
+- duas prévias cartográficas em *Ruínas dos Céus* e sete atalhos estratégicos em *Guerras de Sangue*;
+- zero exceções JavaScript nas duas páginas iniciais no teste Chromium;
+- nenhum scroll horizontal em 390 píxeis.
+
+### Princípio preservado
+
+A página inicial orienta e encaminha. Descrições profundas continuam nas páginas de personagens, relações, capítulos, lugares, mapas e Linha do Tempo.
 
 ---
 
 ## Etapa 8 — Personagens
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data de conclusão:** 21/06/2026  
+**Versão do pacote:** 0.9.8
 
-### Modos de visualização nos dois livros
+### Objetivo executado
 
-#### Cartões grandes
+Padronizar as páginas de Personagens dos dois livros, oferecer pesquisa e dois modos de visualização equivalentes, aprofundar a Trajetória como ação específica do personagem em cada capítulo e ligar todos os retratos disponíveis no inventário oficial.
 
-- fotografias grandes;
-- nome;
-- subtítulo;
-- descrição curta;
-- clique para abrir ficha.
+### Sistema compartilhado
 
-#### Lista
+Foi criado o módulo reutilizável:
 
-- visualização compacta;
-- mais personagens visíveis;
-- acesso rápido.
+- `app/shared/characters/browser.js`;
+- `app/shared/characters/browser.css`.
 
-*Ruínas dos Céus* deve receber a alternância que já existe em *Guerras de Sangue*.
+O módulo oferece:
 
-### Pesquisa
+- cartões grandes;
+- lista compacta;
+- pesquisa textual;
+- persistência da visualização separada por livro;
+- acessibilidade por teclado;
+- responsividade;
+- suporte a movimento reduzido.
 
-- A pesquisa de personagens deve existir nos dois livros.
-- *Guerras de Sangue* deve receber a pesquisa equivalente à de *Ruínas dos Céus*.
+As preferências usam chaves próprias:
 
-### Subtítulo da página
+- `di-ruinas-character-view`;
+- `di-guerras-character-view`.
 
-Criar uma frase-guia específica para cada livro.
+A antiga chave de *Guerras de Sangue* é migrada quando encontrada, sem quebrar preferências já guardadas.
 
-Em *Ruínas dos Céus*, falar sobre:
+### Ruínas dos Céus
 
-- habitantes de Etérea;
-- sobreviventes;
-- Queda;
-- transformação.
+- a página passou a usar a frase-guia: **“Habitantes de Etérea e sobreviventes transformados pela Queda, entre a leveza do céu e o peso da superfície.”**;
+- foi adicionada pesquisa por nome, subtítulo, descrição e estado;
+- foi criada alternância entre cartões grandes e lista compacta;
+- os cartões grandes mostram retrato, nome, subtítulo simples e descrição curta;
+- subtítulos como “Protagonista e Âncora” aparecem como texto simples, sem cápsula, círculo ou borda própria;
+- a lista compacta mostra retrato, nome, subtítulo, resumo e quantidade de capítulos;
+- a ficha individual deixou de exibir o campo redundante **Aparições**;
+- a aba **Trajetória** mantém capítulos clicáveis e apresenta exclusivamente ações específicas do personagem;
+- foram preenchidas as lacunas de trajetória de Marv, Loutes, Sersi e Platisa;
+- os 15 personagens possuem retrato ligado ao inventário oficial;
+- foram validadas 149 ligações entre personagens e capítulos, sem nenhuma trajetória ausente.
 
-Em *Guerras de Sangue*, falar sobre:
+### Guerras de Sangue
 
-- clãs;
-- alianças;
-- rivalidades;
-- guerra;
-- poder.
-
-### Cartões de Ruínas dos Céus
-
-Descrições como “Protagonista e Âncora” ou “Oradora e Sopro” não devem parecer tags.
-
-Colocar:
-
-- abaixo do nome;
-- como subtítulo simples;
-- sem cápsula;
-- sem círculo;
-- sem borda própria.
-
-### Trajetória
-
-- O campo Trajetória deve explicar o que o personagem faz em cada capítulo.
-- Não deve repetir o resumo geral do capítulo.
-- Remover o campo Aparições quando ele for redundante com a Trajetória.
-- Manter os capítulos clicáveis.
+- a página passou a usar a frase-guia: **“Figuras de clãs, alianças e rivalidades que atravessam a guerra e disputam memória, território e poder.”**;
+- foi adicionada pesquisa equivalente à de *Ruínas dos Céus*;
+- os filtros de clã continuam disponíveis e funcionam em conjunto com a pesquisa;
+- cartões grandes e lista compacta passaram a utilizar o mesmo sistema compartilhado;
+- os cartões exibem retrato, nome, subtítulo e descrição curta;
+- a lista mostra mais personagens simultaneamente, mantendo acesso direto à ficha;
+- a aba **Trajetória** não utiliza mais o resumo geral do capítulo como fallback;
+- foram preenchidas todas as lacunas restantes de trajetória, incluindo aparições presenciais, menções e ausências narrativamente relevantes já registradas nos dados;
+- foram validadas 293 ligações entre personagens e capítulos, sem nenhuma trajetória ausente;
+- 42 imagens disponíveis foram ligadas;
+- a segunda imagem de Orionus foi incorporada como retrato alternativo na visão geral da ficha;
+- Eshvar, Maedra e Capitão Lirron continuam com fallback porque não possuem retrato no inventário atual.
 
 ### Imagens
 
-Usar todas as imagens de personagens já disponíveis e ainda não ligadas ao site.
+Todas as imagens de personagens existentes no inventário foram utilizadas:
+
+- 15 caminhos de *Ruínas dos Céus*;
+- 42 caminhos de *Guerras de Sangue*, incluindo o retrato alternativo de Orionus;
+- nenhum caminho foi inventado;
+- nenhuma imagem disponível ficou sem ligação.
+
+### Arquivos criados
+
+- `app/shared/characters/browser.js`;
+- `app/shared/characters/browser.css`;
+- `data/sagas/ciclo-de-jesed/audits/characters-etapa-8.json`;
+- dez capturas em `docs/screenshots/etapa-8/`, incluindo desktop e dispositivos móveis.
+
+### Arquivos alterados
+
+- `ruinas.html`;
+- `guerras.html`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/list.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/detail.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/characters/tabs/trajetoria.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/events.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/styles/main.css`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/styles.css`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/trajectory.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/trajectory.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/characters.js`;
+- `scripts/validate-content.js`;
+- `scripts/audit-content.js`;
+- `README.md`;
+- `AI_UPDATE_RULES.md`;
+- `PLANO-MESTRE-E-HISTORICO.md`;
+- `package.json`.
+
+### Arquivos removidos
+
+- nenhum.
+
+### Entidades e compatibilidade
+
+- personagens canônicos criados: **0**;
+- personagens canônicos removidos: **0**;
+- IDs alterados: **0**;
+- slugs ou rotas alterados: **0**;
+- conteúdo canônico reescrito: **0**;
+- GitHub alterado: **não**.
+
+### Validações realizadas
+
+- 15 personagens em *Ruínas dos Céus*;
+- 45 personagens em *Guerras de Sangue*;
+- 57 caminhos de retrato disponíveis e ligados;
+- 149 ligações de trajetória em Ruínas;
+- 293 ligações de trajetória em Guerras;
+- nenhuma trajetória sem texto específico;
+- nenhuma reutilização do resumo geral do capítulo como fallback;
+- campo Aparições removido da ficha de Ruínas;
+- pesquisa e alternância de visualização confirmadas nos dois livros;
+- sintaxe de todos os arquivos JavaScript;
+- `npm run validate`;
+- `npm run audit`;
+- visualização em desktop e largura móvel;
+- ausência de scroll horizontal em 390 píxeis;
+- nenhuma exceção JavaScript registrada nos testes da página de Personagens.
+
+### Limitações registradas
+
+- os binários dos retratos não acompanham o pacote intermediário; os caminhos foram conferidos pelo inventário oficial e funcionarão quando reunidos à pasta `assets` completa;
+- Eshvar, Maedra e Capitão Lirron não possuem imagem disponível;
+- a revisão estética final das fotografias depende da reunião do pacote com os assets reais.
+
+### Não realizado nesta etapa
+
+- alterações nas páginas de Relações, Famílias ou Organizações;
+- criação de novos personagens;
+- mudança de cânone;
+- publicação ou push para o GitHub.
 
 ---
 
-## Etapa 9 — Relações, família e organizações
+## Etapa 9 — Relações, família, organizações e atmosfera com imagens
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA EM 21/06/2026  
+**Pacote:** 0.9.9
 
 ### Relações em Ruínas dos Céus
 
-Adicionar legenda para tipos de relações, como em *Guerras de Sangue*:
-
-- família;
-- amizade;
-- proteção;
-- influência;
-- conflito;
-- rivalidade;
-- lealdade;
-- relação rompida.
-
-As linhas do mapa devem corresponder à legenda.
-
-Criar cartões sofisticados com:
-
-- fotos dos dois personagens;
-- nomes;
-- tipo de relação;
-- estado;
-- descrição;
-- evolução;
-- links clicáveis.
+- criada legenda com oito tipos: família, amizade, proteção, influência, conflito, rivalidade, lealdade e relação rompida;
+- as linhas do mapa usam as mesmas categorias visuais da legenda;
+- foram estruturadas doze relações com participantes, tipo, estado, descrição, perspectiva de cada personagem e evolução;
+- os cartões mostram os dois personagens e permitem abrir suas fichas;
+- a aba Relações das fichas individuais passou a usar os mesmos dados enriquecidos.
 
 ### Família em Ruínas dos Céus
 
-A seção não deve listar famílias genéricas.
+- mantida somente a ficha **Os Amaréa**;
+- membros: Yoral, Mirel, Jokara, Nestira e Loutes como criança acolhida;
+- incluídos vida familiar, casa em Nivellia, crenças, Sopro e Peso, perda de Yoral, diferenças entre as irmãs, acolhimento de Loutes e importância para a Queda;
+- todos os membros são clicáveis;
+- adicionada imagem social substituível em caminho permanente.
 
-Manter somente:
+### Organizações
 
-**Os Amaréa**
-
-Criar painel com:
-
-- fotografia da família;
-- Yoral;
-- Mirel;
-- Jokara;
-- Nestira;
-- Loutes como criança acolhida;
-- vida familiar;
-- casa em Nivellia;
-- crenças;
-- relação com Sopro e Peso;
-- perda de Yoral;
-- diferenças entre as irmãs;
-- acolhimento de Loutes;
-- importância para a Queda.
-
-Todos os membros devem ser clicáveis.
-
-### Organizações em Ruínas dos Céus
-
-Usar cartões com fotos para:
+Em *Ruínas dos Céus*:
 
 - Oradores da Corrente;
 - Ecoantes;
 - Tecelões de Vento;
-- sobreviventes de Nadírion;
-- outras organizações realmente existentes.
+- sobreviventes de Nadírion.
 
-Cada ficha ou cartão deve conter:
+Cada ficha contém imagem, tipo, função, descrição, atuação e membros ligados.
 
-- imagem;
+Em *Guerras de Sangue*:
+
+- preservadas três famílias e três organizações já existentes;
+- adicionadas imagens, subtítulos, detalhes, função, atuação, temas e membros com retratos clicáveis.
+
+### Atmosfera baseada em imagens
+
+- substituídas referências atmosféricas SVG por WebP locais;
+- nuvens de Ruínas agora usam imagens transparentes em três camadas;
+- sol, lua, fragmentos, raízes, menu lateral e cenário contemplativo usam imagens rasterizadas;
+- partículas de Guerras usam sprites WebP de brasa, faísca e cinza no Canvas;
+- poeira quente, fumaça, textura cartográfica, couro, reflexo metálico e cenário de Kaendar usam imagens WebP;
+- cartões e fichas de lugares receberam sobreposições atmosféricas próprias por livro;
+- nenhum plugin ou dependência externa foi acrescentado;
+- os fallbacks anteriores foram preservados para que arquivos ausentes não provoquem falha do site.
+
+### Catálogo de imagens
+
+Criados:
+
+- `docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md`;
+- `data/common/image-requirements-etapa-9.json`.
+
+Os arquivos registram quarenta imagens com:
+
 - nome;
+- pasta e caminho exatos;
+- dimensão recomendada;
+- necessidade de transparência;
 - função;
-- descrição;
-- atuação;
-- membros com fotos;
-- links.
+- instrução de substituição direta.
+
+Todos os quarenta caminhos possuem placeholders WebP locais. As artes definitivas podem substituí-los sem qualquer edição de código.
+
+### Arquivos principais criados
+
+- `app/shared/social/network.css`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/social.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/social.js`;
+- `data/sagas/ciclo-de-jesed/audits/social-etapa-9.json`;
+- catálogo humano e catálogo de máquina das imagens;
+- quarenta placeholders WebP atmosféricos e sociais.
+
+### Arquivos removidos
+
+- antigos SVG temporários de textura, contemplação e marca Fendelar;
+- `docs/ETAPA-5.5-RECURSOS-TEMPORARIOS.md`, substituído pelo catálogo completo da Etapa 9;
+- pastas temporárias vazias sem uso.
+
+### Validações
+
+- 12 relações enriquecidas em Ruínas;
+- 8 tipos de relação;
+- 1 família em Ruínas, com 5 membros e 7 blocos narrativos;
+- 4 organizações em Ruínas;
+- 3 famílias e 3 organizações em Guerras;
+- 40 imagens substituíveis com arquivos locais;
+- zero referências SVG atmosféricas ativas;
+- zero IDs alterados;
+- zero mudanças canônicas;
+- sintaxe JavaScript validada;
+- `npm run validate` e `npm run audit` concluídos;
+- teste visual de Relações de Ruínas e Famílias de Guerras sem exceções;
+- teste móvel de Relações de Ruínas sem scroll horizontal.
+
+### Limitações conhecidas
+
+- os WebP incluídos são placeholders técnicos, não artes canônicas definitivas;
+- as imagens finais de família e organizações dependem das referências visuais que o autor produzir;
+- os retratos canônicos completos continuam sendo reunidos com a pasta `assets` principal.
+
+### Não realizado
+
+- nenhuma criação de brasão Fendelar;
+- nenhuma mudança de cânone;
+- nenhum push ou publicação no GitHub;
+- nenhuma alteração da Etapa 10 — Clãs.
 
 ---
 
@@ -1821,6 +2133,6 @@ Não criar outro histórico paralelo.
 
 # 12. Próxima etapa oficial
 
-## Etapa 6 — Mapas interativos
+## Etapa 10 — Clãs
 
-A próxima IA deve começar pela Etapa 6 usando o pacote completo da Etapa 5.5 e sem alterar o GitHub. Deve preservar as fichas aprofundadas, IDs de lugares, cenas localizadas, estimativas de população e rotas históricas concluídas nesta etapa. O trabalho seguinte é transformar os mapas de Etérea, Nadírion e Guerras de Sangue em interfaces interativas, incluir todos os lugares geograficamente localizáveis e revisar pins, zoom, deslocamento, centralização, fichas rápidas e informações estratégicas.
+A próxima IA deve começar pela Etapa 10 usando o pacote completo da Etapa 9. Deve preservar as páginas sociais, o catálogo das quarenta imagens substituíveis, os fallbacks atmosféricos, os IDs, os mapas, as trajetórias e todas as etapas anteriores. O foco seguinte é revisar, completar e padronizar as fichas dos clãs de *Guerras de Sangue*, sem criar brasão para os Fendelar e sem alterar o GitHub.

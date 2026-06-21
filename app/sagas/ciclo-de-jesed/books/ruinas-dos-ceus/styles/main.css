@@ -295,3 +295,79 @@ h1{font-size:clamp(2.2rem,5vw,4.5rem);line-height:1;margin:.08em 0}
 .place-event-card small{color:#698088;line-height:1.45}
 @media(max-width:1050px){.place-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.place-linked-grid{grid-template-columns:1fr}}
 @media(max-width:680px){.place-feature-grid{grid-template-columns:1fr}.place-card-facts,.place-detail-facts{grid-template-columns:1fr}.place-content-section,.place-characters-section,.place-linked-grid>.panel{padding:19px}.place-character-grid{grid-template-columns:1fr}.place-scene-heading{display:block}.place-scene-relation{display:inline-block;margin-bottom:8px}}
+
+/* Etapa 6 — mapas interactivos e navegação entre capítulos */
+.ruinas-interactive-map{--di-map-accent:#3e8192;--di-map-accent-soft:rgba(62,129,146,.24);background:#162b32}
+.ruinas-interactive-map .di-map-context{background:linear-gradient(135deg,rgba(24,67,79,.92),rgba(33,61,67,.68))}
+.ruinas-interactive-map .di-map-pin-marker{background:radial-gradient(circle at 50% 35%,#eef8f3 0 16%,#4e98aa 18% 55%,#173640 58%)}
+.ruinas-map-section .di-map-tabs button{background:rgba(241,249,247,.78)}
+.ruinas-map-section .di-map-tabs button.active{background:#356f80;color:#fff}
+.map-period-summary{display:grid;gap:10px}
+.map-period-summary h2,.map-period-summary p{margin:0}
+.map-place-links{display:flex;flex-wrap:wrap;gap:8px}
+.map-place-links button{border:1px solid rgba(72,114,124,.28);border-radius:999px;padding:7px 10px;background:rgba(255,255,255,.55);color:inherit;cursor:pointer;font:inherit;font-size:.78rem}
+.map-place-links button:hover,.map-place-links button:focus-visible{outline:none;border-color:#3e8192;background:rgba(76,150,167,.16)}
+.chapter-pagination-top{margin:0 0 18px}
+.chapter-pagination-top button{min-height:58px}
+.chapter-pagination-top button small{display:block;margin-top:3px;max-width:26ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:700px){.chapter-pagination-top{grid-template-columns:1fr}.chapter-pagination-top button{width:100%}.ruinas-map-section .di-map-tabs{display:grid;grid-template-columns:1fr}.ruinas-map-section .di-map-tabs button{width:100%}}
+
+
+/* Etapa 7 — página inicial orientadora */
+.home-guide-hero{min-height:500px}
+.home-guide-section{margin-top:24px}
+.home-section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:14px}
+.home-section-heading .eyebrow{margin:0 0 4px}.home-section-heading h2{font-size:clamp(1.35rem,2.4vw,2rem);margin:0}.home-section-heading p{max-width:700px}
+.home-guide-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.home-guide-card{min-height:150px;position:relative;overflow:hidden;padding:20px}
+.home-guide-card::after{content:"";position:absolute;right:-24px;bottom:-34px;width:100px;height:100px;border:1px solid #59818a38;border-radius:50%;box-shadow:0 0 0 18px #fff2,0 0 0 34px #4d7d8814;pointer-events:none}
+.home-guide-mark{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#d9edf0;color:#2d6471;font-size:1.15rem;margin-bottom:18px}
+.home-guide-card h3{margin:0 0 6px}.home-guide-card p{margin:0;max-width:190px}
+.home-map-overview{padding:22px;border:1px solid #fff9;border-radius:22px;background:linear-gradient(145deg,#f7edd8dc,#dcecefde);box-shadow:var(--shadow)}
+.home-light-button{color:var(--deep);border-color:#567d8655;background:#ffffff77}
+.home-map-preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.home-map-preview{position:relative;min-height:300px;padding:0;border:1px solid #fff9;border-radius:18px;overflow:hidden;cursor:pointer;text-align:left;background:#1e4450;color:#fff;box-shadow:0 12px 32px #17323a24}
+.home-map-preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease,filter .5s ease;filter:saturate(.92) brightness(.72)}
+.home-map-preview::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(13,31,38,.88))}
+.home-map-preview span{position:absolute;z-index:2;left:22px;right:22px;bottom:20px;display:grid;gap:4px}.home-map-preview small{text-transform:uppercase;letter-spacing:.14em;opacity:.78}.home-map-preview strong{font-size:1.7rem}.home-map-preview em{font-style:normal;opacity:.82}
+.home-map-preview:hover img,.home-map-preview:focus-visible img{transform:scale(1.035);filter:saturate(1) brightness(.82)}.home-map-preview:focus-visible{outline:3px solid #79adba;outline-offset:3px}
+.home-focus-section{padding:22px;margin-top:28px}
+.home-focus-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.home-focus-card{display:grid;justify-items:center;gap:9px;border:1px solid #78959d35;border-radius:14px;background:#fff8;padding:14px 10px;text-align:center;cursor:pointer;color:inherit;transition:.18s}
+.home-focus-card:hover,.home-focus-card:focus-visible{transform:translateY(-3px);border-color:#4f8390;background:#fff;outline:none;box-shadow:0 10px 25px #17323a1c}
+.home-focus-avatar{width:74px;height:74px;border-radius:50%;overflow:hidden;background:#294f61}.home-focus-avatar img{width:100%;height:100%;object-fit:cover}.home-focus-card strong{display:block;color:var(--deep)}.home-focus-card small{display:block;margin-top:4px;opacity:.68}
+.home-text-button{border:0;background:none;color:#285f6d;font-weight:700;cursor:pointer;padding:8px}.home-text-button:hover,.home-text-button:focus-visible{text-decoration:underline;outline:none}
+.home-places-section{margin-top:28px}
+.home-place-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.home-place-card{position:relative;display:flex;flex-direction:column;min-height:330px;padding:0;border:1px solid #fff9;border-radius:18px;background:#f7edd8e8;overflow:hidden;box-shadow:0 8px 24px #173a4718;transition:.2s}
+.home-place-card:hover,.home-place-card:focus-visible{transform:translateY(-4px);box-shadow:0 16px 36px #173a4728;outline:none;border-color:#77a3ad}
+.home-place-media{height:180px;background:#294f61;overflow:hidden}.home-place-media img{width:100%;height:100%;object-fit:cover}.home-place-copy{padding:16px 16px 7px}.home-place-copy .eyebrow{margin:0 0 5px}.home-place-copy h3{margin:0 0 7px}.home-place-copy p{margin:0;opacity:.72}.home-card-link{margin-top:auto;padding:10px 16px 16px;color:#285f6d;font-weight:700}
+@media(max-width:980px){.home-guide-grid{grid-template-columns:repeat(2,1fr)}.home-focus-grid{grid-template-columns:repeat(3,1fr)}.home-place-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.home-guide-hero{min-height:430px}.home-section-heading{align-items:flex-start;flex-direction:column}.home-guide-grid,.home-map-preview-grid,.home-place-grid{grid-template-columns:1fr}.home-focus-grid{grid-template-columns:repeat(2,1fr)}.home-map-preview{min-height:250px}.home-place-card{min-height:300px}}
+@media(prefers-reduced-motion:reduce){.home-map-preview img,.home-guide-card,.home-focus-card,.home-place-card{transition:none}}
+
+/* Etapa 8 — Personagens */
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.character-browser-search input{border:1px solid #6f919955;background:#fffddd;color:var(--deep)}
+.character-browser-search input:focus{border-color:var(--sky);box-shadow:0 0 0 3px #8ac5d32b}
+.character-view-button{border:1px solid #66879255;background:#fff9;color:var(--deep)}
+.character-view-button[aria-pressed="true"]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.ruinas-character-card{padding:0;border:1px solid #fff9;border-radius:18px;background:#f7edd8e8;color:var(--deep);box-shadow:0 9px 26px #173a471a;font:inherit}
+.ruinas-character-card:hover{border-color:#6f919966;box-shadow:0 14px 32px #173a4729}
+.character-browser-card-media .portrait{height:100%;margin:0;border-radius:0;background-position:center top}
+.character-browser-card-copy{text-align:left}
+.character-browser-card-copy h2{font-size:1.28rem;color:var(--deep)}
+.character-browser-subtitle{color:#44616a;opacity:1}
+.character-browser-description{color:#40555b}
+.ruinas-character-row{border:1px solid #78959d44;background:#fff9;color:var(--deep);font:inherit}
+.ruinas-character-row:hover{border-color:#66879288;background:#f7edd8}
+.character-browser-row-media .portrait{width:100%;height:100%;margin:0;border-radius:0;font-size:1.3rem}
+.character-browser-row-description{color:#40555b}
+.character-detail-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:18px}
+.character-detail-facts>div{padding:11px 13px;border:1px solid #64838c3d;border-radius:11px;background:#fff7}
+.character-detail-facts small,.character-detail-facts strong{display:block}.character-detail-facts small{margin-bottom:4px;color:#61747a}.character-detail-facts strong{color:var(--deep)}
+.trajectory-heading{margin-bottom:18px}.trajectory-heading h2{margin:.15rem 0 .45rem}.trajectory-heading p:last-child{margin:0;color:#50676e}
+.character-trajectory-card{width:100%;display:block;text-align:left;font:inherit;color:var(--deep)}
+.character-trajectory-card strong{display:block;font-size:1.02rem}.trajectory-chapter-number{display:block;margin-bottom:4px;color:#5f7d86;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+.trajectory-companions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.trajectory-companions>span{font-size:.78rem;color:#536b72;border-bottom:1px solid #6f91994d;padding-bottom:2px}
+@media(max-width:680px){.character-detail-facts{grid-template-columns:1fr}.character-browser-card-media{height:360px}}
