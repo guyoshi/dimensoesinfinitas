@@ -70,8 +70,8 @@
 
   P.mapa=()=>{
     const maps={
-      eterea:{label:'Etérea',file:'assets/maps/ruinas-dos-ceus/Mapa de Etérea.png',desc:'Ilhas suspensas, pontes vivas, Bosques de Arion, Nivellia, Erílan e Praça da Raiz.'},
-      nadirion:{label:'Nadírion',file:'assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).png',desc:'Floresta, riacho, abrigo, ruínas e Vale.'}
+      eterea:{label:'Etérea',file:'assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp',desc:'Ilhas suspensas, pontes vivas, Bosques de Arion, Nivellia, Erílan e Praça da Raiz.'},
+      nadirion:{label:'Nadírion',file:'assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp',desc:'Floresta, riacho, abrigo, ruínas e Vale.'}
     };
     const phase=maps[st.mapPhase]?st.mapPhase:'eterea',m=maps[phase];
     return H('Mundo','Mapa do período','Etérea, acima das nuvens — Nadírion, na superfície.')+`<div class="filters">${Object.entries(maps).map(([k,v])=>`<button class="${phase===k?'active':''}" data-map-phase="${k}">${E(v.label)}</button>`).join('')}</div><div class="map-page-art"><img src="${encodeURI(m.file)}" alt="Mapa de ${E(m.label)}" loading="lazy"></div><div class="panel"><h2>${E(m.label)}</h2><p>${E(m.desc)}</p></div>`;

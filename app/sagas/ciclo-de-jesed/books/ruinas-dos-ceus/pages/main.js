@@ -15,7 +15,7 @@ function livro(id){
   if(!b) return err();
   const current=b.id==='ruinas-dos-ceus';
   const externalLinks={'guerras-de-sangue':'guerras.html'};
-  const bookLogos={'guerras-de-sangue':'assets/branding/Guerras de Sangue white.png'};
+  const bookLogos={'guerras-de-sangue':'assets/branding/Guerras de Sangue white.webp'};
   const href=!current?externalLinks[b.id]:null;
   const logo=bookLogos[b.id];
   const titleHtml=logo?`<img class="hero-logo" src="${E(logo)}" alt="${E(b.name)}">`:`<h1>${E(b.name)}</h1>`;
@@ -27,7 +27,7 @@ function inicio(){
   const focusChars=D.characters.slice(0,5);
   return `<section class="hero-map-card">
     <img src="assets/maps/ruinas-dos-ceus/mapa-combinado.webp" alt="Mapa de Etérea e Nadírion">
-    <div class="hero-map-content"><p class="eyebrow">Ciclo de Jesed · Guia do livro</p><img class="hero-logo glow-title" src="assets/branding/Ruínas dos Céus white.png" alt="Ruínas dos Céus"><p class="lead">A queda de Etérea e o nascimento da primeira raiz Polar.</p><div class="hero-actions"><button class="primary-button" data-go="mapa">Abrir mapa</button><button class="secondary-button" data-go="livros">Ver os cinco livros</button></div></div>
+    <div class="hero-map-content"><p class="eyebrow">Ciclo de Jesed · Guia do livro</p><img class="hero-logo glow-title" src="assets/branding/Ruínas dos Céus white.webp" alt="Ruínas dos Céus"><p class="lead">A queda de Etérea e o nascimento da primeira raiz Polar.</p><div class="hero-actions"><button class="primary-button" data-go="mapa">Abrir mapa</button><button class="secondary-button" data-go="livros">Ver os cinco livros</button></div></div>
   </section>
   <div class="section grid quick-grid">${[['personagens','Personagens','Quem são e onde ficaram'],['relacoes','Relações','Vínculos centrais'],['linha','Linha do Tempo','Eventos e antecedentes'],['misterios','Mistérios','Pistas e respostas'],['mapa','Mapa','Etérea e Nadírion'],['capitulos','Capítulos',`${D.chapters.length} capítulos escritos`]].map(x=>`<article class="card click" data-go="${x[0]}"><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join('')}</div>
   <div class="section metrics-grid">${[[D.characters.length,'personagens'],[D.places.length,'lugares'],[D.chapters.length,'capítulos'],[(D.common?.entities?.timeline||D.timeline||[]).length,'eventos na linha do tempo'],[MYS.length,'mistérios']].map(x=>`<article class="metric-card"><strong>${x[0]}</strong><span>${x[1]}</span></article>`).join('')}</div>

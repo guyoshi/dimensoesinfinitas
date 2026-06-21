@@ -294,7 +294,7 @@
         <img src="assets/mapa-guerras-de-sangue.webp" alt="Mapa de Jesed na época de Guerras de Sangue">
         <div class="hero-map-content">
           <p class="eyebrow">Ciclo de Jesed · Guia do livro</p>
-          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.png" alt="Guerras de Sangue">
+          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.webp" alt="Guerras de Sangue">
           <p>Um arquivo cartográfico de pessoas, territórios, segredos e consequências, limitado aos capítulos realmente escritos.</p>
           <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button></div>
         </div>
@@ -334,7 +334,7 @@
     const cover = book.cover ? `<img src="${book.cover}" alt="Capa de ${escapeHtml(book.name)}">` : icon(book.icon);
     if (book.id !== "guerras-de-sangue") {
       const externalLinks = { "ruinas-dos-ceus": "ruinas.html" };
-      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.png" };
+      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.webp" };
       const href = externalLinks[book.id];
       const logo = bookLogos[book.id];
       const titleHtml = logo ? `<img class="hero-logo" src="${logo}" alt="${escapeHtml(book.name)}">` : `<h2>${escapeHtml(book.name)}</h2>`;
