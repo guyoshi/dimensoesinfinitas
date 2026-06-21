@@ -8,7 +8,7 @@ Estas regras são obrigatórias para qualquer IA que actualize o conteúdo canó
 - Em **Guerras de Sangue**, considerar apenas o texto efectivamente escrito.
 - Não transformar resumos de capítulos futuros em acontecimentos, trajectórias, conhecimento, destinos ou aparições canónicas.
 - Quando um capítulo resumido passar a existir como narrativa escrita, ele pode então ser incorporado.
-- O livro Guerras de Sangue está completo até o Capítulo 29 — A Raiz que Ficou. Os capítulos 1-23 estão em `data/content.js`; os capítulos 24-29 são adicionados em runtime por `data/guerras-4d-chapters.js` (e os personagens/eventos correspondentes por `data/guerras-4d-characters.js` e `data/guerras-4d-events.js`), para não exigir reescrever o blob minificado de `content.js`. `scripts/validate-content.js` valida apenas `content.js` isoladamente (por isso ainda espera 23 capítulos nesse ficheiro — isso é esperado e não é um erro).
+- O livro Guerras de Sangue está completo até o Capítulo 29 — A Raiz que Ficou. Os arquivos permanentes de cada livro ficam em `data/sagas/ciclo-de-jesed/books/<livro>/`. O validador carrega a estrutura completa dos dois livros.
 
 ## 2. Nunca inventar
 
@@ -41,7 +41,7 @@ Exemplo:
 - Alterar apenas os campos afectados pela nova fonte.
 - Não substituir listas inteiras sem primeiro preservar elementos válidos já existentes.
 - Não apagar entidades silenciosamente.
-- Não remover relações, fontes, aparições ou acontecimentos por ausência numa nova análise parcial.
+- Não remover relações, fontes, aparições ou registros da Linha do Tempo por ausência numa nova análise parcial.
 - Antes de remover qualquer entidade, explicar o motivo no relatório de alterações.
 
 ## 5. Tipos de verdade separados
@@ -128,3 +128,54 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 - Não criar brasão para os Fendelar: eles são o único clã sem brasão.
 - Quando uma imagem for substituída, manter o ID da entidade e alterar apenas o caminho do asset.
 - Validar todos os caminhos antes da publicação.
+
+## 14. Plano mestre obrigatório
+
+- Antes de qualquer alteração, ler `PLANO-MESTRE-E-HISTORICO.md` por completo.
+- O arquivo define a ordem das etapas, as decisões mais recentes, o protocolo de trabalho e o estado atual do projeto.
+- Trabalhar sempre sobre o pacote mais recente enviado pelo autor.
+- Não usar nem alterar o GitHub quando o autor tiver enviado a pasta de trabalho, salvo autorização explícita.
+- Atualizar o plano mestre ao concluir cada etapa.
+- Não criar outro histórico ou plano paralelo.
+
+
+## Arquitetura obrigatória desde a Etapa 3
+
+- Não criar scripts ou CSS de livros na raiz.
+- Manter na raiz apenas entradas HTML, documentação, `.nojekyll` e `package.json`.
+- Código de livro: `app/sagas/<saga>/books/<livro>/`.
+- Dados de livro: `data/sagas/<saga>/books/<livro>/`.
+- Código reutilizável: `app/shared/`.
+- Não voltar a nomes temporários como `4d`, `patch-final`, `novo`, `backup` ou `corrigido` nos arquivos definitivos.
+- Novas sagas e livros devem repetir o mesmo padrão, sem arquivos soltos por título na raiz.
+
+
+## 15. Linha do Tempo desde a Etapa 4
+
+- A Queda é o marco zero entre A.Q. e D.Q.
+- Usar ciclos, nunca anos.
+- Usar meses ordinais; não inventar dias.
+- Toda estimativa deve permanecer explicitamente marcada como aproximada.
+- Não confundir a data do acontecimento com o capítulo em que ele foi citado, recordado, investigado ou revelado.
+- Preservar `id`, `slug`, `legacySlugs`, `date`, `dateLabel`, `sortKey` e `chapterLinks`.
+- Relações de capítulo permitidas: `ocorre`, `citado`, `recordado`, `investigado`, `revelado` e `consequencia`.
+- Páginas individuais devem manter descrição, contexto, causa, consequências, participantes, lugares, capítulos e acontecimentos relacionados.
+- A verdade da morte de Orionus não pode regredir: Ylvena pretendia envenenar Alyra, Orionus bebeu por engano e Daryon falsificou as provas.
+- Rotas históricas de Acontecimentos devem continuar redirecionando para a Linha do Tempo.
+
+## 16. Lugares desde a Etapa 5
+
+- Rotas são lugares e não podem voltar a existir como seção independente.
+- Preservar os IDs históricos `route-*` das cinco rotas de *Guerras de Sangue*.
+- Não usar `Estado: Activa` ou `Estado: Ativa` nas fichas de lugares.
+- Mostrar população somente quando houver estimativa aplicável; quando não houver, omitir o campo.
+- Não atribuir população a rios, florestas, estradas, gargantas, rotas, montanhas ou regiões naturais.
+- Preservar `region`, `location`, `description`, `narrativeFunction`, `architecture`, `atmosphere`, `resources`, `dangers`, `culture`, `population`, `chapterScenes`, `characterIds` e `eventIds`.
+- “Personagens que passaram por aqui” deve ser derivado das cenas do livro, nunca da última localização do personagem.
+- Capítulos ligados devem descrever somente a cena ocorrida no lugar, e não repetir o resumo geral do capítulo.
+- Estimativas populacionais são editoriais e podem ser corrigidas sem alterar IDs.
+
+## 17. Estado atual
+
+- Etapas 1, 2, 3, 4 e 5 concluídas.
+- Próxima etapa oficial: **Etapa 6 — Mapas interativos**.

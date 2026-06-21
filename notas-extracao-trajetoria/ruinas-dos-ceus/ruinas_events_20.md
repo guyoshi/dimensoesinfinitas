@@ -1,7 +1,0 @@
-### Capítulo 20 — Ruínas dos Céus
-- Jokara Amaréa: Segue Loutes sonâmbulo de madrugada (contra os pedidos de Nestira) até ruínas antigas muito mais antigas que as de Etérea; encontra um cristal pulsante e o esqueleto de alguém que escrevera o Verbo da Corrente original; ao tocar o cristal junto com Nestira, é transportada numa visão para dentro da própria Etérea, revelando que o povo eteriano na verdade se originou na superfície e fugiu para o céu havia muito tempo — invertendo tudo que acreditavam sobre sua própria origem.
-- Nestira Amaréa: Acompanha Jokara até as ruínas antigas; lê em voz alta o livro escrito em Levis encontrado junto ao esqueleto, decifrando o Verbo da Corrente original e descobrindo, em choque, que Etérea não foi o começo do povo eterí — eles vieram da terra, não o contrário; toca o cristal junto com a irmã e é levada à mesma visão.
-- Marv: Não aparece ativamente; está ferido e dormindo durante a maior parte do capítulo.
-- Loutes: Caminha sonâmbulo de madrugada, sempre de costas, conduzindo Jokara e Nestira até as ruínas antigas e desaparecendo dentro delas, como se soubesse exatamente o caminho.
-- Gabasteres: Provoca o grupo ao avistar um pântano fétido, sugerindo ironicamente que ali há "banquete" de peixes e raízes; ronca tranquilamente enquanto Loutes desaparece de madrugada, sem se envolver na busca.
-- Malthar: Lidera a travessia de um pântano perigoso e hostil; entrega a Jokara um novo bastão de apoio; permanece de vigia, embora vencido pelo cansaço na noite em que Loutes desaparece.

@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "stage": 4,
+  "generatedAt": "2026-06-21",
+  "scope": "Nova Linha do Tempo cronológica de Ruínas dos Céus e Guerras de Sangue.",
+  "rules": {
+    "eras": [
+      "A.Q.",
+      "D.Q."
+    ],
+    "zeroMarker": "Queda de Etérea",
+    "unit": "ciclos",
+    "months": "meses ordinais",
+    "dayPrecision": false,
+    "unknownAbsoluteCycleAllowed": true,
+    "falsePrecisionForbidden": true,
+    "chapterRelations": [
+      "ocorre",
+      "citado",
+      "recordado",
+      "revelado",
+      "investigado",
+      "consequencia"
+    ]
+  },
+  "counts": {
+    "ruinas-dos-ceus": 30,
+    "guerras-de-sangue": 38
+  },
+  "implementation": {
+    "chronologicalSort": "sortKey numérico oculto",
+    "visibleDate": "dateLabel",
+    "individualPages": true,
+    "selectedCardPersistence": true,
+    "keyboardNavigation": true,
+    "legacyRoutesPreserved": true,
+    "searchIntegration": [
+      "ruinas-dos-ceus",
+      "guerras-de-sangue"
+    ]
+  },
+  "canonicalDecisions": [
+    "A Queda é o marco zero entre A.Q. e D.Q.",
+    "Ruínas dos Céus usa datas aproximadas no último ciclo A.Q. e nos três primeiros meses do 1º ciclo D.Q.",
+    "Guerras de Sangue ocorre mais de 200 ciclos D.Q., mas o ciclo absoluto não é conhecido; a cronologia usa “ciclo da guerra” e relações temporais verificáveis.",
+    "A ascensão de Orionus, a Lei do Portão, a morte de Orionus e o exílio de Ylvena aparecem pela data histórica, não pelo capítulo da revelação.",
+    "A morte de Orionus preserva a verdade canônica: Ylvena pretendia matar Alyra, Orionus bebeu por engano e Daryon falsificou as provas."
+  ],
+  "legacyCompatibility": {
+    "guerras": [
+      "events",
+      "event/*",
+      "acontecimentos",
+      "acontecimento/*",
+      "morte-de-orionus",
+      "acontecimentos-capitulo-01..23"
+    ],
+    "ruinas": [
+      "acontecimentos",
+      "acontecimento/*",
+      "events",
+      "event/*",
+      "timeline",
+      "timeline/*",
+      "slugs históricos dos acontecimentos"
+    ]
+  },
+  "knownLimits": [
+    "Os meses de Guerras de Sangue são estimativas narrativas e estão marcados como aproximados.",
+    "A pasta assets não estava incluída e não foi auditada nesta etapa.",
+    "A revisão aprofundada de lugares permanece para a Etapa 5."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "stage": "Etapa 5",
+  "title": "Lugares e rotas",
+  "books": {
+    "guerras-de-sangue": {
+      "places": 23,
+      "populationFields": 12,
+      "routesIntegrated": [
+        "route-rio-grande",
+        "route-garganta-kaendar",
+        "route-garganta-seca",
+        "route-estrada-graos",
+        "route-marcha-alianca"
+      ],
+      "chapterScenes": 69
+    },
+    "ruinas-dos-ceus": {
+      "places": 17,
+      "populationFields": 3,
+      "chapterScenes": 48
+    }
+  },
+  "rules": [
+    "Estado genérico removido das fichas de lugares.",
+    "População exibida somente quando aplicável.",
+    "Capítulos ligados descrevem a cena no lugar, não o resumo geral.",
+    "Rotas permanecem na coleção Lugares com os IDs históricos.",
+    "Personagens são agregados pelas cenas registradas em cada lugar."
+  ]
+}

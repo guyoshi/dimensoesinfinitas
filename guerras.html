@@ -7,7 +7,7 @@
   <meta name="description" content="Guerras de Sangue — Ciclo de Jesed, Livro II." />
   <title>Guerras de Sangue — Dimensões Infinitas</title>
   <link rel="preload" href="assets/mapa-guerras-de-sangue.webp" as="image" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="app/sagas/ciclo-de-jesed/books/guerras-de-sangue/styles.css" />
 </head>
 <body data-theme="jesed" data-book="guerras-de-sangue">
   <div id="particleLayer" class="particle-layer" aria-hidden="true"></div>
@@ -21,7 +21,7 @@
         <button id="sidebarToggle" class="icon-button sidebar-toggle" aria-label="Encolher painel lateral" title="Encolher painel lateral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       </div>
       <nav id="sidebarNav" class="sidebar-nav"></nav>
-      <div class="sidebar-footer"><button class="nav-item compact-only" data-action="open-settings" title="Configurações"><span class="nav-icon" data-icon="settings"></span><span class="nav-label">Configurações</span></button><a class="nav-item exit-nav-link" href="index.html#/books" title="Trocar de livro"><span class="nav-icon">←</span><span class="nav-label">Dimensões Infinitas</span></a><div class="status-stamp"><span class="status-dot"></span><span class="status-copy">Etapa 4D</span></div></div>
+      <div class="sidebar-footer"><button class="nav-item compact-only" data-action="open-settings" title="Configurações"><span class="nav-icon" data-icon="settings"></span><span class="nav-label">Configurações</span></button><a class="nav-item exit-nav-link" href="index.html#/books" title="Trocar de livro"><span class="nav-icon">←</span><span class="nav-label">Dimensões Infinitas</span></a><div class="status-stamp"><span class="status-dot"></span><span class="status-copy">Livro concluído</span></div></div>
     </aside>
     <div class="workspace">
       <header class="topbar">
@@ -44,14 +44,25 @@
   <div id="searchModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-search"></div><section class="modal-panel search-modal-panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle"><div class="search-box-large"><span data-icon="search"></span><input id="searchInput" type="search" autocomplete="off" placeholder="Pesquisar nome, título, alcunha ou categoria…" /><kbd>Esc</kbd></div><div class="search-mode-row"><button class="filter-chip active" data-search-mode="titles">Títulos e nomes</button><button class="filter-chip" data-search-mode="deep">Procurar em descrições</button></div><div id="searchResults" class="search-results"></div></section></div>
   <div id="settingsDrawer" class="drawer" aria-hidden="true"><div class="drawer-backdrop" data-action="close-settings"></div><aside class="drawer-panel settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="drawer-header"><div><p class="eyebrow">Preferências locais</p><h2 id="settingsTitle">Configurações visuais</h2></div><button class="icon-button" data-action="close-settings" aria-label="Fechar configurações"><span data-icon="close"></span></button></div><div id="settingsContent" class="settings-content"></div></aside></div>
   <div id="selectorModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-selector"></div><section class="modal-panel selector-modal-panel" role="dialog" aria-modal="true"><div id="selectorContent"></div></section></div>
-  <script src="data/content.js"></script>
-  <script src="data/guerras-4d-chapters.js"></script>
-  <script src="data/guerras-4d-characters.js"></script>
-  <script src="data/guerras-4d-character-images.js"></script>
-  <script src="data/guerras-4d-events.js"></script>
-  <script src="data/guerras-trajetoria-data.js"></script>
-  <script src="app.js"></script>
-  <script src="etapa4d-ui.js"></script>
-  <script src="ruinas-bridge.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/runtime.js"></script>
+  <script src="data/common/schema.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/book.js"></script>
+<script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/canonical.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/chapters.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/characters.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/timeline.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/relationships.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/places.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/mysteries.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/themes.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/fauna.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/flora.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/foods.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/concepts.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/gallery.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/index.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/guerras-de-sangue/trajectory.js"></script>
+  <script src="app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js"></script>
+  <script src="app/shared/book-music/loader.js"></script>
 </body>
 </html>

@@ -1,0 +1,20 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..');
+const canonical=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/canonical-etapa-3.json'),'utf8'));
+const timeline=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/timeline-etapa-4.json'),'utf8'));
+const places=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/places-etapa-5.json'),'utf8'));
+console.log(`Auditoria canônica preservada — Etapa ${canonical.stage}`);
+console.log(`Correções canônicas aplicadas: ${canonical.correctionsApplied.length}`);
+console.log('');
+console.log(`Auditoria da Linha do Tempo — Etapa ${timeline.stage}`);
+console.log(`Ruínas dos Céus: ${timeline.counts['ruinas-dos-ceus']} acontecimentos.`);
+console.log(`Guerras de Sangue: ${timeline.counts['guerras-de-sangue']} acontecimentos.`);
+console.log(`Regras temporais: ${timeline.rules.eras.join(' / ')}, ciclos, meses ordinais e nenhuma precisão diária.`);
+console.log(`Compatibilidade de rotas antigas: ${timeline.implementation.legacyRoutesPreserved?'preservada':'não confirmada'}.`);
+console.log(`Limitações registradas: ${timeline.knownLimits.length}.`);
+
+console.log('');
+console.log(`Auditoria de Lugares — ${places.stage}`);
+console.log(`Ruínas dos Céus: ${places.books['ruinas-dos-ceus'].places} lugares, ${places.books['ruinas-dos-ceus'].chapterScenes} cenas localizadas e ${places.books['ruinas-dos-ceus'].populationFields} estimativas de população aplicáveis.`);
+console.log(`Guerras de Sangue: ${places.books['guerras-de-sangue'].places} lugares, ${places.books['guerras-de-sangue'].chapterScenes} cenas localizadas e ${places.books['guerras-de-sangue'].populationFields} estimativas de população aplicáveis.`);
+console.log(`Rotas históricas incorporadas a Lugares: ${places.books['guerras-de-sangue'].routesIntegrated.length}.`);

@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "stage": 3,
+  "generatedAt": "2026-06-21",
+  "scope": "Auditoria canônica dos Livros I e II e reorganização física escalável do site.",
+  "sources": {
+    "ruinasManuscript": "Ciclo de Jesed - Ruínas dos Céus.docx",
+    "guerrasManuscriptAvailable": "Ciclo de Jesed - Guerras de Sangue.docx (versão disponível contém capítulos escritos até 14 e resumos posteriores; os capítulos 24–29 foram conferidos pelos dados finais já incorporados ao site e pelas decisões do autor)",
+    "supportingDocs": [
+      "Resumo dos Acontecimentos dos Livros.docx",
+      "Orionus-Guerras-de-Sangue.txt",
+      "Conselho dos 11.docx",
+      "Fauna.docx",
+      "Flora.docx",
+      "Alimentos.docx",
+      "Mapa Textual de Jesed.docx"
+    ],
+    "imageArchives": {
+      "ruinasCharacters": 15,
+      "ruinasPlaces": 17,
+      "guerrasCharacters": 43,
+      "guerrasPlaces": 18
+    }
+  },
+  "architecture": {
+    "rootPolicy": "A raiz mantém apenas entradas HTML, configuração e documentação. Código fica em app/ e conteúdo em data/.",
+    "publicEntrypoints": [
+      "index.html",
+      "ruinas.html",
+      "guerras.html"
+    ],
+    "appPattern": "app/sagas/<saga>/books/<livro>/",
+    "dataPattern": "data/sagas/<saga>/books/<livro>/",
+    "sharedPattern": "app/shared/"
+  },
+  "correctionsApplied": [
+    {
+      "book": "ruinas-dos-ceus",
+      "type": "chapter-title",
+      "items": [
+        {
+          "chapter": 11,
+          "from": "Sobrevivência na Superfície",
+          "to": "Sobrevivência"
+        },
+        {
+          "chapter": 12,
+          "from": "Esperanças e Cinzas",
+          "to": "O Homem no Riacho"
+        },
+        {
+          "chapter": 15,
+          "from": "A Ecoante e as Aranitas",
+          "to": "O Peso do Silêncio"
+        },
+        {
+          "chapter": 21,
+          "from": "A Âncora e o Sopro",
+          "to": "A Leveza e o Peso"
+        },
+        {
+          "chapter": 24,
+          "from": "A Semente e o Vale",
+          "to": "O Vale"
+        }
+      ]
+    },
+    {
+      "book": "ruinas-dos-ceus",
+      "type": "canonical-name",
+      "entity": "jesed-fauna-raukhar",
+      "visibleName": "Rhaukar",
+      "preservedSlug": "raukhar",
+      "aliases": [
+        "Raukhar",
+        "a Fera",
+        "Fera de olhos amarelos"
+      ]
+    },
+    {
+      "book": "guerras-de-sangue",
+      "type": "orionus-truth",
+      "status": "verified-and-preserved",
+      "truth": "Ylvena tentou envenenar Alyra com Beijo-da-Noite; Orionus bebeu por engano; Daryon destruiu provas e fabricou a inocência de Ylvena."
+    },
+    {
+      "book": "guerras-de-sangue",
+      "type": "truncated-text",
+      "status": "sanitized",
+      "note": "Resumos que terminavam no meio de uma frase deixam de exibir reticências truncadas; a reescrita aprofundada permanece para as etapas específicas."
+    }
+  ],
+  "verified": {
+    "ruinasChapterTitles": {
+      "1": "O Sopro de Etérea",
+      "2": "A Criança do Vazio",
+      "3": "O Ritual da Semente",
+      "4": "A Mulher de um Olho",
+      "5": "A Nuvem",
+      "6": "O Círculo de Nhamari",
+      "7": "A Revelação na Praça da Raiz",
+      "8": "O Último Sinal",
+      "9": "O Cataclisma",
+      "10": "Nadírion",
+      "11": "Sobrevivência",
+      "12": "O Homem no Riacho",
+      "13": "As Asas de Xar",
+      "14": "Reencontro",
+      "15": "O Peso do Silêncio",
+      "16": "As Sombras nas Árvores",
+      "17": "Polar",
+      "18": "Pai e Filha",
+      "19": "Ataque da Besta",
+      "20": "Ruínas dos Céus",
+      "21": "A Leveza e o Peso",
+      "22": "O Peso da Verdade",
+      "23": "O Sopro de Nestira",
+      "24": "O Vale"
+    },
+    "guerrasAvailableChapterTitles": {
+      "1": "Talismã Negro",
+      "2": "A Lei do Portão",
+      "3": "O Olho da Fera",
+      "4": "A Mesa da Raiz",
+      "5": "Homens das Areias",
+      "6": "Pão, Sal e Sangue",
+      "7": "O Esconderijo das Crianças",
+      "8": "O Túnel dos Ancestrais",
+      "9": "A Semente Rubra",
+      "10": "A Voz da Mentira",
+      "11": "Os Comerciantes de Fogo",
+      "12": "O Punho Fechado",
+      "13": "Sombras da Verdade",
+      "14": "335",
+      "15": "Os Urtistar na Tempestade",
+      "16": "Os Clãs na Terra Preta",
+      "17": "O Nome do Pai",
+      "18": "Noreval",
+      "19": "A Plataforma do Sol Alto",
+      "20": "Margem dos Zírrios",
+      "21": "Soberanas ao Sol",
+      "22": "A Marcha dos Tondrar",
+      "23": "A Câmara do Primeiro Abrigo",
+      "24": "De Volta à Kaendar",
+      "25": "O Segredo de Daryon",
+      "26": "A Mão de Fogo",
+      "27": "A Última Caça do Caçador",
+      "28": "Guerra de Sangue",
+      "29": "A Soberana"
+    },
+    "characterTrajectoryCoverage": {
+      "ruinas": "15/15 personagens com trajetória têm ficha",
+      "guerras": "41/41 personagens com trajetória têm ficha antes dos acréscimos finais"
+    },
+    "imageArchiveCoverage": {
+      "ruinas": "15 arquivos de personagens e 17 arquivos de lugares identificados.",
+      "guerras": "43 arquivos de personagens e 18 arquivos de lugares identificados."
+    }
+  },
+  "pendingForLaterStages": {
+    "images": [
+      "Associar definitivamente os nomes de arquivos dos RAR aos caminhos WebP quando a pasta assets for reunida.",
+      "Resolver aliases de arquivo: Monthar/Malthar, Prof Talver/Professor Talver, Asteiro/Alesteiro, Lurak/Lurok, Maela/Maelis e Iressa Mãos-de-Sal/Iressa Mão-de-Sal.",
+      "Definir se Amaréa.png é retrato familiar ou imagem individual de Mirel."
+    ],
+    "maps": [
+      "Guerras de Sangue ainda possui lugares sem coordenadas: Marco das Três Pedras, Alesteiro, Noreval, Nhar-Veyr, Plataforma do Sol Alto, Veias de Barro, Câmara do Primeiro Abrigo e rotas migradas.",
+      "Todos os pins serão tratados na Etapa 6, após a revisão detalhada dos lugares da Etapa 5."
+    ],
+    "guerrasSourceLimitation": "O DOCX disponível no ambiente não é a versão revisada final com todos os 29 capítulos. Não substituir dados finais dos capítulos 15–29 pelo manuscrito antigo.",
+    "contentDepth": [
+      "Páginas de clãs continuam reservadas para a Etapa 10.",
+      "Contagens e trechos de fauna, flora e alimentos ficam para a Etapa 11.",
+      "Mistérios serão reestruturados na Etapa 13."
+    ]
+  }
+}

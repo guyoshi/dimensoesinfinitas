@@ -1,48 +1,119 @@
-# Dimensões Infinitas — Etapa 4B
+# Dimensões Infinitas — site pessoal
 
-Site estático de consulta do universo criativo de Guilherme S. L. Anjos. Nesta etapa, a interface de **Ciclo de Jesed** foi preenchida com o conteúdo escrito de **Guerras de Sangue**.
+Versão estrutural: **0.9.0 — Etapa 5 concluída**.
 
-## Abrir localmente
+## Entradas públicas
 
-O ficheiro `index.html` pode ser aberto directamente. Para testar como será publicado no GitHub Pages, execute:
+- `index.html` — portal de Dimensões Infinitas.
+- `ruinas.html` — *Ruínas dos Céus*.
+- `guerras.html` — *Guerras de Sangue*.
 
-```bash
-npm run serve
+Esses três arquivos permanecem na raiz para preservar os endereços publicados. Todo o restante está organizado para suportar várias sagas e livros.
+
+## Arquitetura
+
+```text
+app/
+├── portal/
+├── shared/
+└── sagas/
+    └── ciclo-de-jesed/
+        └── books/
+            ├── ruinas-dos-ceus/
+            └── guerras-de-sangue/
+
+data/
+├── common/
+└── sagas/
+    └── ciclo-de-jesed/
+        ├── audits/
+        └── books/
+            ├── ruinas-dos-ceus/
+            └── guerras-de-sangue/
 ```
 
-Depois abra `http://localhost:8080`.
+O padrão para novos livros é:
 
-## Validar antes de publicar
+- interface: `app/sagas/<saga>/books/<livro>/`;
+- conteúdo: `data/sagas/<saga>/books/<livro>/`;
+- módulos reutilizáveis: `app/shared/`;
+- auditorias da saga: `data/sagas/<saga>/audits/`.
+
+## Instalação
+
+Extraia o pacote completo sobre a pasta do site. A pasta `assets` não foi incluída nesta entrega e deve permanecer na raiz do projeto quando você mesclar as versões.
+
+## Comandos
 
 ```bash
 npm run validate
+npm run audit
+npm run serve
 ```
 
-A validação impede a publicação quando encontra:
+## Documentação obrigatória
 
-- IDs duplicados ou protegidos removidos;
-- relações e referências quebradas;
-- imagens ausentes;
-- personagens ligadas a capítulos, clãs ou lugares inexistentes;
-- capítulo posterior ao 23 marcado como escrito;
-- capítulo sem resumo e acontecimentos detalhados;
-- brasão atribuído indevidamente aos Fendelar.
+Leia `PLANO-MESTRE-E-HISTORICO.md` antes de qualquer alteração. Ele contém todas as decisões, etapas concluídas e tarefas futuras.
 
-## Conteúdo da 4B
+## Etapa 4 — Linha do Tempo
 
-- 29 capítulos efectivamente escritos de **Guerras de Sangue** (1-23 em `data/content.js`; 24-29 acrescentados em runtime por `data/guerras-4d-chapters.js`);
-- resumos rápidos e descrições detalhadas dos acontecimentos;
-- nomes interligados nos textos dos capítulos;
-- 41 personagens, incluindo 23 retratos já adicionados;
-- oito clãs, com sete brasões e os Fendelar explicitamente sem brasão;
-- relações filtráveis, famílias e organizações funcionais;
-- lugares, mapa interactivo, rotas e acontecimentos;
-- fauna, flora, alimentos e conceitos com contagem de citações;
-- capas de **Ruínas dos Céus** e **Guerras de Sangue**;
-- pesquisa rápida e profunda;
-- configurações granulares de desempenho;
-- `AI_UPDATE_RULES.md` e manifesto completo de IDs.
+Os dois livros agora usam uma cronologia real de Jesed:
 
-## Limite canónico
+- `A.Q.` — Antes da Queda;
+- `D.Q.` — Depois da Queda;
+- ciclos em vez de anos;
+- meses ordinais;
+- nenhuma data diária inventada;
+- datas aproximadas claramente identificadas.
 
-O livro **Guerras de Sangue** está completo até o **Capítulo 29 — A Raiz que Ficou**. `scripts/validate-content.js` continua a validar apenas `data/content.js` isoladamente (por isso ainda reporta 23 capítulos nesse ficheiro — os capítulos 24-29 vivem nos ficheiros de extensão em `data/guerras-4d-*.js`, carregados em runtime pelo navegador).
+Cada acontecimento possui:
+
+- `id` e `slug` estáveis;
+- objeto `date`;
+- `dateLabel` visível;
+- `sortKey` cronológico oculto;
+- descrição, contexto, causa e consequências;
+- capítulos classificados como ocorrência, citação, lembrança, investigação, revelação ou consequência;
+- personagens, lugares e acontecimentos relacionados;
+- versão pública e verdade, quando aplicável;
+- `legacySlugs` para preservar endereços antigos.
+
+A Linha do Tempo contém:
+
+- 30 acontecimentos em *Ruínas dos Céus*;
+- 38 acontecimentos em *Guerras de Sangue*.
+
+O relatório específico está em:
+
+`data/sagas/ciclo-de-jesed/audits/timeline-etapa-4.json`
+
+## Etapa 5 — Lugares e rotas
+
+As fichas de lugares dos dois livros agora compartilham uma estrutura aprofundada com:
+
+- região e localização;
+- descrição completa;
+- função narrativa;
+- arquitetura ou forma natural;
+- clima e atmosfera;
+- recursos, perigos e cultura;
+- população estimada somente quando aplicável;
+- personagens que passaram pelo lugar;
+- capítulos com descrição específica da cena;
+- acontecimentos relacionados da Linha do Tempo.
+
+A etapa contém:
+
+- 23 lugares e 69 cenas localizadas em *Guerras de Sangue*;
+- 17 lugares e 48 cenas localizadas em *Ruínas dos Céus*;
+- 5 rotas históricas definitivamente incorporadas à coleção Lugares;
+- 15 estimativas de população ou ocupação aplicáveis;
+- nenhum uso do campo genérico `Estado: Activa`.
+
+O relatório específico está em:
+
+`data/sagas/ciclo-de-jesed/audits/places-etapa-5.json`
+
+## Próxima etapa
+
+**Etapa 6 — Mapas interativos.**
