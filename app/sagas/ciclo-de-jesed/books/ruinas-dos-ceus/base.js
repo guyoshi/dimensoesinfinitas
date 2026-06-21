@@ -5,7 +5,7 @@ const REL=[['Jokara Amaréa','Nestira Amaréa','Irmãs: Peso e Sopro'],['Jokara 
 const EV=[[1,'As primeiras pedras'],[2,'O Primeiro Voo falha'],[3,'Loutes recebe um nome'],[4,'A profecia de Yndra'],[6,'O livro na caverna'],[7,'A denúncia pública'],[9,'O Cataclisma'],[10,'O primeiro fogo'],[15,'A chegada de Platisa'],[17,'O nome Polar'],[20,'As ruínas revelam a origem'],[22,'O sacrifício de Jokara'],[23,'A última perseguição'],[24,'O Vale']];
 const MYS=[['loutes','Quem é Loutes?','Aberto','Uma criança deslocada, ligada ao ciclo e ao tempo; a origem permanece sem explicação.'],['ilhas-baixas','As Ilhas Baixas existiam?','Resolvido','Não. Eram uma mentira institucional usada para ocultar a morte dos exilados.'],['eterea','Por que Etérea caiu?','Parcial','Há sinais físicos e leitura simbólica pelo Peso, mas não uma resposta totalmente fechada.'],['ruinas','Quem construiu as ruínas?','Parcial','Povos da superfície ligados aos ancestrais eterí.'],['sopro','O Sopro é divino ou natural?','Aberto','A narrativa preserva as duas interpretações.']];
 const LORE={fauna:[['Nuari',8],['Aranita',2],['Raukhar',5,'assets/lore/fauna/raukhar.webp','Citado no texto apenas como "a Fera" — é a mesma criatura de Guerras de Sangue.'],['Criatura de escamas negras',2],['Ave branca',1],['Criatura segmentada',1]],flora:[['Selnara',3],['Flor-da-névoa',2],['Seda-das-alturas',2],['Musgos florais',2],['Folha colossal',1],['Raízes vivas',7]],alimentos:[['Carne de nuari',3],['Selnara seca',2],['Mel de flor-aérea',2],['Raízes cozidas',2],['Frutas da superfície',3],['Peixe de riacho',4]],conceitos:[['Sopro',12],['Peso',13],['Primeiro Voo',5],['Círculo do Peso',3],['Verbo da Corrente',2],['Ilhas Baixas',4]]};
-const NAV=[['Visão geral',[['inicio','Início'],['livros','Livros']]],['História',[['capitulos','Capítulos'],['linha','Linha do Tempo']]],['Pessoas',[['personagens','Personagens'],['relacoes','Relações'],['familias','Famílias'],['organizacoes','Organizações']]],['Mundo',[['mapa','Mapa'],['lugares','Lugares']]],['Lore',[['fauna','Fauna'],['flora','Flora'],['alimentos','Alimentos'],['conceitos','Conceitos e leis']]],['Planejamento',[['misterios','Mistérios'],['canon','Regras canônicas']]]];
+const NAV=[['Visão geral',[['inicio','Início'],['livros','Livros']]],['História',[['capitulos','Capítulos'],['linha','Linha do Tempo']]],['Pessoas',[['personagens','Personagens'],['relacoes','Relações'],['familias','Famílias'],['organizacoes','Organizações']]],['Mundo',[['mapa','Mapa'],['lugares','Lugares']]],['Lore',[['fauna','Fauna'],['flora','Flora'],['alimentos','Alimentos'],['conceitos','Conceitos e leis'],['galeria','Galeria']]],['Planejamento',[['temas','Temas'],['misterios','Mistérios'],['canon','Regras canônicas']]]];
 const SAGAS=[
   {id:'ciclo-de-jesed',name:'Ciclo de Jesed',status:'active'},
   {id:'diario-sobrenatural',name:'Diário Sobrenatural',status:'locked'},
@@ -38,13 +38,15 @@ function crumbSegments(){
     if(b==='personagem'){const c=find(D.characters,id);detail=c?.n;}
     else if(b==='capitulo'){const c=D.chapters[Number(id)-1];detail=c?`Capítulo ${c.n}`:null;}
     else if(b==='lugar'){const p=find(D.places,id);detail=p?.n;}
-    else if(b==='misterio'){const m=MYS.find(x=>x[0]===id);detail=m?.[1];}
+    else if(b==='misterio'){const m=D.common?.findBySlug?.('mysteries',id);detail=m?.name;}
+    else if(b==='tema'){const t=D.common?.findBySlug?.('themes',id);detail=t?.name;}
+    else if(b==='conceito'){const c=D.common?.findBySlug?.('concepts',id);detail=c?.name;}
     else if(b==='linha'){const item=D.common?.findBySlug?.('timeline',id);detail=item?.name;}
     if(detail) segs.push({label:detail});
   }
   return segs;
 }
-const NAV_SYMBOLS={inicio:'⌂',livros:'▥',capitulos:'▤',linha:'⌁',personagens:'◌',relacoes:'⌘',familias:'◇',organizacoes:'⚑',mapa:'⌖',lugares:'◉',fauna:'✣',flora:'❧',alimentos:'◡',conceitos:'◫',misterios:'?',canon:'§'};
+const NAV_SYMBOLS={inicio:'⌂',livros:'▥',capitulos:'▤',linha:'⌁',personagens:'◌',relacoes:'⌘',familias:'◇',organizacoes:'⚑',mapa:'⌖',lugares:'◉',fauna:'✣',flora:'❧',alimentos:'◡',conceitos:'◫',galeria:'▧',temas:'◆',misterios:'?',canon:'§'};
 function nav(){
   const b=st.route.split('/')[0];
   $('#nav').innerHTML=NAV.map(([g,a])=>`<div class="group"><span>${g}</span>${a.map(([r,l,href])=>{const icon=NAV_SYMBOLS[r]||'•';return href?`<a class="navb" href="${href}" data-tooltip="${E(l)}" title="${E(l)}"><span class="navb-icon" aria-hidden="true">${icon}</span><span class="navb-label">${E(l)}</span></a>`:`<button class="navb ${b===r?'active':''}" data-go="${r}" data-tooltip="${E(l)}" title="${E(l)}"><span class="navb-icon" aria-hidden="true">${icon}</span><span class="navb-label">${E(l)}</span></button>`}).join('')}</div>`).join('');

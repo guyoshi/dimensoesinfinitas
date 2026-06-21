@@ -11,7 +11,8 @@ const characters=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-
 const social=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/social-etapa-9.json'),'utf8'));
 const clans=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/clans-etapa-10.json'),'utf8'));
 const lore=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/lore-etapa-11.json'),'utf8'));
-const imageRequirements=JSON.parse(fs.readFileSync(path.join(root,'data/common/image-requirements-etapa-9.json'),'utf8'));
+const stage13=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/concepts-mysteries-etapa-13.json'),'utf8'));
+const stage15=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/themes-galleries-etapa-14-15.json'),'utf8'));
 console.log(`Auditoria canônica preservada — Etapa ${canonical.stage}`);
 console.log(`Correções canônicas aplicadas: ${canonical.correctionsApplied.length}`);
 console.log('');
@@ -49,12 +50,12 @@ console.log(`Exceções de execução nos mapas: ${maps.browserTests.runtimeExce
 
 console.log('');
 console.log(`Auditoria de Páginas Iniciais e Assets — ${home.stage} · pacote ${home.version}`);
-console.log(`Inventário WebP: ${assets.count} arquivos registrados e ${home.canonicalManifestMatches} referências canônicas reconhecidas.`);
+console.log(`Inventário de assets: ${assets.count} entradas, sendo ${assets.visualCount} recursos visuais.`);
 console.log(`Ruínas dos Céus: ${home.homepages['ruinas-dos-ceus'].guideCards} acessos, ${home.homepages['ruinas-dos-ceus'].focusCharacters} personagens em foco, ${home.homepages['ruinas-dos-ceus'].placeCards} lugares e ${home.homepages['ruinas-dos-ceus'].mapPreviews} prévias de mapa.`);
 console.log(`Guerras de Sangue: ${home.homepages['guerras-de-sangue'].guideCards} acessos, ${home.homepages['guerras-de-sangue'].focusCharacters} personagens em foco, ${home.homepages['guerras-de-sangue'].placeCards} lugares e ${home.homepages['guerras-de-sangue'].strategicCategories} categorias estratégicas.`);
 console.log(`Últimos capítulos removido dos dois livros: ${home.homepages['ruinas-dos-ceus'].lastChaptersRemoved&&home.homepages['guerras-de-sangue'].lastChaptersRemoved?'sim':'não'}.`);
 console.log(`Caminhos não resolvidos: ${home.unresolvedLiteralPaths.length}; extensões antigas: ${home.legacyImageExtensions.length}; IDs alterados: ${home.idsChanged}.`);
-console.log(`Imagens de capítulo ainda não existentes no inventário: ${home.knownMissingAssets.length} (Ruínas 19 e 22).`);
+console.log(`Imagens de capítulo ausentes no inventário recebido: ${home.knownMissingAssets.length}.`);
 
 console.log('');
 console.log(`Auditoria de Personagens — ${characters.stage} · pacote ${characters.version}`);
@@ -68,8 +69,8 @@ console.log(`IDs alterados: ${characters.idsChanged}; alterações canônicas: $
 console.log('');
 console.log(`Auditoria social e atmosférica — ${social.stage} · pacote ${social.version}`);
 console.log(`Ruínas dos Céus: ${social['ruinas-dos-ceus'].relationships} relações enriquecidas, ${social['ruinas-dos-ceus'].families} família e ${social['ruinas-dos-ceus'].organisations} organizações.`);
-console.log(`Guerras de Sangue: ${social['guerras-de-sangue'].families} famílias e ${social['guerras-de-sangue'].organisations} organizações com imagens e fichas ampliadas.`);
-console.log(`Catálogo substituível: ${imageRequirements.items.length} imagens WebP com caminho, dimensão, transparência e função documentados.`);
+console.log(`Guerras de Sangue: ${social['guerras-de-sangue'].families} famílias e ${social['guerras-de-sangue'].organisations} organizações com fichas ampliadas.`);
+console.log(`Imagens sociais são opcionais e só são usadas quando constam no inventário actual.`);
 console.log(`Referências SVG atmosféricas activas: ${social.atmosphere.activeSvgAtmosphereReferences}; dependências externas adicionadas: ${social.atmosphere.externalDependenciesAdded}.`);
 console.log(`Fallbacks sem erro: ${social.atmosphere.fallbacksEnabled?'activos':'não confirmados'}; GitHub alterado: ${social.githubChanged?'sim':'não'}.`);
 
@@ -93,3 +94,25 @@ console.log(`Ciclo celeste: uma volta em ${lore.clock.cycleRealMinutes} minutos 
 console.log(`Sinopses editoriais completas: Ruínas dos Céus e Guerras de Sangue.`);
 console.log(`Exceções de execução: ${lore.browserTests.runtimeExceptions}; layout móvel sem rolagem horizontal: ${lore.browserTests.mobileNoHorizontalOverflow?'sim':'não'}.`);
 console.log(`IDs alterados: ${lore.idsChanged}; mudanças canônicas: ${lore.canonicalChanges}; GitHub alterado: ${lore.githubChanged?'sim':'não'}.`);
+
+
+console.log('');
+console.log(`Auditoria de Conceitos e Mistérios — ${stage13.stage} · pacote ${stage13.version}`);
+console.log(`Ruínas dos Céus: ${stage13.books['ruinas-dos-ceus'].concepts} conceitos clicáveis e ${stage13.books['ruinas-dos-ceus'].mysteries} mistérios aprofundados.`);
+console.log(`Guerras de Sangue: ${stage13.books['guerras-de-sangue'].concepts} conceitos aprofundados e ${stage13.books['guerras-de-sangue'].mysteries} mistérios atualizados até o fim do livro.`);
+console.log(`Tela Dimensões Infinitas: avanço estelar, portais azul-bebê e música procedural ${stage13.extras.proceduralPortalMusic?'ativos':'ausentes'}.`);
+console.log(`Relógio manual: passos de ${stage13.extras.manualClockStepMinutes} minutos; ciclo automático: ${stage13.extras.automaticSkyCycleRealMinutes} minutos reais por dia completo.`);
+console.log(`Contraste noturno adaptativo: ${stage13.extras.adaptiveNightTextContrast?'ativo':'ausente'}; folha duplicada de Guerras removida: ${stage13.extras.guerrasDuplicateStylesheetRemoved?'sim':'não'}.`);
+console.log(`Rotas testadas: ${stage13.browserSmokeTests.renderedRoutes}/${stage13.browserSmokeTests.routesTested}; exceções da aplicação: ${stage13.browserSmokeTests.applicationExceptions}.`);
+console.log(`IDs alterados: ${stage13.idsChanged}; GitHub alterado: ${stage13.githubChanged?'sim':'não'}.`);
+
+console.log('');
+console.log(`Auditoria de Temas e Galerias — ${stage15.stage} · pacote ${stage15.version}`);
+console.log(`Ruínas dos Céus: ${stage15.books['ruinas-dos-ceus'].themes} temas, ${stage15.books['ruinas-dos-ceus'].galleryItems} registros de galeria e ${stage15.books['ruinas-dos-ceus'].inventoryAvailableItems} itens ligados ao inventário.`);
+console.log(`Guerras de Sangue: ${stage15.books['guerras-de-sangue'].themes} temas, ${stage15.books['guerras-de-sangue'].galleryItems} registros de galeria e ${stage15.books['guerras-de-sangue'].inventoryAvailableItems} itens ligados ao inventário.`);
+console.log(`Cartões temáticos e páginas individuais: ${stage15.themes.interactiveCards&&stage15.themes.individualPages?'ativos':'incompletos'}; ambiguidade interpretativa preservada: ${stage15.themes.interpretiveAmbiguityPreserved?'sim':'não'}.`);
+console.log(`Visualizador compartilhado: ${stage15.gallery.sharedViewer?'ativo':'ausente'}; pesquisa, toque, teclado, contador, legenda e filtro ativo: ${stage15.gallery.searchField&&stage15.gallery.touchSwipe&&stage15.gallery.keyboardArrows&&stage15.gallery.escapeKey&&stage15.gallery.positionCounter&&stage15.gallery.caption&&stage15.gallery.activeFilterNavigation?'ativos':'incompletos'}.`);
+console.log(`Imagens quebradas excluídas durante a execução: ${stage15.gallery.brokenImagesExcludedAtRuntime?'sim':'não'}; placeholders temporários na galeria: ${stage15.gallery.temporaryPlaceholdersExcluded?'não':'sim'}.`);
+console.log(`Rotas testadas: ${stage15.browserTests.renderedRoutes}/${stage15.browserTests.routesTested}; exceções da aplicação: ${stage15.browserTests.applicationExceptions}.`);
+console.log(`IDs alterados: ${stage15.idsChanged}; mudanças canônicas: ${stage15.canonicalChanges}; GitHub alterado: ${stage15.githubChanged?'sim':'não'}.`);
+

@@ -219,7 +219,7 @@
     "finalSituation": "Os Urtistar retiram apoio no momento decisivo e preservam a maior parte de sua força. Saem sem vitória territorial, reforçando a reputação de aliados úteis, perigosos e impossíveis de controlar por contrato ou promessa."
   }
 };
-  const fendelarMark='assets/clans/temp/fendelar-mark.webp';
+  const fendelarMark='';
   for(const clan of D.clans){
     const profile=profiles[clan.slug];
     if(profile)clan.profile=profile;

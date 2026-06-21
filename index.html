@@ -10,24 +10,29 @@
 </head>
 <body>
   <div id="stars" class="stars-layer" aria-hidden="true"></div>
+  <div id="portalField" class="portal-field" aria-hidden="true"></div>
+  <div class="forward-glow" aria-hidden="true"></div>
   <div class="nebula nebula-a" aria-hidden="true"></div>
   <div class="nebula nebula-b" aria-hidden="true"></div>
   <main class="portal-wrap">
     <div id="sagaView" class="view">
       <p class="kicker">Arquivo pessoal do autor</p>
-      <img class="portal-logo" src="assets/branding/Dimensões Infinitas white.webp" alt="Dimensões Infinitas">
+      <img class="portal-logo" src="assets/branding/Dimensões Infinitas white.png" alt="Dimensões Infinitas" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <h1 class="portal-logo-fallback" hidden>Dimensões Infinitas</h1>
       <p class="subtitle">Um arquivo interligado de personagens, relações, mundos, acontecimentos e consequências.</p>
       <section class="card-grid" id="sagaGrid"></section>
     </div>
     <div id="bookView" class="view is-hidden">
       <button class="back-link" data-back="sagas">← Voltar</button>
-      <img class="saga-logo" src="assets/branding/Ciclo de Jesed white.webp" alt="Ciclo de Jesed">
+      <img class="saga-logo" src="assets/branding/Ciclo de Jesed white.png" alt="Ciclo de Jesed" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <h1 class="saga-logo-fallback" hidden>Ciclo de Jesed</h1>
       <h2 class="section-title">Os cinco livros</h2>
       <p class="subtitle">Escolha um livro para ver os detalhes e abrir a página dele.</p>
       <section class="card-grid books" id="bookGrid"></section>
     </div>
     <div id="detailView" class="view is-hidden"></div>
   </main>
+  <div class="portal-controls" aria-label="Controles da atmosfera"><button id="portalMusic" class="portal-music" type="button" aria-pressed="false" title="Ligar música ambiente"><span class="music-symbol" aria-hidden="true">♪</span><span class="music-label">Música</span></button></div>
   <script src="app/portal/data.js"></script>
   <script src="app/portal/app.js"></script>
 </body>

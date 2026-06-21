@@ -101,7 +101,7 @@
       "replacement": "Substituir pela imagem canônica de Kaendar noturna, sem alterar controles ou camadas atmosféricas."
     },
     {
-      "path": "assets/clans/temp/fendelar-mark.webp",
+      "path": "",
       "purpose": "Marca neutra de trilha/floresta para indicar a ausência deliberada de brasão Fendelar.",
       "replacement": "Pode ser mantida como marca não heráldica ou substituída por recurso aprovado; nunca converter em brasão."
     }
@@ -113,7 +113,7 @@
     "app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/experience/styles.css",
     "app/shared/experience/common.css",
     "app/shared/experience/common.js",
-    "assets/clans/temp/fendelar-mark.webp",
+    "",
     "assets/atmosphere/ruinas/eterea-contemplative.webp",
     "assets/atmosphere/guerras/kaendar-night.webp",
     "assets/atmosphere/guerras/sidebar-leather-map.webp",

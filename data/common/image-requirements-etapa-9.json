@@ -312,9 +312,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/clans/temp/fendelar-mark.webp",
+      "path": "",
       "file": "fendelar-mark.webp",
-      "folder": "assets/clans/temp",
+      "folder": "",
       "width": 520,
       "height": 520,
       "transparent": true,
@@ -323,9 +323,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/ruinas/families/familia-amarea.webp",
+      "path": "",
       "file": "familia-amarea.webp",
-      "folder": "assets/social/ruinas/families",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -334,9 +334,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/ruinas/organisations/oradores-da-corrente.webp",
+      "path": "",
       "file": "oradores-da-corrente.webp",
-      "folder": "assets/social/ruinas/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -345,9 +345,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/ruinas/organisations/ecoantes.webp",
+      "path": "",
       "file": "ecoantes.webp",
-      "folder": "assets/social/ruinas/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -356,9 +356,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/ruinas/organisations/teceloes-de-vento.webp",
+      "path": "",
       "file": "teceloes-de-vento.webp",
-      "folder": "assets/social/ruinas/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -367,9 +367,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/ruinas/organisations/sobreviventes-de-nadirion.webp",
+      "path": "",
       "file": "sobreviventes-de-nadirion.webp",
-      "folder": "assets/social/ruinas/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -378,9 +378,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/guerras/families/casa-soberana-orionus.webp",
+      "path": "",
       "file": "casa-soberana-orionus.webp",
-      "folder": "assets/social/guerras/families",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -389,9 +389,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/guerras/families/familia-rendar.webp",
+      "path": "",
       "file": "familia-rendar.webp",
-      "folder": "assets/social/guerras/families",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -400,9 +400,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/guerras/families/origem-daryon.webp",
+      "path": "",
       "file": "origem-daryon.webp",
-      "folder": "assets/social/guerras/families",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -411,9 +411,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/guerras/organisations/conselho-da-raiz.webp",
+      "path": "",
       "file": "conselho-da-raiz.webp",
-      "folder": "assets/social/guerras/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -422,9 +422,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/guerras/organisations/homens-das-areias.webp",
+      "path": "",
       "file": "homens-das-areias.webp",
-      "folder": "assets/social/guerras/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,
@@ -433,9 +433,9 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/social/guerras/organisations/alianca-contra-kaendar.webp",
+      "path": "",
       "file": "alianca-contra-kaendar.webp",
-      "folder": "assets/social/guerras/organisations",
+      "folder": "",
       "width": 1600,
       "height": 900,
       "transparent": false,

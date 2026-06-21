@@ -24,14 +24,14 @@
   D.maps={
     eterea:{
       id:'eterea',title:'Etérea — Capítulos 1 a 9',shortTitle:'Etérea',
-      image:'assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp',ratio:'1450 / 1024',
+      image:'assets/maps/ruinas-dos-ceus/Mapa de Etérea.png',ratio:'1450 / 1024',
       description:'O mundo suspenso antes da Queda, organizado por ilhas, ritos e funções comunitárias.',
       context:['Civilização suspensa','Harmonia ritual','Vento e leveza','Sociedade organizada'],
       placeIds:Object.keys(placements).filter(id=>placements[id].mapId==='eterea')
     },
     superficie:{
       id:'superficie',title:'A Superfície — Capítulos 10 a 24',shortTitle:'A Superfície',
-      image:'assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp',ratio:'1450 / 1024',
+      image:'assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).png',ratio:'1450 / 1024',
       description:'A região de Nadírion onde os sobreviventes aprendem a viver sem as certezas de Etérea.',
       context:['Natureza desconhecida','Sobrevivência','Terra, peso e fome','Ausência de civilização humana conhecida'],
       placeIds:Object.keys(placements).filter(id=>placements[id].mapId==='superficie')

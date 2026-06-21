@@ -1,0 +1,62 @@
+{
+  "stage": "Etapas 12 e 13",
+  "version": "0.13.1",
+  "completedAt": "2026-06-21",
+  "books": {
+    "ruinas-dos-ceus": {
+      "concepts": 7,
+      "mysteries": 5,
+      "resolvedMysteries": 2,
+      "openOrPartialMysteries": 3,
+      "clickableConceptCards": true
+    },
+    "guerras-de-sangue": {
+      "concepts": 7,
+      "mysteries": 5,
+      "resolvedMysteries": 4,
+      "openOrPartialMysteries": 1,
+      "clickableConceptCards": true
+    }
+  },
+  "mysteryFields": [
+    "origin",
+    "firstClues",
+    "investigationPaths",
+    "discoveries",
+    "falseLeads",
+    "contradictions",
+    "finalRevelation",
+    "consequences",
+    "chapterNumbers",
+    "characterIds",
+    "placeIds"
+  ],
+  "conceptFields": [
+    "definition",
+    "origin",
+    "knownFunctioning",
+    "interpretations",
+    "relatedCharacters",
+    "chapterNumbers",
+    "ambiguities",
+    "evolution"
+  ],
+  "extras": {
+    "portalForwardStars": true,
+    "babyBluePortals": true,
+    "proceduralPortalMusic": true,
+    "manualClockStepMinutes": 10,
+    "automaticSkyCycleRealMinutes": 10,
+    "adaptiveNightTextContrast": true,
+    "guerrasDuplicateStylesheetRemoved": true,
+    "assetsRestoredOrReplaced": true
+  },
+  "browserSmokeTests": {
+    "routesTested": 11,
+    "renderedRoutes": 11,
+    "applicationExceptions": 0,
+    "note": "O único aviso do JSDOM foi HTMLMediaElement.load não implementado pelo simulador; não representa erro de navegador."
+  },
+  "idsChanged": 0,
+  "githubChanged": false
+}

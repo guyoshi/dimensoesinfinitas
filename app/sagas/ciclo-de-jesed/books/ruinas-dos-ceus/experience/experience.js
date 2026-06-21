@@ -21,20 +21,13 @@
   const cloudHost=document.getElementById('clouds');
   let rebuilding=false;
   function seeded(index,offset=0){const x=Math.sin((index+1)*9301+offset*49297)*233280;return x-Math.floor(x)}
-  const cloudAssets={
-    distant:['assets/atmosphere/ruinas/cloud-distant-01.webp','assets/atmosphere/ruinas/cloud-distant-02.webp','assets/atmosphere/ruinas/cloud-distant-03.webp'],
-    middle:['assets/atmosphere/ruinas/cloud-mid-01.webp','assets/atmosphere/ruinas/cloud-mid-02.webp','assets/atmosphere/ruinas/cloud-mid-03.webp'],
-    near:['assets/atmosphere/ruinas/mist-near-01.webp','assets/atmosphere/ruinas/mist-near-02.webp']
-  };
   function cloudHtml(layer,count,baseWidth,seedOffset){
     let html=`<div class="cloud-layer cloud-layer-${layer}">`;
-    const assets=cloudAssets[layer]||cloudAssets.middle;
     for(let i=0;i<count;i++){
       const r=seeded(i,seedOffset),r2=seeded(i,seedOffset+2),r3=seeded(i,seedOffset+5);
       const w=baseWidth*(.72+r*.68),top=(layer==='near'?8:layer==='middle'?10:28)+r2*(layer==='distant'?38:52);
       const duration=(layer==='distant'?145:layer==='middle'?92:54)*(.78+r3*.62),opacity=(layer==='distant'?.23:layer==='middle'?.48:.20)*(.75+r2*.4);
-      const src=assets[i%assets.length];
-      html+=`<div class="natural-cloud natural-cloud-${layer}" style="--top:${top}%;--w:${w}px;--duration:${duration}s;--delay:${-r*duration}s;--opacity:${opacity};--scale:${.82+r2*.42};--rise:${-10+r3*22}px"><img src="${src}" alt="" draggable="false" onerror="this.hidden=true"></div>`;
+      html+=`<div class="natural-cloud natural-cloud-${layer}" style="--top:${top}%;--w:${w}px;--duration:${duration}s;--delay:${-r*duration}s;--opacity:${opacity};--scale:${.82+r2*.42};--rise:${-10+r3*22}px"><span class="cloud-body"></span></div>`;
     }
     return html+'</div>';
   }
@@ -62,7 +55,7 @@
   const session={get(key,fallback=null){try{const v=sessionStorage.getItem(key);return v===null?fallback:v}catch{return fallback}},set(key,value){try{sessionStorage.setItem(key,String(value))}catch{}}};
   const CYCLE_DURATION_MS=10*60*1000;
   let autoTime=session.get(P+'time-mode')!=='manual';
-  let manualMinutes=Number(session.get(P+'test-minutes',1110)||1110);
+  let manualMinutes=Math.round(Number(session.get(P+'test-minutes',1110)||1110)/10)*10;
   let cycleAnchorReal=Number(session.get(P+'cycle-anchor-real',Date.now())||Date.now());
   let cycleAnchorMinutes=Number(session.get(P+'cycle-anchor-minutes',360)||360);
   let timer=null;
@@ -85,13 +78,13 @@
     document.querySelectorAll('[data-time-slider]').forEach(i=>{if(document.activeElement!==i)i.value=minutes});
     document.querySelectorAll('[data-time-auto]').forEach(b=>{b.classList.toggle('active',autoTime);b.setAttribute('aria-pressed',String(autoTime))});
   }
-  function timeControlHtml(){return `<div class="time-test-control" data-time-control><label>Horário de teste</label><input data-time-slider type="range" min="0" max="1439" step="1" value="${autoTime?currentMinutes():manualMinutes}" aria-label="Horário de teste"><output data-time-output>${timeLabel(autoTime?currentMinutes():manualMinutes)}</output><button class="time-auto-button ${autoTime?'active':''}" data-time-auto type="button" aria-pressed="${autoTime}" title="Ciclo automático: 24 horas em cerca de 10 minutos">Ciclo 10 min</button></div>`}
+  function timeControlHtml(){return `<div class="time-test-control" data-time-control><label>Horário de teste</label><input data-time-slider type="range" min="0" max="1430" step="10" value="${autoTime?currentMinutes():manualMinutes}" aria-label="Horário de teste"><output data-time-output>${timeLabel(autoTime?currentMinutes():manualMinutes)}</output><button class="time-auto-button ${autoTime?'active':''}" data-time-auto type="button" aria-pressed="${autoTime}" title="Ciclo automático: 24 horas em cerca de 10 minutos">Ciclo 10 min</button></div>`}
   function ensureTimeControls(){
     const utility=document.querySelector('.utility-controls');if(!utility)return;
     if(!utility.querySelector('[data-time-control]'))utility.insertAdjacentHTML('beforeend',timeControlHtml());
     if(!utility.querySelector('.time-mobile-toggle'))utility.insertAdjacentHTML('beforeend','<button class="icon-btn time-mobile-toggle" type="button" data-time-mobile aria-label="Abrir relógio de teste" title="Horário de teste">◷</button>');
   }
-  document.addEventListener('input',e=>{if(!e.target.matches('[data-time-slider]'))return;autoTime=false;manualMinutes=Number(e.target.value);session.set(P+'time-mode','manual');session.set(P+'test-minutes',manualMinutes);updateSky(manualMinutes)});
+  document.addEventListener('input',e=>{if(!e.target.matches('[data-time-slider]'))return;autoTime=false;manualMinutes=Math.round(Number(e.target.value)/10)*10;session.set(P+'time-mode','manual');session.set(P+'test-minutes',manualMinutes);updateSky(manualMinutes)});
   document.addEventListener('click',e=>{
     if(e.target.closest('[data-time-auto]')){anchorCycle(manualMinutes);autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo acelerado do céu restaurado: uma volta em cerca de 10 minutos')}
     const mobile=e.target.closest('[data-time-mobile]');if(mobile){document.querySelector('.topbar [data-time-control]')?.classList.toggle('mobile-open')}

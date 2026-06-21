@@ -12,7 +12,7 @@
 - **Livros atualmente disponíveis:**
   - *Ruínas dos Céus* — Livro I — 24 capítulos — concluído.
   - *Guerras de Sangue* — Livro II — 29 capítulos — concluído.
-- **Versão estrutural atual:** Etapa 11 concluída — pacote 0.11.0.
+- **Versão estrutural atual:** Etapa 15 refeita e sincronizada ao inventário real de assets — pacote 0.15.1.
 - **Última atualização deste documento:** 21 de junho de 2026.
 
 ---
@@ -143,10 +143,10 @@ Categorias incompatíveis não devem ser forçadas. Exemplo: *Ruínas dos Céus*
 | 9 | Relações, família, organizações e atmosfera com imagens | CONCLUÍDA | 21/06/2026 |
 | 10 | Clãs | **CONCLUÍDA** | 21/06/2026 |
 | 11 | Fauna, flora e alimentos | **CONCLUÍDA** | 21/06/2026 |
-| 12 | Conceitos | PENDENTE | — |
-| 13 | Mistérios | PENDENTE | — |
-| 14 | Temas | PENDENTE | — |
-| 15 | Galerias | PENDENTE | — |
+| 12 | Conceitos | **CONCLUÍDA** | 21/06/2026 |
+| 13 | Mistérios | **CONCLUÍDA** | 21/06/2026 |
+| 14 | Temas | **CONCLUÍDA** | 21/06/2026 |
+| 15 | Galerias | **CONCLUÍDA** | 21/06/2026 |
 | 16 | Padronização visual e responsividade | PENDENTE | — |
 | 17 | Limpeza técnica final | PENDENTE | — |
 | 18 | Validação final | PENDENTE | — |
@@ -1922,7 +1922,9 @@ Também foram criados teasers curtos para os cartões da lista. As antigas frase
 
 ## Etapa 12 — Conceitos
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data:** 21/06/2026  
+**Pacote:** 0.12.0
 
 ### Nos dois livros
 
@@ -1945,11 +1947,31 @@ Cada página pode conter:
 
 O Sopro, Etérea e outros elementos ambíguos não devem receber respostas excessivamente fechadas.
 
+### Implementação concluída
+
+- Os filtros continuam removidos nas páginas de Conceitos dos dois livros.
+- *Ruínas dos Céus* passou a ter cartões de Conceitos clicáveis e rotas individuais em `#/conceito/<slug>`.
+- Foram aprofundados 7 conceitos em *Ruínas dos Céus* e 7 em *Guerras de Sangue*.
+- As fichas incluem definição, origem, funcionamento conhecido, interpretações, personagens, capítulos, ambiguidades e evolução durante o livro.
+- O Sopro e Etérea permaneceram deliberadamente ambíguos, sem explicação mágica ou científica fechada.
+- IDs existentes foram preservados; nenhum redirecionamento anterior foi removido.
+
+### Arquivos principais alterados
+
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/concepts.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/concepts.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/lore.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/app.js`;
+- `app/shared/experience/common.css`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`.
+
 ---
 
 ## Etapa 13 — Mistérios
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data:** 21/06/2026  
+**Pacote:** 0.13.0
 
 ### Revisão completa
 
@@ -1986,17 +2008,81 @@ Os dois livros estão finalizados, então a ficha deve apresentar a evolução c
 
 As fichas atuais são simples demais e devem alcançar o nível de profundidade de *Guerras de Sangue*.
 
+### Implementação concluída
+
+- Os 5 mistérios de cada livro foram revistos até o encerramento real de suas histórias.
+- Todas as fichas passaram a mostrar origem, primeiras pistas, caminhos de investigação, descobertas intermediárias, contradições, revelação ou estado final, consequências, capítulos, personagens e lugares relacionados.
+- Pistas falsas aparecem apenas quando existiam de verdade na narrativa.
+- O rótulo antigo “Resposta no ponto escrito” foi removido.
+- Em *Guerras de Sangue*, foram atualizadas as respostas sobre Orionus, os dois jovens Polar, o massacre Fendelar, Yvenn e Markoso.
+- Em *Ruínas dos Céus*, foram aprofundados Loutes, Ilhas Baixas, queda de Etérea, origem das ruínas e natureza do Sopro.
+
+### Arquivos principais alterados
+
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/mysteries.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/mysteries.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/mysteries.js`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`;
+- `app/shared/experience/common.css`.
+
+### Validação
+
+- 14 conceitos e 10 mistérios validados pelo modelo comum.
+- 11 rotas principais verificadas em teste de execução com JSDOM.
+- Nenhuma exceção da aplicação encontrada.
+- Relatório criado em `data/sagas/ciclo-de-jesed/audits/concepts-mysteries-etapa-13.json`.
+
+---
+
+## Etapa 13.1 — Portal, relógio, contraste noturno e correção de Guerras
+
+**Estado:** CONCLUÍDA  
+**Data:** 21/06/2026  
+**Pacote:** 0.13.1
+
+### Tela de Dimensões Infinitas
+
+- Criado avanço contínuo por um campo de 220 estrelas em perspectiva.
+- Criados portais azul-bebê em formato oval vertical, aproximando-se do centro para fora e dispersando partículas de energia.
+- Adicionada música ambiente procedural, sem dependência externa e com botão fixo para ligar/desligar.
+- A preferência de música é guardada; por limitação normal dos navegadores, a reprodução automática só retoma depois da primeira interação do usuário.
+
+### Relógio e legibilidade
+
+- O simulador manual passou a andar em intervalos de 10 minutos.
+- O ciclo automático continua fluido e completa 24 horas em cerca de 10 minutos reais.
+- Amanhecer, dia, entardecer e noite continuam definidos por faixas horárias.
+- Na fase noturna, azul-escuro, preto e cinza foram substituídos por textos claros e superfícies escuras de maior contraste.
+
+### Correção de Guerras de Sangue
+
+- Identificada a ausência da pasta `assets` no pacote recebido como principal origem das imagens quebradas.
+- Restaurados mapas, capas, retratos, lugares, brasões e imagens atmosféricas disponíveis nos arquivos do projeto.
+- Criados fallbacks temporários WebP para recursos ainda sem arte canônica.
+- Removido o carregamento duplicado da folha visual de *Guerras de Sangue*.
+- Removido o arquivo obsoleto `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/styles.css`, cuja cópia tinha caminhos relativos incorretos.
+- Mantida apenas `experience/styles.css`, com caminhos válidos.
+- Verificação estática final: 0 URLs CSS quebradas.
+- `npm run validate` e `npm run audit` executados com sucesso.
+
 ---
 
 ## Etapa 14 — Temas
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data:** 21/06/2026  
+**Pacote:** 0.15.0
 
-### Ruínas dos Céus
+### Implementação concluída
 
-Criar uma seção de temas equivalente à de *Guerras de Sangue*, mas adaptada.
+- Criados 10 temas aprofundados para *Ruínas dos Céus* e 10 para *Guerras de Sangue*.
+- Cada tema possui cartão interativo e página individual.
+- As fichas apresentam descrição, pergunta central, desenvolvimento, personagens, lugares, capítulos, acontecimentos, símbolos e evolução ao longo do livro.
+- As ligações usam IDs estáveis e conduzem às fichas já existentes.
+- A interface deixa explícito quando uma leitura permanece interpretativa.
+- Sopro, Peso, destino, culpa, justiça, fé e repetição não foram transformados em respostas canônicas fechadas.
 
-Possíveis temas a extrair do texto:
+### Temas de Ruínas dos Céus
 
 - Peso e Sopro;
 - queda e sobrevivência;
@@ -2005,60 +2091,101 @@ Possíveis temas a extrair do texto:
 - família e legado;
 - destino e livre-arbítrio;
 - civilização e natureza;
-- memória;
-- sacrifício;
-- reconstrução.
+- memória e verdade;
+- sacrifício e cuidado;
+- reconstrução e repetição.
 
-Cada tema deve ter cartão interativo e página ou expansão com:
+### Temas de Guerras de Sangue
 
-- descrição;
-- desenvolvimento;
-- personagens;
-- lugares;
-- capítulos;
-- acontecimentos;
-- símbolos;
-- evolução ao longo do livro.
+- paz e violência;
+- fome, recursos e poder;
+- justiça e vingança;
+- herança e legado;
+- irmãs, identidade e poder;
+- verdade, mentira e narrativa;
+- destino e livre-arbítrio;
+- aliança e desconfiança;
+- centro, periferia e desigualdade;
+- ciclo, memória e repetição.
+
+### Arquivos principais
+
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/themes.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/themes.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/themes.js`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`;
+- `app/shared/themes/presentation.css`.
+
+### Validação
+
+- 20 temas completos.
+- Todas as referências de personagens, lugares, capítulos e acontecimentos resolvidas.
+- IDs e slugs únicos.
+- Nenhuma mudança canônica introduzida.
 
 ---
 
 ## Etapa 15 — Galerias
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA  
+**Data:** 21/06/2026  
+**Pacote:** 0.15.1
 
-### Ambos os livros
+### Implementação concluída
 
-Padronizar galerias e criar a de *Ruínas dos Céus*.
+- Etapa refeita sobre o inventário real de `assets/` enviado pelo autor.
+- Criada a galeria de *Ruínas dos Céus*.
+- Padronizada a galeria de *Guerras de Sangue* pelo mesmo sistema compartilhado.
+- Os filtros são gerados pelas categorias existentes nos dados.
+- Incluída pesquisa textual por nome, tipo e legenda.
+- Incluídos gesto de deslizar em telas tácteis, pré-carregamento da imagem vizinha, foco preso no visualizador e botão para abrir a ficha relacionada.
+- Os dois livros organizam capas, capítulos, personagens, lugares, mapas e fauna com imagem confirmada no inventário.
+- Acontecimentos, clãs, emblemas, famílias e organizações não aparecem como filtros porque as respectivas pastas não possuem arte utilizável no inventário recebido.
+- Flora, Alimentos, Conceitos e as demais categorias continuam preparadas para aparecer quando receberem imagens próprias e forem adicionadas ao inventário.
 
-### Filtros permitidos
+### Visualizador em tela cheia
 
-- capítulos;
-- personagens;
-- lugares;
-- mapas;
-- acontecimentos;
-- fauna;
-- flora;
-- alimentos;
-- clãs e emblemas apenas em *Guerras de Sangue*;
-- outras categorias realmente existentes.
-
-### Visualizador
-
-Ao clicar numa imagem:
-
-- não abrir página de detalhes;
-- abrir somente a imagem em tela cheia;
 - fundo escuro;
-- fechar;
-- anterior;
-- seguinte;
-- setas do teclado;
+- botão de fechar;
+- anterior e seguinte;
+- setas esquerda e direita do teclado;
 - tecla Esc;
 - contador de posição;
-- legenda discreta.
+- legenda discreta;
+- navegação limitada ao filtro ativo.
 
-A navegação deve respeitar o filtro ativo.
+### Tratamento de imagens ausentes
+
+- Os caminhos de capítulos, logos, mapas e Raukhar foram trocados para os nomes e extensões exactos do inventário enviado.
+- Referências a imagens sociais, clãs, acontecimentos e placeholders inexistentes foram removidas em vez de apontarem para ficheiros quebrados.
+- Cartões cuja imagem não carrega são ocultados automaticamente.
+- Imagens quebradas também são retiradas do contador, dos filtros disponíveis e da navegação anterior/seguinte.
+- Placeholders temporários repetidos não são usados como obras da galeria.
+- As referências narrativas continuam preservadas nos dados; a galeria só cria cartões para caminhos confirmados pelo inventário.
+
+### Arquivos principais
+
+- `app/shared/gallery/gallery.js`;
+- `app/shared/gallery/gallery.css`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/gallery.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/gallery.js`;
+- `app/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/pages/gallery.js`;
+- `app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js`;
+- `data/sagas/ciclo-de-jesed/audits/themes-galleries-etapa-14-15.json`.
+
+### Métricas
+
+- *Ruínas dos Céus*: 60 cartões ligados a imagens do inventário.
+- *Guerras de Sangue*: 88 cartões ligados a imagens do inventário.
+- Total: 148 cartões, todos com caminho exacto confirmado em `inventario-pasta-assets.csv`.
+
+### Validação
+
+- Sintaxe JavaScript validada.
+- Rotas de Temas e Galerias testadas nos dois livros.
+- Teclado, filtro ativo, contador e fechamento verificados.
+- Nenhuma exceção da aplicação.
+- Nenhum push realizado no GitHub.
 
 ---
 
@@ -2301,6 +2428,15 @@ Não criar outro histórico paralelo.
 
 # 12. Próxima etapa oficial
 
-## Etapa 12 — Conceitos
+## Etapa 16 — Padronização visual e responsividade
 
-A próxima IA deve começar pela Etapa 12 usando o pacote completo da Etapa 11. Deve preservar as novas fichas e contagens de fauna, flora e alimentos, o ciclo celeste acelerado de dez minutos, o simulador temporário, as sinopses editoriais, os clãs, mapas, relações, trajetórias, IDs, fallbacks e todas as etapas anteriores. O foco seguinte é remover definitivamente qualquer filtro residual de Conceitos, criar fichas clicáveis de Conceitos em *Ruínas dos Céus* e aprofundar definição, origem, funcionamento conhecido, interpretações, personagens, capítulos, citações e ambiguidades sem fechar respostas que a narrativa mantém misteriosas. Nenhum push deve ser realizado sem autorização.
+A próxima IA deve começar pela Etapa 16 usando o pacote completo 0.15.1. Deve preservar os 20 Temas aprofundados, as duas Galerias, o visualizador compartilhado, o tratamento de imagens ausentes, os Conceitos e Mistérios, a animação e música do portal de Dimensões Infinitas, o relógio manual em passos de dez minutos, o ciclo automático, o contraste noturno, os assets restaurados, os mapas, relações, trajetórias, IDs, fallbacks e todas as etapas anteriores. O foco seguinte é padronizar cartões, fotografias, subtítulos, contrastes, tamanhos e responsividade sem retirar a identidade própria de cada livro. Nenhum push deve ser realizado sem autorização.
+
+
+### Correcção 0.15.1 — Inventário real de assets
+
+- Fonte de verdade: `data/common/inventario-pasta-assets.csv`.
+- Manifesto regenerado com 202 entradas, 162 delas visuais.
+- Galerias passam a aceitar somente caminhos presentes no inventário.
+- Dependências atmosféricas não presentes no inventário foram substituídas por efeitos CSS, preservando o funcionamento ao usar a pasta `assets` do autor.
+- Nenhum push realizado no GitHub.

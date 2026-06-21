@@ -116,6 +116,7 @@
   const getChapter = id => D.chapters.find(item => item.id === id || String(item.number) === String(id));
   const getTimelineEntry = id => timelineEntries().find(item => item.id === id || item.slug === id || (item.legacySlugs || []).includes(id));
   const getMystery = id => D.mysteries.find(item => item.id === id || item.slug === id);
+  const getTheme = id => D.common?.entities?.themes?.find(item => item.id === id || item.slug === id);
   const getLoreItem = (kind, id) => (D.lore[kind] || []).find(item => item.id === id || item.slug === id);
   const routeForEntityId = id => {
     const c = getCharacter(id); if (c) return `character/${c.slug}`;
@@ -309,7 +310,7 @@
         <img src="assets/maps/guerras-de-sangue/mapa-geral.webp" alt="Mapa de Jesed na época de Guerras de Sangue">
         <div class="hero-map-content">
           <p class="eyebrow">Ciclo de Jesed — Guia do Livro</p>
-          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.webp" alt="Guerras de Sangue">
+          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.png" alt="Guerras de Sangue">
           <p>Um guia cartográfico de pessoas, clãs, territórios, segredos e consequências.</p>
           <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button><button class="secondary-button contemplate-button" data-contemplative="guerras">${icon("eye")} Contemplar este mundo</button></div>
         </div>
@@ -350,7 +351,7 @@
     const cover = book.cover ? `<img src="${book.cover}" alt="Capa de ${escapeHtml(book.name)}">` : icon(book.icon);
     if (book.id !== "guerras-de-sangue") {
       const externalLinks = { "ruinas-dos-ceus": "ruinas.html" };
-      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.webp" };
+      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.png" };
       const href = externalLinks[book.id];
       const logo = bookLogos[book.id];
       const titleHtml = logo ? `<img class="hero-logo" src="${logo}" alt="${escapeHtml(book.name)}">` : `<h2>${escapeHtml(book.name)}</h2>`;
@@ -590,23 +591,59 @@
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Linha do Tempo",route:"timeline"},{label:entry.name}]);
   }
 
+  function mysteryList(items, ordered = false) {
+    if (!items?.length) return "";
+    const tag = ordered ? "ol" : "ul";
+    return `<${tag} class="mystery-rich-list">${items.map(item => `<li>${linkifyText(item)}</li>`).join("")}</${tag}>`;
+  }
+
+  function mysteryBlock(title, items, options = {}) {
+    if (!items || (Array.isArray(items) && !items.length)) return "";
+    const body = Array.isArray(items) ? mysteryList(items, options.ordered) : `<p>${linkifyText(items)}</p>`;
+    return `<section class="mystery-rich-block ${options.accent ? "accent" : ""}"><p class="eyebrow">${escapeHtml(title)}</p>${body}</section>`;
+  }
+
   function renderMysteries() {
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Planeamento narrativo", "Mistérios", "Pistas, respostas, conhecimento do leitor e personagens ligadas.")}<section class="entity-grid">${D.mysteries.map(m => `<article class="entity-card mystery-card" data-route="mystery/${m.slug}"><div class="entity-card-top"><span class="entity-avatar">${icon("question")}</span><div><h3>${escapeHtml(m.name)}</h3><span class="alias">${escapeHtml(m.status)}</span></div></div><p>${escapeHtml(m.question)}</p><div class="tag-row"><span class="tag">${m.clues.length} pistas</span><span class="tag">${m.linkedCharacters.length} personagens</span></div></article>`).join("")}</section></div>`;
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Planeamento narrativo", "Mistérios", "Origem, pistas, investigação, revelações e consequências de cada pergunta narrativa.")}<section class="entity-grid mystery-stage13-grid">${D.mysteries.map(m => {
+      const clueCount=(m.firstClues||m.clues||[]).length;
+      const chapterCount=(m.chapterNumbers||m.chapterIds||[]).length;
+      return `<article class="entity-card mystery-card" data-route="mystery/${m.slug}"><div class="entity-card-top"><span class="entity-avatar">${icon("question")}</span><div><h3>${escapeHtml(m.name)}</h3><span class="alias mystery-status ${m.status==='Resolvido'?'resolved':'open'}">${escapeHtml(m.status)}</span></div></div><p>${escapeHtml(m.question)}</p><div class="tag-row"><span class="tag">${clueCount} pistas iniciais</span><span class="tag">${chapterCount} capítulos</span></div></article>`;
+    }).join("")}</section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Mistérios"}]);
   }
 
   function renderMystery(slug) {
     const mystery = getMystery(slug);
     if (!mystery) return renderNotFound();
-    const linked = mystery.linkedCharacters.map(getCharacter).filter(Boolean);
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Mistério", mystery.name, mystery.status)}<section class="mystery-layout"><article class="parchment-panel"><p class="eyebrow">Pergunta central</p><h2>${escapeHtml(mystery.question)}</h2><div class="mystery-answer"><small>Resposta no ponto escrito</small><p>${linkifyText(mystery.answer)}</p></div><h3>Pistas apresentadas</h3><ol class="clue-list">${mystery.clues.map(clue => `<li>${linkifyText(clue)}</li>`).join("")}</ol></article><aside class="dark-panel section-card"><h3>O que o leitor sabe</h3><p>${linkifyText(mystery.readerKnows)}</p><h3>Personagens ligadas</h3><div class="context-chip-list">${linked.map(c => `<button class="context-chip" data-route="character/${c.slug}">${c.image ? `<img src="${c.image}" alt="">` : icon("person")}<span>${escapeHtml(c.name)}</span></button>`).join("")}</div></aside></section></div>`;
+    const characterIds=mystery.characterIds||mystery.linkedCharacters||[];
+    const linked = characterIds.map(getCharacter).filter(Boolean);
+    const places=(mystery.placeIds||[]).map(getPlace).filter(Boolean);
+    const chapters=(mystery.chapterNumbers||[]).map(number=>D.chapters.find(ch=>Number(ch.number)===Number(number))).filter(Boolean);
+    refs.main.innerHTML = `<div class="page-enter mystery-stage13-detail">
+      <button class="secondary-button mystery-back" data-route="mysteries">← Voltar para Mistérios</button>
+      ${pageHeader("Mistério", mystery.name, mystery.status)}
+      <section class="mystery-question-panel parchment-panel"><p class="eyebrow">Pergunta central</p><h2>${escapeHtml(mystery.question)}</h2><p class="mystery-summary">${linkifyText(mystery.summary||mystery.readerKnows||"")}</p></section>
+      <section class="mystery-stage13-layout"><div class="mystery-stage13-main">
+        ${mysteryBlock("Como surgiu",mystery.origin)}
+        ${mysteryBlock("Primeiras pistas",mystery.firstClues||mystery.clues,{ordered:true})}
+        ${mysteryBlock("Caminhos de investigação",mystery.investigationPaths)}
+        ${mysteryBlock("Descobertas intermediárias",mystery.discoveries)}
+        ${mysteryBlock("Falsas pistas",mystery.falseLeads)}
+        ${mysteryBlock("Contradições",mystery.contradictions)}
+        ${mysteryBlock(mystery.status==='Resolvido'?"Revelação final":"Estado da revelação",mystery.finalRevelation||mystery.answer,{accent:true})}
+        ${mysteryBlock("Consequências",mystery.consequences)}
+      </div><aside class="mystery-stage13-context">
+        <article class="dark-panel section-card"><h3>Capítulos relacionados</h3><div class="mini-list">${chapters.length?chapters.map(ch=>miniEntity(`Capítulo ${ch.number}`,ch.title,"chapter",`chapter/${ch.id}`)).join(""):`<p class="empty-inline">Nenhum capítulo ligado.</p>`}</div></article>
+        <article class="dark-panel section-card"><h3>Personagens ligadas</h3><div class="context-chip-list">${linked.length?linked.map(c => `<button class="context-chip" data-route="character/${c.slug}">${c.image ? `<img src="${escapeHtml(c.image)}" alt="">` : icon("person")}<span>${escapeHtml(c.name)}</span></button>`).join(""):`<p class="empty-inline">Nenhuma personagem registada.</p>`}</div></article>
+        <article class="dark-panel section-card"><h3>Lugares relacionados</h3><div class="mini-list">${places.length?places.map(p=>miniEntity(p.name,p.type||"Lugar","pin",`place/${p.slug}`)).join(""):`<p class="empty-inline">Nenhum lugar determinado.</p>`}</div></article>
+      </aside></section></div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Mistérios",route:"mysteries"},{label:mystery.name}]);
   }
 
   const foldText = value => String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("pt-BR");
 
   function clanMarkImage(clan) {
-    return clan.emblem || clan.contextMark || "assets/clans/temp/fendelar-mark.webp";
+    return clan.emblem || clan.contextMark || "";
   }
 
   function clanTerritory(clan) {
@@ -672,9 +709,9 @@
   function clanLoreSection(clan, kind, title, iconName, categoryRoute) {
     const items = clanLoreItems(clan, kind);
     const fallback = {
-      foods: "assets/lore/temp/food-placeholder.webp",
-      fauna: "assets/lore/temp/fauna-placeholder.webp",
-      flora: "assets/lore/temp/flora-placeholder.webp"
+      foods: "",
+      fauna: "",
+      flora: ""
     }[kind];
     return `<section class="clan-lore-section"><div class="clan-lore-section-header"><div><h2>${icon(iconName)} ${escapeHtml(title)}</h2><p>${kind === "foods" ? "Comidas e ingredientes ligados ao cotidiano do clã." : kind === "fauna" ? "Animais usados, caçados, criados ou temidos no território." : "Plantas com relevância territorial, alimentar, medicinal ou cultural."}</p></div><button class="secondary-button" data-route="${categoryRoute}">Ver categoria</button></div>${items.length ? `<div class="clan-lore-grid">${items.map(item => { const src = item.image || fallback; return `<button class="clan-lore-card" data-route="lore-item/${kind}/${escapeHtml(item.slug)}"><span class="clan-lore-media"><img src="${escapeHtml(src)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null;this.src='${escapeHtml(fallback)}'"></span><span class="clan-lore-copy"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(characterShortText(item.summary || item.type, 112))}</small></span></button>`; }).join("")}</div>` : `<p class="empty-inline">Nenhum item diretamente ligado foi registrado.</p>`}</section>`;
   }
@@ -886,7 +923,7 @@
   }
 
   function loreListHtml(kind, items, iconName = loreKindInfo(kind)[2]) {
-    const fallback = kind === "foods" ? "assets/lore/temp/food-placeholder.webp" : `assets/lore/temp/${kind}-placeholder.webp`;
+    const fallback = kind === "foods" ? "" : `assets/lore/temp/${kind}-placeholder.webp`;
     return `<section class="lore-grid lore-stage11-grid">${items.map(item => `<article class="lore-card lore-stage11-card has-image" data-route="lore-item/${kind}/${item.slug}"><img class="lore-card-image" src="${escapeHtml(item.image || fallback)}" alt="${escapeHtml(item.name)}" loading="lazy" onerror="this.onerror=null;this.src='${fallback}'"><span class="citation-count">${item.citations||0} ${(item.citations||0)===1?"citação":"citações"}</span><h3>${escapeHtml(item.name)}</h3><p>${escapeHtml(characterShortText(item.summary,190))}</p></article>`).join("")}</section>`;
   }
 
@@ -894,24 +931,59 @@
     const item = getLoreItem(kind, slug);
     if (!item) return renderNotFound();
     const [title,,iconName] = loreKindInfo(kind);
-    const fallback = kind === "foods" ? "assets/lore/temp/food-placeholder.webp" : `assets/lore/temp/${kind}-placeholder.webp`;
+    const fallback = kind === "foods" ? "" : `assets/lore/temp/${kind}-placeholder.webp`;
     const mentions = item.citationDetails || [];
-    const fields = [
-      ["Características", item.characteristics],
-      ["Habitat e origem", item.habitat],
-      ["Usos", Array.isArray(item.uses) ? item.uses.join("\n") : item.uses]
-    ].filter(([,value]) => value && String(value).trim());
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader(title, item.name, item.type)}<section class="lore-detail-layout lore-stage11-detail"><article class="parchment-panel lore-detail"><img class="lore-detail-image" src="${escapeHtml(item.image || fallback)}" alt="${escapeHtml(item.name)}" onerror="this.onerror=null;this.src='${fallback}'"><p class="lore-lead">${linkifyText(item.summary)}</p><div class="lore-full-description">${String(item.fullDescription||item.details?.join("\n\n")||item.summary||"").split(/\n\s*\n/).filter(Boolean).map(paragraph=>`<p>${linkifyText(paragraph)}</p>`).join("")}</div></article><aside class="dark-panel section-card"><h3>Relação com povos e clãs</h3><div class="tag-row">${item.clans.length ? item.clans.map(name => { const clan = getClan(slugText(name).replaceAll(" ","-")); return `<button class="tag clickable-tag" ${clan ? `data-route="clan/${clan.slug}"` : ""}>${escapeHtml(name)}</button>`; }).join("") : `<span class="empty-inline">Nenhum povo ou clã específico registrado.</span>`}</div>${fields.map(([label,value])=>`<h3>${escapeHtml(label)}</h3>${String(value).split("\n").filter(Boolean).map(x=>`<p>${linkifyText(x)}</p>`).join("")}`).join("")}</aside></section><section class="parchment-panel lore-citations-section"><div class="section-heading"><div><p class="eyebrow">Citações no livro</p><h2>${item.citations||0} ${(item.citations||0)===1?"vez citado":"vezes citado"}</h2><p>Todas as menções localizadas no manuscrito canônico usado nesta etapa.</p></div></div>${mentions.length ? `<div class="lore-citation-list">${mentions.map(m=>{const ch=getChapter(m.chapter);return `<article class="lore-citation"><button class="lore-citation-chapter" data-route="chapter/${ch?.id||m.chapter}">Capítulo ${m.chapter} — ${escapeHtml(ch?.title||m.chapterTitle||"")}</button><blockquote>“${escapeHtml(m.quote)}”</blockquote><p>${escapeHtml(m.context||"")}</p></article>`}).join("")}</div>` : `<p class="empty-inline">Este item ainda não foi citado diretamente no manuscrito.</p>`}</section></div>`;
+    const isConcept=kind==="concepts";
+    const fields = isConcept ? [
+      ["Definição",item.definition],["Origem",item.origin],["Funcionamento conhecido",item.knownFunctioning]
+    ] : [
+      ["Características", item.characteristics],["Habitat e origem", item.habitat],["Usos", Array.isArray(item.uses) ? item.uses.join("\n") : item.uses]
+    ];
+    const relatedCharacters=(item.relatedCharacters||[]).map(getCharacter).filter(Boolean);
+    const relatedChapters=(item.chapterNumbers||[]).map(number=>D.chapters.find(ch=>Number(ch.number)===Number(number))).filter(Boolean);
+    const richList=(label,values)=>values?.length?`<section class="concept-rich-block"><h2>${escapeHtml(label)}</h2><ul>${values.map(value=>`<li>${linkifyText(value)}</li>`).join("")}</ul></section>`:"";
+    refs.main.innerHTML = `<div class="page-enter">${pageHeader(title, item.name, item.type)}
+      <section class="lore-detail-layout lore-stage11-detail concept-stage12-detail"><article class="parchment-panel lore-detail">
+        <img class="lore-detail-image" src="${escapeHtml(item.image || fallback)}" alt="${escapeHtml(item.name)}" onerror="this.onerror=null;this.src='${fallback}'">
+        <p class="lore-lead">${linkifyText(item.summary)}</p>
+        ${fields.filter(([,value])=>value).map(([label,value])=>`<section class="concept-rich-block"><h2>${escapeHtml(label)}</h2>${String(value).split(/\n\s*\n/).filter(Boolean).map(x=>`<p>${linkifyText(x)}</p>`).join("")}</section>`).join("")}
+        ${isConcept?`${richList("Interpretações",item.interpretations)}${richList("Ambiguidades",item.ambiguities)}${richList("Evolução no livro",item.evolution)}`:`<div class="lore-full-description">${String(item.fullDescription||item.details?.join("\n\n")||item.summary||"").split(/\n\s*\n/).filter(Boolean).map(paragraph=>`<p>${linkifyText(paragraph)}</p>`).join("")}</div>`}
+      </article><aside class="dark-panel section-card"><h3>Relação com povos e clãs</h3><div class="tag-row">${item.clans?.length ? item.clans.map(name => { const clan = getClan(slugText(name).replaceAll(" ","-")); return `<button class="tag clickable-tag" ${clan ? `data-route="clan/${clan.slug}"` : ""}>${escapeHtml(name)}</button>`; }).join("") : `<span class="empty-inline">Nenhum povo ou clã específico registado.</span>`}</div>
+        ${isConcept?`<h3>Personagens relacionadas</h3><div class="context-chip-list">${relatedCharacters.length?relatedCharacters.map(c=>`<button class="context-chip" data-route="character/${c.slug}">${c.image?`<img src="${escapeHtml(c.image)}" alt="">`:icon("person")}<span>${escapeHtml(c.name)}</span></button>`).join(""):`<p class="empty-inline">Nenhuma personagem ligada.</p>`}</div><h3>Capítulos relacionados</h3><div class="mini-list">${relatedChapters.length?relatedChapters.map(ch=>miniEntity(`Capítulo ${ch.number}`,ch.title,"chapter",`chapter/${ch.id}`)).join(""):`<p class="empty-inline">Nenhum capítulo ligado.</p>`}</div>`:""}
+      </aside></section>
+      ${isConcept?"":`<section class="parchment-panel lore-citations-section"><div class="section-heading"><div><p class="eyebrow">Citações no livro</p><h2>${item.citations||0} ${(item.citations||0)===1?"vez citado":"vezes citado"}</h2><p>Todas as menções localizadas no manuscrito canônico usado nesta etapa.</p></div></div>${mentions.length ? `<div class="lore-citation-list">${mentions.map(m=>{const ch=getChapter(m.chapter);return `<article class="lore-citation"><button class="lore-citation-chapter" data-route="chapter/${ch?.id||m.chapter}">Capítulo ${m.chapter} — ${escapeHtml(ch?.title||m.chapterTitle||"")}</button><blockquote>“${escapeHtml(m.quote)}”</blockquote><p>${escapeHtml(m.context||"")}</p></article>`}).join("")}</div>` : `<p class="empty-inline">Este item ainda não foi citado diretamente no manuscrito.</p>`}</section>`}
+    </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:title,route:kind === "concepts" ? "lore" : kind},{label:item.name}]);
   }
 
+  function themeList(title, values) {
+    if (!values?.length) return "";
+    return `<section class="parchment-panel theme-stage14-block"><h2>${escapeHtml(title)}</h2><ul>${values.map(value => `<li>${linkifyText(value)}</li>`).join("")}</ul></section>`;
+  }
+
+  function renderThemes() {
+    const items=D.common?.entities?.themes||[];
+    refs.main.innerHTML=`<div class="page-enter">${pageHeader("Leitura temática","Temas","Ideias que atravessam a guerra sem transformar interpretação em resposta única.")}<section class="theme-stage14-grid">${items.map(item=>`<article class="parchment-panel theme-stage14-card" data-route="theme/${escapeHtml(item.slug)}" tabindex="0" role="link"><p class="eyebrow">${escapeHtml(item.category||"Tema")}</p><h2>${escapeHtml(item.name)}</h2><p>${escapeHtml(item.summary)}</p><div class="theme-stage14-counts"><span>${(item.chapterIds||[]).length} capítulos</span><span>${(item.characterIds||[]).length} personagens</span><span>${(item.symbols||[]).length} símbolos</span></div><p class="theme-question">${escapeHtml(item.question||"")}</p><span class="theme-open">Aprofundar tema ${icon("arrow")}</span></article>`).join("")}</section></div>`;
+    setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Temas"}]);
+  }
+
+  function renderTheme(slug) {
+    const item=getTheme(slug);if(!item)return renderNotFound();
+    const chars=(item.characterIds||[]).map(getCharacter).filter(Boolean);
+    const places=(item.placeIds||[]).map(getPlace).filter(Boolean);
+    const chapters=(item.chapterIds||[]).map(getChapter).filter(Boolean);
+    const events=(item.eventIds||[]).map(getTimelineEntry).filter(Boolean);
+    const evolution=(item.evolution||[]).map(step=>`<article class="theme-stage14-step"><small>${escapeHtml(step.phase)}</small><div><h3>${escapeHtml(step.title)}</h3><p>${linkifyText(step.text)}</p>${step.chapterIds?.length?`<div class="tag-row">${step.chapterIds.map(getChapter).filter(Boolean).map(ch=>`<button class="tag clickable-tag" data-route="chapter/${ch.id}">Cap. ${ch.number}</button>`).join("")}</div>`:""}</div></article>`).join("");
+    refs.main.innerHTML=`<div class="page-enter"><button class="secondary-button mystery-back" data-route="themes">← Voltar para Temas</button>${pageHeader(item.category||"Tema",item.name,item.summary)}<article class="parchment-panel theme-stage14-block"><p class="theme-stage14-question">${escapeHtml(item.question||"")}</p><p>${linkifyText(item.description||item.summary)}</p></article><section class="theme-stage14-detail"><div class="theme-stage14-main">${themeList("Desenvolvimento",item.development)}${item.symbols?.length?`<section class="parchment-panel theme-stage14-block"><h2>Símbolos</h2><div class="theme-stage14-symbols">${item.symbols.map(symbol=>`<article class="theme-stage14-symbol"><strong>${escapeHtml(symbol.name)}</strong><span>${linkifyText(symbol.meaning)}</span></article>`).join("")}</div></section>`:""}${evolution?`<section class="parchment-panel theme-stage14-block"><h2>Evolução ao longo do livro</h2><div class="theme-stage14-evolution">${evolution}</div></section>`:""}${item.interpretationNote?`<aside class="theme-stage14-note"><strong>Limite de interpretação:</strong> ${escapeHtml(item.interpretationNote)}</aside>`:""}</div><aside class="theme-stage14-context"><article class="dark-panel theme-stage14-context-card"><h2>Personagens</h2><div class="mini-list">${chars.length?chars.map(c=>miniEntity(c.name,c.alias||c.importance,"person",`character/${c.slug}`,"",c.image)).join(""):`<p class="empty-inline">Nenhuma personagem ligada.</p>`}</div></article><article class="dark-panel theme-stage14-context-card"><h2>Lugares</h2><div class="mini-list">${places.length?places.map(p=>miniEntity(p.name,p.type||p.region||"Lugar","pin",`place/${p.slug}`)).join(""):`<p class="empty-inline">Nenhum lugar ligado.</p>`}</div></article><article class="dark-panel theme-stage14-context-card"><h2>Capítulos</h2><div class="mini-list">${chapters.length?chapters.map(ch=>miniEntity(`Capítulo ${ch.number}`,ch.title,"chapter",`chapter/${ch.id}`)).join(""):`<p class="empty-inline">Nenhum capítulo ligado.</p>`}</div></article><article class="dark-panel theme-stage14-context-card"><h2>Acontecimentos</h2><div class="mini-list">${events.length?events.map(event=>miniEntity(event.name,event.dateLabel||event.period||"Acontecimento","timeline",`timeline/${event.slug}`)).join(""):`<p class="empty-inline">Nenhum acontecimento ligado.</p>`}</div></article></aside></section></div>`;
+    setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Temas",route:"themes"},{label:item.name}]);
+  }
+
   function renderGallery() {
-    const items = [
-      ...D.books.filter(b => b.cover).map(b => ({name:b.name,type:"Capa",image:b.cover,route:b.status === "active" ? `book/${b.id}` : "books",icon:b.icon})),
-      ...D.characters.filter(c => c.image).map(c => ({name:c.name,type:"Personagem",image:c.image,route:`character/${c.slug}`,icon:"person"})),
-      ...D.clans.map(c => ({name:`Clã ${c.name}`,type:c.emblem ? "Brasão" : "Sem brasão",image:c.emblem,route:`clan/${c.slug}`,icon:c.icon}))
-    ];
-    refs.main.innerHTML = `<div class="page-enter">${pageHeader("Visual", "Galeria", "Capas, retratos e brasões já integrados ao arquivo. Os Fendelar permanecem sem brasão.")}<section class="gallery-grid enhanced-gallery">${items.map(item => `<article class="gallery-item" data-route="${item.route}"><div class="gallery-placeholder ${item.image ? "has-image" : ""}">${item.image ? `<img src="${item.image}" alt="${escapeHtml(item.name)}" loading="lazy">` : icon(item.icon)}</div><div class="gallery-copy"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.type)}</small></div></article>`).join("")}</section></div>`;
+    const items=D.common?.entities?.gallery||[];
+    const labels={cover:"Capas",chapter:"Capítulos",character:"Personagens",place:"Lugares",map:"Mapas",event:"Acontecimentos",fauna:"Fauna",flora:"Flora",foods:"Alimentos",concepts:"Conceitos",clan:"Clãs e emblemas"};
+    const categories=[...new Set(items.map(item=>item.category).filter(Boolean))];
+    refs.main.innerHTML=`<div class="page-enter">${pageHeader("Visual","Galeria","Imagens organizadas por categoria. Clique para ampliar sem abrir páginas de detalhes.")}<section class="di-gallery-page"><div class="di-gallery-toolbar"><label class="di-gallery-search-wrap"><span>Pesquisar</span><input type="search" data-gallery-search placeholder="Pesquisar imagens" autocomplete="off"></label><button class="di-gallery-filter active" data-gallery-filter="all" aria-pressed="true">Todas</button>${categories.map(category=>`<button class="di-gallery-filter" data-gallery-filter="${escapeHtml(category)}" aria-pressed="false">${escapeHtml(labels[category]||category)}</button>`).join("")}<span class="di-gallery-count" data-gallery-visible-count></span></div><div class="di-gallery-grid">${items.map(item=>`<button class="di-gallery-card" type="button" data-gallery-item data-gallery-category="${escapeHtml(item.category)}" data-gallery-src="${escapeHtml(item.image)}" data-gallery-title="${escapeHtml(item.name)}" data-gallery-type="${escapeHtml(item.type)}" data-gallery-caption="${escapeHtml(item.caption||item.name)}" data-gallery-route="${escapeHtml(item.route||'')}"><img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy"><span class="di-gallery-card-copy"><strong>${escapeHtml(item.name)}</strong><small>${escapeHtml(item.type)}</small></span></button>`).join("")}</div><p class="di-gallery-empty" data-gallery-empty hidden>Nenhuma imagem disponível neste filtro.</p></section></div>`;
+    window.DI_GALLERY?.mount(refs.main);
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Galeria"}]);
   }
 
@@ -928,7 +1000,7 @@
   }
 
   function activeNavForRoute(base, parts) {
-    const map = { book:"books", character:"characters", chapter:"chapters", timeline:"timeline", mystery:"mysteries", clan:"clans", place:"places", "lore-item": parts[0] === "concepts" ? "lore" : parts[0] };
+    const map = { book:"books", character:"characters", chapter:"chapters", timeline:"timeline", mystery:"mysteries", theme:"themes", clan:"clans", place:"places", "lore-item": parts[0] === "concepts" ? "lore" : parts[0] };
     return map[base] || base;
   }
 
@@ -961,7 +1033,7 @@
     const renderers = {
       dashboard: renderDashboard, books: renderBooks, characters: renderCharacters, relationships: renderRelationships,
       families: renderFamilies, organisations: renderOrganisations, chapters: renderChapters,
-      timeline: renderTimeline, mysteries: renderMysteries, clans: renderClans,
+      timeline: renderTimeline, themes: renderThemes, mysteries: renderMysteries, clans: renderClans,
       places: renderPlaces, map: renderMap, fauna: () => renderLore("fauna"),
       flora: () => renderLore("flora"), foods: () => renderLore("foods"), lore: () => renderLore("concepts"),
       gallery: renderGallery, canon: renderCanon
@@ -971,6 +1043,7 @@
     else if (base === "chapter") renderChapter(parts[0]);
     else if (base === "timeline" && parts[0]) renderTimelineEntry(parts[0]);
     else if (base === "mystery") renderMystery(parts[0]);
+    else if (base === "theme") renderTheme(parts[0]);
     else if (base === "clan") renderClan(parts[0]);
     else if (base === "place") renderPlace(parts[0]);
     else if (base === "lore-item") renderLoreItem(parts[0], parts[1]);
@@ -993,6 +1066,7 @@
       ...D.chapters.map(item => ({type:"Capítulos",name:`Capítulo ${item.number} — ${item.title}`,subtitle:item.status,description:[item.summary,...item.details].join(" "),route:`chapter/${item.id}`,icon:"chapter"})),
       ...timelineEntries().map(item => ({type:"Linha do Tempo",name:item.name,subtitle:item.category,description:[item.summary || item.cause,...(item.consequences || [])].join(" "),route:`timeline/${item.slug}`,icon:"timeline"})),
       ...D.mysteries.map(item => ({type:"Mistérios",name:item.name,subtitle:item.status,description:[item.question,item.answer,...item.clues].join(" "),route:`mystery/${item.slug}`,icon:"question"})),
+      ...(D.common?.entities?.themes||[]).map(item => ({type:"Temas",name:item.name,subtitle:item.category||"Tema",description:[item.summary,item.question,...(item.development||[])].join(" "),route:`theme/${item.slug}`,icon:"law"})),
       ...lore
     ];
   }
@@ -1126,7 +1200,7 @@
   $("#sagaSelector").addEventListener("click", () => openSelector("sagas"));
   $("#bookLens").addEventListener("click", () => openSelector("books"));
   refs.settingsContent.addEventListener("input", event => { if (event.target.matches("[data-setting-range]")) { state.settings[event.target.dataset.settingRange] = Number(event.target.value); storage.set("di-guerras-customized","1"); persistSettings(); } });
-  document.addEventListener("keydown", event => { const card=event.target.closest?.("[data-timeline-card], .place-scene-card[data-route]"); if(card && (event.key==="Enter" || event.key===" ") && !event.target.closest("button,a")){event.preventDefault();routeTo(card.dataset.route);} if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); } if (event.key === "Escape") { closeSearch(); closeSettings(); closeSelector(); refs.sidebar.classList.remove("mobile-open"); } });
+  document.addEventListener("keydown", event => { const card=event.target.closest?.("[role='link'][data-route], [data-timeline-card], .place-scene-card[data-route]"); if(card && (event.key==="Enter" || event.key===" ") && !event.target.closest("button,a")){event.preventDefault();routeTo(card.dataset.route);} if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); } if (event.key === "Escape") { closeSearch(); closeSettings(); closeSelector(); refs.sidebar.classList.remove("mobile-open"); } });
   window.addEventListener("hashchange", () => routeTo(location.hash.replace(/^#\//, "") || "dashboard", { replace: true }));
 
   function initIcons() { $$('[data-icon]').forEach(element => { element.innerHTML = icon(element.dataset.icon); }); }

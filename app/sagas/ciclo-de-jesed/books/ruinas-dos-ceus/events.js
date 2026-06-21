@@ -31,6 +31,7 @@ function searchableItems(){
     ...D.places.map(p=>({type:'Lugares',title:p.n,subtitle:p.s.slice(0,60),text:`${p.n} ${p.s}`,route:`lugar/${S(p.n)}`})),
     ...D.chapters.map(c=>({type:'Capítulos',title:`Capítulo ${c.n} — ${c.t}`,subtitle:c.s.slice(0,60),text:`${c.t} ${c.s}`,route:`capitulo/${c.n}`})),
     ...(D.common?.entities?.timeline||D.timeline||[]).map(item=>({type:'Linha do Tempo',title:item.name,subtitle:item.dateLabel||item.category||'',text:`${item.name} ${item.summary||''} ${item.context||''} ${(item.consequences||[]).join(' ')}`,route:`linha/${item.slug}`})),
+    ...(D.common?.entities?.themes||[]).map(item=>({type:'Temas',title:item.name,subtitle:item.category||'Tema',text:`${item.name} ${item.summary||''} ${item.question||''} ${(item.development||[]).join(' ')}`,route:`tema/${item.slug}`})),
     ...['fauna','flora','foods'].flatMap(kind=>(D.common?.entities?.[kind]||[]).map(item=>({type:kind==='foods'?'Alimentos':kind[0].toUpperCase()+kind.slice(1),title:item.name,subtitle:`${item.citations||0} citações`,text:`${item.name} ${item.summary||''} ${item.fullDescription||''}`,route:`${kind==='foods'?'alimentos':kind}/${item.slug}`})))
   ];
 }
@@ -63,7 +64,7 @@ function closeSearch(){
 $('#searchTrigger')?.addEventListener('click',openSearch);
 $('#searchInput')?.addEventListener('input',e=>renderSearch(e.target.value));
 document.addEventListener('keydown',e=>{
-  const card=e.target.closest?.('[data-timeline-card], .place-scene-card[data-go]');
+  const card=e.target.closest?.('[role="link"][data-go], [data-timeline-card], .place-scene-card[data-go]');
   if(card&&(e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a')){e.preventDefault();return go(card.dataset.go);}
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch();}
   if(e.key==='Escape'){closeSearch();closeSelector();closeSettingsDrawer();}

@@ -1,8 +1,8 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.11.0",
+  "version": "0.15.1",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 11 com citações verificadas de fauna, flora e alimentos, ciclo celeste acelerado e sinopses editoriais completas.",
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 15 refeita com galeria filtrável em tela cheia e caminhos sincronizados ao inventário real de assets.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",

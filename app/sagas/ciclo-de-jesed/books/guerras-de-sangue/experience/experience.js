@@ -3,7 +3,7 @@
   const P='di-guerras-';
   const defaults={embers:true,sparks:true,ash:true,'hot-dust':true,turbulence:true,'front-particles':true,'clan-texture':true,'metal-reflection':true,'map-texture':true,'menu-motion':true,'ember-density':54,'motion-intensity':48,'effect-opacity':72};
   const getBool=k=>X.bool(P+k,defaults[k]),getNum=(k,min=0,max=100)=>X.num(P+k,defaults[k],min,max);
-  const particleSources={ember:'assets/atmosphere/guerras/ember-sprite.webp',spark:'assets/atmosphere/guerras/spark-sprite.webp',ash:['assets/atmosphere/guerras/ash-sprite-01.webp','assets/atmosphere/guerras/ash-sprite-02.webp','assets/atmosphere/guerras/ash-sprite-03.webp']};
+  const particleSources={ember:[],spark:[],ash:[]};
   const particleSprites={};
   for(const [key,value] of Object.entries(particleSources)){
     const paths=Array.isArray(value)?value:[value];particleSprites[key]=paths.map(src=>{const image=new Image();image.decoding='async';image.src=src;return image});

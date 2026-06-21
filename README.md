@@ -1,6 +1,6 @@
 # Dimensões Infinitas — site pessoal
 
-Versão estrutural: **0.11.0 — Etapa 11 concluída**.
+Versão estrutural: **0.15.1 — Etapas 14 e 15 concluídas**.
 
 ## Entradas públicas
 
@@ -20,7 +20,9 @@ app/
 │   ├── experience/
 │   ├── maps/
 │   ├── characters/
-│   └── social/
+│   ├── social/
+│   ├── themes/
+│   └── gallery/
 └── sagas/
     └── ciclo-de-jesed/
         └── books/
@@ -62,6 +64,30 @@ npm run serve
 ## Documentação obrigatória
 
 Leia `PLANO-MESTRE-E-HISTORICO.md` antes de alterar o projeto. Ele é a fonte oficial para decisões, etapas concluídas e tarefas futuras.
+
+
+## Etapas 12 e 13 — Conceitos e Mistérios
+
+- 7 conceitos aprofundados em cada livro;
+- conceitos clicáveis também em *Ruínas dos Céus*;
+- definição, origem, funcionamento, interpretações, capítulos, personagens, ambiguidades e evolução;
+- 5 mistérios aprofundados em cada livro;
+- evolução completa das pistas até o encerramento dos livros;
+- falsas pistas apenas quando realmente existentes;
+- remoção de “Resposta no ponto escrito”.
+
+## Pacote 0.13.1 — melhorias adicionais
+
+- portal de Dimensões Infinitas com viagem contínua por estrelas;
+- portais azul-bebê ovais com dispersão de energia;
+- música ambiente procedural com controlo de reprodução;
+- simulador manual do céu em passos de 10 minutos;
+- ciclo automático contínuo de 24 horas em cerca de 10 minutos reais;
+- contraste adaptativo para textos durante a noite;
+- restauração de assets ausentes e fallbacks temporários;
+- correção da página de *Guerras de Sangue*, com remoção da folha CSS duplicada e obsoleta.
+
+A música do portal respeita a política de autoplay dos navegadores: quando a preferência estiver guardada, ela volta depois da primeira interação do usuário.
 
 ## Etapas 4 e 5 preservadas
 
@@ -156,7 +182,7 @@ Capturas de revisão:
 
 ## Etapa 7 — páginas iniciais e inventário de imagens
 
-- os caminhos de branding, capítulos, personagens e mapas foram alinhados ao inventário WebP fornecido pelo autor;
+- os caminhos de branding, capítulos, personagens e mapas foram alinhados ao inventário real fornecido pelo autor, incluindo PNG, JPG e WebP;
 - o inventário completo foi incorporado em `data/common/assets-manifest.json`;
 - *Ruínas dos Céus* possui quatro cartões internos em uma linha no desktop: Personagens, Relações, Linha do Tempo e Capítulos;
 - *Guerras de Sangue* usa a mesma estrutura orientadora;
@@ -172,8 +198,8 @@ Relatório:
 
 Validação da Etapa 7:
 
-- nenhuma referência activa com `.png`, `.jpg` ou `.jpeg`;
-- nenhum caminho de imagem sem correspondência no inventário ou nos recursos temporários documentados;
+- extensões `.png`, `.jpg`, `.jpeg` e `.webp` são aceites conforme o ficheiro real;
+- nenhum caminho activo de imagem fica fora do inventário recebido;
 - zero exceções nas duas páginas iniciais;
 - layout sem scroll horizontal a 390 píxeis.
 
@@ -300,6 +326,58 @@ Capturas:
 
 `docs/screenshots/etapa-11/`
 
+## Etapas 12 e 13 — conceitos, mistérios e melhorias adicionais
+
+- os Conceitos dos dois livros possuem fichas individuais com definição, origem, funcionamento conhecido, interpretações, ambiguidades e evolução;
+- os Mistérios acompanham a narrativa completa, desde as primeiras pistas até a revelação ou estado final;
+- a tela de Dimensões Infinitas recebeu avanço estelar, portais azul-bebê e música procedural;
+- o relógio manual de Ruínas avança em passos de dez minutos e o contraste noturno adapta a leitura;
+- a folha visual duplicada de Guerras de Sangue foi removida e os recursos disponíveis foram restaurados.
+
+Relatório:
+
+`data/sagas/ciclo-de-jesed/audits/concepts-mysteries-etapa-13.json`
+
+## Etapa 14 — temas
+
+- cada livro possui dez temas com cartões interativos e páginas próprias;
+- as fichas apresentam descrição, pergunta central, desenvolvimento, personagens, lugares, capítulos, acontecimentos, símbolos e evolução;
+- os temas de *Ruínas dos Céus* incluem Peso e Sopro, queda, tradição, fé, família, destino, natureza, memória, sacrifício e reconstrução;
+- os temas de *Guerras de Sangue* incluem paz, fome, justiça, herança, identidade, verdade, destino, alianças, desigualdade e repetição;
+- interpretações ambíguas permanecem explicitamente abertas, sem converter leitura temática em resposta canônica absoluta.
+
+Arquivos principais:
+
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/themes.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/themes.js`;
+- `app/shared/themes/presentation.css`.
+
+## Etapa 15 — galerias
+
+- *Ruínas dos Céus* recebeu uma galeria completa e *Guerras de Sangue* foi padronizada pelo mesmo sistema;
+- os filtros são gerados apenas para categorias realmente presentes;
+- capas, mapas, capítulos, personagens, lugares e fauna aparecem quando possuem imagem confirmada;
+- clãs, emblemas, acontecimentos, famílias e organizações não aparecem como filtros porque o inventário recebido não contém arte utilizável nessas pastas;
+- o visualizador abre a imagem em tela cheia, sobre fundo escuro, sem navegar para outra página;
+- há pesquisa textual, botões de fechar, anterior e seguinte, gesto de deslizar, setas do teclado, tecla Esc, contador, legenda e botão para abrir a ficha relacionada;
+- anterior e seguinte respeitam o filtro ativo;
+- imagens ausentes são retiradas dos cartões e da navegação automaticamente;
+- placeholders temporários repetidos não entram na galeria; Flora, Alimentos, Conceitos e outras categorias surgirão quando receberem arte própria e forem acrescentados ao inventário;
+- a galeria contém 60 cartões em *Ruínas dos Céus* e 88 em *Guerras de Sangue*, totalizando 148 caminhos confirmados.
+
+Arquivos principais:
+
+- `app/shared/gallery/gallery.js`;
+- `app/shared/gallery/gallery.css`;
+- `data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/gallery.js`;
+- `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/gallery.js`;
+- `data/sagas/ciclo-de-jesed/audits/themes-galleries-etapa-14-15.json`.
+
 ## Próxima etapa
 
-**Etapa 12 — Conceitos.**
+**Etapa 16 — Padronização visual e responsividade.**
+
+
+## Inventário de assets
+
+A versão 0.15.1 usa `data/common/inventario-pasta-assets.csv` como fonte de verdade para nomes, extensões e pastas. As galerias só registam imagens presentes nesse inventário. Ao substituir a pasta `assets`, preserve exactamente maiúsculas, acentos, espaços e extensões indicados no CSV.

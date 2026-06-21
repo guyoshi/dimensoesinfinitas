@@ -13,10 +13,10 @@
       personagens:P.personagens,personagem:()=>P.personagem(id),
       relacoes:P.relacoes,familias:P.familias,organizacoes:P.organizacoes,
       linha:id?()=>P.linhaItem(id):P.linha,
-      misterios:P.misterios,misterio:()=>P.misterio(id),
+      temas:P.temas,tema:()=>P.tema(id),misterios:P.misterios,misterio:()=>P.misterio(id),
       mapa:P.mapa,lugares:P.lugares,lugar:()=>P.lugar(id),
       fauna:id?()=>P.loreItem('fauna',id):()=>P.lore('fauna'),flora:id?()=>P.loreItem('flora',id):()=>P.lore('flora'),
-      alimentos:id?()=>P.loreItem('alimentos',id):()=>P.lore('alimentos'),conceitos:()=>P.lore('conceitos'),
+      alimentos:id?()=>P.loreItem('alimentos',id):()=>P.lore('alimentos'),conceitos:()=>P.lore('conceitos'),conceito:()=>P.conceito(id),galeria:P.galeria,
       canon:()=>P.simples('Regras canônicas',[
         ['Sopro','Manter ambiguidade.'],
         ['Tom','Perda pesada e esperança final.'],
@@ -31,6 +31,7 @@
     }
     $('#main').innerHTML=page();
     if(base==='mapa') requestAnimationFrame(()=>R.mountMap?.());
+    if(base==='galeria') requestAnimationFrame(()=>window.DI_GALLERY?.mount($('#main')));
     if(base==='linha'&&!id){
       requestAnimationFrame(()=>document.querySelector('.rdc-timeline-card.selected')?.scrollIntoView({block:'center',behavior:(settings&&settings.motion)?'smooth':'auto'}));
     }else{

@@ -53,8 +53,8 @@
     "ruinas-dos-ceus": 5
   },
   "assetsAdded": [
-    "assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp",
-    "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp",
+    "assets/maps/ruinas-dos-ceus/Mapa de Etérea.png",
+    "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).png",
     "assets/maps/ruinas-dos-ceus/mapa-combinado.webp",
     "assets/maps/guerras-de-sangue/mapa-geral.webp",
     "assets/maps/guerras-de-sangue/mapa-geral.webp"
@@ -64,8 +64,8 @@
     "app/shared/maps/interactive-map.js",
     "data/sagas/ciclo-de-jesed/books/ruinas-dos-ceus/maps.js",
     "data/sagas/ciclo-de-jesed/books/guerras-de-sangue/maps.js",
-    "assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp",
-    "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp",
+    "assets/maps/ruinas-dos-ceus/Mapa de Etérea.png",
+    "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).png",
     "assets/maps/guerras-de-sangue/mapa-geral.webp"
   ],
   "preservation": {

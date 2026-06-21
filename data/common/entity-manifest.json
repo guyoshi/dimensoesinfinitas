@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "project": "Dimensões Infinitas",
-  "generatedFor": "Etapa 4 — Linha do Tempo cronológica",
+  "generatedFor": "Etapas 14 e 15 — Temas e Galerias",
   "books": {
     "guerras-de-sangue": {
       "canonicalCutoff": "Fim do Capítulo 29 — A Raiz que Ficou",
@@ -204,7 +204,18 @@
           "jesed-mystery-attack-fendelar",
           "jesed-mystery-yvenn"
         ],
-        "themes": [],
+        "themes": [
+          "jesed-theme-guerras-de-sangue-paz-e-violencia",
+          "jesed-theme-guerras-de-sangue-fome-recursos-e-poder",
+          "jesed-theme-guerras-de-sangue-justica-e-vinganca",
+          "jesed-theme-guerras-de-sangue-heranca-e-legado",
+          "jesed-theme-guerras-de-sangue-irmas-identidade-e-poder",
+          "jesed-theme-guerras-de-sangue-verdade-mentira-e-narrativa",
+          "jesed-theme-guerras-de-sangue-destino-e-livre-arbitrio",
+          "jesed-theme-guerras-de-sangue-alianca-e-desconfianca",
+          "jesed-theme-guerras-de-sangue-centro-periferia-e-desigualdade",
+          "jesed-theme-guerras-de-sangue-ciclo-memoria-e-repeticao"
+        ],
         "fauna": [
           "jesed-fauna-raukhar",
           "jesed-fauna-dorvek",
@@ -509,11 +520,12 @@
           "jesed-concept-semente-rubra"
         ],
         "gallery": [
-          "jesed-gallery-guerras-de-sangue-cover-ruinas-dos-ceus",
           "jesed-gallery-guerras-de-sangue-cover-guerras-de-sangue",
+          "jesed-gallery-guerras-de-sangue-map-guerras",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-kaelina-polar",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-alyra-polar",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-orionus-polar",
+          "jesed-gallery-guerras-de-sangue-character-jesed-character-orionus-polar-alt-1",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-daryon-vess",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-cal-edran-polar",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-cal-kadrir",
@@ -521,7 +533,6 @@
           "jesed-gallery-guerras-de-sangue-character-jesed-character-vita-fendelar",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-avara-fendelar",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-nara",
-          "jesed-gallery-guerras-de-sangue-character-jesed-character-ilo",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-nynestra-buldar",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-kharvok",
           "jesed-gallery-guerras-de-sangue-character-jesed-character-torgun-ossos-de-fome",
@@ -596,13 +607,6 @@
           "jesed-gallery-guerras-de-sangue-chapter-jesed-chapter-gs-27",
           "jesed-gallery-guerras-de-sangue-chapter-jesed-chapter-gs-28",
           "jesed-gallery-guerras-de-sangue-chapter-jesed-chapter-gs-29",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-polar",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-tondrar",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-buldar",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-glydar",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-vendrar",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-cendar",
-          "jesed-gallery-guerras-de-sangue-clan-jesed-clan-urtistar",
           "jesed-gallery-guerras-de-sangue-fauna-jesed-fauna-raukhar"
         ]
       }
@@ -721,7 +725,18 @@
           "jesed-mystery-rdc-ruinas",
           "jesed-mystery-rdc-sopro"
         ],
-        "themes": [],
+        "themes": [
+          "jesed-theme-ruinas-dos-ceus-peso-e-sopro",
+          "jesed-theme-ruinas-dos-ceus-queda-e-sobrevivencia",
+          "jesed-theme-ruinas-dos-ceus-tradicao-e-duvida",
+          "jesed-theme-ruinas-dos-ceus-fe-e-interpretacao",
+          "jesed-theme-ruinas-dos-ceus-familia-e-legado",
+          "jesed-theme-ruinas-dos-ceus-destino-e-livre-arbitrio",
+          "jesed-theme-ruinas-dos-ceus-civilizacao-e-natureza",
+          "jesed-theme-ruinas-dos-ceus-memoria-e-verdade",
+          "jesed-theme-ruinas-dos-ceus-sacrificio-e-cuidado",
+          "jesed-theme-ruinas-dos-ceus-reconstrucao-e-repeticao"
+        ],
         "fauna": [
           "jesed-fauna-nuari",
           "jesed-fauna-aranita",
@@ -756,17 +771,30 @@
         ],
         "gallery": [
           "jesed-gallery-rdc-cover-ruinas-dos-ceus",
+          "jesed-gallery-rdc-map-eterea",
+          "jesed-gallery-rdc-map-superficie",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-01",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-02",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-03",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-04",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-05",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-06",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-07",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-08",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-09",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-10",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-11",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-12",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-13",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-14",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-15",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-16",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-17",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-18",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-19",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-20",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-21",
+          "jesed-gallery-rdc-chapter-jesed-chapter-rdc-22",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-23",
           "jesed-gallery-rdc-chapter-jesed-chapter-rdc-24",
           "jesed-gallery-rdc-character-jesed-character-jokara-amarea",

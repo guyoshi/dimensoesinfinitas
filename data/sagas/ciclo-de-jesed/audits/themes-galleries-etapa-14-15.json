@@ -1,0 +1,88 @@
+{
+  "stage": "Etapas 14 e 15",
+  "version": "0.15.1",
+  "date": "2026-06-21",
+  "books": {
+    "ruinas-dos-ceus": {
+      "themes": 10,
+      "galleryItems": 60,
+      "categories": [
+        "chapter",
+        "character",
+        "cover",
+        "fauna",
+        "map",
+        "place"
+      ],
+      "clanFilterPresent": false,
+      "inventoryAvailableItems": 60,
+      "eventFilterPresent": false
+    },
+    "guerras-de-sangue": {
+      "themes": 10,
+      "galleryItems": 88,
+      "categories": [
+        "chapter",
+        "character",
+        "cover",
+        "fauna",
+        "map",
+        "place"
+      ],
+      "clanFilterPresent": false,
+      "inventoryAvailableItems": 88,
+      "eventFilterPresent": false
+    }
+  },
+  "themes": {
+    "interactiveCards": true,
+    "individualPages": true,
+    "requiredSections": [
+      "description",
+      "development",
+      "characters",
+      "places",
+      "chapters",
+      "events",
+      "symbols",
+      "evolution"
+    ],
+    "interpretiveAmbiguityPreserved": true
+  },
+  "gallery": {
+    "sharedViewer": true,
+    "fullscreen": true,
+    "darkBackdrop": true,
+    "closeButton": true,
+    "previousNextButtons": true,
+    "keyboardArrows": true,
+    "escapeKey": true,
+    "positionCounter": true,
+    "caption": true,
+    "activeFilterNavigation": true,
+    "brokenImagesExcludedAtRuntime": true,
+    "temporaryPlaceholdersExcluded": true,
+    "searchField": true,
+    "touchSwipe": true,
+    "neighbourPreload": true,
+    "focusTrap": true,
+    "openRelatedRecord": true,
+    "strictInventory": true,
+    "exactAssetPaths": true
+  },
+  "browserTests": {
+    "routesTested": 8,
+    "renderedRoutes": 8,
+    "applicationExceptions": 0,
+    "desktopNoHorizontalOverflow": true,
+    "mobileNoHorizontalOverflow": true
+  },
+  "idsChanged": 0,
+  "canonicalChanges": 0,
+  "githubChanged": false,
+  "knownLimits": [
+    "As pastas de arte social, famílias, organizações, clãs e acontecimentos não contêm imagens utilizáveis no inventário recebido; por isso essas categorias não são exibidas na galeria.",
+    "Os caminhos usam exactamente nomes, acentos, espaços e extensões do inventário-pasta-assets.csv. Os binários completos devem permanecer na mesma estrutura assets/ do projecto do autor.",
+    "Imagens quebradas são retiradas automaticamente da grelha, dos filtros e da navegação do visualizador."
+  ]
+}

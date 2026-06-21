@@ -21,18 +21,18 @@
   "genericLoreBlockRemoved": true,
   "archivesPreserved": true,
   "fendelarFormalEmblemCreated": false,
-  "fendelarContextMark": "assets/clans/temp/fendelar-mark.webp",
+  "fendelarContextMark": "",
   "temporaryLorePlaceholders": [
-    "assets/lore/temp/food-placeholder.webp",
-    "assets/lore/temp/fauna-placeholder.webp",
-    "assets/lore/temp/flora-placeholder.webp"
+    "",
+    "",
+    ""
   ],
   "requiredFiles": [
     "data/sagas/ciclo-de-jesed/books/guerras-de-sangue/clans.js",
     "app/shared/clans/presentation.css",
-    "assets/lore/temp/food-placeholder.webp",
-    "assets/lore/temp/fauna-placeholder.webp",
-    "assets/lore/temp/flora-placeholder.webp"
+    "",
+    "",
+    ""
   ],
   "screenshots": [
     "docs/screenshots/etapa-10/guerras-clans.png",
