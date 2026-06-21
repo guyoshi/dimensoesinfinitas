@@ -296,7 +296,7 @@
         <img src="assets/mapa-guerras-de-sangue.webp" alt="Mapa de Jesed na época de Guerras de Sangue">
         <div class="hero-map-content">
           <p class="eyebrow">Ciclo de Jesed · Guia do livro</p>
-          <img class="hero-logo glow-title" src="assets/branding/guerras-de-sangue-logo.png" alt="Guerras de Sangue">
+          <img class="hero-logo glow-title" src="assets/branding/Guerras de Sangue white.png" alt="Guerras de Sangue">
           <p>Um arquivo cartográfico de pessoas, territórios, segredos e consequências, limitado aos capítulos realmente escritos.</p>
           <div class="hero-actions"><button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button><button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button></div>
         </div>
@@ -336,7 +336,7 @@
     const cover = book.cover ? `<img src="${book.cover}" alt="Capa de ${escapeHtml(book.name)}">` : icon(book.icon);
     if (book.id !== "guerras-de-sangue") {
       const externalLinks = { "ruinas-dos-ceus": "ruinas.html" };
-      const bookLogos = { "ruinas-dos-ceus": "assets/branding/ruinas-dos-ceus-logo.png" };
+      const bookLogos = { "ruinas-dos-ceus": "assets/branding/Ruínas dos Céus white.png" };
       const href = externalLinks[book.id];
       const logo = bookLogos[book.id];
       const titleHtml = logo ? `<img class="hero-logo" src="${logo}" alt="${escapeHtml(book.name)}">` : `<h2>${escapeHtml(book.name)}</h2>`;
@@ -400,7 +400,9 @@
       return chapters.length ? `<div class="timeline-list">${chapters.map(ch => {
         const companions = ch.characters.filter(id => id !== character.id).map(getCharacter).filter(Boolean).slice(0, 5);
         const chPlaces = ch.places.map(getPlace).filter(Boolean);
-        return `<article class="timeline-item" data-route="chapter/${ch.id}"><small>Capítulo ${ch.number}</small><h3>${escapeHtml(ch.title)}</h3><p>${escapeHtml(ch.summary)}</p><div class="tag-row">${chPlaces.map(p => `<span class="tag">${icon("pin")}${escapeHtml(p.name)}</span>`).join("")}${companions.map(c => `<span class="tag">${icon("person")}${escapeHtml(c.name)}</span>`).join("")}</div></article>`;
+        const traj = window.GUERRAS_TRAJ && window.GUERRAS_TRAJ[character.name];
+        const eventText = (traj && traj[ch.id]) || ch.summary;
+        return `<article class="timeline-item" data-route="chapter/${ch.id}"><small>Capítulo ${ch.number}</small><h3>${escapeHtml(ch.title)}</h3><p>${escapeHtml(eventText)}</p><div class="tag-row">${chPlaces.map(p => `<span class="tag">${icon("pin")}${escapeHtml(p.name)}</span>`).join("")}${companions.map(c => `<span class="tag">${icon("person")}${escapeHtml(c.name)}</span>`).join("")}</div></article>`;
       }).join("")}</div>` : `<p class="empty-inline">Trajectória ainda não registada.</p>`;
     }
     if (tab === "relations") return relationships.length ? `<div class="relationship-detail-list">${relationships.map(r => { const other = getCharacter(r.from === character.id ? r.to : r.from); return `<article class="relationship-detail-card"><button class="relationship-person" data-route="character/${other?.slug || ""}">${other?.image ? `<img src="${other.image}" alt="">` : icon("person")}<span><strong>${escapeHtml(other?.name || "Entidade não encontrada")}</strong><small>${escapeHtml(r.type)}</small></span></button><p><strong>Estado:</strong> ${escapeHtml(r.state)}</p><p>${escapeHtml(r.from === character.id ? r.fromView : r.toView)}</p><div class="tag-row">${r.evolution.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join("")}</div></article>`; }).join("")}</div>` : `<p class="empty-inline">Nenhuma relação registada neste período.</p>`;

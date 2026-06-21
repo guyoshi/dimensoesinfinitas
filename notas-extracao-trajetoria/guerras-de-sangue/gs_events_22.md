@@ -1,0 +1,9 @@
+### Capítulo 22 — A Marcha dos Tondrar
+- Kaelina Polar: É mantida como refém febril durante a marcha conjunta dos clãs rumo a Kaendar; testemunha calada a execução de um espião/batedor Polar; é reconhecida por Rendar, que tenta matá-la na hora mas é impedido por Nynestra, que argumenta que ela vale mais como vantagem estratégica para atrair Alyra para fora da muralha.
+- Rendar: Reencontra Nynestra e Kharvok com reforços (Buldar, Vendrar, Glydar) após a vitória na Margem dos Zírrios; planeja com Kharvok uma marcha dividida e silenciosa até Kaendar, evitando aldeias e contato desnecessário; tenta matar Kaelina ao reconhecê-la, mas é contido por Nynestra; revela a ela, em conversa íntima à noite, os nomes da família perdida — a companheira Vita e os filhos Nara e Ilo — e admite que não consegue ver a si mesmo como assassino, apesar de tudo o que fez.
+- Vita Fendelar: Não aparece (já morta); é nomeada por Rendar como sua companheira morta, parte da dor que o move.
+- Nara: Não aparece (já morta); é nomeada por Rendar como sua filha morta.
+- Ilo: Não aparece (já morto); é nomeado por Rendar como seu filho bebê morto.
+- Nynestra Buldar: É libertada por Kharvok a pedido de Rendar; reencontra Hadrun com alívio raro; debate estrategicamente contra a ideia de cerco simples, defendendo uma marcha dividida e oculta; impede que Rendar mate Kaelina na hora; questiona-o sobre suas motivações e o adverte que a linha entre assassino e homem perdido é estreita.
+- Kharvok: Reencontra Rendar e seus próprios homens sobreviventes da Margem dos Zírrios; debate a estratégia do cerco com ele; cede ao pedido de Rendar e liberta Nynestra; mantém o controle final sobre Kaelina como prisioneira Tondrar.
+- Hadrun: Reencontra Nynestra com alívio profundo; alerta-a sobre o estado emocional perigoso de Rendar, que "ama apenas os mortos"; expressa preocupação sobre o que vem depois da guerra contra os Polar.

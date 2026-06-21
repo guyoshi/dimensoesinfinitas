@@ -10,7 +10,7 @@
     detail: detailView
   };
   const externalPages = { 'ruinas-dos-ceus': 'ruinas.html', 'guerras-de-sangue': 'guerras.html' };
-  const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/ruinas-dos-ceus-logo.png', 'guerras-de-sangue': 'assets/branding/guerras-de-sangue-logo.png' };
+  const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/Ruínas dos Céus white.png', 'guerras-de-sangue': 'assets/branding/Guerras de Sangue white.png' };
   const icons = { compass: '✦', journal: '✦', crown: '♕', stars: '✧', portal: '◎', eye: '◉', union: '⬡', wind: '☁', 'crossed-swords': '⚔', fortress: '⛁', embers: '♨', hourglass: '⏳' };
   const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 

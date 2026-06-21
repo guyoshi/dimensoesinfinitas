@@ -8,7 +8,7 @@ Estas regras são obrigatórias para qualquer IA que actualize o conteúdo canó
 - Em **Guerras de Sangue**, considerar apenas o texto efectivamente escrito.
 - Não transformar resumos de capítulos futuros em acontecimentos, trajectórias, conhecimento, destinos ou aparições canónicas.
 - Quando um capítulo resumido passar a existir como narrativa escrita, ele pode então ser incorporado.
-- Na Etapa 4B, o limite canónico é o fim do Capítulo 23 — A Câmara do Primeiro Abrigo. Os Capítulos 24 e 25 estão vazios.
+- O livro Guerras de Sangue está completo até o Capítulo 29 — A Raiz que Ficou. Os capítulos 1-23 estão em `data/content.js`; os capítulos 24-29 são adicionados em runtime por `data/guerras-4d-chapters.js` (e os personagens/eventos correspondentes por `data/guerras-4d-characters.js` e `data/guerras-4d-events.js`), para não exigir reescrever o blob minificado de `content.js`. `scripts/validate-content.js` valida apenas `content.js` isoladamente (por isso ainda espera 23 capítulos nesse ficheiro — isso é esperado e não é um erro).
 
 ## 2. Nunca inventar
 

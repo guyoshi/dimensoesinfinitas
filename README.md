@@ -30,7 +30,7 @@ A validação impede a publicação quando encontra:
 
 ## Conteúdo da 4B
 
-- 23 capítulos efectivamente escritos de **Guerras de Sangue**;
+- 29 capítulos efectivamente escritos de **Guerras de Sangue** (1-23 em `data/content.js`; 24-29 acrescentados em runtime por `data/guerras-4d-chapters.js`);
 - resumos rápidos e descrições detalhadas dos acontecimentos;
 - nomes interligados nos textos dos capítulos;
 - 41 personagens, incluindo 23 retratos já adicionados;
@@ -45,4 +45,4 @@ A validação impede a publicação quando encontra:
 
 ## Limite canónico
 
-O conteúdo narrativo termina no **Capítulo 23 — A Câmara do Primeiro Abrigo**. Os Capítulos 24 e 25 estão vazios no manuscrito, e resumos de acontecimentos posteriores não são tratados como narrativa já escrita.
+O livro **Guerras de Sangue** está completo até o **Capítulo 29 — A Raiz que Ficou**. `scripts/validate-content.js` continua a validar apenas `data/content.js` isoladamente (por isso ainda reporta 23 capítulos nesse ficheiro — os capítulos 24-29 vivem nos ficheiros de extensão em `data/guerras-4d-*.js`, carregados em runtime pelo navegador).
