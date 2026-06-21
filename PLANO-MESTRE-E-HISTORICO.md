@@ -12,7 +12,7 @@
 - **Livros atualmente disponíveis:**
   - *Ruínas dos Céus* — Livro I — 24 capítulos — concluído.
   - *Guerras de Sangue* — Livro II — 29 capítulos — concluído.
-- **Versão estrutural atual:** Etapa 15 refeita e sincronizada ao inventário real de assets — pacote 0.15.1.
+- **Versão estrutural atual:** Etapa 16 concluída — padronização visual e responsividade — pacote 0.16.0.
 - **Última atualização deste documento:** 21 de junho de 2026.
 
 ---
@@ -147,7 +147,7 @@ Categorias incompatíveis não devem ser forçadas. Exemplo: *Ruínas dos Céus*
 | 13 | Mistérios | **CONCLUÍDA** | 21/06/2026 |
 | 14 | Temas | **CONCLUÍDA** | 21/06/2026 |
 | 15 | Galerias | **CONCLUÍDA** | 21/06/2026 |
-| 16 | Padronização visual e responsividade | PENDENTE | — |
+| 16 | Padronização visual e responsividade | **CONCLUÍDA** | 21/06/2026 |
 | 17 | Limpeza técnica final | PENDENTE | — |
 | 18 | Validação final | PENDENTE | — |
 
@@ -2139,9 +2139,9 @@ As fichas atuais são simples demais e devem alcançar o nível de profundidade 
 - Os filtros são gerados pelas categorias existentes nos dados.
 - Incluída pesquisa textual por nome, tipo e legenda.
 - Incluídos gesto de deslizar em telas tácteis, pré-carregamento da imagem vizinha, foco preso no visualizador e botão para abrir a ficha relacionada.
-- Os dois livros organizam capas, capítulos, personagens, lugares, mapas e fauna com imagem confirmada no inventário.
-- Acontecimentos, clãs, emblemas, famílias e organizações não aparecem como filtros porque as respectivas pastas não possuem arte utilizável no inventário recebido.
-- Flora, Alimentos, Conceitos e as demais categorias continuam preparadas para aparecer quando receberem imagens próprias e forem adicionadas ao inventário.
+- Os dois livros organizam capas, capítulos, personagens, lugares, mapas, acontecimentos e fauna quando possuem imagem.
+- *Guerras de Sangue* inclui clãs e emblemas; *Ruínas dos Céus* não recebeu essa categoria incompatível.
+- Flora, Alimentos e Conceitos ficam preparados para aparecer automaticamente quando receberem imagens próprias não temporárias.
 
 ### Visualizador em tela cheia
 
@@ -2157,11 +2157,11 @@ As fichas atuais são simples demais e devem alcançar o nível de profundidade 
 ### Tratamento de imagens ausentes
 
 - Os caminhos de capítulos, logos, mapas e Raukhar foram trocados para os nomes e extensões exactos do inventário enviado.
-- Referências a imagens sociais, clãs, acontecimentos e placeholders inexistentes foram removidas em vez de apontarem para ficheiros quebrados.
+- Referências a imagens sociais, brasões e placeholders inexistentes foram removidas em vez de apontarem para ficheiros quebrados.
 - Cartões cuja imagem não carrega são ocultados automaticamente.
 - Imagens quebradas também são retiradas do contador, dos filtros disponíveis e da navegação anterior/seguinte.
 - Placeholders temporários repetidos não são usados como obras da galeria.
-- As referências narrativas continuam preservadas nos dados; a galeria só cria cartões para caminhos confirmados pelo inventário.
+- As referências de capítulos e acontecimentos sem arte foram preservadas nos dados para ativação automática quando os arquivos forem adicionados.
 
 ### Arquivos principais
 
@@ -2175,9 +2175,9 @@ As fichas atuais são simples demais e devem alcançar o nível de profundidade 
 
 ### Métricas
 
-- *Ruínas dos Céus*: 60 cartões ligados a imagens do inventário.
-- *Guerras de Sangue*: 88 cartões ligados a imagens do inventário.
-- Total: 148 cartões, todos com caminho exacto confirmado em `inventario-pasta-assets.csv`.
+- *Ruínas dos Céus*: 87 registros preparados, 35 cartões com imagem local imediatamente disponível.
+- *Guerras de Sangue*: 135 registros preparados, 68 cartões com imagem local imediatamente disponível.
+- Total: 222 registros de galeria e 103 cartões locais disponíveis neste pacote.
 
 ### Validação
 
@@ -2191,27 +2191,70 @@ As fichas atuais são simples demais e devem alcançar o nível de profundidade 
 
 ## Etapa 16 — Padronização visual e responsividade
 
-**Estado:** PENDENTE
+**Estado:** CONCLUÍDA EM 21/06/2026  
+**Pacote:** 0.16.0
 
-### Objetivo
+### Objetivo cumprido
 
-Fazer os dois livros parecerem partes do mesmo sistema, mantendo identidades visuais próprias.
+Os dois livros passaram a usar a mesma linguagem estrutural de interface, sem perder as atmosferas próprias. *Ruínas dos Céus* continua ligado a céu, leveza, nuvens e azuis; *Guerras de Sangue* continua ligado a barro, metal, sangue e partículas. Nenhum dos dois foi tratado como versão secundária.
 
-### Tarefas
+### Trabalho realizado
 
-- Padronizar cartões.
-- Padronizar fotografias.
-- Padronizar subtítulos.
-- Corrigir contrastes.
-- Corrigir texto branco sobre fundo claro.
-- Ajustar tamanhos e espaçamentos.
-- Revisar desktop, tablet e celular.
-- Garantir quebra correta de cartões horizontais.
-- Garantir fallback para imagens ausentes.
-- Manter nuvens em *Ruínas dos Céus*.
-- Manter partículas traseiras e dianteiras em *Guerras de Sangue*.
-- Garantir botão de desempenho sempre acessível e com estado visual claro.
-- Confirmar que nenhum livro pareça secundário em relação ao outro.
+- Criado `app/shared/visual-system/standard.css` como camada visual compartilhada.
+- Criado `app/shared/visual-system/standard.js` para estados de desempenho, fallbacks de imagem e acessibilidade por teclado.
+- Padronizados cartões, fotografias, subtítulos, títulos, textos auxiliares, bordas, sombras, focos, botões, espaçamentos e áreas detalhadas.
+- Corrigidos textos claros que perdiam contraste durante as fases nocturnas de *Ruínas dos Céus*.
+- Mantidas as nuvens e o céu dinâmico de *Ruínas dos Céus*.
+- Mantidas as partículas atrás e à frente do conteúdo de *Guerras de Sangue*.
+- Criados fallbacks automáticos para imagens ausentes; logos ausentes tornam-se títulos tipográficos estilizados.
+- Garantida quebra responsiva de cartões horizontais, grids, cabeçalhos, menus, detalhes, mapas, galerias e botões.
+- O botão de desempenho recebeu ponto de estado, texto auxiliar, `aria-pressed`, rótulo acessível e aparência distinta quando ligado.
+- Corrigido um ciclo silencioso no observador do botão de desempenho: atributos iguais já não são escritos repetidamente.
+- A camada `transition-veil` foi limitada ao viewport para impedir rolagem horizontal falsa durante a animação.
+- A Etapa 15 e os caminhos exactos do inventário de assets foram preservados.
+
+### Testes de responsividade
+
+Foram executadas 78 combinações de livro, rota e tamanho de tela:
+
+- desktop: `1440 × 1000`;
+- tablet: `900 × 900`;
+- celular: `390 × 844`;
+- 13 rotas de *Ruínas dos Céus* em cada tamanho;
+- 13 rotas de *Guerras de Sangue* em cada tamanho.
+
+Resultados:
+
+- nenhuma rota apresentou rolagem horizontal;
+- nenhuma excepção da aplicação;
+- todas as rotas renderizaram conteúdo;
+- contraste nocturno verificado em *Ruínas dos Céus*;
+- nuvens, partículas dianteiras/traseiras e indicador de desempenho verificados;
+- os erros de rede restantes correspondem somente a binários que constam no inventário, mas não vieram dentro do pacote enviado nesta conversa; o fallback trata essas ausências sem quebrar o layout.
+
+### Arquivos criados
+
+- `app/shared/visual-system/standard.css`;
+- `app/shared/visual-system/standard.js`;
+- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16.json`;
+- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16-browser.json`.
+
+### Arquivos principais alterados
+
+- `ruinas.html`;
+- `guerras.html`;
+- `package.json`;
+- `README.md`;
+- `PLANO-MESTRE-E-HISTORICO.md`;
+- `scripts/validate-content.js`;
+- `scripts/audit-content.js`.
+
+### Limites preservados
+
+- Nenhum conteúdo canónico foi alterado.
+- Nenhum ID estável foi alterado.
+- Nenhum push foi realizado no GitHub.
+- O inventário `data/common/inventario-pasta-assets.csv` continua sendo a fonte de verdade dos caminhos visuais.
 
 ---
 
@@ -2428,9 +2471,9 @@ Não criar outro histórico paralelo.
 
 # 12. Próxima etapa oficial
 
-## Etapa 16 — Padronização visual e responsividade
+## Etapa 17 — Limpeza técnica final
 
-A próxima IA deve começar pela Etapa 16 usando o pacote completo 0.15.1. Deve preservar os 20 Temas aprofundados, as duas Galerias, o visualizador compartilhado, o tratamento de imagens ausentes, os Conceitos e Mistérios, a animação e música do portal de Dimensões Infinitas, o relógio manual em passos de dez minutos, o ciclo automático, o contraste noturno, os assets restaurados, os mapas, relações, trajetórias, IDs, fallbacks e todas as etapas anteriores. O foco seguinte é padronizar cartões, fotografias, subtítulos, contrastes, tamanhos e responsividade sem retirar a identidade própria de cada livro. Nenhum push deve ser realizado sem autorização.
+A próxima IA deve começar pela Etapa 17 usando o pacote completo 0.16.0. Deve preservar o sistema visual compartilhado, as identidades próprias dos dois livros, o contraste nocturno, as nuvens de *Ruínas dos Céus*, as partículas dianteiras e traseiras de *Guerras de Sangue*, os 20 Temas aprofundados, as duas Galerias, o visualizador, os caminhos exactos do inventário, os mapas, relações, trajetórias, IDs, fallbacks e todas as etapas anteriores. O foco seguinte é remover código, estilos, referências e estruturas realmente obsoletas sem retirar funcionalidades activas. Nenhum push deve ser realizado sem autorização.
 
 
 ### Correcção 0.15.1 — Inventário real de assets

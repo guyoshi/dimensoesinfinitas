@@ -1,6 +1,6 @@
 # Dimensões Infinitas — site pessoal
 
-Versão estrutural: **0.15.1 — Etapas 14 e 15 concluídas**.
+Versão estrutural: **0.16.0 — Etapa 16 concluída**.
 
 ## Entradas públicas
 
@@ -22,7 +22,8 @@ app/
 │   ├── characters/
 │   ├── social/
 │   ├── themes/
-│   └── gallery/
+│   ├── gallery/
+│   └── visual-system/
 └── sagas/
     └── ciclo-de-jesed/
         └── books/
@@ -182,7 +183,7 @@ Capturas de revisão:
 
 ## Etapa 7 — páginas iniciais e inventário de imagens
 
-- os caminhos de branding, capítulos, personagens e mapas foram alinhados ao inventário real fornecido pelo autor, incluindo PNG, JPG e WebP;
+- os caminhos de branding, capítulos, personagens e mapas foram alinhados ao inventário WebP fornecido pelo autor;
 - o inventário completo foi incorporado em `data/common/assets-manifest.json`;
 - *Ruínas dos Céus* possui quatro cartões internos em uma linha no desktop: Personagens, Relações, Linha do Tempo e Capítulos;
 - *Guerras de Sangue* usa a mesma estrutura orientadora;
@@ -198,8 +199,8 @@ Relatório:
 
 Validação da Etapa 7:
 
-- extensões `.png`, `.jpg`, `.jpeg` e `.webp` são aceites conforme o ficheiro real;
-- nenhum caminho activo de imagem fica fora do inventário recebido;
+- nenhuma referência activa com `.png`, `.jpg` ou `.jpeg`;
+- nenhum caminho de imagem sem correspondência no inventário ou nos recursos temporários documentados;
 - zero exceções nas duas páginas iniciais;
 - layout sem scroll horizontal a 390 píxeis.
 
@@ -356,14 +357,12 @@ Arquivos principais:
 
 - *Ruínas dos Céus* recebeu uma galeria completa e *Guerras de Sangue* foi padronizada pelo mesmo sistema;
 - os filtros são gerados apenas para categorias realmente presentes;
-- capas, mapas, capítulos, personagens, lugares e fauna aparecem quando possuem imagem confirmada;
-- clãs, emblemas, acontecimentos, famílias e organizações não aparecem como filtros porque o inventário recebido não contém arte utilizável nessas pastas;
+- os filtros activos correspondem somente a categorias com imagens presentes no inventário real;
 - o visualizador abre a imagem em tela cheia, sobre fundo escuro, sem navegar para outra página;
-- há pesquisa textual, botões de fechar, anterior e seguinte, gesto de deslizar, setas do teclado, tecla Esc, contador, legenda e botão para abrir a ficha relacionada;
+- há botões de fechar, anterior e seguinte, setas do teclado, tecla Esc, contador e legenda;
 - anterior e seguinte respeitam o filtro ativo;
 - imagens ausentes são retiradas dos cartões e da navegação automaticamente;
-- placeholders temporários repetidos não entram na galeria; Flora, Alimentos, Conceitos e outras categorias surgirão quando receberem arte própria e forem acrescentados ao inventário;
-- a galeria contém 60 cartões em *Ruínas dos Céus* e 88 em *Guerras de Sangue*, totalizando 148 caminhos confirmados.
+- placeholders temporários repetidos não entram na galeria; Flora, Alimentos e Conceitos surgirão como filtros quando receberem arte própria.
 
 Arquivos principais:
 
@@ -373,11 +372,39 @@ Arquivos principais:
 - `data/sagas/ciclo-de-jesed/books/guerras-de-sangue/gallery.js`;
 - `data/sagas/ciclo-de-jesed/audits/themes-galleries-etapa-14-15.json`.
 
+## Etapa 16 — padronização visual e responsividade
+
+- os dois livros usam a mesma camada estrutural para tipografia, cartões, fotografias, subtítulos, espaçamento, foco e fallbacks;
+- *Ruínas dos Céus* mantém a identidade de céu, nuvens e tons azulados, com textos claros aplicados automaticamente durante a noite;
+- *Guerras de Sangue* mantém a identidade de barro, sangue e metal, incluindo partículas atrás e à frente do conteúdo;
+- cartões horizontais, páginas detalhadas, galerias, mapas e menus foram revistos para desktop, tablet e celular;
+- a transição atmosférica foi limitada ao viewport para não provocar rolagem horizontal falsa;
+- o botão de desempenho permanece acessível e mostra estado visual e textual claro;
+- imagens ausentes recebem fallback sem quebrar a composição; logos ausentes tornam-se títulos tipográficos estilizados;
+- o observador do botão de desempenho foi protegido contra actualizações repetidas do mesmo atributo.
+
+Arquivos principais:
+
+- `app/shared/visual-system/standard.css`;
+- `app/shared/visual-system/standard.js`;
+- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16.json`;
+- `data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16-browser.json`.
+
+Validação da etapa:
+
+- 78 combinações de rota, livro e tamanho de tela executadas;
+- desktop em `1440 × 1000`, tablet em `900 × 900` e celular em `390 × 844`;
+- nenhuma rota com rolagem horizontal;
+- nenhuma excepção da aplicação;
+- contraste nocturno de *Ruínas dos Céus* verificado;
+- nuvens, partículas dianteiras/traseiras e indicador de desempenho verificados.
+
 ## Próxima etapa
 
-**Etapa 16 — Padronização visual e responsividade.**
-
+**Etapa 17 — Limpeza técnica final.**
 
 ## Inventário de assets
 
-A versão 0.15.1 usa `data/common/inventario-pasta-assets.csv` como fonte de verdade para nomes, extensões e pastas. As galerias só registam imagens presentes nesse inventário. Ao substituir a pasta `assets`, preserve exactamente maiúsculas, acentos, espaços e extensões indicados no CSV.
+A versão 0.16.0 continua a usar `data/common/inventario-pasta-assets.csv` como fonte de verdade para nomes, extensões e pastas. As galerias só registam imagens presentes nesse inventário. Ao substituir a pasta `assets`, preserve exactamente maiúsculas, acentos, espaços e extensões indicados no CSV.
+
+O ZIP desta conversa ainda não contém todos os binários descritos no inventário. Os caminhos permanecem correctos e o sistema visual trata essas ausências sem quebrar cartões ou páginas.

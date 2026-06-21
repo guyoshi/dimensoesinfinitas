@@ -13,6 +13,8 @@ const clans=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed
 const lore=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/lore-etapa-11.json'),'utf8'));
 const stage13=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/concepts-mysteries-etapa-13.json'),'utf8'));
 const stage15=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/themes-galleries-etapa-14-15.json'),'utf8'));
+const stage16=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16.json'),'utf8'));
+const stage16Browser=JSON.parse(fs.readFileSync(path.join(root,'data/sagas/ciclo-de-jesed/audits/visual-responsive-etapa-16-browser.json'),'utf8'));
 console.log(`Auditoria canônica preservada — Etapa ${canonical.stage}`);
 console.log(`Correções canônicas aplicadas: ${canonical.correctionsApplied.length}`);
 console.log('');
@@ -115,4 +117,14 @@ console.log(`Visualizador compartilhado: ${stage15.gallery.sharedViewer?'ativo':
 console.log(`Imagens quebradas excluídas durante a execução: ${stage15.gallery.brokenImagesExcludedAtRuntime?'sim':'não'}; placeholders temporários na galeria: ${stage15.gallery.temporaryPlaceholdersExcluded?'não':'sim'}.`);
 console.log(`Rotas testadas: ${stage15.browserTests.renderedRoutes}/${stage15.browserTests.routesTested}; exceções da aplicação: ${stage15.browserTests.applicationExceptions}.`);
 console.log(`IDs alterados: ${stage15.idsChanged}; mudanças canônicas: ${stage15.canonicalChanges}; GitHub alterado: ${stage15.githubChanged?'sim':'não'}.`);
+
+console.log('');
+console.log(`Auditoria visual e responsiva — ${stage16.stage} · pacote ${stage16.version}`);
+console.log(`Rotas e viewports testados: ${stage16.responsive.routesTested}; breakpoints: ${stage16.responsive.breakpointsTested.join(', ')}.`);
+console.log(`Overflow horizontal: ${stage16.responsive.horizontalOverflowRoutes}; exceções da aplicação: ${stage16.responsive.applicationExceptions}.`);
+console.log(`Contraste nocturno de Ruínas: ${stage16.nightContrast.lightTextApplied?'confirmado':'incompleto'}; nuvens preservadas: ${stage16.performanceToggle['ruinas-dos-ceus'].clouds>0?'sim':'não'}.`);
+console.log(`Partículas de Guerras: traseiras ${stage16.performanceToggle['guerras-de-sangue'].back?'activas':'ausentes'} e dianteiras ${stage16.performanceToggle['guerras-de-sangue'].front?'activas':'ausentes'}.`);
+console.log(`Indicador de desempenho: ${stage16.performanceToggle['ruinas-dos-ceus'].dot&&stage16.performanceToggle['guerras-de-sangue'].dot?'activo nos dois livros':'incompleto'}; ciclo do observador prevenido: ${stage16.performanceToggle.observerLoopPrevented?'sim':'não'}.`);
+console.log(`Respostas 404 de binários não incluídos no pacote: ${stage16Browser.missingBinaryResponses}; fallbacks automáticos: ${stage16.imageFallbacks.automatic?'activos':'ausentes'}.`);
+console.log(`IDs alterados: ${stage16.idsChanged}; mudanças canônicas: ${stage16.canonicalChanges}; GitHub alterado: ${stage16.githubChanged?'sim':'não'}.`);
 

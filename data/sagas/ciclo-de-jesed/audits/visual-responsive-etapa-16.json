@@ -1,0 +1,90 @@
+{
+  "stage": "Etapa 16",
+  "version": "0.16.0",
+  "date": "2026-06-21",
+  "scope": "Padronização visual e responsividade dos dois livros publicados no site.",
+  "sharedVisualSystem": {
+    "stylesheet": "app/shared/visual-system/standard.css",
+    "script": "app/shared/visual-system/standard.js",
+    "loadedBy": [
+      "ruinas.html",
+      "guerras.html"
+    ],
+    "unified": [
+      "hierarquia tipográfica",
+      "cartões",
+      "fotografias",
+      "subtítulos",
+      "contraste",
+      "estados de foco",
+      "espaçamento",
+      "fallbacks de imagem",
+      "quebras responsivas",
+      "indicador de desempenho"
+    ]
+  },
+  "bookIdentityPreserved": {
+    "ruinas-dos-ceus": [
+      "nuvens e céu dinâmico",
+      "paleta azul e clara",
+      "contraste adaptado à noite"
+    ],
+    "guerras-de-sangue": [
+      "partículas atrás e à frente",
+      "paleta de sangue, barro e metal",
+      "cartões e botões próprios"
+    ]
+  },
+  "responsive": {
+    "breakpointsTested": [
+      "1440x1000",
+      "900x900",
+      "390x844"
+    ],
+    "routesTested": 78,
+    "horizontalOverflowRoutes": 0,
+    "applicationExceptions": 0,
+    "desktopNoHorizontalOverflow": true,
+    "tabletNoHorizontalOverflow": true,
+    "mobileNoHorizontalOverflow": true
+  },
+  "nightContrast": {
+    "tested": true,
+    "sampledVisibleTexts": 20,
+    "lightTextApplied": true
+  },
+  "performanceToggle": {
+    "ruinas-dos-ceus": {
+      "pressed": "true",
+      "label": "Modo de desempenho ligado",
+      "state": "performance",
+      "dot": true,
+      "clouds": 1,
+      "back": false,
+      "front": false
+    },
+    "guerras-de-sangue": {
+      "pressed": "true",
+      "label": "Modo de desempenho ligado",
+      "state": "performance",
+      "dot": true,
+      "clouds": 0,
+      "back": true,
+      "front": true
+    },
+    "observerLoopPrevented": true
+  },
+  "imageFallbacks": {
+    "automatic": true,
+    "logosBecomeStyledText": true,
+    "cardsHideBrokenMediaWithoutBreakingLayout": true,
+    "inventoryPathsPreserved": true
+  },
+  "knownLimits": [
+    "O pacote desta conversa não contém todos os 202 binários descritos no inventário-pasta-assets.csv. Os caminhos continuam exactos e as ausências são tratadas visualmente pelo fallback compartilhado.",
+    "As respostas 404 encontradas no servidor de teste correspondem a binários ainda não incluídos no ZIP, não a excepções da aplicação."
+  ],
+  "idsChanged": 0,
+  "canonicalChanges": 0,
+  "githubChanged": false
+}

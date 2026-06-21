@@ -1,8 +1,8 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.15.1",
+  "version": "0.16.0",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 15 refeita com galeria filtrável em tela cheia e caminhos sincronizados ao inventário real de assets.",
+  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 16 com sistema visual compartilhado, contraste revisado e responsividade padronizada.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",
