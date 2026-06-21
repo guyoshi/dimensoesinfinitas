@@ -10,6 +10,7 @@
     detail: detailView
   };
   const externalPages = { 'ruinas-dos-ceus': 'ruinas.html', 'guerras-de-sangue': 'guerras.html' };
+  const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/ruinas-dos-ceus-logo.png', 'guerras-de-sangue': 'assets/branding/guerras-de-sangue-logo.png' };
   const icons = { compass: '✦', journal: '✦', crown: '♕', stars: '✧', portal: '◎', eye: '◉', union: '⬡', wind: '☁', 'crossed-swords': '⚔', fortress: '⛁', embers: '♨', hourglass: '⏳' };
   const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -45,7 +46,9 @@
     const b = books.find(x => x.id === id);
     if (!b) { showView('books'); renderBooks(); return; }
     const href = externalPages[b.id];
-    detailView.innerHTML = `<button class="back-link" data-back="books">← Voltar</button><div class="detail-card">${b.cover ? `<img class="detail-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}">` : ''}<p class="kicker">Livro ${b.order} · Ciclo de Jesed</p><h2 class="section-title">${escapeHtml(b.name)}</h2><p class="subtitle">${escapeHtml(b.synopsis || b.visual)}</p>${href ? `<button class="go-button" data-go-href="${href}">Ir para a página do livro</button>` : '<p class="subtitle">Ainda em preparação.</p>'}</div>`;
+    const logo = bookLogos[b.id];
+    const titleHtml = logo ? `<img class="detail-logo" src="${escapeHtml(logo)}" alt="${escapeHtml(b.name)}">` : `<h2 class="section-title">${escapeHtml(b.name)}</h2>`;
+    detailView.innerHTML = `<button class="back-link" data-back="books">← Voltar</button><div class="detail-card">${b.cover ? `<img class="detail-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}">` : ''}<p class="kicker">Livro ${b.order} · Ciclo de Jesed</p>${titleHtml}<p class="subtitle">${escapeHtml(b.synopsis || b.visual)}</p>${href ? `<button class="go-button" data-go-href="${href}">Ir para a página do livro</button>` : '<p class="subtitle">Ainda em preparação.</p>'}</div>`;
   }
 
   function route() {

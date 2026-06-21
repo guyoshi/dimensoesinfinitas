@@ -1,4 +1,4 @@
-(()=>{const R=window.RS,{D,E,S,AP,REL,EV,MYS,st,H,find,err,BOOKS,charImage,media,initials}=R;
+(()=>{const R=window.RS,{D,E,S,AP,REL,EV,MYS,st,H,find,err,BOOKS,charImage,media,initials,linkify}=R;
 function livros(){
   return H('Ciclo de Jesed','Os cinco livros','Clique num livro para ver os detalhes.')+`<div class="bookshelf">${BOOKS.map(b=>{
     const active=b.status==='active';
@@ -15,9 +15,12 @@ function livro(id){
   if(!b) return err();
   const current=b.id==='ruinas-dos-ceus';
   const externalLinks={'guerras-de-sangue':'guerras.html'};
+  const bookLogos={'guerras-de-sangue':'assets/branding/guerras-de-sangue-logo.png'};
   const href=!current?externalLinks[b.id]:null;
+  const logo=bookLogos[b.id];
+  const titleHtml=logo?`<img class="hero-logo" src="${E(logo)}" alt="${E(b.name)}">`:`<h1>${E(b.name)}</h1>`;
   const stats=current?`<div class="stats"><span class="stat">${D.chapters.length} capítulos</span><span class="stat">${D.characters.length} personagens</span><span class="stat">${D.places.length} lugares</span></div>`:'';
-  return `<button class="back" data-go="livros">← Voltar</button><section class="detailhero">${media(b.cover,`Capa de ${b.name}`,'✦','portrait avatar big')}<article class="panel"><p class="eyebrow">Livro ${b.order} · ${b.status==='active'?(current?'Você está aqui':'Disponível'):'Bloqueado nesta etapa'}</p><h1>${E(b.name)}</h1><p class="lead">${E(b.visual)}</p>${stats}${href?`<div class="hero-actions"><button class="primary-button" data-selector-href="${href}">Ir para a página do livro</button></div>`:''}</article></section>`;
+  return `<button class="back" data-go="livros">← Voltar</button><section class="detailhero">${media(b.cover,`Capa de ${b.name}`,'✦','portrait avatar big')}<article class="panel"><p class="eyebrow">Livro ${b.order} · ${b.status==='active'?(current?'Você está aqui':'Disponível'):'Bloqueado nesta etapa'}</p>${titleHtml}<p class="lead">${E(b.visual)}</p>${stats}${href?`<div class="hero-actions"><button class="primary-button" data-selector-href="${href}">Ir para a página do livro</button></div>`:''}</article></section>`;
 }
 function inicio(){
   const lastChapters=D.chapters.slice(-5).reverse();
@@ -33,6 +36,13 @@ function inicio(){
     <article class="panel"><div class="section-heading"><h2>Últimos capítulos</h2><p>Continuação directa da escrita.</p></div><div class="mini-list">${lastChapters.map(ch=>`<button class="mini-item" data-go="capitulo/${ch.n}"><span class="mini-icon">📖</span><span><strong>Capítulo ${ch.n} — ${E(ch.t)}</strong><small>${E(ch.s.slice(0,70))}…</small></span></button>`).join('')}</div></article>
   </div>`;
 }
-function capitulos(){let a=D.chapters.filter(x=>`${x.n} ${x.t} ${x.s}`.toLowerCase().includes(st.q.toLowerCase()));return H('História','Capítulos','Os 24 capítulos escritos.',`<input class="search" data-search placeholder="Pesquisar…" value="${E(st.q)}">`)+`<div class="grid">${a.map(x=>`<article class="card click" data-go="capitulo/${x.n}"><p class="meta">Capítulo ${x.n}</p><h3>${E(x.t)}</h3><p>${E(x.s)}</p></article>`).join('')}</div>`}
-function capitulo(id){const c=D.chapters[Number(id)-1];if(!c)return err();const chars=D.characters.filter(x=>(AP[x.n]||[]).includes(c.n)),ev=EV.filter(x=>x[0]===c.n);return `<button class="back" data-go="capitulos">← Voltar</button><article class="panel"><p class="eyebrow">Capítulo ${c.n}</p><h1>${E(c.t)}</h1><p class="lead">${E(c.s)}</p><h2>Acontecimentos</h2>${(ev.length?ev:[[c.n,c.t]]).map(x=>`<div class="row"><strong>${E(x[1])}</strong><p>${E(c.s)}</p></div>`).join('')}<h2>Personagens presentes</h2><div class="tags">${chars.map(x=>`<button class="tag" data-go="personagem/${S(x.n)}">${E(x.n)}</button>`).join('')}</div></article>`}
+function capitulos(){let a=D.chapters.filter(x=>`${x.n} ${x.t} ${x.s}`.toLowerCase().includes(st.q.toLowerCase()));return H('História','Capítulos','Os 24 capítulos escritos.',`<input class="search" data-search placeholder="Pesquisar…" value="${E(st.q)}">`)+`<div class="grid">${a.map(x=>`<article class="card click" data-go="capitulo/${x.n}">${x.img?`<img class="chapter-thumb" src="${encodeURI(x.img)}" alt="" loading="lazy">`:''}<p class="meta">Capítulo ${x.n}</p><h3>${E(x.t)}</h3><p>${E(x.s)}</p></article>`).join('')}</div>`}
+function capitulo(id){
+  const c=D.chapters[Number(id)-1];if(!c)return err();
+  const chars=D.characters.filter(x=>(AP[x.n]||[]).includes(c.n));
+  const ev=EV.find(x=>x[0]===c.n);
+  const idx=EV.findIndex(x=>x[0]===c.n);
+  const causa=idx>0?EV[idx-1][1]:(idx===0?'A estabilidade aparente de Etérea.':null);
+  return `<button class="back" data-go="capitulos">← Voltar</button><article class="panel">${c.img?`<img class="chapter-hero-thumb" src="${encodeURI(c.img)}" alt="">`:''}<p class="eyebrow">Capítulo ${c.n}${ev?` · ${E(ev[1])}`:''}</p><h1>${E(c.t)}</h1><p class="lead">${linkify(c.s)}</p>${causa?`<div class="tags"><span class="tag">Vem de: ${E(causa)}</span></div>`:''}<h2>Personagens presentes</h2><div class="tags">${chars.map(x=>`<button class="tag" data-go="personagem/${S(x.n)}">${E(x.n)}</button>`).join('')}</div></article>`;
+}
 R.pages={inicio,capitulos,capitulo,livros,livro};})();

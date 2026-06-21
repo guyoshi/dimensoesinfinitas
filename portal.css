@@ -27,13 +27,15 @@ body{
 .portal-wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:60px 24px 80px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
 .view.is-hidden{display:none!important}
 .kicker{text-transform:uppercase;letter-spacing:.32em;color:var(--gold);font-size:.72rem;text-align:center;margin:0 0 10px}
-.glow-title-neon{margin:0 0 14px;text-align:center;font-size:clamp(2.6rem,7vw,6.2rem);line-height:.95;letter-spacing:-.03em;animation:neonPulse 3.2s ease-in-out infinite}
+.portal-logo{display:block;margin:0 auto 14px;width:min(560px,92%);height:auto;animation:neonPulse 3.2s ease-in-out infinite}
 @keyframes neonPulse{
-  0%,100%{text-shadow:0 0 8px rgba(94,247,255,.5),0 0 22px rgba(200,96,255,.35)}
-  50%{text-shadow:0 0 22px rgba(94,247,255,.9),0 0 60px rgba(200,96,255,.7),0 0 90px rgba(200,96,255,.4)}
+  0%,100%{filter:drop-shadow(0 0 8px rgba(94,247,255,.5)) drop-shadow(0 0 20px rgba(200,96,255,.35))}
+  50%{filter:drop-shadow(0 0 20px rgba(94,247,255,.95)) drop-shadow(0 0 55px rgba(200,96,255,.75)) drop-shadow(0 0 85px rgba(200,96,255,.45))}
 }
+.saga-logo{display:block;margin:0 auto 14px;width:min(280px,70%);height:auto}
 .subtitle{max-width:680px;margin:0 auto 36px;text-align:center;color:var(--muted);font-size:1.05rem;line-height:1.7}
 .section-title{text-align:center;margin:0 0 8px;font-size:clamp(1.8rem,4vw,2.6rem);color:#fff}
+.detail-logo{display:block;margin:0 auto 18px;width:min(320px,90%);height:auto}
 .card-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;position:relative}
 .card-grid.books{grid-template-columns:repeat(5,minmax(0,1fr))}
 .dim-card{position:relative;min-height:230px;border:1px solid var(--line);border-radius:20px;padding:22px;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(150deg,rgba(40,28,70,.55),rgba(10,7,20,.85));box-shadow:var(--shadow);transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;text-align:left}
@@ -54,4 +56,4 @@ body{
 .go-button:hover{background:rgba(94,247,255,.22)}
 @media(max-width:980px){.card-grid,.card-grid.books{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:560px){.card-grid,.card-grid.books{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.star,.nebula,.glow-title-neon{animation:none}}
+@media(prefers-reduced-motion:reduce){.star,.nebula,.portal-logo{animation:none}}

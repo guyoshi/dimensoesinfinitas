@@ -336,10 +336,13 @@
     const cover = book.cover ? `<img src="${book.cover}" alt="Capa de ${escapeHtml(book.name)}">` : icon(book.icon);
     if (book.id !== "guerras-de-sangue") {
       const externalLinks = { "ruinas-dos-ceus": "ruinas.html" };
+      const bookLogos = { "ruinas-dos-ceus": "assets/branding/ruinas-dos-ceus-logo.png" };
       const href = externalLinks[book.id];
+      const logo = bookLogos[book.id];
+      const titleHtml = logo ? `<img class="hero-logo" src="${logo}" alt="${escapeHtml(book.name)}">` : `<h2>${escapeHtml(book.name)}</h2>`;
       refs.main.innerHTML = `<div class="page-enter">
         ${pageHeader(`Livro ${book.order} · Ciclo de Jesed`, book.name, book.status === "active" ? "Livro disponível, com sistema de navegação próprio." : "Ainda em preparação nesta etapa.")}
-        <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">${book.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</p><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.visual)}</p>${href ? `<div class="hero-actions"><button class="primary-button" data-external-href="${href}">${icon("arrow")} Ir para a página do livro</button></div>` : ""}</div></section>
+        <section class="book-detail-hero"><div class="book-detail-cover">${cover}</div><div class="book-detail-copy"><p class="eyebrow">${book.status === "active" ? "Disponível" : "Bloqueado nesta etapa"}</p>${titleHtml}<p>${escapeHtml(book.visual)}</p>${href ? `<div class="hero-actions"><button class="primary-button" data-external-href="${href}">${icon("arrow")} Ir para a página do livro</button></div>` : ""}</div></section>
       </div>`;
       setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"dashboard"},{label:"Livros",route:"books"},{label:book.name}]);
       return;

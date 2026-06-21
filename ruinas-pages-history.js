@@ -16,7 +16,14 @@ P.relacoes=()=>{
 };
 P.familias=()=>H('Pessoas','Famílias','Laços familiares.')+`<div class="grid"><article class="card"><h3>Família Amaréa</h3><p>O núcleo de Jokara: pais, irmã e o menino acolhido após a Queda.</p><div class="tags">${['Yoral','Mirel Amaréa','Jokara Amaréa','Nestira Amaréa','Loutes'].map(memberChip).join('')}</div></article><article class="card"><h3>A raiz futura</h3><p>Marv recebe o legado de Jokara e Nestira e leva os sobreviventes ao Vale.</p><div class="tags">${['Marv','Jokara Amaréa','Nestira Amaréa'].map(memberChip).join('')}</div></article></div>`;
 P.organizacoes=()=>H('Pessoas','Organizações','Instituições e grupos.')+`<div class="grid">${[['Oradores da Corrente','Guardam ritos, escrituras e segredos.',['Nestira Amaréa','Yrséa']],['Ecoantes','Aprendizes e intérpretes.',['Platisa']],['Tecelões de Vento','Constroem planadores e pontes.',['Efepar']],['Sobreviventes de Nadírion','Grupo formado após a Queda.',['Malthar','Gabasteres','Marv','Jokara Amaréa']]].map(x=>`<article class="card"><h3>${E(x[0])}</h3><p>${E(x[1])}</p><div class="tags">${x[2].map(memberChip).join('')}</div></article>`).join('')}</div>`;
-P.acontecimentos=()=>H('História','Acontecimentos','Eventos centrais.')+`<div class="grid">${EV.map(x=>`<article class="card click" data-go="capitulo/${x[0]}"><p class="meta">Capítulo ${x[0]}</p><h3>${E(x[1])}</h3><p>${E(D.chapters[x[0]-1].s)}</p></article>`).join('')}</div>`;
-P.linha=()=>H('História','Linha do tempo','Da primeira pedra ao Vale.')+`<div class="list">${EV.map(x=>`<div class="row click" data-go="capitulo/${x[0]}"><strong>Capítulo ${x[0]} — ${E(x[1])}</strong><p>${E(D.chapters[x[0]-1].s)}</p></div>`).join('')}</div>`;
-P.consequencias=()=>H('História','Causa e consequência','Como cada evento empurra o ciclo.')+`<div class="list">${EV.map((x,i)=>`<div class="row"><strong>${E(x[1])}</strong><p><b>Causa:</b> ${E(i?EV[i-1][1]:'A estabilidade aparente de Etérea.')}</p><p><b>Consequência:</b> ${E(D.chapters[x[0]-1].s)}</p></div>`).join('')}</div>`;
+P.acontecimentos=()=>H('História','Acontecimentos','Da primeira pedra ao Vale — o que aconteceu, de onde veio e o que mudou.')+`<div class="list">${EV.map((x,i)=>{
+  const causa=i?EV[i-1][1]:'A estabilidade aparente de Etérea.';
+  return `<div class="row click" data-go="capitulo/${x[0]}">
+    <strong>Capítulo ${x[0]} — ${E(x[1])}</strong>
+    <p>${E(D.chapters[x[0]-1].s)}</p>
+    <div class="tags"><span class="tag">Vem de: ${E(causa)}</span></div>
+  </div>`;
+}).join('')}</div>`;
+P.linha=P.acontecimentos;
+P.consequencias=P.acontecimentos;
 })();

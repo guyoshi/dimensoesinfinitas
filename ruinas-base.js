@@ -5,7 +5,7 @@ const REL=[['Jokara Amaréa','Nestira Amaréa','Irmãs: Peso e Sopro'],['Jokara 
 const EV=[[1,'As primeiras pedras'],[2,'O Primeiro Voo falha'],[3,'Loutes recebe um nome'],[4,'A profecia de Yndra'],[6,'O livro na caverna'],[7,'A denúncia pública'],[9,'O Cataclisma'],[10,'O primeiro fogo'],[15,'A chegada de Platisa'],[17,'O nome Polar'],[20,'As ruínas revelam a origem'],[22,'O sacrifício de Jokara'],[23,'A última perseguição'],[24,'O Vale']];
 const MYS=[['loutes','Quem é Loutes?','Aberto','Uma criança deslocada, ligada ao ciclo e ao tempo; a origem permanece sem explicação.'],['ilhas-baixas','As Ilhas Baixas existiam?','Resolvido','Não. Eram uma mentira institucional usada para ocultar a morte dos exilados.'],['eterea','Por que Etérea caiu?','Parcial','Há sinais físicos e leitura simbólica pelo Peso, mas não uma resposta totalmente fechada.'],['ruinas','Quem construiu as ruínas?','Parcial','Povos da superfície ligados aos ancestrais eterí.'],['sopro','O Sopro é divino ou natural?','Aberto','A narrativa preserva as duas interpretações.']];
 const LORE={fauna:[['Nuari',8],['Aranita',2],['Raukhar',5,'assets/lore/fauna/raukhar.webp','Citado no texto apenas como "a Fera" — é a mesma criatura de Guerras de Sangue.'],['Criatura de escamas negras',2],['Ave branca',1],['Criatura segmentada',1]],flora:[['Selnara',3],['Flor-da-névoa',2],['Seda-das-alturas',2],['Musgos florais',2],['Folha colossal',1],['Raízes vivas',7]],alimentos:[['Carne de nuari',3],['Selnara seca',2],['Mel de flor-aérea',2],['Raízes cozidas',2],['Frutas da superfície',3],['Peixe de riacho',4]],conceitos:[['Sopro',12],['Peso',13],['Primeiro Voo',5],['Círculo do Peso',3],['Verbo da Corrente',2],['Ilhas Baixas',4]]};
-const NAV=[['Visão geral',[['inicio','Início'],['livros','Livros']]],['História',[['capitulos','Capítulos'],['acontecimentos','Acontecimentos'],['linha','Linha do tempo'],['consequencias','Causa e consequência']]],['Pessoas',[['personagens','Personagens'],['relacoes','Relações'],['familias','Famílias'],['organizacoes','Organizações']]],['Mundo',[['mapa','Mapa'],['lugares','Lugares']]],['Lore',[['fauna','Fauna'],['flora','Flora'],['alimentos','Alimentos'],['conceitos','Conceitos e leis']]],['Planejamento',[['misterios','Mistérios'],['continuidade','Continuidade'],['canon','Regras canônicas'],['decisoes','Decisões do autor']]]];
+const NAV=[['Visão geral',[['inicio','Início'],['livros','Livros']]],['História',[['capitulos','Capítulos'],['acontecimentos','Acontecimentos']]],['Pessoas',[['personagens','Personagens'],['relacoes','Relações'],['familias','Famílias'],['organizacoes','Organizações']]],['Mundo',[['mapa','Mapa'],['lugares','Lugares']]],['Lore',[['fauna','Fauna'],['flora','Flora'],['alimentos','Alimentos'],['conceitos','Conceitos e leis']]],['Planejamento',[['misterios','Mistérios'],['continuidade','Continuidade'],['canon','Regras canônicas'],['decisoes','Decisões do autor']]]];
 const SAGAS=[
   {id:'ciclo-de-jesed',name:'Ciclo de Jesed',status:'active'},
   {id:'diario-sobrenatural',name:'Diário Sobrenatural',status:'locked'},
@@ -53,5 +53,22 @@ function nav(){
     return i?`<span class="crumb-sep" aria-hidden="true">›</span>${inner}`:inner;
   }).join('');
 }
-window.RS={D,$,E,S,AP,REL,EV,MYS,LORE,NAV,SAGAS,BOOKS,st,H,go,find,err,nav,charImage,placeImage,initials,media};
+const ALIASES=[...D.characters.map(c=>({text:c.n,route:`personagem/${S(c.n)}`})),...D.places.map(p=>({text:p.n,route:`lugar/${S(p.n)}`}))]
+  .filter(a=>a.text&&a.text.length>2).sort((a,b)=>b.text.length-a.text.length);
+const ALIAS_PATTERN=ALIASES.length?new RegExp('('+ALIASES.map(a=>a.text.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')','g'):null;
+function linkify(text){
+  const raw=String(text??'');
+  if(!ALIAS_PATTERN) return E(raw);
+  let out='',last=0;
+  for(const m of raw.matchAll(ALIAS_PATTERN)){
+    const start=m.index??0,hit=m[0];
+    out+=E(raw.slice(last,start));
+    const found=ALIASES.find(a=>a.text===hit);
+    out+=found?`<button class="inline-link" data-go="${found.route}">${E(hit)}</button>`:E(hit);
+    last=start+hit.length;
+  }
+  out+=E(raw.slice(last));
+  return out;
+}
+window.RS={D,$,E,S,AP,REL,EV,MYS,LORE,NAV,SAGAS,BOOKS,st,H,go,find,err,nav,charImage,placeImage,initials,media,linkify};
 })();
