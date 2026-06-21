@@ -1,0 +1,145 @@
+name: Restaurar WebP já optimizados
+
+on:
+  push:
+    branches:
+      - chore/webp-images
+    paths:
+      - ".github/workflows/restore-smaller-webp.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Baixar repositório e histórico
+        uses: actions/checkout@v4
+        with:
+          ref: chore/webp-images
+          fetch-depth: 0
+
+      - name: Restaurar WebP originais quando forem menores
+        shell: bash
+        run: |
+          python - <<'PY'
+          import csv
+          import json
+          import subprocess
+          from pathlib import Path
+
+          root = Path.cwd()
+          report_dir = root / "docs" / "imagens"
+          json_path = report_dir / "relatorio-imagens-webp.json"
+          csv_path = report_dir / "relatorio-imagens-webp.csv"
+          md_path = report_dir / "relatorio-imagens-webp.md"
+
+          def human_size(size: int) -> str:
+              value = float(size)
+              for unit in ("B", "KB", "MB", "GB"):
+                  if value < 1024 or unit == "GB":
+                      return f"{value:.0f} {unit}" if unit == "B" else f"{value:.1f} {unit}"
+                  value /= 1024
+              return f"{size} B"
+
+          rows = json.loads(json_path.read_text(encoding="utf-8"))
+          restored = 0
+          saved = 0
+
+          for row in rows:
+              if row.get("formato_origem") != "WEBP":
+                  continue
+              rel = row["caminho"]
+              current_path = root / rel
+              result = subprocess.run(
+                  ["git", "show", f"origin/main:{rel}"],
+                  stdout=subprocess.PIPE,
+                  stderr=subprocess.DEVNULL,
+                  check=False,
+              )
+              if result.returncode != 0:
+                  continue
+              original = result.stdout
+              current_size = current_path.stat().st_size
+              if len(original) < current_size:
+                  current_path.write_bytes(original)
+                  restored += 1
+                  saved += current_size - len(original)
+                  row["tamanho_bytes"] = len(original)
+                  row["tamanho_humano"] = human_size(len(original))
+                  row["economia_percentual"] = 0.0
+
+          rows.sort(key=lambda r: (r["tipo"].lower(), r["arquivo"].lower(), r["caminho"].lower()))
+          json_path.write_text(json.dumps(rows, ensure_ascii=False, indent=2), encoding="utf-8")
+
+          with csv_path.open("w", encoding="utf-8-sig", newline="") as handle:
+              writer = csv.writer(handle)
+              writer.writerow([
+                  "Arquivo", "Caminho", "Tipo", "O que é", "Dimensões", "Tamanho",
+                  "Tamanho em bytes", "Formato de origem", "Dimensões de origem",
+                  "Tamanho de origem", "Economia (%)", "Referenciado em",
+              ])
+              for r in rows:
+                  writer.writerow([
+                      r["arquivo"], r["caminho"], r["tipo"], r["descricao"], r["dimensoes"],
+                      r["tamanho_humano"], r["tamanho_bytes"], r["formato_origem"],
+                      r["dimensoes_origem"], r["tamanho_origem_humano"],
+                      r["economia_percentual"], "; ".join(r.get("referencias", [])),
+                  ])
+
+          total_original = sum(r["tamanho_origem_bytes"] for r in rows)
+          total_new = sum(r["tamanho_bytes"] for r in rows)
+          reduction = ((total_original - total_new) / total_original * 100) if total_original else 0
+
+          lines = [
+              "# Relatório de imagens WebP",
+              "",
+              f"- **Imagens processadas:** {len(rows)}",
+              f"- **Tamanho antes:** {human_size(total_original)}",
+              f"- **Tamanho depois:** {human_size(total_new)}",
+              f"- **Redução total:** {reduction:.1f}%",
+              "- **Observação:** SVGs foram preservados como vector, pois convertê-los para WebP reduziria a qualidade e a escalabilidade.",
+              "- **Optimização adicional:** ficheiros que já eram WebP foram mantidos na versão original sempre que ela era menor.",
+              "",
+              "| Arquivo | Dimensões | Tamanho | Tipo | O que é | Caminho |",
+              "|---|---:|---:|---|---|---|",
+          ]
+          for r in rows:
+              desc = r["descricao"].replace("|", "\\|")
+              lines.append(
+                  f"| `{r['arquivo']}` | {r['dimensoes']} | {r['tamanho_humano']} | "
+                  f"{r['tipo']} | {desc} | `{r['caminho']}` |"
+              )
+          md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+          print(f"WebP originais restaurados: {restored}")
+          print(f"Espaço adicional poupado: {human_size(saved)}")
+          print(f"Tamanho final: {human_size(total_new)}")
+          print(f"Redução total: {reduction:.1f}%")
+          PY
+
+      - name: Guardar correcção na branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteração necessária."
+          else
+            git commit -m "Manter WebP originais quando forem menores [skip ci]"
+            git push origin chore/webp-images
+          fi
+
+      - name: Disponibilizar relatório actualizado
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-imagens-webp-final
+          path: |
+            docs/imagens/relatorio-imagens-webp.md
+            docs/imagens/relatorio-imagens-webp.csv
+            docs/imagens/relatorio-imagens-webp.json
+          if-no-files-found: error
+          retention-days: 30
