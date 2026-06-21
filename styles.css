@@ -361,10 +361,10 @@ kbd { font: 600 .68rem/1 ui-monospace, SFMono-Regular, Consolas, monospace; colo
 
 .hero-map-card { position: relative; min-height: 350px; border-radius: 22px; overflow: hidden; border: 1px solid var(--line-strong); box-shadow: var(--shadow); margin-bottom: 24px; background: #2c2117; }
 .hero-map-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(17,12,8,.92), rgba(17,12,8,.35) 48%, rgba(17,12,8,.12)); }
-.hero-map-card img { width: 100%; height: 100%; min-height: 350px; object-fit: cover; filter: sepia(.2) contrast(1.03) brightness(.7); }
+.hero-map-card > img { width: 100%; height: 100%; min-height: 350px; object-fit: cover; filter: sepia(.2) contrast(1.03) brightness(.7); }
 .hero-map-content { position: absolute; z-index: 2; inset: 0 auto 0 0; width: min(630px, 72%); display: flex; flex-direction: column; justify-content: center; padding: clamp(28px, 5vw, 64px); }
 .hero-map-content h1 { margin: 0; font-size: clamp(2.3rem, 5vw, 5.2rem); line-height: .93; letter-spacing: -.045em; }
-.hero-logo { display: block; width: min(380px, 100%); max-width: 100%; height: auto; margin: 4px 0 10px; }
+.hero-logo { display: block; width: auto; height: auto; max-width: min(380px, 100%); max-height: 92px; object-fit: contain; margin: 4px 0 10px; }
 .glow-title { display: inline-block; animation: titleGlow 2.6s ease-in-out infinite; }
 @keyframes titleGlow {
   0%, 100% { filter: drop-shadow(0 0 6px rgba(255,255,255,.3)) drop-shadow(0 0 14px rgba(255,200,140,.25)); opacity: .9; }
