@@ -93,10 +93,9 @@
     const displayMinutes=Math.round(minutes/10)*10%1440;
     document.querySelectorAll('[data-time-output]').forEach(o=>o.textContent=timeLabel(displayMinutes));
     document.querySelectorAll('[data-time-slider]').forEach(i=>{if(document.activeElement!==i)i.value=displayMinutes});
-    document.querySelectorAll('[data-time-auto]').forEach(b=>{b.classList.toggle('active',autoTime&&!paused);b.setAttribute('aria-pressed',String(autoTime&&!paused))});
     document.querySelectorAll('[data-time-pause]').forEach(b=>{b.classList.toggle('active',paused);b.setAttribute('aria-pressed',String(paused));b.innerHTML=paused?'▶':'⏸';b.title=paused?'Retomar o relógio':'Pausar o relógio';b.setAttribute('aria-label',paused?'Retomar o relógio':'Pausar o relógio')});
   }
-  function timeControlHtml(){const m=liveMinutes();return `<div class="time-test-control" data-time-control><label>Hora do dia</label><input data-time-slider type="range" min="0" max="1430" step="10" value="${m}" aria-label="Hora do dia"><output data-time-output>${timeLabel(Math.round(m/10)*10%1440)}</output><button class="time-pause-button" data-time-pause type="button" aria-pressed="${paused}" title="${paused?'Retomar o relógio':'Pausar o relógio'}" aria-label="${paused?'Retomar o relógio':'Pausar o relógio'}">${paused?'▶':'⏸'}</button><button class="time-auto-button ${autoTime&&!paused?'active':''}" data-time-auto type="button" aria-pressed="${autoTime&&!paused}" title="Ciclo automático: 24 horas em cerca de 10 minutos">Ciclo 10 min</button></div>`}
+  function timeControlHtml(){const m=liveMinutes();return `<div class="time-test-control" data-time-control><label>Hora do dia</label><input data-time-slider type="range" min="0" max="1430" step="10" value="${m}" aria-label="Hora do dia"><output data-time-output>${timeLabel(Math.round(m/10)*10%1440)}</output><button class="time-pause-button" data-time-pause type="button" aria-pressed="${paused}" title="${paused?'Retomar o relógio':'Pausar o relógio'}" aria-label="${paused?'Retomar o relógio':'Pausar o relógio'}">${paused?'▶':'⏸'}</button></div>`}
   function ensureTimeControls(){
     const utility=document.querySelector('.utility-controls');if(!utility)return;
     if(!utility.querySelector('[data-time-control]'))utility.insertAdjacentHTML('afterbegin',timeControlHtml());
@@ -111,7 +110,6 @@
     updateSky();
   });
   document.addEventListener('click',e=>{
-    if(e.target.closest('[data-time-auto]')){paused=false;anchorCycle(manualMinutes);autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo acelerado do céu restaurado: uma volta em cerca de 10 minutos')}
     if(e.target.closest('[data-time-pause]')){
       if(paused){anchorCycle(pausedAtMinutes);paused=false;autoTime=true;session.set(P+'time-mode','auto');X.toast('Relógio retomado')}
       else{pausedAtMinutes=liveMinutes();paused=true;X.toast('Relógio pausado')}
