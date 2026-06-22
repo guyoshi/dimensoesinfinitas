@@ -1,0 +1,26 @@
+== Partes disponíveis ==
+-rw-r--r-- 1 runner runner  5000 Jun 22 00:14 scripts/patch-parts/part-00
+-rw-r--r-- 1 runner runner  5000 Jun 22 00:14 scripts/patch-parts/part-01
+-rw-r--r-- 1 runner runner 10000 Jun 22 00:14 scripts/patch-parts/part-02
+-rw-r--r-- 1 runner runner  5000 Jun 22 00:14 scripts/patch-parts/part-03a
+-rw-r--r-- 1 runner runner  9568 Jun 22 00:14 scripts/patch-parts/part-04
+ 5000 scripts/patch-parts/part-00
+ 5000 scripts/patch-parts/part-01
+10000 scripts/patch-parts/part-02
+ 5000 scripts/patch-parts/part-03a
+ 9568 scripts/patch-parts/part-04
+34568 total
+505c497c034a7c3fc410367a4f387c665d4b0ecb989b372117f2de60b1cdad37  scripts/patch-parts/part-00
+4fdc23175072762a3c9b8a8769e87c2b94d3cfd8593e8b02df536963044591f8  scripts/patch-parts/part-01
+f38d97144d4ad62e659400f6b85544abd634611a4b68a92ac3d6b0ed5a9d5042  scripts/patch-parts/part-02
+11eb9972d4c91dcb717ab0708eadc3986012b1e203d3b068133159349c6d578b  scripts/patch-parts/part-03a
+94e706082c91365ce98dbe8f2db52e2927dff2e45f06a305547d1d3825e62be9  scripts/patch-parts/part-04
+== Base64 combinado ==
+34568 /tmp/site-fixes-0.17.b64
+7204d9e21736b1fbd9b8705894e696c0590e1f0a6f3256eaf8fb24445152df30  /tmp/site-fixes-0.17.b64
+base64_status=0
+
+gzip: /tmp/site-fixes-0.17.patch.gz: invalid compressed data--crc error
+
+gzip: /tmp/site-fixes-0.17.patch.gz: invalid compressed data--length error
+gzip_status=1
