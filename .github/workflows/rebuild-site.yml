@@ -36,10 +36,51 @@ jobs:
       - name: Reconstruir pacote de correções
         shell: bash
         run: |
-          cat scripts/patch-parts/part-* | base64 --decode | gzip --decompress > /tmp/site-fixes-0.17.patch
-          git apply --check --exclude=.github/workflows/site-validation.yml /tmp/site-fixes-0.17.patch
+          set +e
+          DIAG=.github/rebuild-diagnostics.txt
+          : > "$DIAG"
+          {
+            echo '== Partes disponíveis =='
+            ls -l scripts/patch-parts/part-*
+            wc -c scripts/patch-parts/part-*
+            cat scripts/patch-parts/part-* > /tmp/site-fixes-0.17.b64
+            echo '== Base64 combinado =='
+            wc -c /tmp/site-fixes-0.17.b64
+            sha256sum /tmp/site-fixes-0.17.b64
+            base64 --decode /tmp/site-fixes-0.17.b64 > /tmp/site-fixes-0.17.patch.gz
+            DECODE_STATUS=$?
+            echo "base64_status=$DECODE_STATUS"
+            if [ "$DECODE_STATUS" -eq 0 ]; then
+              gzip --test /tmp/site-fixes-0.17.patch.gz
+              GZIP_STATUS=$?
+              echo "gzip_status=$GZIP_STATUS"
+            else
+              GZIP_STATUS=1
+            fi
+            if [ "$GZIP_STATUS" -eq 0 ]; then
+              gzip --decompress --stdout /tmp/site-fixes-0.17.patch.gz > /tmp/site-fixes-0.17.patch
+              echo '== Patch reconstruído =='
+              wc -c /tmp/site-fixes-0.17.patch
+              sha256sum /tmp/site-fixes-0.17.patch
+              git apply --check --exclude=.github/workflows/site-validation.yml /tmp/site-fixes-0.17.patch
+              APPLY_STATUS=$?
+              echo "apply_status=$APPLY_STATUS"
+            else
+              APPLY_STATUS=1
+            fi
+          } >> "$DIAG" 2>&1
+          cat "$DIAG"
+          if [ "$APPLY_STATUS" -ne 0 ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add "$DIAG"
+            git commit -m 'ci: registra diagnóstico da reconstrução'
+            git push --force origin HEAD:workflow-diagnostics
+            exit 1
+          fi
+          set -e
           git apply --whitespace=fix --exclude=.github/workflows/site-validation.yml /tmp/site-fixes-0.17.patch
-          rm -rf scripts/patch-parts
+          rm -rf scripts/patch-parts "$DIAG"
 
       - uses: actions/setup-python@v5
         with:
