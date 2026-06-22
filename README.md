@@ -389,3 +389,15 @@ Arquivos principais:
 ## Inventário de assets
 
 A versão 0.15.1 usa `data/common/inventario-pasta-assets.csv` como fonte de verdade para nomes, extensões e pastas. As galerias só registam imagens presentes nesse inventário. Ao substituir a pasta `assets`, preserve exactamente maiúsculas, acentos, espaços e extensões indicados no CSV.
+
+## Organização de imagens — 0.17.0
+
+As imagens do site ficam exclusivamente em `assets/`, em **WebP** e com nomes ASCII em `kebab-case`.
+A estrutura principal é `assets/books/ciclo-de-jesed/<livro>/<categoria>/`, com recursos compartilhados em `assets/books/ciclo-de-jesed/shared/` e elementos de interface em `assets/shared/`.
+
+Para importar ou normalizar novas imagens, execute:
+
+```bash
+python scripts/migrate_assets.py
+npm run validate:all
+```

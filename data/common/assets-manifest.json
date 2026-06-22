@@ -1,2028 +1,2159 @@
 {
-  "generatedFrom": "inventario-pasta-assets.csv",
-  "updatedAt": "2026-06-21",
-  "count": 202,
-  "visualCount": 162,
+  "schemaVersion": 2,
+  "updatedAt": "2026-06-22",
+  "formatPolicy": "webp-only",
+  "namingPolicy": "ascii-kebab-case",
+  "count": 215,
   "assets": [
     {
-      "arquivo": "Ciclo de Jesed black.png",
-      "caminho": "assets/branding/Ciclo de Jesed black.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Ciclo de Jesed white.png",
-      "caminho": "assets/branding/Ciclo de Jesed white.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Dimensões Infinitas black.png",
-      "caminho": "assets/branding/Dimensões Infinitas black.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Dimensões Infinitas white.png",
-      "caminho": "assets/branding/Dimensões Infinitas white.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Guerras de Sangue black.png",
-      "caminho": "assets/branding/Guerras de Sangue black.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Guerras de Sangue white.png",
-      "caminho": "assets/branding/Guerras de Sangue white.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Ruínas dos Céus black.png",
-      "caminho": "assets/branding/Ruínas dos Céus black.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Ruínas dos Céus white.png",
-      "caminho": "assets/branding/Ruínas dos Céus white.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ciclo-de-jesed-logo.png",
-      "caminho": "assets/branding/ciclo-de-jesed-logo.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "dimensoes-infinitas-logo.png",
-      "caminho": "assets/branding/dimensoes-infinitas-logo.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "guerras-de-sangue-logo.png",
-      "caminho": "assets/branding/guerras-de-sangue-logo.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ruinas-dos-ceus-logo.png",
-      "caminho": "assets/branding/ruinas-dos-ceus-logo.png",
-      "pasta": "branding",
-      "extensao": ".png",
-      "tipo": "Identidade visual",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ruinas-dos-ceus.webp",
-      "caminho": "assets/covers/ruinas-dos-ceus.webp",
-      "pasta": "covers",
-      "extensao": ".webp",
-      "tipo": "Capa de livro",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "guerras-de-sangue.webp",
-      "caminho": "assets/covers/guerras-de-sangue.webp",
-      "pasta": "covers",
-      "extensao": ".webp",
-      "tipo": "Capa de livro",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-1.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-1.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-2.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-2.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-3.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-3.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-4.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-4.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-5.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-5.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-6.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-6.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-7.jpg",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-7.jpg",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".jpg",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-8.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-8.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-9.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-9.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-10.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-10.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-11.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-11.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-12.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-12.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-13.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-13.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-14.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-14.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-15.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-15.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-16.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-16.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-17.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-17.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-18.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-18.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-19.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-19.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-20.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-20.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-21.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-21.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-22.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-22.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-23.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-23.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-24.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-24.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-25.jpg",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-25.jpg",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".jpg",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-26.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-26.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-27.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-27.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-28.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-28.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "capitulo-29.png",
-      "caminho": "assets/chapters/guerras-de-sangue/capitulo-29.png",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/chapters/guerras-de-sangue/.gitkeep",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/chapters/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "chapters/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "Capítulo 1.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 1.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 2.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 2.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 3.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 3.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 4.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 4.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capitulo 5.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capitulo 5.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—NOTA: sem acento, inconsistente com os demais",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 6.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 6.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 7.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 7.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 8.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 8.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 9.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 9.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 10.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 10.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 11.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 11.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 12.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 12.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 13.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 13.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 14.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 14.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 15.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 15.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 16.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 16.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 17.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 17.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 18.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 18.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 19.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 19.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 20.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 20.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 21.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 21.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 22.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 22.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 23.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 23.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Capítulo 24.png",
-      "caminho": "assets/chapters/ruinas-dos-ceus/Capítulo 24.png",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/chapters/ruinas-dos-ceus/.gitkeep",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/chapters/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "chapters/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Ilustração de capítulo",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "Mapa de Etérea.png",
-      "caminho": "assets/maps/ruinas-dos-ceus/Mapa de Etérea.png",
-      "pasta": "maps/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Mapa",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Mapa de Nadírion (Floresta de Mirval).png",
-      "caminho": "assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).png",
-      "pasta": "maps/ruinas-dos-ceus",
-      "extensao": ".png",
-      "tipo": "Mapa",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Mapa de Et+®rea.webp",
-      "caminho": "assets/maps/ruinas-dos-ceus/Mapa de Et+®rea.webp",
-      "pasta": "maps/ruinas-dos-ceus",
-      "extensao": ".webp",
-      "tipo": "Mapa",
-      "dimensoes": "—NOTA: nome de arquivo corrompido (encoding), provável \"Mapa de Etérea.webp\"",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "Mapa de Nad+¡rion (Floresta de Mirval).webp",
-      "caminho": "assets/maps/ruinas-dos-ceus/Mapa de Nad+¡rion (Floresta de Mirval).webp",
-      "pasta": "maps/ruinas-dos-ceus",
-      "extensao": ".webp",
-      "tipo": "Mapa",
-      "dimensoes": "—NOTA: nome de arquivo corrompido (encoding), provável \"Mapa de Nadírion (Floresta de Mirval).webp\"",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "mapa-combinado.webp",
-      "caminho": "assets/maps/ruinas-dos-ceus/mapa-combinado.webp",
-      "pasta": "maps/ruinas-dos-ceus",
-      "extensao": ".webp",
-      "tipo": "Mapa",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/maps/ruinas-dos-ceus/.gitkeep",
-      "pasta": "maps/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Mapa",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "mapa-geral.webp",
-      "caminho": "assets/maps/guerras-de-sangue/mapa-geral.webp",
-      "pasta": "maps/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Mapa",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/maps/guerras-de-sangue/.gitkeep",
-      "pasta": "maps/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Mapa",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "acampamento-dos-homens-das-areias.webp",
-      "caminho": "assets/places/acampamento-dos-homens-das-areias.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "alesteiro.webp",
-      "caminho": "assets/places/alesteiro.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "cendar-vel.webp",
-      "caminho": "assets/places/cendar-vel.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "kaendar.webp",
-      "caminho": "assets/places/kaendar.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "khar-tondr.webp",
-      "caminho": "assets/places/khar-tondr.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "camara-do-primeiro-abrigo.webp",
-      "caminho": "assets/places/camara-do-primeiro-abrigo.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "floresta-de-mirval.webp",
-      "caminho": "assets/places/floresta-de-mirval.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "marco-das-tres-pedras.webp",
-      "caminho": "assets/places/marco-das-tres-pedras.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "margem-dos-zirrios.webp",
-      "caminho": "assets/places/margem-dos-zirrios.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "noreval.webp",
-      "caminho": "assets/places/noreval.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nyn-harad.webp",
-      "caminho": "assets/places/nyn-harad.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "urtar-vesh.webp",
-      "caminho": "assets/places/urtar-vesh.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "varkhama.webp",
-      "caminho": "assets/places/varkhama.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "velarim.webp",
-      "caminho": "assets/places/velarim.webp",
-      "pasta": "places",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "bosques-de-arion.webp",
-      "caminho": "assets/places/ruinas/bosques-de-arion.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "circulo-de-nhamari.webp",
-      "caminho": "assets/places/ruinas/circulo-de-nhamari.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "erilan.webp",
-      "caminho": "assets/places/ruinas/erilan.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "estacao-da-leveza.webp",
-      "caminho": "assets/places/ruinas/estacao-da-leveza.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "eterea.webp",
-      "caminho": "assets/places/ruinas/eterea.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "floresta-de-nadirion.webp",
-      "caminho": "assets/places/ruinas/floresta-de-nadirion.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ilha-da-memoria.webp",
-      "caminho": "assets/places/ruinas/ilha-da-memoria.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ilha-dos-pequenos.webp",
-      "caminho": "assets/places/ruinas/ilha-dos-pequenos.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ilhas-baixas.webp",
-      "caminho": "assets/places/ruinas/ilhas-baixas.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nadirion.webp",
-      "caminho": "assets/places/ruinas/nadirion.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nivellia.webp",
-      "caminho": "assets/places/ruinas/nivellia.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "vale.webp",
-      "caminho": "assets/places/ruinas/vale.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "planalto-de-talyen.webp",
-      "caminho": "assets/places/ruinas/planalto-de-talyen.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "praca-da-raiz.webp",
-      "caminho": "assets/places/ruinas/praca-da-raiz.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "primeiro-abrigo.webp",
-      "caminho": "assets/places/ruinas/primeiro-abrigo.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "riacho-de-nadirion.webp",
-      "caminho": "assets/places/ruinas/riacho-de-nadirion.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ruinas-de-eterea.webp",
-      "caminho": "assets/places/ruinas/ruinas-de-eterea.webp",
-      "pasta": "places/ruinas",
-      "extensao": ".webp",
-      "tipo": "Ilustração de lugar",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "hadrun.webp",
-      "caminho": "assets/characters/guerras-de-sangue/hadrun.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "harrev.webp",
-      "caminho": "assets/characters/guerras-de-sangue/harrev.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "kahul.webp",
-      "caminho": "assets/characters/guerras-de-sangue/kahul.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "lurok.webp",
-      "caminho": "assets/characters/guerras-de-sangue/lurok.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "lutharus.webp",
-      "caminho": "assets/characters/guerras-de-sangue/lutharus.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nara-e-ilo.webp",
-      "caminho": "assets/characters/guerras-de-sangue/nara-e-ilo.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "odran-porta-baixa.webp",
-      "caminho": "assets/characters/guerras-de-sangue/odran-porta-baixa.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "odris.webp",
-      "caminho": "assets/characters/guerras-de-sangue/odris.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "orionus-polar-2.webp",
-      "caminho": "assets/characters/guerras-de-sangue/orionus-polar-2.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "orven.webp",
-      "caminho": "assets/characters/guerras-de-sangue/orven.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "saela.webp",
-      "caminho": "assets/characters/guerras-de-sangue/saela.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "savel.webp",
-      "caminho": "assets/characters/guerras-de-sangue/savel.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "seron-das-obras.webp",
-      "caminho": "assets/characters/guerras-de-sangue/seron-das-obras.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "soren.webp",
-      "caminho": "assets/characters/guerras-de-sangue/soren.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "tavra-vendrar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/tavra-vendrar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "thoren-dos-graos.webp",
-      "caminho": "assets/characters/guerras-de-sangue/thoren-dos-graos.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "varael-glydar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/varael-glydar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "veyr-polar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/veyr-polar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "yvenn-raiz-branca.webp",
-      "caminho": "assets/characters/guerras-de-sangue/yvenn-raiz-branca.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "daryon-polar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/daryon-polar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "iressa-maos-de-sal.webp",
-      "caminho": "assets/characters/guerras-de-sangue/iressa-maos-de-sal.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "kaelina.webp",
-      "caminho": "assets/characters/guerras-de-sangue/kaelina.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "kharvok.webp",
-      "caminho": "assets/characters/guerras-de-sangue/kharvok.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "lorde-ossar-glydar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/lorde-ossar-glydar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "maelis-das-contagens.webp",
-      "caminho": "assets/characters/guerras-de-sangue/maelis-das-contagens.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "markoso.webp",
-      "caminho": "assets/characters/guerras-de-sangue/markoso.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nynestra.webp",
-      "caminho": "assets/characters/guerras-de-sangue/nynestra.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "rendar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/rendar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "sarkan.webp",
-      "caminho": "assets/characters/guerras-de-sangue/sarkan.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "seyra-vendrar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/seyra-vendrar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "torgun.webp",
-      "caminho": "assets/characters/guerras-de-sangue/torgun.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "varron-meio-olho.webp",
-      "caminho": "assets/characters/guerras-de-sangue/varron-meio-olho.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "vita-fendelar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/vita-fendelar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "vorlan-vendrar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/vorlan-vendrar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "ylvena.webp",
-      "caminho": "assets/characters/guerras-de-sangue/ylvena.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "alyra.webp",
-      "caminho": "assets/characters/guerras-de-sangue/alyra.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "avara-fendelar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/avara-fendelar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "brokan-das-forjas.webp",
-      "caminho": "assets/characters/guerras-de-sangue/brokan-das-forjas.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "cal-edran.webp",
-      "caminho": "assets/characters/guerras-de-sangue/cal-edran.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "cal-kadrir.webp",
-      "caminho": "assets/characters/guerras-de-sangue/cal-kadrir.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "orionus-polar.webp",
-      "caminho": "assets/characters/guerras-de-sangue/orionus-polar.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nalia-do-rio.webp",
-      "caminho": "assets/characters/guerras-de-sangue/nalia-do-rio.webp",
-      "pasta": "characters/guerras-de-sangue",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "mirel-amarea.webp",
-      "caminho": "assets/characters/ruinas/mirel-amarea.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "efepar.webp",
-      "caminho": "assets/characters/ruinas/efepar.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "gabasteres.webp",
-      "caminho": "assets/characters/ruinas/gabasteres.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "jokara.webp",
-      "caminho": "assets/characters/ruinas/jokara.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "liri.webp",
-      "caminho": "assets/characters/ruinas/liri.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "loutes.webp",
-      "caminho": "assets/characters/ruinas/loutes.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "marv.webp",
-      "caminho": "assets/characters/ruinas/marv.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "malthar.webp",
-      "caminho": "assets/characters/ruinas/malthar.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "nestira.webp",
-      "caminho": "assets/characters/ruinas/nestira.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "platisa.webp",
-      "caminho": "assets/characters/ruinas/platisa.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "professor-talver.webp",
-      "caminho": "assets/characters/ruinas/professor-talver.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "sersi.webp",
-      "caminho": "assets/characters/ruinas/sersi.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "yndra.webp",
-      "caminho": "assets/characters/ruinas/yndra.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "yoral.webp",
-      "caminho": "assets/characters/ruinas/yoral.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "yrsea.webp",
-      "caminho": "assets/characters/ruinas/yrsea.webp",
-      "pasta": "characters/ruinas",
-      "extensao": ".webp",
-      "tipo": "Retrato de personagem",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": "raukhar.webp",
-      "caminho": "assets/lore/fauna/raukhar.webp",
-      "pasta": "lore/fauna",
-      "extensao": ".webp",
-      "tipo": "Fauna",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": true
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/lore/fauna/.gitkeep",
-      "pasta": "lore/fauna",
-      "extensao": "(sem extensão)",
-      "tipo": "Fauna",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/lore/alimentos/.gitkeep",
-      "pasta": "lore/alimentos",
-      "extensao": "(sem extensão)",
-      "tipo": "Alimento",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/lore/conceitos/.gitkeep",
-      "pasta": "lore/conceitos",
-      "extensao": "(sem extensão)",
-      "tipo": "Conceito",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/lore/flora/.gitkeep",
-      "pasta": "lore/flora",
-      "extensao": "(sem extensão)",
-      "tipo": "Flora",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/backgrounds/guerras-de-sangue/.gitkeep",
-      "pasta": "backgrounds/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Backgrounds",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/backgrounds/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "backgrounds/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Backgrounds",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/backgrounds/ruinas-dos-ceus/.gitkeep",
-      "pasta": "backgrounds/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Backgrounds",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/backgrounds/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "backgrounds/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Backgrounds",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/events/guerras-de-sangue/.gitkeep",
-      "pasta": "events/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Events",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/events/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "events/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Events",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/events/ruinas-dos-ceus/.gitkeep",
-      "pasta": "events/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Events",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/events/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "events/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Events",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/families/guerras-de-sangue/.gitkeep",
-      "pasta": "families/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Families",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/families/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "families/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Families",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/families/ruinas-dos-ceus/.gitkeep",
-      "pasta": "families/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Families",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/families/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "families/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Families",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/gallery/guerras-de-sangue/.gitkeep",
-      "pasta": "gallery/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Gallery",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/gallery/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "gallery/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Gallery",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/gallery/ruinas-dos-ceus/.gitkeep",
-      "pasta": "gallery/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Gallery",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/gallery/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "gallery/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Gallery",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/objects/guerras-de-sangue/.gitkeep",
-      "pasta": "objects/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Objects",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/objects/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "objects/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Objects",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/objects/ruinas-dos-ceus/.gitkeep",
-      "pasta": "objects/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Objects",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/objects/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "objects/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Objects",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/organisations/guerras-de-sangue/.gitkeep",
-      "pasta": "organisations/guerras-de-sangue",
-      "extensao": "(sem extensão)",
-      "tipo": "Organisations",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/organisations/guerras-de-sangue/LEIA-ME.md",
-      "pasta": "organisations/guerras-de-sangue",
-      "extensao": ".md",
-      "tipo": "Organisations",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/organisations/ruinas-dos-ceus/.gitkeep",
-      "pasta": "organisations/ruinas-dos-ceus",
-      "extensao": "(sem extensão)",
-      "tipo": "Organisations",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/organisations/ruinas-dos-ceus/LEIA-ME.md",
-      "pasta": "organisations/ruinas-dos-ceus",
-      "extensao": ".md",
-      "tipo": "Organisations",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/ui/icons/.gitkeep",
-      "pasta": "ui/icons",
-      "extensao": "(sem extensão)",
-      "tipo": "Ui",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/ui/icons/LEIA-ME.md",
-      "pasta": "ui/icons",
-      "extensao": ".md",
-      "tipo": "Ui",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/ui/particles/.gitkeep",
-      "pasta": "ui/particles",
-      "extensao": "(sem extensão)",
-      "tipo": "Ui",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/ui/particles/LEIA-ME.md",
-      "pasta": "ui/particles",
-      "extensao": ".md",
-      "tipo": "Ui",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": ".gitkeep",
-      "caminho": "assets/ui/textures/.gitkeep",
-      "pasta": "ui/textures",
-      "extensao": "(sem extensão)",
-      "tipo": "Ui",
-      "dimensoes": "—NOTA: pasta sem conteúdo real ainda",
-      "tamanho": "—",
-      "visual": false
-    },
-    {
-      "arquivo": "LEIA-ME.md",
-      "caminho": "assets/ui/textures/LEIA-ME.md",
-      "pasta": "ui/textures",
-      "extensao": ".md",
-      "tipo": "Ui",
-      "dimensoes": "—",
-      "tamanho": "—",
-      "visual": false
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-01.webp",
+      "filename": "chapter-01.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 264236,
+      "sha256": "b33a778442646c5cdec66bf697e9efa1d7961f7b64fab6a9b2d474e6429c9528"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-02.webp",
+      "filename": "chapter-02.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 197894,
+      "sha256": "9b2ea9a26e394d8976258afc94549c89b465fed4002006f71dcd5f31dcb05a1a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-03.webp",
+      "filename": "chapter-03.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 317014,
+      "sha256": "ae3f6c6af8fe604b7196299be1b7526935ac6d7ac622464e272b40040bea08d4"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-04.webp",
+      "filename": "chapter-04.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 349176,
+      "sha256": "5e60b1af4a45c38c14834ae261c3cb81b6d8ed37355bda8737d32c8b51224335"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-05.webp",
+      "filename": "chapter-05.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 214116,
+      "sha256": "69a20394d5452957fead920577c299c39c55f28cbb57961c7bebddb0a73da366"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-06.webp",
+      "filename": "chapter-06.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 296954,
+      "sha256": "d75c93f0b32e5b37c1b9b554f52c62386b8bae0661423987e152e942a66864d6"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-07.webp",
+      "filename": "chapter-07.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1024,
+      "height": 572,
+      "sizeBytes": 117180,
+      "sha256": "8d641a5f05095726adc544cf273ef5464b40185db80f652eb730aa9636c6a20f"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-08.webp",
+      "filename": "chapter-08.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 373828,
+      "sha256": "a303e903a89afda582038de96790aa6de14b4c14fefbda2e5999da28a64d9c3b"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-09.webp",
+      "filename": "chapter-09.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 478894,
+      "sha256": "758ed5c8142260b1d351b5b59e7ed11a4512ecda8f51450e06f5f81edc77ec9c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-10.webp",
+      "filename": "chapter-10.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 205348,
+      "sha256": "ef67c5b4214f1679396a92ea349a8413247ec43a440cca8ba511928604a7f9d0"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-11.webp",
+      "filename": "chapter-11.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 394612,
+      "sha256": "7ed12dcfe67c5fd7cee4cc9f0d688c2367363308ed1fa6c8c425a2d5872c82f2"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-12.webp",
+      "filename": "chapter-12.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 320782,
+      "sha256": "7c9edfabf184de4b6145ddfdf0672de788a079aa4cc811adc1877a886ced4cb9"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-13.webp",
+      "filename": "chapter-13.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 287680,
+      "sha256": "3f0fe92fd8e2ee1665028cec37e28b5288b108c235c93427adcb7b1c85952672"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-14.webp",
+      "filename": "chapter-14.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 218314,
+      "sha256": "7373ff55106123dc6cf98c0add336b87ef73b0c5520f8b35c8cb562598f89c86"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-15.webp",
+      "filename": "chapter-15.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 412938,
+      "sha256": "a65e35a29448e7ce7145e4fd5c2c198123504a7da6d03863f82af9052ec9bfc4"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-16.webp",
+      "filename": "chapter-16.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 365182,
+      "sha256": "9af42d1d57a0c14c500915edff71070541b410f22818a3aa048eef7ba95b1b33"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-17.webp",
+      "filename": "chapter-17.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 229066,
+      "sha256": "7849444a5411b5ba68aa2a41c0e85542c6cb692aac7f0b8d2a8969e7cec2003f"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-18.webp",
+      "filename": "chapter-18.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 242440,
+      "sha256": "30a23c43830f087be6060419d52624d581cdc8f2c1a68b1f7d69efae079ddda2"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-19.webp",
+      "filename": "chapter-19.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 247244,
+      "sha256": "4d51d58049c8f188db6d74391af37383b8662a1f860f5994e1aa0fdb41a8eb8a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-20.webp",
+      "filename": "chapter-20.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 359424,
+      "sha256": "ba608e4173954ff73d5a7dc3d1f69b9f500be60428ee6b63218026663a353450"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-21.webp",
+      "filename": "chapter-21.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 346122,
+      "sha256": "0816ced2c978a32659ef486b059688e7eeb7159d5c0c1ff8b52ba6c549b989b9"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-22.webp",
+      "filename": "chapter-22.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 243300,
+      "sha256": "197e4b78580194e34cd3416ae8570b7c6aca9e25cbe076addf083362b0eb2dbc"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-23.webp",
+      "filename": "chapter-23.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 236812,
+      "sha256": "1763ebf77e99c60c503548c2aafa6ccc6c9b69c0e7b05802595677f84a95ef7f"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-24.webp",
+      "filename": "chapter-24.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 201064,
+      "sha256": "854b869b8f9edd849683373d8c7dbff99b05c246a92bb5b5d83f7fb14dc322d5"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-25.webp",
+      "filename": "chapter-25.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1024,
+      "height": 576,
+      "sizeBytes": 96366,
+      "sha256": "fc6034b2ccdec6e19ab5aab6d3f29555f6f9da18cb435e68a647aa555c3d2aee"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-26.webp",
+      "filename": "chapter-26.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 272288,
+      "sha256": "2e6b803a7d3ea3cc69afe9f4524cb341497f962f340e09f0d19b1692612687ad"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-27.webp",
+      "filename": "chapter-27.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 268440,
+      "sha256": "5d8ea3f721bd6d5504a0a6424c20cb9adfbb1bf1e5f593fdf98bf7c3612bf73d"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-28.webp",
+      "filename": "chapter-28.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 353162,
+      "sha256": "e9ecae411148c8ee84abfb0ad29e1f941c49d9411c99abd80901ae08af880165"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-29.webp",
+      "filename": "chapter-29.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 330594,
+      "sha256": "dda8eb24bbbaa9aa5b7706a5c00ec44d3511f445cd6bd46d70f19bf1c0ec0b07"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/alyra.webp",
+      "filename": "alyra.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 122308,
+      "sha256": "1b6125a44e9d443217c276ab66dcd49a21131562e63f1e77fc6d6b93310257ef"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/avara-fendelar.webp",
+      "filename": "avara-fendelar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1350,
+      "sizeBytes": 146174,
+      "sha256": "8abb10dcf2e7fe975bfeb1c30f1b6f5ad7089bd221fa75c2d81c1465a8ce6b56"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/brokan-das-forjas.webp",
+      "filename": "brokan-das-forjas.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 147932,
+      "sha256": "5852fecf30a33a4193d7cceed87cbdcf470abd38f5d85c9c68e84544f13130b2"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/cal-edran.webp",
+      "filename": "cal-edran.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 140618,
+      "sha256": "d9ece89a61560325ff6ac9d4cc1db61290f116261db0dd8242453b5329ed1d04"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/cal-kadrir.webp",
+      "filename": "cal-kadrir.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 128276,
+      "sha256": "844f323d85f10c272eadc0f99ba0fa53ac5669496f8c5a7b74a1b7e59b7e4ed2"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/daryon-polar.webp",
+      "filename": "daryon-polar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 101276,
+      "sha256": "f0f899d4a38e2a63410c6d45b3cae85cd4dc3dcef1b9ffbc545a0dc8d30643bb"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/hadrun.webp",
+      "filename": "hadrun.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 123982,
+      "sha256": "4ee80fa5252da095dd46780f24977001754e9c15a039754eac7a902984ab5860"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/harrev.webp",
+      "filename": "harrev.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 162926,
+      "sha256": "96a26fe2f2f46f85b9888b1c6eb3588db981b2780943eb26fa5b18837e14d8b1"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/iressa-maos-de-sal.webp",
+      "filename": "iressa-maos-de-sal.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 180358,
+      "sha256": "5a55e6609344fc497e9ca62c05cdd4fb38509cf3cc3026d0eb732b89afe3ae90"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/kaelina.webp",
+      "filename": "kaelina.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 144322,
+      "sha256": "78ee44c50051c181030917452c14acee9cc6a15b6ba2969ebbf428c704ff520b"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/kahul.webp",
+      "filename": "kahul.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 111766,
+      "sha256": "c3748bfacca3707967fc0e68e491d2d007dabd5f9eabc0c636eb6d02b6419452"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/kharvok.webp",
+      "filename": "kharvok.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 139252,
+      "sha256": "b02b61a7d39cbc5c304844cd347eb864e0a7b43e533af31f1713d1f650426b13"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/lorde-ossar-glydar.webp",
+      "filename": "lorde-ossar-glydar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 125814,
+      "sha256": "ed0875a1363095043a056243dfa9ff857dc9cc8673c905b10817e7da0416a05a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/lurok.webp",
+      "filename": "lurok.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 81344,
+      "sha256": "dad109897c252e6f572dd2da63ce8b1529d4a604efd0f559285a89eaa4d151d5"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/lutharus.webp",
+      "filename": "lutharus.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 96394,
+      "sha256": "fbe4ea55649c68784a2ca27c7886fa744f5f5361c582238b25a2bad52682fe01"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/maelis-das-contagens.webp",
+      "filename": "maelis-das-contagens.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 160466,
+      "sha256": "20413380393434b79298e5e033f7582a314e97b019179f55a2157dd4c359d991"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/markoso.webp",
+      "filename": "markoso.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 147402,
+      "sha256": "6ec9a0065471047a90d28a9d385f1da35e5d04749cb48c6cb20c4040e316d12a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/nalia-do-rio.webp",
+      "filename": "nalia-do-rio.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 115518,
+      "sha256": "0a394ef8bf162d4756a42f7c6c3851e59a1b3fbd7b08d8ecd0f04bc59fa3652a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/nara-e-ilo.webp",
+      "filename": "nara-e-ilo.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 160874,
+      "sha256": "b77bd0dfd6485469bacf545f2f760bc2e733e48b7da5f620ac48d4bb008c292d"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/nynestra.webp",
+      "filename": "nynestra.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 202906,
+      "sha256": "9447bd533e1b98b07878ed189bc935d3a55ded02ff3d474e05245767e9b2763b"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/odran-porta-baixa.webp",
+      "filename": "odran-porta-baixa.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 197084,
+      "sha256": "ac34658d9308ce56576d7f52b2991167e0cdd8764e6f33fe932d98d12b1ae3e6"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/odris.webp",
+      "filename": "odris.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 157264,
+      "sha256": "08900144c11698fc0cf6bf269e02ccf16e69b865b00e785ea9ca1b826aa016ab"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/orionus-polar-2.webp",
+      "filename": "orionus-polar-2.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1350,
+      "sizeBytes": 238984,
+      "sha256": "c3081cfdf58e29937ba29909114087c535f902544f26648d68e7a505168ab776"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/orionus-polar.webp",
+      "filename": "orionus-polar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 122224,
+      "sha256": "f98b699e67084f87cd27d148f983556d33fbaab25bd75488a42a55ccf8d3e9bc"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/orven.webp",
+      "filename": "orven.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 170796,
+      "sha256": "e58374e2662cba027576ed2444a2d66d9781a639843746c45a1283c269f551cc"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/rendar.webp",
+      "filename": "rendar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 149282,
+      "sha256": "5d4af38d7dc9db0444ae4e5eb37e9b2586f3800fde5cf072bab988888736cf8a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/saela.webp",
+      "filename": "saela.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 126974,
+      "sha256": "179566470ce303f3c45346163e53bf9bfd303d91c016f292e908dea5bf2bc7c1"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/sarkan.webp",
+      "filename": "sarkan.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 130058,
+      "sha256": "2deeff8fff77028e3790636c32fc394934a38a2e0515e824606dab8dc61abf53"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/savel.webp",
+      "filename": "savel.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 115408,
+      "sha256": "fcd9b15e0f79d946abf0daeedc47e79745ea64a819573479ca4bfbf13e4d7413"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/seron-das-obras.webp",
+      "filename": "seron-das-obras.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 167938,
+      "sha256": "9a023bedafd1f449596b6a54a0adeb103c67736c13ffd2d11d176fc7b5a7c09c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/seyra-vendrar.webp",
+      "filename": "seyra-vendrar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 215502,
+      "sha256": "450680bd452bca703e4b4bd19f4eac5612c9334583983d7e4416d1a39c266213"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/soren.webp",
+      "filename": "soren.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 77754,
+      "sha256": "facded7f3ceaae9218805ef2fcc6b5f326dad5e12d235437582f066c18f6574f"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/tavra-vendrar.webp",
+      "filename": "tavra-vendrar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 207610,
+      "sha256": "507f869e64f505214f094a34cd509f4d4b74ff1835c511060cb51edcbbd49560"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/thoren-dos-graos.webp",
+      "filename": "thoren-dos-graos.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 156826,
+      "sha256": "f578f6857b55d60618137ce45b830b15623990bc4358526d1bcbe6b252c45c05"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/torgun.webp",
+      "filename": "torgun.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 253472,
+      "sha256": "073cf0c800507098a100b61c851d3a165d5041514707c049e5221221dc7558ee"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/varael-glydar.webp",
+      "filename": "varael-glydar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 149252,
+      "sha256": "02062cbf3ca3645a451fe5a3f1cd830bea3c1104631a1b916efa7a9abbcb6600"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/varron-meio-olho.webp",
+      "filename": "varron-meio-olho.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 125310,
+      "sha256": "a1143c5a554b28cf6c1027f09287c5150301dcf74a36831d8da7086bb126504a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/veyr-polar.webp",
+      "filename": "veyr-polar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 180244,
+      "sha256": "ab9e8ab48eb8cecc941536bcf83c77a7cc028051078f85f7bad4cff70e0bea5a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/vita-fendelar.webp",
+      "filename": "vita-fendelar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1350,
+      "sizeBytes": 89886,
+      "sha256": "c29b969a7fe7595cb4366cd79c15d9731476784acddecb71654bb8a8bcfc953c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/vorlan-vendrar.webp",
+      "filename": "vorlan-vendrar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 144818,
+      "sha256": "72a388b70859d8ccdc67f0ec56a13e2e3dbb77167b2568c9a5641aed39c72eb7"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/ylvena.webp",
+      "filename": "ylvena.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 107776,
+      "sha256": "4bf15dff5cdee75cee64fc9700d617a267184eee3f3c366e95d0f7a35bb6b008"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/yvenn-raiz-branca.webp",
+      "filename": "yvenn-raiz-branca.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 169886,
+      "sha256": "34c2c5fac1249dea09061dd2cd91c75023449638c07e7c9a52a7574ae9a3d9f4"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/cover.webp",
+      "filename": "cover.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue",
+      "extension": ".webp",
+      "width": 1024,
+      "height": 1535,
+      "sizeBytes": 335210,
+      "sha256": "3d931320e79c2084cd1707ab328af48bd3e0abdfddd3a07586715476002215f1"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/maps/map-jesed.webp",
+      "filename": "map-jesed.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/maps",
+      "extension": ".webp",
+      "width": 1536,
+      "height": 1024,
+      "sizeBytes": 675282,
+      "sha256": "ff2f8307b2218399c450d8ba312345b6579163c79d2f6cc4491c66a667514932"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/acampamento-dos-homens-das-areias.webp",
+      "filename": "acampamento-dos-homens-das-areias.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 241756,
+      "sha256": "142c2f825668ea9da280435c52523236a1f3b43cd310c8fdeb44088043d7afbd"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/alesteiro.webp",
+      "filename": "alesteiro.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 227716,
+      "sha256": "cc33ea05b2c9c616d0ecf8cf77803193484389e27cf61b3f0e77bb7a321db51a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/camara-do-primeiro-abrigo.webp",
+      "filename": "camara-do-primeiro-abrigo.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 94574,
+      "sha256": "c7c46d4ede6b3636fe07b4294083dd80449000d2196714882c4aa1a87f205c41"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/cendar-vel.webp",
+      "filename": "cendar-vel.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 141300,
+      "sha256": "e241c7cb39f5a42ceded116af6e4117184f72ea3194f71f106fc602b3f62209b"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/floresta-de-mirval.webp",
+      "filename": "floresta-de-mirval.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 207034,
+      "sha256": "6f1f5c932954794e61b9cf9365fd41f507567e86840880ccb8c82c2b33588786"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/kaendar.webp",
+      "filename": "kaendar.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 237134,
+      "sha256": "8b6da032961fc71b10f3c3d055042b7f78c1a7ca95178ec319fe38c5ab9f58ec"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/khar-tondr.webp",
+      "filename": "khar-tondr.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 305564,
+      "sha256": "ecb487b03ef0af8fde1e05e7275a7e0e8de7e2dd58320a134fec6e6b1eeee0ef"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/marco-das-tres-pedras.webp",
+      "filename": "marco-das-tres-pedras.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 123730,
+      "sha256": "554e0116328a76342933e36f56749f22b51eaafd71fe49117697ef0ffc638d14"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/margem-dos-zirrios.webp",
+      "filename": "margem-dos-zirrios.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 248800,
+      "sha256": "a4242d416bfa3d82f91ae448c6944ea65f2bf7ddb5644bbf2647a099d9aa0c35"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/noreval.webp",
+      "filename": "noreval.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 171684,
+      "sha256": "5018751740769f2e32aca699e819a8f989f72d330591faf50697d1b5e0420aa8"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/nyn-harad.webp",
+      "filename": "nyn-harad.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 303014,
+      "sha256": "be3c6c52e77753f48dd2e172dabf2d5920f0f4b7a9be620b28c794040eb0e99c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/urtar-vesh.webp",
+      "filename": "urtar-vesh.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 136466,
+      "sha256": "19870b5bf8240bd26af20f07a3271d8d317f150a8af75f68cd3b7979ccae706b"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/varkhama.webp",
+      "filename": "varkhama.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 229178,
+      "sha256": "ffc9001f74461562963d6e5f6887b5ea42340b56e3125770913acb796ea40930"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/guerras-de-sangue/places/velarim.webp",
+      "filename": "velarim.webp",
+      "category": "books/ciclo-de-jesed/guerras-de-sangue/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 313386,
+      "sha256": "e102231ed5f957fe3591efe65a4f03be9a341be46a7be3bed23bd20da7e93cc5"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-01.webp",
+      "filename": "chapter-01.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 437208,
+      "sha256": "7b1adb46b2e534991ec726de913fcdc6abf2fa1fa38d1dfc7a63850bbb4e5e09"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-02.webp",
+      "filename": "chapter-02.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 431968,
+      "sha256": "9bd124eb1746ccc83e41b5aec346d4a68266c63b875ec82f78b92300983bf9d0"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-03.webp",
+      "filename": "chapter-03.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 377376,
+      "sha256": "e4fb7fa7caea9c390590be426be1d767b9264706530464912bc5b821080e09f9"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-04.webp",
+      "filename": "chapter-04.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 386468,
+      "sha256": "46be08e0a532b19c494ce8a790d2a3854615cee1116fdf594247d0da61481ac2"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-05.webp",
+      "filename": "chapter-05.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 296436,
+      "sha256": "91146c339993c57d0f82f50ef5735ce657a71c3ddaa2c5ed8508cd01119e6660"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-06.webp",
+      "filename": "chapter-06.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 292656,
+      "sha256": "29e44108466dd1209e18ce5ae80d099e9f8e19031d8f3460478843176cab2055"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-07.webp",
+      "filename": "chapter-07.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 401076,
+      "sha256": "2515a1c86f7dbef99934d86ffeb5fa18f4b1c064245ee184f75f5d1bc6e2c330"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-08.webp",
+      "filename": "chapter-08.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 342704,
+      "sha256": "8780e16c92bad4d4cb82687f6886705c4750f5e52c0d5ca3a1387748128ac052"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-09.webp",
+      "filename": "chapter-09.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 352556,
+      "sha256": "26deb436ba8047a7dccbe97008d09117cb8d00c50cd32a3d682ce76bbded3fc8"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-10.webp",
+      "filename": "chapter-10.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 224130,
+      "sha256": "1485de307db20517c82431a4519668f2990f4b7e02b3692d08ab46a8fed6e06c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-11.webp",
+      "filename": "chapter-11.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 244986,
+      "sha256": "8ea42e176f7ea1c9c8b90467c4df86818ebaa4847ea5500cbbd808872dff4324"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-12.webp",
+      "filename": "chapter-12.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 335752,
+      "sha256": "d56f267824ca26084fc5ba26bb1e97f9370174ad4e98c9f869424a9b7a6495b4"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-13.webp",
+      "filename": "chapter-13.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 369426,
+      "sha256": "64ef4f8f9a67c75070d0dfca706906592a2a670b663d35fa76c23787db56ac57"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-14.webp",
+      "filename": "chapter-14.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 309344,
+      "sha256": "607787f5ea33d09a51dc621b36b53cf2ba7d078f3566f39a4a4726d9d02b06a6"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-15.webp",
+      "filename": "chapter-15.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 337000,
+      "sha256": "2cfb8b1873903e4329bf42b9954a51caa8bec4e926113e742528cb75d347b126"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-16.webp",
+      "filename": "chapter-16.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 300874,
+      "sha256": "de0fe4ea9fe24e81fc6a28db9bd79358d53e346835ba8bd8a676da4a758605d0"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-17.webp",
+      "filename": "chapter-17.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 312406,
+      "sha256": "b76fa5e82a807f5da075662ba19d694949182132772463597abab7bee17fef9e"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-18.webp",
+      "filename": "chapter-18.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 223246,
+      "sha256": "9bf717b14d17fb26d7c9baf8e97bcb1612185b3355e610f637ea849f2ff5ed02"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-19.webp",
+      "filename": "chapter-19.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 330778,
+      "sha256": "4a78d04fa08e6723a3ec8c96e56ae8fe74abbc1eab72ab7627f182e0de7490ea"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-20.webp",
+      "filename": "chapter-20.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 464210,
+      "sha256": "52e95aa675401b792095a2f9b76eff7bf0bcb8d516b417688d82ef269d7ffd78"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-21.webp",
+      "filename": "chapter-21.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 300864,
+      "sha256": "f9eb084e6ba4909abadc94f6ea868bc29ca03e0bc54076f8aefb704af72ad170"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-22.webp",
+      "filename": "chapter-22.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 239418,
+      "sha256": "30fd53dbc9fa02a852a550a12b26ec41c16f434725ee7a8a651220992dc013d7"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-23.webp",
+      "filename": "chapter-23.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 342302,
+      "sha256": "c53d88c01d6f5710b38cd2f7030daeebf917e87e4076de80d14193100f76b9ee"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/chapters/chapter-24.webp",
+      "filename": "chapter-24.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/chapters",
+      "extension": ".webp",
+      "width": 1672,
+      "height": 941,
+      "sizeBytes": 339264,
+      "sha256": "6d15edb2db361d464fbe9847dba7732d00ccac610e1686e39e323a835dd93fca"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/efepar.webp",
+      "filename": "efepar.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 140606,
+      "sha256": "289c7e69edff1b4eec64122ae5002e93a2ab67f7d6cad9c658766f5185116aed"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/gabasteres.webp",
+      "filename": "gabasteres.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 85994,
+      "sha256": "9d8b66c96ea076b8836fb9bd78bf6bc73ec9c4eeaaa770c96bf56f3af969015a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/jokara.webp",
+      "filename": "jokara.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 119884,
+      "sha256": "4b51bf7ac07fa141c5d7eda7a8a98a2ca40b80746061ff319a1a0ae8523356c7"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/liri.webp",
+      "filename": "liri.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 118452,
+      "sha256": "8755ad500aaef8bd9283ec346f55ebb6e8e7a1930ce90f429bc3f0f433d02380"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/loutes.webp",
+      "filename": "loutes.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 125226,
+      "sha256": "8a359b562cc4e1480fb1e0d87145ae988e415c7b20ace7331badc31784c82296"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/malthar.webp",
+      "filename": "malthar.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 1122,
+      "height": 1402,
+      "sizeBytes": 308966,
+      "sha256": "0089f65de24352a90b0acb56bbb137a594f8c7a892af939d8bca0c6fb8b65588"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/marv.webp",
+      "filename": "marv.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 155686,
+      "sha256": "03a61281273054a0cbbbd2a76edee46f607d621ca71f159c6e3b6f656cbce650"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/mirel-amarea.webp",
+      "filename": "mirel-amarea.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 172320,
+      "sha256": "9a58c32af3ffd51882fbd5ac4c7c70a810f2b79d5d01e9f8bbeb8e51400fb639"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/nestira.webp",
+      "filename": "nestira.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 140840,
+      "sha256": "23956e4d0a424310aeb8e732f720da73bc8bb02d741566f8f0efe8963a221872"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/platisa.webp",
+      "filename": "platisa.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 167636,
+      "sha256": "28065f7e7b88a8b096b3d5cb3f6c690ba8cd3a91f811984acaec9ac96df8540c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/professor-talver.webp",
+      "filename": "professor-talver.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 183116,
+      "sha256": "c5f8bfb4083f5f165cffcb353f071c7d00f5c227777b96e3bb0b2858ff28dc1c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/sersi.webp",
+      "filename": "sersi.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 172846,
+      "sha256": "1305d3a35ecabfc17b510cb4d78d69fb7f43412a4903538d73c1635bf75de1d5"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/yndra.webp",
+      "filename": "yndra.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 169384,
+      "sha256": "1bc5cd72c74af4a87d76a427babfd4b61c3946dbc904117e1259d9e905d2c13f"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/yoral.webp",
+      "filename": "yoral.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 164914,
+      "sha256": "795654326d865cca7458ce48594dabc908f67083539fbdba29ade0c8e1294e83"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/yrsea.webp",
+      "filename": "yrsea.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/characters",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1125,
+      "sizeBytes": 182240,
+      "sha256": "04181324d52dfd2c4793442fec77e614b2171313e2228e53cbf3b66bf77c337c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/cover.webp",
+      "filename": "cover.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus",
+      "extension": ".webp",
+      "width": 1024,
+      "height": 1536,
+      "sizeBytes": 268496,
+      "sha256": "71d82eb2c5cd861ea5f9808357c04cca400dd27d518637e52d87c841788a223e"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/maps/map-combined.webp",
+      "filename": "map-combined.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/maps",
+      "extension": ".webp",
+      "width": 2568,
+      "height": 900,
+      "sizeBytes": 745306,
+      "sha256": "34a381eee209de201fbad771c299a6afc155994e18501f3e1497220c4141dc3a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/maps/map-eterea.webp",
+      "filename": "map-eterea.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/maps",
+      "extension": ".webp",
+      "width": 1491,
+      "height": 1055,
+      "sizeBytes": 565338,
+      "sha256": "997eca70562785b64ece4f060541275641c2c0b735dd4ec806ee2979fcd653c9"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/maps/map-nadirion.webp",
+      "filename": "map-nadirion.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/maps",
+      "extension": ".webp",
+      "width": 1491,
+      "height": 1055,
+      "sizeBytes": 535818,
+      "sha256": "b8a31901c84a577687f6797c3bcc9d73545f7cd06b6ccf8d68b4cf21f8b000b9"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/bosques-de-arion.webp",
+      "filename": "bosques-de-arion.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 675,
+      "sizeBytes": 238210,
+      "sha256": "b5300fae22176007d6f7bba2ee8f4593e8b62c65737a972d37e79d6c48845b41"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/circulo-de-nhamari.webp",
+      "filename": "circulo-de-nhamari.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 675,
+      "sizeBytes": 168294,
+      "sha256": "2c27caeea42ff94eac88f02652ca860226197b4e21d0b5bdd62abd6de867b667"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/erilan.webp",
+      "filename": "erilan.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 675,
+      "sizeBytes": 234568,
+      "sha256": "f9478ca22f14ae64f6461de21300dcac55d9587076c7ca1cc72fea0f93195df4"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/estacao-da-leveza.webp",
+      "filename": "estacao-da-leveza.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 237074,
+      "sha256": "6c8f0a1ee955b4a8a3b70280ad65afebb3d44f0e18e71fae36e7cf5547478b51"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/eterea.webp",
+      "filename": "eterea.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 675,
+      "sizeBytes": 173980,
+      "sha256": "0694e5e6eb433b1ce659c6fa3a4884c1b270b164a618b243135b0dd46e7ee4c7"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/floresta-de-nadirion.webp",
+      "filename": "floresta-de-nadirion.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 185964,
+      "sha256": "4a3f9b00a969b7f79884cab73dcb52b4f481e0c0dde4d1472d1fcdb02a16c261"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/ilha-da-memoria.webp",
+      "filename": "ilha-da-memoria.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 225462,
+      "sha256": "e3f9d3895eb4d59685906f9529e8c673e288930952db07c8956182544656e369"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/ilha-dos-pequenos.webp",
+      "filename": "ilha-dos-pequenos.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 317538,
+      "sha256": "37559cfa16542d4b17ec8ccfb3e9e5bc6996e3dfbe89e463f1500ba4dfab30f6"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/ilhas-baixas.webp",
+      "filename": "ilhas-baixas.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 56000,
+      "sha256": "6c2ec02cf4a652ccedd972ec55db077fa85583e1b38d2a5f58bad18fe3cd115c"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/nadirion.webp",
+      "filename": "nadirion.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 79120,
+      "sha256": "ac62dadefdd4616cecbd158eb223774727c096a2ccf1e7829b4676f31fe06ed1"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/nivellia.webp",
+      "filename": "nivellia.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 281748,
+      "sha256": "e6588d38030f4099a9a80583a22be8a62110f6d0dd25f7f1ab69e807bcff7abe"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/planalto-de-talyen.webp",
+      "filename": "planalto-de-talyen.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 238222,
+      "sha256": "8d6173eee45a0e632ba59baaa17c3fc5c0bcff1e02b9fcf298398073baf5d41d"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/praca-da-raiz.webp",
+      "filename": "praca-da-raiz.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 332518,
+      "sha256": "4a15bfe3b7ee375d85b022c1677f074f751d88eeeaf13fd35aa367628198fffa"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/primeiro-abrigo.webp",
+      "filename": "primeiro-abrigo.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 158732,
+      "sha256": "91018489f0dd1a07dbd4b8d5607860468e15786f25d58ff6526721538327530a"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/riacho-de-nadirion.webp",
+      "filename": "riacho-de-nadirion.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 173250,
+      "sha256": "a151df3e0ab75b76b579f7b0a72949c15688eb66d0a9c944d06d488a93f30c2e"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/ruinas-de-eterea.webp",
+      "filename": "ruinas-de-eterea.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 226606,
+      "sha256": "1cbb60d7bc091a36e0d7e447ee0f0ee553d5b479ddfc1e83bc333aef748864ac"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/vale.webp",
+      "filename": "vale.webp",
+      "category": "books/ciclo-de-jesed/ruinas-dos-ceus/places",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 900,
+      "sizeBytes": 232140,
+      "sha256": "3423b51d4a882199c501e49f7ba5803f15ef996f4e724a22833ec6afab311457"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/shared/lore/fauna/raukhar.webp",
+      "filename": "raukhar.webp",
+      "category": "books/ciclo-de-jesed/shared/lore/fauna",
+      "extension": ".webp",
+      "width": 1400,
+      "height": 1120,
+      "sizeBytes": 230770,
+      "sha256": "ff18b6079f38eb3d162e519eaa9721f2621c0ce4109c28aea38ffb253080b336"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/shared/lore/temp/fauna-placeholder.webp",
+      "filename": "fauna-placeholder.webp",
+      "category": "books/ciclo-de-jesed/shared/lore/temp",
+      "extension": ".webp",
+      "width": 960,
+      "height": 600,
+      "sizeBytes": 3618,
+      "sha256": "085b5345ceb37415caa84c988cbe42d4ddb62f53bda9119d799cd7d134603e25"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/shared/lore/temp/flora-placeholder.webp",
+      "filename": "flora-placeholder.webp",
+      "category": "books/ciclo-de-jesed/shared/lore/temp",
+      "extension": ".webp",
+      "width": 960,
+      "height": 600,
+      "sizeBytes": 4266,
+      "sha256": "84c4f08dfa187ee62450247256f007efdc8abe9405517452a2b2d5d07823d072"
+    },
+    {
+      "path": "assets/books/ciclo-de-jesed/shared/lore/temp/food-placeholder.webp",
+      "filename": "food-placeholder.webp",
+      "category": "books/ciclo-de-jesed/shared/lore/temp",
+      "extension": ".webp",
+      "width": 960,
+      "height": 600,
+      "sizeBytes": 4038,
+      "sha256": "e83365e3dd7102586e47e83687b20c42010a9e705e2de820e6f641de68ca3dd3"
+    },
+    {
+      "path": "assets/branding/ciclo-de-jesed/logo-dark.webp",
+      "filename": "logo-dark.webp",
+      "category": "branding/ciclo-de-jesed",
+      "extension": ".webp",
+      "width": 1723,
+      "height": 608,
+      "sizeBytes": 40706,
+      "sha256": "b98689d0d61614f64a590bd99ca8752cbd119adcc242106f00ab01699f27c78b"
+    },
+    {
+      "path": "assets/branding/ciclo-de-jesed/logo-light.webp",
+      "filename": "logo-light.webp",
+      "category": "branding/ciclo-de-jesed",
+      "extension": ".webp",
+      "width": 760,
+      "height": 210,
+      "sizeBytes": 49722,
+      "sha256": "b73fe6820480cf3720287c4e2fd645278dfb308991a12dcc27c4d83c3866d3d1"
+    },
+    {
+      "path": "assets/branding/ciclo-de-jesed/mark.webp",
+      "filename": "mark.webp",
+      "category": "branding/ciclo-de-jesed",
+      "extension": ".webp",
+      "width": 2058,
+      "height": 379,
+      "sizeBytes": 325158,
+      "sha256": "9d9ede79dff3763910845311ae91fdfdacbb977f7744ae05ef4f937efce5b4f8"
+    },
+    {
+      "path": "assets/branding/dimensoes-infinitas/logo-dark.webp",
+      "filename": "logo-dark.webp",
+      "category": "branding/dimensoes-infinitas",
+      "extension": ".webp",
+      "width": 1626,
+      "height": 656,
+      "sizeBytes": 77308,
+      "sha256": "7fcd233c22e7e5792ba946633dba48541ec4fbd5906a336e64a091c4a027b270"
+    },
+    {
+      "path": "assets/branding/dimensoes-infinitas/logo-light.webp",
+      "filename": "logo-light.webp",
+      "category": "branding/dimensoes-infinitas",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 260,
+      "sizeBytes": 87052,
+      "sha256": "bea401c70a6235c1eebbe0946c9714e37392c53aac15b53feaa51198fa03d904"
+    },
+    {
+      "path": "assets/branding/dimensoes-infinitas/mark.webp",
+      "filename": "mark.webp",
+      "category": "branding/dimensoes-infinitas",
+      "extension": ".webp",
+      "width": 1609,
+      "height": 596,
+      "sizeBytes": 419078,
+      "sha256": "023b0a353d3a675ca6d595d4eff71ed2d2e1452cb1a6134c10e9c655184d06c4"
+    },
+    {
+      "path": "assets/branding/guerras-de-sangue/logo-dark.webp",
+      "filename": "logo-dark.webp",
+      "category": "branding/guerras-de-sangue",
+      "extension": ".webp",
+      "width": 1644,
+      "height": 656,
+      "sizeBytes": 57984,
+      "sha256": "111e694b4dcdf7a1ca56c0e0f8f357ea0c0cba064b5f4e12fb65508cef85252d"
+    },
+    {
+      "path": "assets/branding/guerras-de-sangue/logo-light.webp",
+      "filename": "logo-light.webp",
+      "category": "branding/guerras-de-sangue",
+      "extension": ".webp",
+      "width": 1644,
+      "height": 656,
+      "sizeBytes": 57654,
+      "sha256": "3aeab3e7624fd524c048f84bf6c9cd489244bcd166d037ca36dcef9d8de25f72"
+    },
+    {
+      "path": "assets/branding/guerras-de-sangue/mark.webp",
+      "filename": "mark.webp",
+      "category": "branding/guerras-de-sangue",
+      "extension": ".webp",
+      "width": 1730,
+      "height": 687,
+      "sizeBytes": 1111706,
+      "sha256": "6b83d628b973dd0644157386700a70986fa28a244be041425cb786fee71e4694"
+    },
+    {
+      "path": "assets/branding/ruinas-dos-ceus/logo-dark.webp",
+      "filename": "logo-dark.webp",
+      "category": "branding/ruinas-dos-ceus",
+      "extension": ".webp",
+      "width": 1597,
+      "height": 656,
+      "sizeBytes": 48688,
+      "sha256": "26b2349221bf82cc97ce9618d936622db3e49a114c44005ccf07cd5158db1265"
+    },
+    {
+      "path": "assets/branding/ruinas-dos-ceus/logo-light.webp",
+      "filename": "logo-light.webp",
+      "category": "branding/ruinas-dos-ceus",
+      "extension": ".webp",
+      "width": 1597,
+      "height": 656,
+      "sizeBytes": 48532,
+      "sha256": "26c2e14a3a5514fb53bf071e127f6df87fa28c1531db4d010605631f54ce7d62"
+    },
+    {
+      "path": "assets/branding/ruinas-dos-ceus/mark.webp",
+      "filename": "mark.webp",
+      "category": "branding/ruinas-dos-ceus",
+      "extension": ".webp",
+      "width": 1934,
+      "height": 670,
+      "sizeBytes": 707512,
+      "sha256": "d9dbb6c9b79ffc2961eeab84f515d42020a99ee59f374a537d31aa44ce82fabb"
+    },
+    {
+      "path": "assets/shared/reference/alianca-contra-kaendar.webp",
+      "filename": "alianca-contra-kaendar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 280496,
+      "sha256": "1290602591c9002f9184ad93d67abf28aab097fb81845a280dfff001c4c7e97c"
+    },
+    {
+      "path": "assets/shared/reference/ash-sprite-01.webp",
+      "filename": "ash-sprite-01.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 160,
+      "height": 160,
+      "sizeBytes": 1570,
+      "sha256": "a9f1b56ee293ab5a929298239c144d8a496027ec63aa99be700996c8c87f6b28"
+    },
+    {
+      "path": "assets/shared/reference/ash-sprite-02.webp",
+      "filename": "ash-sprite-02.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 160,
+      "height": 160,
+      "sizeBytes": 1596,
+      "sha256": "c3df5aa22d328994a349cfcfbfdd7f1c1977d8ddc2222cd403bdfa4ebad584cc"
+    },
+    {
+      "path": "assets/shared/reference/ash-sprite-03.webp",
+      "filename": "ash-sprite-03.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 160,
+      "height": 160,
+      "sizeBytes": 1290,
+      "sha256": "598fa4a4d430c467c8e25998148ffbb59a00e4e9af5bcd18213bcec1784941fc"
+    },
+    {
+      "path": "assets/shared/reference/casa-soberana-orionus.webp",
+      "filename": "casa-soberana-orionus.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 274074,
+      "sha256": "b5cf3bf26ae481464d492284afe7dff4946c5a769bef6f93e6052eed4de70587"
+    },
+    {
+      "path": "assets/shared/reference/cla-buldar.webp",
+      "filename": "cla-buldar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 74150,
+      "sha256": "938cd33c5a2e7b2b6d1655b895718bd36c3cf4ff85e8410fe95d9fb248f50fc9"
+    },
+    {
+      "path": "assets/shared/reference/cla-cendar.webp",
+      "filename": "cla-cendar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 76078,
+      "sha256": "14748c6cc96fe837fe21e3491cbe5a7e9b0323b6cf0f661e41e1bb1e95ebe9f4"
+    },
+    {
+      "path": "assets/shared/reference/cla-glydar.webp",
+      "filename": "cla-glydar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 77632,
+      "sha256": "71b0f6dff692f0594b331996d60e8fe000810f66b373e932a557effa43f6c951"
+    },
+    {
+      "path": "assets/shared/reference/cla-polar-1o-emblema-antigo.webp",
+      "filename": "cla-polar-1o-emblema-antigo.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 59304,
+      "sha256": "8bd83ae9d3d50cf7d9b020bebe029b4b51c0c054753ab1eaace16a39a3aa04ab"
+    },
+    {
+      "path": "assets/shared/reference/cla-polar-2o-emblema-antigo.webp",
+      "filename": "cla-polar-2o-emblema-antigo.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 69542,
+      "sha256": "7751166bad52a1f94898d1c33b92864d98bf5c45045384f608470bcfdfb80f86"
+    },
+    {
+      "path": "assets/shared/reference/cla-polar-emblema-atual.webp",
+      "filename": "cla-polar-emblema-atual.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 63608,
+      "sha256": "fbdc7442de79a292820def8f394d41be6a21862f22a2b953105be2cbd0a00cda"
+    },
+    {
+      "path": "assets/shared/reference/cla-tondrar.webp",
+      "filename": "cla-tondrar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 61808,
+      "sha256": "565d67b4d3697a4893e1d07fbf0dec0c3b7ec17b65b0557ce254446e884122b6"
+    },
+    {
+      "path": "assets/shared/reference/cla-urtistar.webp",
+      "filename": "cla-urtistar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 76250,
+      "sha256": "9a07b16304c3c473b572cddfb4b4b02ffdace5013dea7c108245b2dda0fc41c0"
+    },
+    {
+      "path": "assets/shared/reference/cla-vendrar.webp",
+      "filename": "cla-vendrar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 69630,
+      "sha256": "6158dcb19b8e5f878d45e8d6354cf23e141f69b0347510c4b2dcc3f6c30e7f2a"
+    },
+    {
+      "path": "assets/shared/reference/cloud-distant-01.webp",
+      "filename": "cloud-distant-01.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 600,
+      "sizeBytes": 42964,
+      "sha256": "b9bd61252b601ffcdf8d89557c4ba3f1669cdc3303410b70a62bb6f610e04e31"
+    },
+    {
+      "path": "assets/shared/reference/cloud-distant-02.webp",
+      "filename": "cloud-distant-02.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 600,
+      "sizeBytes": 60462,
+      "sha256": "11ac2d39a7f93b464f0780cecf692e42258dc14ced1d9a0551c9db5d1c00d9a2"
+    },
+    {
+      "path": "assets/shared/reference/cloud-distant-03.webp",
+      "filename": "cloud-distant-03.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 600,
+      "sizeBytes": 48594,
+      "sha256": "60f855effc7db32ec6ca9086f80a2028b67b529d5eb2366d6cd75dd53e0de733"
+    },
+    {
+      "path": "assets/shared/reference/cloud-mid-01.webp",
+      "filename": "cloud-mid-01.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 500,
+      "sizeBytes": 46584,
+      "sha256": "12f5be441070ea46bb256f0ea074cb6c019ac77dbf84e26afa64402f1f1d840d"
+    },
+    {
+      "path": "assets/shared/reference/cloud-mid-02.webp",
+      "filename": "cloud-mid-02.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 500,
+      "sizeBytes": 43320,
+      "sha256": "8fdd0333ae6b1f7fcf698c12b255287ff47316bd37193110949900b58808afb3"
+    },
+    {
+      "path": "assets/shared/reference/cloud-mid-03.webp",
+      "filename": "cloud-mid-03.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 500,
+      "sizeBytes": 42684,
+      "sha256": "b4ad3f7b2da97e821b89d827b3e8cc76d66ed41bfe9846a8723f2625c71c2ef5"
+    },
+    {
+      "path": "assets/shared/reference/conselho-da-raiz.webp",
+      "filename": "conselho-da-raiz.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 274484,
+      "sha256": "fe8e8b3f367865dfcb911e07016925ca91054dfb4fcdf3e466977dcf92d96060"
+    },
+    {
+      "path": "assets/shared/reference/ecoantes.webp",
+      "filename": "ecoantes.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 273100,
+      "sha256": "6e93eeb4ac35eb361a45dd2e284705487cd360c8f81d0a7373935e2266721eac"
+    },
+    {
+      "path": "assets/shared/reference/ember-sprite.webp",
+      "filename": "ember-sprite.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 192,
+      "height": 192,
+      "sizeBytes": 2420,
+      "sha256": "926ab6017f817612ce36d9793831085364d87c397714ad21b21526e1effac071"
+    },
+    {
+      "path": "assets/shared/reference/eterea-contemplative.webp",
+      "filename": "eterea-contemplative.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 2400,
+      "height": 1350,
+      "sizeBytes": 619628,
+      "sha256": "f3cc2f95d958ded3c7a8377ee99335f47c713223c2639b2ebaf4d8fc87dc5170"
+    },
+    {
+      "path": "assets/shared/reference/familia-amarea.webp",
+      "filename": "familia-amarea.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 275106,
+      "sha256": "922314a0ca51c6ac2c4d6dad6fd8675a5a8ae61652bfea6e7c0d09513eda09b1"
+    },
+    {
+      "path": "assets/shared/reference/familia-rendar.webp",
+      "filename": "familia-rendar.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 276526,
+      "sha256": "9179ee7c93cc6b76f2cfe7725e1199a2066af613b4c52a7c96416e2f303eaa5e"
+    },
+    {
+      "path": "assets/shared/reference/fendelar-mark.webp",
+      "filename": "fendelar-mark.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 520,
+      "height": 520,
+      "sizeBytes": 19506,
+      "sha256": "f1aa0b9eda1c3fbe67f826252cbfeab77905ccb6295a8bd0ee4824d35da4a20f"
+    },
+    {
+      "path": "assets/shared/reference/floating-fragments.webp",
+      "filename": "floating-fragments.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 900,
+      "height": 1200,
+      "sizeBytes": 18290,
+      "sha256": "80aeb75b54ce56307a48ef0eb16a81eae7e340c71643ae51b18065fd31d709a5"
+    },
+    {
+      "path": "assets/shared/reference/homens-das-areias.webp",
+      "filename": "homens-das-areias.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 276618,
+      "sha256": "347a06ea25434e50a3fed42ad54f51cb2e20747f3f0d68c23661f17d4f138b31"
+    },
+    {
+      "path": "assets/shared/reference/hot-dust.webp",
+      "filename": "hot-dust.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 650,
+      "sizeBytes": 27576,
+      "sha256": "8d0369d1a48c66f47227c6e85ba3dc1c794b18b4c60fd6e29cff0c6eb378a333"
+    },
+    {
+      "path": "assets/shared/reference/kaendar-night.webp",
+      "filename": "kaendar-night.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 2400,
+      "height": 1350,
+      "sizeBytes": 622342,
+      "sha256": "59addd3a172c0c7aa6a2881a69bbdce0a462fe2fdf47f0c40cbaecf47c1a99b4"
+    },
+    {
+      "path": "assets/shared/reference/map-grain.webp",
+      "filename": "map-grain.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 2048,
+      "height": 2048,
+      "sizeBytes": 1436618,
+      "sha256": "5fb3d5a9f737d2d696d052f2fdd84427cdb9577023f01985039dadf52aa35c30"
+    },
+    {
+      "path": "assets/shared/reference/mapa-combinado.webp",
+      "filename": "mapa-combinado.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1800,
+      "height": 900,
+      "sizeBytes": 488270,
+      "sha256": "30a6fa6cd8b54cbb7669989baec0bef65a4092ec4b12b1f96390db1156cf525e"
+    },
+    {
+      "path": "assets/shared/reference/mapa-de-et-rea.webp",
+      "filename": "mapa-de-et-rea.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1491,
+      "height": 1055,
+      "sizeBytes": 526822,
+      "sha256": "2513859aab54edf955f3006c622eb4d05b5a1a4a5397dae813dbfcd65ef0d516"
+    },
+    {
+      "path": "assets/shared/reference/mapa-de-nad-rion-floresta-de-mirval.webp",
+      "filename": "mapa-de-nad-rion-floresta-de-mirval.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1491,
+      "height": 1055,
+      "sizeBytes": 505382,
+      "sha256": "341575d4f27493e34629f4934ef1617458b95ba2a12077dcb0acb393f901918d"
+    },
+    {
+      "path": "assets/shared/reference/metal-glint.webp",
+      "filename": "metal-glint.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1024,
+      "height": 150,
+      "sizeBytes": 2700,
+      "sha256": "4b638280fe9e2cea9fa88ccde47556e47061e135e1a178c4d97c56d1ba9e98dc"
+    },
+    {
+      "path": "assets/shared/reference/mist-near-01.webp",
+      "filename": "mist-near-01.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1920,
+      "height": 700,
+      "sizeBytes": 38218,
+      "sha256": "57daadf029a558cf90fae348c32140ace4e472372f9d1bc7884bd561723948f8"
+    },
+    {
+      "path": "assets/shared/reference/mist-near-02.webp",
+      "filename": "mist-near-02.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1920,
+      "height": 700,
+      "sizeBytes": 48650,
+      "sha256": "88e52b05db72e52e5eb41385b2fce0a4463e27d0087270ed54f6ad67924cc910"
+    },
+    {
+      "path": "assets/shared/reference/moon-glow.webp",
+      "filename": "moon-glow.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 512,
+      "height": 512,
+      "sizeBytes": 13794,
+      "sha256": "7510564c153e1177f2ecab83b967b0b88d4aad48a1f0ff753762bcb12c5bbe04"
+    },
+    {
+      "path": "assets/shared/reference/oradores-da-corrente.webp",
+      "filename": "oradores-da-corrente.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 273322,
+      "sha256": "4aa6dc5984442a0d01ccc9dc41fe88c45456c76932c13ecc55aa582de2ccbde7"
+    },
+    {
+      "path": "assets/shared/reference/origem-daryon.webp",
+      "filename": "origem-daryon.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 278306,
+      "sha256": "c0386fd7d673e264c466a7ee154dc07da47add933e1d3d4fe570d9638a5c5bbb"
+    },
+    {
+      "path": "assets/shared/reference/place-card-overlay.webp",
+      "filename": "place-card-overlay.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 56514,
+      "sha256": "c045a3287c14213d52ab89895674b54176a1998733fe5eb6a0f2f20406fd311c"
+    },
+    {
+      "path": "assets/shared/reference/place-parchment-overlay.webp",
+      "filename": "place-parchment-overlay.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 39704,
+      "sha256": "a166e2d2e600126ae14199fd9fbba8e951ba9a56990ba6ece43f388831dac183"
+    },
+    {
+      "path": "assets/shared/reference/sidebar-clan-marks.webp",
+      "filename": "sidebar-clan-marks.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 2400,
+      "sizeBytes": 49496,
+      "sha256": "48a14b843f3989568942d0f5bbf01b0bf9f1006fd2f604a2c3e5b2cf2bd0b603"
+    },
+    {
+      "path": "assets/shared/reference/sidebar-leather-map.webp",
+      "filename": "sidebar-leather-map.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 2400,
+      "sizeBytes": 766926,
+      "sha256": "f43b66c3218c68726a1e918f2cb233883b0215f2d7a78d577c5327b80c83be7a"
+    },
+    {
+      "path": "assets/shared/reference/sidebar-roots-fragments.webp",
+      "filename": "sidebar-roots-fragments.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 2400,
+      "sizeBytes": 50886,
+      "sha256": "cd18ffc92a3f6a9b614d845825b8c62245592b63552be23230c985a82be02588"
+    },
+    {
+      "path": "assets/shared/reference/sidebar-sky-stone.webp",
+      "filename": "sidebar-sky-stone.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1200,
+      "height": 2400,
+      "sizeBytes": 651710,
+      "sha256": "cd73562a966e5e0f891429973a71e9340a7b29de18738e9785b6db9cba151bd2"
+    },
+    {
+      "path": "assets/shared/reference/smoke-haze.webp",
+      "filename": "smoke-haze.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1920,
+      "height": 800,
+      "sizeBytes": 39968,
+      "sha256": "a1006ab9c37ce9e27f65cb4ea7c672514c2dfa469a0ef98ce9870aca15e2da3a"
+    },
+    {
+      "path": "assets/shared/reference/sobreviventes-de-nadirion.webp",
+      "filename": "sobreviventes-de-nadirion.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 276014,
+      "sha256": "be86aff876ca9d4ef89f4a60e333d490d06fcd658ac932d35df444368e4f61ef"
+    },
+    {
+      "path": "assets/shared/reference/spark-sprite.webp",
+      "filename": "spark-sprite.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 256,
+      "height": 96,
+      "sizeBytes": 662,
+      "sha256": "289ae87adb76fa8479ec4ee71e70be4729d78316ab6545e17ed407e0daafcb34"
+    },
+    {
+      "path": "assets/shared/reference/sun-glow.webp",
+      "filename": "sun-glow.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 512,
+      "height": 512,
+      "sizeBytes": 14626,
+      "sha256": "11171223094fbc1ae08ccddb6c6a11964ce13cebd76e12fa6e35e5b0ea47ff7f"
+    },
+    {
+      "path": "assets/shared/reference/teceloes-de-vento.webp",
+      "filename": "teceloes-de-vento.webp",
+      "category": "shared/reference",
+      "extension": ".webp",
+      "width": 1600,
+      "height": 900,
+      "sizeBytes": 269054,
+      "sha256": "e4b30a12fd4c610b3e4f6647117ed80080926fc6e5d5a6df893e3ed94b1aefc6"
     }
   ]
 }

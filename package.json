@@ -1,11 +1,13 @@
 {
   "name": "dimensoes-infinitas",
-  "version": "0.16.1",
+  "version": "0.17.0",
   "private": true,
-  "description": "Arquivo pessoal de Dimensões Infinitas — Etapa 16.1 com correções de carregamento visual, breadcrumbs, navegação de capítulos e contraste nocturno.",
+  "description": "Dimensões Infinitas — organização canónica de assets, correcções de Guerras de Sangue e navegação entre livros.",
   "scripts": {
     "validate": "node scripts/validate-content.js",
     "serve": "python3 -m http.server 8080",
-    "audit": "node scripts/audit-content.js"
+    "audit": "node scripts/audit-content.js",
+    "validate:assets": "node scripts/validate-assets.js",
+    "validate:all": "npm run validate:assets && npm run validate && npm run audit"
   }
 }

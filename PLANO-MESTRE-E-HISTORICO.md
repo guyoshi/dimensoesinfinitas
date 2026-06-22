@@ -949,11 +949,11 @@ Isso impede que nuvens, céu, brasões, brasas ou cinzas de um livro alterem o o
 
 Foram criados:
 
-- `assets/atmosphere/ruinas/sidebar-sky-stone.webp`;
-- `assets/atmosphere/guerras/sidebar-leather-map.webp`;
-- `assets/atmosphere/ruinas/eterea-contemplative.webp`;
-- `assets/atmosphere/guerras/kaendar-night.webp`;
-- `assets/clans/temp/fendelar-mark.webp`.
+- `assets/shared/reference/sidebar-sky-stone.webp`;
+- `assets/shared/reference/sidebar-leather-map.webp`;
+- `assets/shared/reference/eterea-contemplative.webp`;
+- `assets/shared/reference/kaendar-night.webp`;
+- `assets/shared/reference/fendelar-mark.webp`.
 
 Instruções completas de substituição estão em:
 
@@ -1174,9 +1174,9 @@ Foram incluídas versões WebP otimizadas dos mapas fornecidos pelo autor:
 
 - `assets/maps/ruinas-dos-ceus/Mapa de Etérea.webp`;
 - `assets/maps/ruinas-dos-ceus/Mapa de Nadírion (Floresta de Mirval).webp`;
-- `assets/maps/ruinas-dos-ceus/mapa-combinado.webp`;
-- `assets/maps/guerras-de-sangue/mapa-geral.webp`;
-- `assets/maps/guerras-de-sangue/mapa-geral.webp`, mantido como caminho de compatibilidade da página inicial.
+- `assets/books/ciclo-de-jesed/ruinas-dos-ceus/maps/map-combined.webp`;
+- `assets/books/ciclo-de-jesed/guerras-de-sangue/maps/map-jesed.webp`;
+- `assets/books/ciclo-de-jesed/guerras-de-sangue/maps/map-jesed.webp`, mantido como caminho de compatibilidade da página inicial.
 
 ### Arquivos criados
 
@@ -1663,9 +1663,9 @@ Os cartões apresentam imagem, nome, descrição curta e ligação para a ficha 
 
 Foram criados fallbacks locais seguros:
 
-- `assets/lore/temp/food-placeholder.webp`;
-- `assets/lore/temp/fauna-placeholder.webp`;
-- `assets/lore/temp/flora-placeholder.webp`.
+- `assets/books/ciclo-de-jesed/shared/lore/temp/food-placeholder.webp`;
+- `assets/books/ciclo-de-jesed/shared/lore/temp/fauna-placeholder.webp`;
+- `assets/books/ciclo-de-jesed/shared/lore/temp/flora-placeholder.webp`.
 
 ### Conteúdo aprofundado preservado
 
@@ -1674,7 +1674,7 @@ O antigo conteúdo extenso não foi apagado. Ele passou a aparecer como **Arquiv
 ### Fendelar
 
 - continuam sendo o único clã sem brasão formal;
-- `assets/clans/temp/fendelar-mark.webp` permanece apenas como marca contextual neutra;
+- `assets/shared/reference/fendelar-mark.webp` permanece apenas como marca contextual neutra;
 - nenhum símbolo heráldico novo foi criado.
 
 ### Arquivos principais criados

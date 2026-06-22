@@ -81,22 +81,22 @@
   },
   "temporaryAssets": [
     {
-      "path": "assets/atmosphere/ruinas/sidebar-sky-stone.webp",
+      "path": "assets/shared/reference/sidebar-sky-stone.webp",
       "purpose": "Textura leve de céu, rocha, fissuras e raízes do menu de Ruínas.",
       "replacement": "Substituir por WebP/SVG final mantendo o caminho ou atualizar a variável CSS documentada."
     },
     {
-      "path": "assets/atmosphere/guerras/sidebar-leather-map.webp",
+      "path": "assets/shared/reference/sidebar-leather-map.webp",
       "purpose": "Textura histórica e cartográfica do menu de Guerras.",
       "replacement": "Substituir por textura final otimizada, sem padrão repetitivo."
     },
     {
-      "path": "assets/atmosphere/ruinas/eterea-contemplative.webp",
+      "path": "assets/shared/reference/eterea-contemplative.webp",
       "purpose": "Composição atmosférica temporária do modo contemplativo de Ruínas.",
       "replacement": "Substituir por ilustração canônica de Etérea preservando o enquadramento e o caminho."
     },
     {
-      "path": "assets/atmosphere/guerras/kaendar-night.webp",
+      "path": "assets/shared/reference/kaendar-night.webp",
       "purpose": "Silhueta temporária de Kaendar à noite junto do Rio Grande.",
       "replacement": "Substituir pela imagem canônica de Kaendar noturna, sem alterar controles ou camadas atmosféricas."
     },
@@ -114,10 +114,10 @@
     "app/shared/experience/common.css",
     "app/shared/experience/common.js",
     "",
-    "assets/atmosphere/ruinas/eterea-contemplative.webp",
-    "assets/atmosphere/guerras/kaendar-night.webp",
-    "assets/atmosphere/guerras/sidebar-leather-map.webp",
-    "assets/atmosphere/ruinas/sidebar-sky-stone.webp",
+    "assets/shared/reference/eterea-contemplative.webp",
+    "assets/shared/reference/kaendar-night.webp",
+    "assets/shared/reference/sidebar-leather-map.webp",
+    "assets/shared/reference/sidebar-sky-stone.webp",
     "data/sagas/ciclo-de-jesed/audits/visual-etapa-5-5.json",
     "docs/CATALOGO-DE-IMAGENS-ATMOSFERICAS-E-SOCIAIS.md",
     "docs/screenshots/guerras-contemplative.png",

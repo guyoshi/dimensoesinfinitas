@@ -194,9 +194,10 @@ function validateMaps(){
 validateMaps();
 
 function validateStage7AssetsAndHomes(){
-  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho));
-  if(assetManifest.count!==202||(assetManifest.assets||[]).length!==202)errors.push(`Inventário atual deveria conter 202 entradas, encontradas ${(assetManifest.assets||[]).length}.`);
-  if(assetManifest.visualCount!==162)errors.push(`Inventário atual deveria conter 162 recursos visuais, encontrados ${assetManifest.visualCount}.`);
+  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho||item.path).filter(Boolean));
+  if(assetManifest.count!==(assetManifest.assets||[]).length)errors.push(`Manifesto de assets inconsistente: count=${assetManifest.count}, entradas=${(assetManifest.assets||[]).length}.`);
+  if(!(assetManifest.assets||[]).length)errors.push('Manifesto de assets vazio.');
+  if(assetManifest.schemaVersion!==2)warnings.push(`Manifesto de assets ainda usa schema ${assetManifest.schemaVersion||'legado'}; esperado 2.`);
   if(homeAudit.sourceManifest!=='data/common/assets-manifest.json')errors.push('Etapa 7: relatório não aponta para o manifesto oficial de assets.');
   if((homeAudit.unresolvedLiteralPaths||[]).length)errors.push(`Etapa 7: caminhos literais não resolvidos: ${homeAudit.unresolvedLiteralPaths.join(', ')}.`);
   if(homeAudit.idsChanged!==0)errors.push('Etapa 7: a auditoria indica alteração indevida de IDs.');
@@ -264,9 +265,9 @@ function validateStage7AssetsAndHomes(){
 function validateStage8Characters(){
   const ruinasModel=models['ruinas-dos-ceus']?.entities;
   const guerrasModel=models['guerras-de-sangue']?.entities;
-  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho));
-  const ruinasAssets=[...canonicalPaths].filter(value=>value.startsWith('assets/characters/ruinas/'));
-  const guerrasAssets=[...canonicalPaths].filter(value=>value.startsWith('assets/characters/guerras-de-sangue/'));
+  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho||item.path).filter(Boolean));
+  const ruinasAssets=[...canonicalPaths].filter(value=>value.startsWith('assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/'));
+  const guerrasAssets=[...canonicalPaths].filter(value=>value.startsWith('assets/books/ciclo-de-jesed/guerras-de-sangue/characters/'));
   const ruinasImages=new Set((ruinasModel?.characters||[]).flatMap(character=>[character.image,...(character.alternateImages||[])].filter(Boolean)));
   const guerrasImages=new Set((guerrasModel?.characters||[]).flatMap(character=>[character.image,...(character.alternateImages||[])].filter(Boolean)));
 
@@ -310,7 +311,7 @@ function validateStage8Characters(){
   if(/\|\|\s*ch\.(?:s|summary)/.test(ruinasTrajectory)||/\|\|\s*ch\.summary/.test(guerrasApp))errors.push('Etapa 8: a Trajetória ainda reutiliza resumo geral de capítulo como fallback.');
   if(!ruinasList.includes(charactersAudit['ruinas-dos-ceus'].subtitle))errors.push('Etapa 8: frase-guia de Personagens de Ruínas ausente.');
   if(!guerrasApp.includes(charactersAudit['guerras-de-sangue'].subtitle))errors.push('Etapa 8: frase-guia de Personagens de Guerras ausente.');
-  if(!guerrasImages.has('assets/characters/guerras-de-sangue/orionus-polar-2.webp'))errors.push('Etapa 8: retrato alternativo de Orionus não foi ligado.');
+  if(!guerrasImages.has('assets/books/ciclo-de-jesed/guerras-de-sangue/characters/orionus-polar-2.webp'))errors.push('Etapa 8: retrato alternativo de Orionus não foi ligado.');
   if(charactersAudit.browserTests?.runtimeExceptions!==0||charactersAudit.browserTests?.mobileNoHorizontalOverflow!==true)errors.push('Etapa 8: auditoria de navegador não confirma execução limpa e responsiva.');
   return {ruinasLinks,guerrasLinks,ruinasImages:ruinasImages.size,guerrasImages:guerrasImages.size};
 }
@@ -318,7 +319,7 @@ function validateStage8Characters(){
 
 function validateStage9SocialAndAtmosphere(){
   const requiredTypes=new Set(['family','friendship','protection','influence','conflict','rivalry','loyalty','broken']);
-  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho));
+  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho||item.path).filter(Boolean));
   const ruinasSocial=rc.RUINAS_SOCIAL;
   const guerras=gc.DI_DATA;
   const ruinasCharacters=new Set((rc.RUINAS_DATA?.characters||[]).map(character=>character.name));
@@ -529,7 +530,7 @@ function validateStages12And13(){
 function validateStages14And15(){
   if(themesGalleryAudit.stage!=='Etapas 14 e 15'||themesGalleryAudit.version!=='0.15.1')errors.push('Etapas 14–15: relatório de auditoria ausente ou com versão incorreta.');
   const requiredThemeFields=['name','slug','description','question','development','characterIds','placeIds','chapterIds','eventIds','symbols','evolution','interpretationNote','route'];
-  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho));
+  const canonicalPaths=new Set((assetManifest.assets||[]).map(item=>item.caminho||item.path).filter(Boolean));
   let themes=0,galleryItems=0,inventoryGalleryItems=0;
   for(const [bookId,model] of Object.entries(models)){
     const themeItems=model?.entities?.themes||[],gallery=model?.entities?.gallery||[];
@@ -596,7 +597,7 @@ function validateStage16(){
   const js=fs.readFileSync(path.join(root,'app/shared/visual-system/standard.js'),'utf8');
   for(const marker of ['ensurePerformanceIndicator','fallbackFor(img)','makeClickableCardsKeyboardSafe',"button.getAttribute(\'aria-pressed\') !== pressed",'MutationObserver'])if(!js.includes(marker))errors.push(`Etapa 16: recurso compartilhado ausente (${marker}).`);
   const pkg=JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'));
-  if(pkg.version!=='0.16.1')errors.push(`Etapa 16.1: package.json deveria estar em 0.16.1, encontrado ${pkg.version}.`);
+  if(pkg.version!=='0.17.0')errors.push(`Versão de limpeza técnica deveria ser 0.17.0, encontrado ${pkg.version}.`);
   const responsive=stage16Audit.responsive||{};
   if(responsive.routesTested!==78||responsive.horizontalOverflowRoutes!==0||responsive.applicationExceptions!==0)errors.push('Etapa 16: relatório principal não confirma 78 testes sem overflow e sem exceções.');
   if(!responsive.desktopNoHorizontalOverflow||!responsive.tabletNoHorizontalOverflow||!responsive.mobileNoHorizontalOverflow)errors.push('Etapa 16: algum breakpoint ainda apresenta rolagem horizontal.');
@@ -624,4 +625,4 @@ warnings.push('Os caminhos foram sincronizados ao inventario-pasta-assets.csv. E
 const summary=[`Validação Etapa 16 — ${new Date().toISOString()}`,`Guerras de Sangue: ${models['guerras-de-sangue']?.entities.chapters.length||0} capítulos, ${models['guerras-de-sangue']?.entities.places.length||0} lugares, ${placesAudit.books['guerras-de-sangue'].chapterScenes} cenas localizadas e ${gsTimeline.length} acontecimentos cronológicos.`,`Ruínas dos Céus: ${models['ruinas-dos-ceus']?.entities.chapters.length||0} capítulos, ${models['ruinas-dos-ceus']?.entities.places.length||0} lugares, ${placesAudit.books['ruinas-dos-ceus'].chapterScenes} cenas localizadas e ${rdTimeline.length} acontecimentos cronológicos.`,`Assets: ${stage7Stats.canonicalPaths} caminhos únicos no inventário; ${stage7Stats.resolvedPaths} caminhos resolvidos nos modelos carregados.`,`Páginas iniciais: 4 acessos orientadores, 5 personagens em foco e 6 lugares destacados em cada livro.`,`Personagens: ${models['ruinas-dos-ceus']?.entities.characters.length||0} em Ruínas e ${models['guerras-de-sangue']?.entities.characters.length||0} em Guerras; ${stage8Stats.ruinasLinks+stage8Stats.guerrasLinks} ligações de trajetória validadas; todas as imagens disponíveis ligadas.`,`Etapa 9: ${stage9Stats.relationships} relações enriquecidas em Ruínas, ${stage9Stats.families} famílias, ${stage9Stats.organisations} organizações e ${stage9Stats.images} imagens atmosféricas/sociais substituíveis.`,`Etapa 10: ${stage10Stats.clans} clãs, ${stage10Stats.members} personagens associados, ${stage10Stats.loreCards} cartões territoriais priorizados e ${stage10Stats.archiveSections} seções aprofundadas preservadas.`,`Etapa 11: ${stage11Stats.items} itens revisados, ${stage11Stats.citations} citações localizadas e ${stage11Stats.uncited} itens ainda não citados.`,`Etapas 12–13: ${stage13Stats.concepts} conceitos aprofundados e ${stage13Stats.mysteries} mistérios completos, com portal, relógio e contraste noturno validados.`,`Etapas 14–15: ${stage15Stats.themes} temas aprofundados, ${stage15Stats.galleryItems} registros de galeria e ${stage15Stats.inventoryGalleryItems} cartões ligados a imagens existentes no inventário recebido.`,`Etapa 16: ${stage16Stats.routes} combinações de rota e viewport em ${stage16Stats.breakpoints} tamanhos, sem overflow horizontal nem exceções da aplicação.`];
 if(warnings.length){summary.push('','AVISOS:',...warnings.map(x=>`- ${x}`));}
 if(errors.length){summary.push('','ERROS:',...errors.map(x=>`- ${x}`));console.error(summary.join('\n'));process.exit(1);}
-summary.push('','OK: Etapas 1–16 preservadas e validadas; correções de carregamento visual, breadcrumbs, capítulos e contraste concluídas no pacote 0.16.1.');console.log(summary.join('\n'));
+summary.push('','OK: Etapas 1–16 preservadas; organização canónica de assets e correções de Guerras de Sangue validadas no pacote 0.17.0.');console.log(summary.join('\n'));

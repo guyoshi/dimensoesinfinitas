@@ -1,0 +1,33 @@
+
+> dimensoes-infinitas@0.17.0 validate:all
+> npm run validate:assets && npm run validate && npm run audit
+
+
+> dimensoes-infinitas@0.17.0 validate:assets
+> node scripts/validate-assets.js
+
+Assets válidos: 215 imagens WebP, 0 referências quebradas, 0 duplicados binários.
+
+> dimensoes-infinitas@0.17.0 validate
+> node scripts/validate-content.js
+
+Validação Etapa 16 — 2026-06-22T00:26:22.659Z
+Guerras de Sangue: 29 capítulos, 23 lugares, 69 cenas localizadas e 38 acontecimentos cronológicos.
+Ruínas dos Céus: 24 capítulos, 17 lugares, 48 cenas localizadas e 30 acontecimentos cronológicos.
+Assets: 215 caminhos únicos no inventário; 147 caminhos resolvidos nos modelos carregados.
+Páginas iniciais: 4 acessos orientadores, 5 personagens em foco e 6 lugares destacados em cada livro.
+Personagens: 15 em Ruínas e 45 em Guerras; 440 ligações de trajetória validadas; todas as imagens disponíveis ligadas.
+Etapa 9: 12 relações enriquecidas em Ruínas, 4 famílias, 7 organizações e 0 imagens atmosféricas/sociais substituíveis.
+Etapa 10: 8 clãs, 45 personagens associados, 186 cartões territoriais priorizados e 578 seções aprofundadas preservadas.
+Etapa 11: 309 itens revisados, 612 citações localizadas e 168 itens ainda não citados.
+Etapas 12–13: 14 conceitos aprofundados e 10 mistérios completos, com portal, relógio e contraste noturno validados.
+Etapas 14–15: 20 temas aprofundados, 148 registros de galeria e 148 cartões ligados a imagens existentes no inventário recebido.
+Etapa 16: 78 combinações de rota e viewport em 3 tamanhos, sem overflow horizontal nem exceções da aplicação.
+
+AVISOS:
+- Os caminhos foram sincronizados ao inventario-pasta-assets.csv. Este pacote inclui apenas os binários disponíveis nesta conversa; ao usar a pasta assets completa do autor, os mesmos caminhos serão resolvidos sem renomeação.
+
+ERROS:
+- Etapa 8: ligações de trajetória de Guerras deveriam ser 293, encontradas 291.
+- Etapa 11: imagem fora do inventário recebido em ruinas-dos-ceus/fauna/jesed-fauna-raukhar (assets/books/ciclo-de-jesed/shared/lore/fauna/raukhar.webp).
+- Etapa 11: imagem fora do inventário recebido em guerras-de-sangue/fauna/jesed-fauna-raukhar (assets/books/ciclo-de-jesed/shared/lore/fauna/raukhar.webp).
