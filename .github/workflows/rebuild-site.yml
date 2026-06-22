@@ -10,6 +10,10 @@ on:
       - scripts/dedupe_assets.py
       - scripts/validate-assets.js
       - scripts/patch-parts/**
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/rebuild-trigger.txt
 
 permissions:
   contents: write
@@ -26,6 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Reconstruir pacote de correções
