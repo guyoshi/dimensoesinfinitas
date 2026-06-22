@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/rebuild-site.yml
       - scripts/migrate_assets.py
+      - scripts/migrate_assets_streaming.py
       - scripts/dedupe_assets.py
       - scripts/validate-assets.js
       - scripts/patch-parts/**
@@ -92,7 +93,7 @@ jobs:
 
       - name: Converter, renomear e reorganizar imagens
         run: |
-          python scripts/migrate_assets.py
+          python scripts/migrate_assets_streaming.py
           python scripts/dedupe_assets.py
 
       - uses: actions/setup-node@v4
