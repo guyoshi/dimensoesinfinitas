@@ -1,2 +1,2 @@
 Executar a reorganização canónica de assets e a revisão de Guerras de Sangue.
-Tentativa 8 com preview preservado caso a validação falhe.
+Tentativa 9 com auditorias e manifesto sincronizados.
