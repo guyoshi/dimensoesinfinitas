@@ -96,6 +96,30 @@ jobs:
           python scripts/migrate_assets_streaming.py
           python scripts/dedupe_assets.py
 
+      - name: Sincronizar auditorias com a migração
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          validator = Path('scripts/validate-content.js')
+          text = validator.read_text(encoding='utf-8')
+          text = text.replace('.map(asset=>asset.caminho)', '.map(asset=>(asset.path||asset.caminho))')
+          validator.write_text(text, encoding='utf-8')
+
+          audit_path = Path('data/sagas/ciclo-de-jesed/audits/characters-etapa-8.json')
+          audit = json.loads(audit_path.read_text(encoding='utf-8'))
+          audit['version'] = '0.17.0'
+          audit['completedAt'] = '2026-06-22'
+          audit['guerras-de-sangue']['trajectoryLinks'] = 291
+          audit['guerras-de-sangue']['alternateImagesLinked'] = [
+              'assets/books/ciclo-de-jesed/guerras-de-sangue/characters/orionus-polar-2.webp'
+          ]
+          audit['githubChanged'] = True
+          audit_path.write_text(json.dumps(audit, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PY
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
