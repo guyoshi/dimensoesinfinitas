@@ -1,2 +1,2 @@
 Executar a reorganização canónica de assets e a revisão de Guerras de Sangue.
-Tentativa 2 com diagnóstico detalhado.
+Tentativa 3 com checksums individuais.
