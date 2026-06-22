@@ -3,34 +3,83 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#1c232a" />
-  <meta name="description" content="Dinastia Polar — Ciclo de Jesed, Livro III. Em preparação." />
+  <meta name="theme-color" content="#0d1d2a" />
+  <meta name="description" content="Dinastia Polar — Ciclo de Jesed, Livro III. Ordem, hierarquia e o peso de uma instituição que existe há séculos." />
   <title>Dinastia Polar — Dimensões Infinitas</title>
-  <link rel="stylesheet" href="app/portal/styles.css" />
-  <style>
-    .dp-page{display:flex;flex-direction:column;align-items:center;text-align:center}
-    .dp-cover-placeholder{width:min(260px,70%);aspect-ratio:5/7;margin:0 auto 22px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#c9b987;background:linear-gradient(160deg,#27313a,#1c232a 60%,#11161b);border:1px solid rgba(201,185,135,.25);box-shadow:0 20px 50px rgba(0,0,0,.5)}
-    .dp-status-pill{display:inline-block;margin:0 0 14px;padding:6px 16px;border-radius:999px;border:1px solid rgba(201,185,135,.4);color:#c9b987;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase}
-    .dp-music{margin-top:30px;display:flex;justify-content:center}
-    .dp-palette{display:flex;justify-content:center;gap:8px;margin:18px 0 26px}
-    .dp-swatch{width:22px;height:22px;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
-  </style>
+  <link rel="stylesheet" href="app/shared/experience/common.css" />
+  <link rel="stylesheet" href="app/shared/maps/interactive-map.css" />
+  <link rel="stylesheet" href="app/shared/characters/browser.css" />
+  <link rel="stylesheet" href="app/shared/social/network.css" />
+  <link rel="stylesheet" href="app/shared/clans/presentation.css" />
+  <link rel="stylesheet" href="app/shared/themes/presentation.css" />
+  <link rel="stylesheet" href="app/shared/gallery/gallery.css" />
+  <link rel="stylesheet" href="app/shared/visual-system/standard.css" />
+  <link rel="stylesheet" href="app/sagas/ciclo-de-jesed/books/dinastia-polar/styles.css" />
+  <link rel="stylesheet" href="app/sagas/ciclo-de-jesed/books/dinastia-polar/experience/styles.css" />
+  <link rel="stylesheet" href="app/sagas/ciclo-de-jesed/books/dinastia-polar/experience/fixes.css" />
 </head>
-<body data-book="dinastia-polar">
-  <div id="stars" class="stars-layer" aria-hidden="true"></div>
-  <div class="nebula nebula-a" aria-hidden="true"></div>
-  <div class="nebula nebula-b" aria-hidden="true"></div>
-  <main class="portal-wrap dp-page">
-    <a class="back-link" href="index.html#/books">← Voltar aos livros</a>
-    <p class="kicker">Livro 3 · Ciclo de Jesed</p>
-    <div class="dp-cover-placeholder" aria-hidden="true">⛁</div>
-    <span class="dp-status-pill">Em preparação</span>
-    <h1 class="section-title">Dinastia Polar</h1>
-    <div class="dp-palette" aria-hidden="true"><span class="dp-swatch" style="background:#27313a"></span><span class="dp-swatch" style="background:#8f7544"></span><span class="dp-swatch" style="background:#c9b987"></span></div>
-    <p class="subtitle">Pedra azul-escura, ouro envelhecido, anéis concêntricos e peso institucional.</p>
-    <p class="subtitle">Esta página está reservada para o terceiro livro do Ciclo de Jesed. A capa, os capítulos e o conteúdo completo ainda estão sendo construídos — o visual definitivo virá em uma etapa futura.</p>
-    <div class="dp-music"><div id="musicDock"></div></div>
-  </main>
+<body data-theme="jesed" data-book="dinastia-polar">
+  <div id="particleLayer" class="particle-layer" aria-hidden="true"></div>
+  <div id="particleLayerFront" class="particle-layer particle-layer-front" aria-hidden="true"></div>
+  <div id="transitionVeil" class="transition-veil" aria-hidden="true"><span class="veil-mark">◆</span></div>
+  <div id="portal" class="portal-screen is-hidden"></div>
+  <div id="appShell" class="app-shell">
+    <aside id="sidebar" class="sidebar" aria-label="Navegação principal">
+      <div class="sidebar-brand">
+        <button class="brand-button" data-route="inicio" aria-label="Ir para o início do livro"><span class="brand-sigil">⌘</span><span class="brand-copy"><strong>Ciclo de Jesed</strong><small>Dinastia Polar · Livro III</small></span></button>
+        <button id="sidebarToggle" class="icon-button sidebar-toggle" aria-label="Encolher painel lateral" title="Encolher painel lateral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      </div>
+      <nav id="sidebarNav" class="sidebar-nav"></nav>
+      <div class="sidebar-footer"><button class="nav-item compact-only" data-action="open-settings" title="Configurações"><span class="nav-icon" data-icon="settings"></span><span class="nav-label">Configurações</span></button><a class="nav-item exit-nav-link" href="index.html#/books" title="Trocar de livro"><span class="nav-icon">←</span><span class="nav-label">Dimensões Infinitas</span></a><div class="status-stamp"><span class="status-dot"></span><span class="status-copy">Em preparação</span></div></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-main">
+          <button id="mobileMenu" class="icon-button mobile-only" aria-label="Abrir menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+          <div class="topbar-actions">
+            <button id="sagaSelector" class="selector-button" aria-haspopup="dialog"><span class="selector-icon" data-icon="compass"></span><span>Ciclo de Jesed</span><span class="chevron">⌄</span></button>
+            <button id="bookLens" class="selector-button book-lens" aria-haspopup="dialog"><span class="selector-icon" data-icon="fortress"></span><span>Dinastia Polar</span><span class="chevron">⌄</span></button>
+            <button id="searchButton" class="search-trigger" aria-label="Pesquisar"><span data-icon="search"></span><span class="search-label">Pesquisar</span><kbd>Ctrl K</kbd></button>
+            <div class="utility-controls">
+              <span class="performance-toggle-wrap"><button id="performanceToggle" class="icon-button" aria-label="Modo desempenho desactivado" title="Modo desempenho desactivado" aria-pressed="false"><span data-icon="gauge"></span></button><span class="performance-state-dot" aria-hidden="true"></span></span>
+              <div id="musicDock" class="music-dock"></div>
+              <button id="settingsButton" class="icon-button" aria-label="Abrir configurações" title="Configurações"><span data-icon="settings"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="topbar-path"><div id="breadcrumbs" class="breadcrumbs"></div></div>
+      </header>
+      <main id="mainContent" class="main-content" tabindex="-1"></main>
+    </div>
+  </div>
+  <div id="searchModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-search"></div><section class="modal-panel search-modal-panel" role="dialog" aria-modal="true" aria-labelledby="searchTitle"><div class="search-box-large"><span data-icon="search"></span><input id="searchInput" type="search" autocomplete="off" placeholder="Pesquisar nome, título, alcunha ou categoria…" /><kbd>Esc</kbd></div><div class="search-mode-row"><button class="filter-chip active" data-search-mode="titles">Títulos e nomes</button><button class="filter-chip" data-search-mode="deep">Procurar em descrições</button></div><div id="searchResults" class="search-results"></div></section></div>
+  <div id="settingsDrawer" class="drawer" aria-hidden="true"><div class="drawer-backdrop" data-action="close-settings"></div><aside class="drawer-panel settings-panel" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="drawer-header"><div><p class="eyebrow">Preferências locais</p><h2 id="settingsTitle">Configurações visuais</h2></div><button class="icon-button" data-action="close-settings" aria-label="Fechar configurações"><span data-icon="close"></span></button></div><div id="settingsContent" class="settings-content"></div></aside></div>
+  <div id="selectorModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-selector"></div><section class="modal-panel selector-modal-panel" role="dialog" aria-modal="true"><div id="selectorContent"></div></section></div>
+  <div id="creditsModal" class="modal" aria-hidden="true"><div class="modal-backdrop" data-action="close-credits"></div><section class="modal-panel credits-modal-panel" role="dialog" aria-modal="true" aria-labelledby="creditsTitle"><div class="section-heading"><div><p class="eyebrow">Dinastia Polar</p><h2 id="creditsTitle">Créditos</h2></div><button class="icon-button" data-action="close-credits" aria-label="Fechar créditos"><span data-icon="close"></span></button></div><div class="credits-body"><p>Ciclo de Jesed — Livro III, ainda em preparação.</p><p>Autoria, mundo e texto: Gui.</p><p>Estrutura do site partilhada com Ruínas dos Céus e Guerras de Sangue, dentro do projecto Dimensões Infinitas.</p></div></section></div>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/runtime.js"></script>
+  <script src="data/common/schema.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/book.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/chapters.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/characters.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/dynasties.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/timeline.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/relationships.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/places.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/mysteries.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/themes.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/fauna.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/flora.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/foods.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/concepts.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/gallery.js"></script>
+  <script src="data/sagas/ciclo-de-jesed/books/dinastia-polar/index.js"></script>
+  <script src="app/shared/maps/interactive-map.js"></script>
+  <script src="app/shared/characters/browser.js"></script>
+  <script src="app/shared/gallery/gallery.js"></script>
+  <script src="app/sagas/ciclo-de-jesed/books/dinastia-polar/app.js"></script>
   <script src="app/shared/book-music/loader.js"></script>
+  <script src="app/shared/experience/common.js"></script>
+  <script src="app/sagas/ciclo-de-jesed/books/dinastia-polar/experience/experience.js"></script>
+  <script src="app/shared/visual-system/standard.js"></script>
 </body>
 </html>

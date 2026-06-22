@@ -1,0 +1,92 @@
+/* Dinastia Polar — atmosfera (poeira, sombras lentas, luzes distantes, fumo, anéis) */
+body[data-book="dinastia-polar"]{--dp-effect-opacity:.92}
+
+#dpDustCanvas,#dpDustCanvasFront{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:var(--dp-effect-opacity)}
+#dpDustCanvas{z-index:2}
+#dpDustCanvasFront{z-index:40}
+body[data-book="dinastia-polar"] .particle-layer{display:none!important}
+
+/* Sombras lentas sobre a pedra: um único gradiente que se desloca muito devagar. */
+body[data-book="dinastia-polar"]::before{
+  content:"";position:fixed;inset:-10%;z-index:1;pointer-events:none;
+  background:radial-gradient(46% 38% at 20% 18%, rgba(0,0,0,.32), transparent 60%),
+             radial-gradient(50% 42% at 82% 78%, rgba(0,0,0,.26), transparent 62%);
+  opacity:calc(.6 * var(--dp-effect-opacity));
+  animation:dpShadowDrift 90s ease-in-out infinite alternate;
+}
+body[data-book="dinastia-polar"].dp-no-shadow-drift::before{display:none}
+@keyframes dpShadowDrift{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(4%,3%)}
+  100%{transform:translate(-3%,-2%)}
+}
+
+/* Luzes distantes de Kaeliran: pontos quentes que acendem e apagam devagar. */
+#dpDistantLights{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+#dpDistantLights span{
+  position:absolute;width:var(--dp-light-size,2px);height:var(--dp-light-size,2px);
+  border-radius:50%;background:#e7c98a;
+  box-shadow:0 0 6px 1px rgba(231,201,138,.6);
+  opacity:0;
+  animation:dpLightFlicker var(--dp-light-duration,9s) ease-in-out infinite;
+  animation-delay:var(--dp-light-delay,0s);
+}
+@keyframes dpLightFlicker{0%,100%{opacity:0}8%{opacity:.05}45%{opacity:.7}55%{opacity:.65}92%{opacity:.05}}
+
+/* Fumo / névoa discreta de lamparinas e braseiros. */
+#dpSmoke{position:fixed;inset:auto 0 0 0;height:38vh;z-index:1;pointer-events:none;opacity:.16;overflow:hidden}
+#dpSmoke::before,#dpSmoke::after{
+  content:"";position:absolute;width:60vw;height:100%;left:-65vw;
+  background:radial-gradient(ellipse at center, rgba(169,176,173,.22), transparent 72%);
+  filter:blur(22px);animation:dpSmokeDrift 130s linear infinite;
+}
+#dpSmoke::after{top:10%;animation-duration:171s;animation-delay:-60s;opacity:.7}
+@keyframes dpSmokeDrift{to{transform:translateX(180vw)}}
+
+/* Anéis decorativos: deslocam-se ligeiramente ao abrir uma página. */
+.dp-rings circle{transform-origin:center}
+.page-enter .dp-rings{animation:dpRingDrift 1.3s cubic-bezier(.22,.7,.2,1) both}
+body.dp-no-ring-motion .page-enter .dp-rings{animation:none}
+@keyframes dpRingDrift{
+  from{transform:translate(6px,-4px) scale(1.015);opacity:0}
+  to{transform:translate(0,0) scale(1);opacity:1}
+}
+
+/* Reflexos automáticos sobre inscrições douradas (logótipo e títulos). */
+.dp-home-logo,.dp-home-title,.page-header h1{position:relative}
+body:not(.dp-no-glints) .dp-home-logo::after,
+body:not(.dp-no-glints) .dp-home-title::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg,transparent 40%,rgba(255,255,255,.22) 50%,transparent 60%);
+  background-size:220% 100%;background-position:140% 0;
+  animation:dpAutoGlint 11s ease-in-out infinite;
+  mix-blend-mode:screen;pointer-events:none;
+}
+@keyframes dpAutoGlint{0%,72%{background-position:140% 0}88%{background-position:-40% 0}100%{background-position:-40% 0}}
+
+/* Modo contemplativo. */
+.dp-contemplative{background:#0a0705}
+.dp-contemplative .contemplative-scene{background:radial-gradient(120% 90% at 50% 20%, #251b12 0%, #0b0805 60%, #060402 100%)}
+.dp-contemplative-rings{position:absolute;inset:0;display:grid;place-items:center;opacity:.6}
+.dp-contemplative-rings svg{width:min(90vw,900px);height:auto}
+.dp-contemplative canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dp-contemplative .contemplative-caption{color:var(--dp-ivory,#ddd6c5)}
+
+/* Modo Desempenho: tudo estático, ouro como cor sólida, sem brilho. */
+.performance-mode #dpDustCanvas,
+.performance-mode #dpDustCanvasFront,
+.performance-mode #dpDistantLights,
+.performance-mode #dpSmoke,
+.no-particles #dpDustCanvas,
+.no-particles #dpDustCanvasFront{display:none!important}
+.performance-mode .dp-home-logo::after,
+.performance-mode .dp-home-title::after{display:none}
+.performance-mode .dp-rings{opacity:.18}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-book="dinastia-polar"]::before{animation:none}
+  #dpDistantLights span{animation:none;opacity:.3}
+  #dpSmoke::before,#dpSmoke::after{animation:none}
+  .page-enter .dp-rings{animation:none}
+  .dp-home-logo::after,.dp-home-title::after{animation:none}
+}

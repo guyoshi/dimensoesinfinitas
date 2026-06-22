@@ -14,7 +14,7 @@ window.BOOK_MUSIC_CONFIG = Object.freeze({
   "dinastia-polar": {
     title: "Dinastia Polar",
     files: [
-      "assets/books/ciclo-de-jesed/dinastia-polar/cover.mp3"
+      "assets/books/ciclo-de-jesed/dinastia-polar/audio.mp3"
     ]
   }
 });

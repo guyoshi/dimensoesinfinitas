@@ -35,7 +35,7 @@ body[data-book="guerras-de-sangue"] a.primary-button,body[data-book="guerras-de-
 @media(max-width:760px){.character-hero{grid-template-columns:1fr}.character-portrait{min-height:260px}}
 .book-detail-cover{align-self:start;max-width:390px;margin-inline:auto}
 .book-detail-cover img{display:block;width:100%;max-height:600px;object-fit:contain;border-radius:18px}
-body[data-book="guerras-de-sangue"] .hero-map-card>img{width:100%;height:clamp(360px,48vw,650px);object-fit:contain;background:var(--di-surface-strong,#2b2118)}
+body[data-book="guerras-de-sangue"] .hero-map-card>img{width:100%;height:100%;object-fit:cover;background:var(--di-surface-strong,#2b2118)}
 .hero-logo{max-width:min(560px,90%);max-height:130px;object-fit:contain}
 
 /* Estante e selector: imagem real, link real e texto legível. */
@@ -82,7 +82,7 @@ body[data-book="guerras-de-sangue"] .selector-modal-panel{width:min(920px,calc(1
 /* Linha do tempo agrupada e compacta. */
 .timeline-phases{display:grid;gap:20px}.timeline-phase{border:1px solid rgba(222,190,132,.22);border-radius:22px;background:rgba(27,20,16,.88);overflow:hidden}
 .timeline-phase>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;padding:20px 24px;background:linear-gradient(90deg,rgba(151,104,65,.2),transparent)}
-.timeline-phase>summary::-webkit-details-marker{display:none}.timeline-phase>summary span{display:grid;gap:3px}.timeline-phase>summary small{color:#cda977;text-transform:uppercase;letter-spacing:.08em}.timeline-phase>summary strong{font-size:1.35rem;color:#fff}.timeline-phase>summary em{font-style:normal;color:#cbbba7}
+.timeline-phase>summary::-webkit-details-marker{display:none}.timeline-phase>summary span{display:grid;gap:3px}.timeline-phase>summary small{color:#d98f7e;text-transform:uppercase;letter-spacing:.08em}.timeline-phase>summary strong{font-size:1.35rem;color:#fff}.timeline-phase>summary em{font-style:normal;color:#cbbba7}
 .timeline-phase .timeline-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:16px;padding:18px}
 .timeline-entry-card{min-width:0;margin:0;padding:13px 16px;border-radius:15px;background:rgba(83,58,42,.88);color:#f1e4cf;border:1px solid rgba(201,164,101,.35);box-shadow:none;backdrop-filter:blur(3px)}
 .timeline-entry-card h3{color:#f3e4cc;margin:.3rem 0;font-size:1.02rem}.timeline-entry-card>p{color:#d3bd9f;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.45}
@@ -151,7 +151,7 @@ body[data-book="guerras-de-sangue"] .character-view-button[aria-pressed="true"]{
 /* Configurações visuais / desempenho: a gaveta estava sem qualquer estilo. */
 .settings-content{display:grid;gap:4px}
 .settings-group{margin-bottom:6px}
-.settings-group h3{margin:0 0 12px;font-size:.96rem;color:#f2dfb8}
+.settings-group h3{margin:0 0 12px;font-size:.96rem;color:#e7ab9e}
 .preset-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:4px}
 .preset-button{min-height:40px;padding:8px 10px;border-radius:11px;border:1px solid rgba(201,164,101,.28);background:rgba(255,255,255,.035);color:#eadcc2;font-size:.82rem;font-weight:700;cursor:pointer;transition:.18s ease}
 .preset-button:hover{background:rgba(232,204,151,.1);border-color:rgba(201,164,101,.46)}
@@ -159,7 +159,7 @@ body[data-book="guerras-de-sangue"] .character-view-button[aria-pressed="true"]{
 .setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 0;border-bottom:1px solid rgba(201,164,101,.16)}
 .settings-group .setting-row:last-child{border-bottom:0}
 .setting-copy{min-width:0}
-.setting-copy strong{display:block;color:#f0dfb8;font-size:.88rem}
+.setting-copy strong{display:block;color:#e7ab9e;font-size:.88rem}
 .setting-copy small{display:block;margin-top:3px;color:#bfae93;line-height:1.4}
 .switch{flex:none;width:42px;height:24px;border-radius:999px;border:1px solid rgba(201,164,101,.4);background:rgba(255,255,255,.07);position:relative;cursor:pointer}
 .switch::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#cbb893;transition:.18s ease}

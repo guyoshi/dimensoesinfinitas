@@ -2,8 +2,8 @@
   const X=window.DIExperience;if(!X)return;
   const P='di-ruinas-';
   const defaults={
-    'distant-clouds':true,'mid-clouds':true,'near-mist':true,'fragments':true,'menu-motion':true,'sky-cycle':true,'distant-elements':true,'parallax':true,'wind-particles':true,
-    'cloud-density':62,'motion-intensity':45,'effect-opacity':72
+    'distant-clouds':true,'mid-clouds':true,'near-mist':true,'cloud-front':true,'fragments':true,'menu-motion':true,'sky-cycle':true,'distant-elements':true,'parallax':true,'wind-particles':true,
+    'cloud-density':86,'motion-intensity':45,'effect-opacity':92
   };
   const getBool=key=>X.bool(P+key,defaults[key]);
   const getNum=(key,min=0,max=100)=>X.num(P+key,defaults[key],min,max);
@@ -19,14 +19,15 @@
   atmosphere.innerHTML='<div class="ruinas-stars"></div><div class="ruinas-celestial ruinas-sun"></div><div class="ruinas-celestial ruinas-moon"></div><div class="ruinas-distant-elements"></div>';
   document.body.prepend(atmosphere);
   const cloudHost=document.getElementById('clouds');
+  const cloudHostFront=document.getElementById('cloudsFront');
   let rebuilding=false;
   function seeded(index,offset=0){const x=Math.sin((index+1)*9301+offset*49297)*233280;return x-Math.floor(x)}
   function cloudHtml(layer,count,baseWidth,seedOffset){
     let html=`<div class="cloud-layer cloud-layer-${layer}">`;
     for(let i=0;i<count;i++){
       const r=seeded(i,seedOffset),r2=seeded(i,seedOffset+2),r3=seeded(i,seedOffset+5);
-      const w=baseWidth*(.72+r*.68),top=(layer==='near'?8:layer==='middle'?10:28)+r2*(layer==='distant'?38:52);
-      const duration=(layer==='distant'?145:layer==='middle'?92:54)*(.78+r3*.62),opacity=(layer==='distant'?.23:layer==='middle'?.48:.20)*(.75+r2*.4);
+      const w=baseWidth*(.78+r*.72),top=(layer==='near'?8:layer==='middle'?10:24)+r2*(layer==='distant'?40:52);
+      const duration=(layer==='distant'?135:layer==='middle'?84:50)*(.78+r3*.62),opacity=(layer==='distant'?.4:layer==='middle'?.66:.34)*(.82+r2*.36);
       html+=`<div class="natural-cloud natural-cloud-${layer}" style="--top:${top}%;--w:${w}px;--duration:${duration}s;--delay:${-r*duration}s;--opacity:${opacity};--scale:${.82+r2*.42};--rise:${-10+r3*22}px"><span class="cloud-body"></span></div>`;
     }
     return html+'</div>';
@@ -36,13 +37,20 @@
     const performance=document.body.classList.contains('performance-mode');
     const density=getNum('cloud-density');
     let factor=density/60;if(X.weakDevice)factor*=.72;if(X.reduced)factor*=.45;
-    let html='';
-    if(!performance&&document.body.classList.contains('no-particles')===false){
-      if(getBool('distant-clouds'))html+=cloudHtml('distant',Math.max(1,Math.round(4*factor)),520,1);
-      if(getBool('mid-clouds'))html+=cloudHtml('middle',Math.max(1,Math.round(6*factor)),340,11);
-      if(getBool('near-mist')&&!X.reduced)html+=cloudHtml('near',Math.max(1,Math.round(2*factor)),650,21);
+    let html='',frontHtml='';
+    const allowed=!performance&&document.body.classList.contains('no-particles')===false;
+    if(allowed){
+      if(getBool('distant-clouds'))html+=cloudHtml('distant',Math.max(2,Math.round(6*factor)),560,1);
+      if(getBool('mid-clouds'))html+=cloudHtml('middle',Math.max(2,Math.round(8*factor)),370,11);
+      if(getBool('near-mist')&&!X.reduced)html+=cloudHtml('near',Math.max(1,Math.round(3*factor)),680,21);
+      if(getBool('cloud-front')&&cloudHostFront&&!X.reduced){
+        frontHtml+=cloudHtml('near',Math.max(1,Math.round(2*factor)),760,31);
+        frontHtml+=cloudHtml('middle',Math.max(1,Math.round(2*factor)),420,41);
+      }
     }
-    cloudHost.innerHTML=html;requestAnimationFrame(()=>{rebuilding=false});
+    cloudHost.innerHTML=html;
+    if(cloudHostFront)cloudHostFront.innerHTML=frontHtml;
+    requestAnimationFrame(()=>{rebuilding=false});
   }
   if(cloudHost){new MutationObserver(()=>{if(!rebuilding&&!cloudHost.querySelector('.cloud-layer'))buildClouds()}).observe(cloudHost,{childList:true});}
 
@@ -133,14 +141,14 @@
   const settingsHost=document.getElementById('settingsContent');
   function injectSettings(){
     if(!settingsHost||settingsHost.querySelector('[data-ruinas-experience-settings]'))return;
-    settingsHost.insertAdjacentHTML('beforeend',`<section class="experience-settings-section" data-ruinas-experience-settings><h3>Atmosfera de Ruínas dos Céus</h3><p class="experience-settings-note">Controles específicos deste livro. Alterá-los não modifica Guerras de Sangue.</p>${X.makeToggle({key:'distant-clouds',prefix:P,label:'Nuvens distantes',description:'Massas lentas próximas do horizonte.',value:getBool('distant-clouds')})}${X.makeToggle({key:'mid-clouds',prefix:P,label:'Nuvens intermédias',description:'Camada principal com luz e sombra.',value:getBool('mid-clouds')})}${X.makeToggle({key:'near-mist',prefix:P,label:'Névoa próxima',description:'Névoa frontal muito transparente.',value:getBool('near-mist')})}${X.makeToggle({key:'fragments',prefix:P,label:'Fragmentos suspensos',description:'Lascas e fissuras decorativas do menu.',value:getBool('fragments')})}${X.makeToggle({key:'menu-motion',prefix:P,label:'Movimento do menu',description:'Separação quase imperceptível dos fragmentos.',value:getBool('menu-motion')})}${X.makeToggle({key:'sky-cycle',prefix:P,label:'Ciclo do céu',description:'Iluminação automática de amanhecer a noite.',value:getBool('sky-cycle')})}${X.makeToggle({key:'distant-elements',prefix:P,label:'Elementos distantes',description:'Nuaris e vintela quase imperceptíveis.',value:getBool('distant-elements')})}${X.makeToggle({key:'parallax',prefix:P,label:'Parallax de Etérea',description:'Pequena profundidade em dispositivos adequados.',value:getBool('parallax')})}${X.makeRange({key:'cloud-density',prefix:P,label:'Densidade de nuvens',description:'Limite rígido e adaptado ao dispositivo.',value:getNum('cloud-density'),min:15,max:100})}${X.makeRange({key:'motion-intensity',prefix:P,label:'Intensidade do movimento',description:'Amplitude máxima dos movimentos atmosféricos.',value:getNum('motion-intensity'),min:0,max:100})}${X.makeRange({key:'effect-opacity',prefix:P,label:'Opacidade dos efeitos',description:'Visibilidade geral da atmosfera.',value:getNum('effect-opacity'),min:20,max:100})}</section>`);
+    settingsHost.insertAdjacentHTML('beforeend',`<section class="experience-settings-section" data-ruinas-experience-settings><h3>Atmosfera de Ruínas dos Céus</h3><p class="experience-settings-note">Controles específicos deste livro. Alterá-los não modifica Guerras de Sangue.</p>${X.makeToggle({key:'distant-clouds',prefix:P,label:'Nuvens distantes',description:'Massas lentas próximas do horizonte.',value:getBool('distant-clouds')})}${X.makeToggle({key:'mid-clouds',prefix:P,label:'Nuvens intermédias',description:'Camada principal com luz e sombra.',value:getBool('mid-clouds')})}${X.makeToggle({key:'near-mist',prefix:P,label:'Névoa próxima',description:'Névoa frontal muito transparente.',value:getBool('near-mist')})}${X.makeToggle({key:'cloud-front',prefix:P,label:'Nuvens à frente',description:'Permite que parte das nuvens passe por cima do conteúdo, como se estivesse imerso nelas.',value:getBool('cloud-front')})}${X.makeToggle({key:'fragments',prefix:P,label:'Fragmentos suspensos',description:'Lascas e fissuras decorativas do menu.',value:getBool('fragments')})}${X.makeToggle({key:'menu-motion',prefix:P,label:'Movimento do menu',description:'Separação quase imperceptível dos fragmentos.',value:getBool('menu-motion')})}${X.makeToggle({key:'sky-cycle',prefix:P,label:'Ciclo do céu',description:'Iluminação automática de amanhecer a noite.',value:getBool('sky-cycle')})}${X.makeToggle({key:'distant-elements',prefix:P,label:'Elementos distantes',description:'Nuaris e vintela quase imperceptíveis.',value:getBool('distant-elements')})}${X.makeToggle({key:'parallax',prefix:P,label:'Parallax de Etérea',description:'Pequena profundidade em dispositivos adequados.',value:getBool('parallax')})}${X.makeRange({key:'cloud-density',prefix:P,label:'Densidade de nuvens',description:'Limite rígido e adaptado ao dispositivo.',value:getNum('cloud-density'),min:15,max:100})}${X.makeRange({key:'motion-intensity',prefix:P,label:'Intensidade do movimento',description:'Amplitude máxima dos movimentos atmosféricos.',value:getNum('motion-intensity'),min:0,max:100})}${X.makeRange({key:'effect-opacity',prefix:P,label:'Opacidade dos efeitos',description:'Visibilidade geral da atmosfera.',value:getNum('effect-opacity'),min:20,max:100})}</section>`);
   }
   if(settingsHost){X.attachSettings(settingsHost,()=>{X.storage.set(P+'customized','1');applyVisualSettings();setTimeout(injectSettings)});new MutationObserver(injectSettings).observe(settingsHost,{childList:true});}
 
   const profileValues={
-    full:{'distant-clouds':1,'mid-clouds':1,'near-mist':1,'fragments':1,'menu-motion':1,'sky-cycle':1,'distant-elements':1,'parallax':1,'cloud-density':82,'motion-intensity':58,'effect-opacity':82},
-    normal:{'distant-clouds':1,'mid-clouds':1,'near-mist':0,'fragments':1,'menu-motion':1,'sky-cycle':1,'distant-elements':1,'parallax':0,'cloud-density':52,'motion-intensity':30,'effect-opacity':68},
-    performance:{'distant-clouds':0,'mid-clouds':0,'near-mist':0,'fragments':1,'menu-motion':0,'sky-cycle':0,'distant-elements':0,'parallax':0,'cloud-density':15,'motion-intensity':0,'effect-opacity':38}
+    full:{'distant-clouds':1,'mid-clouds':1,'near-mist':1,'cloud-front':1,'fragments':1,'menu-motion':1,'sky-cycle':1,'distant-elements':1,'parallax':1,'cloud-density':100,'motion-intensity':58,'effect-opacity':100},
+    normal:{'distant-clouds':1,'mid-clouds':1,'near-mist':1,'cloud-front':1,'fragments':1,'menu-motion':1,'sky-cycle':1,'distant-elements':1,'parallax':0,'cloud-density':86,'motion-intensity':45,'effect-opacity':92},
+    performance:{'distant-clouds':0,'mid-clouds':0,'near-mist':0,'cloud-front':0,'fragments':1,'menu-motion':0,'sky-cycle':0,'distant-elements':0,'parallax':0,'cloud-density':15,'motion-intensity':0,'effect-opacity':38}
   };
   function applyProfile(name){const values=profileValues[name];if(!values)return;Object.entries(values).forEach(([k,v])=>X.storage.set(P+k,v));X.storage.set(P+'customized','0');setTimeout(applyVisualSettings,50)}
   document.addEventListener('click',e=>{const p=e.target.closest('[data-bpreset]')?.dataset.bpreset;if(p)applyProfile(p);if(e.target.closest('#perfToggle'))setTimeout(()=>X.toast(document.body.classList.contains('performance-mode')?'Modo desempenho ativado':'Modo equilibrado ativado'),70)});

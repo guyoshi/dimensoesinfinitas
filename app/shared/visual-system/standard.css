@@ -49,18 +49,36 @@ body[data-book="ruinas-dos-ceus"]{
 }
 
 body[data-book="guerras-de-sangue"]{
-  --di-accent:#9f493b;
-  --di-accent-strong:#6f2f27;
-  --di-accent-soft:#473226;
+  --di-accent:#b5453a;
+  --di-accent-strong:#7a2620;
+  --di-accent-soft:#3a1a16;
   --di-text:#e8dcc4;
-  --di-muted:#b9a990;
-  --di-heading:#f2dfb8;
+  --di-muted:#b9a18f;
+  --di-heading:#e7ab9e;
   --di-surface:rgba(38,29,22,.94);
   --di-surface-strong:#2b2118;
   --di-surface-soft:rgba(255,244,218,.055);
-  --di-border:rgba(201,164,101,.24);
-  --di-border-strong:rgba(201,164,101,.46);
-  --di-on-accent:#fff8ec;
+  --di-border:rgba(181,69,58,.3);
+  --di-border-strong:rgba(199,90,74,.55);
+  --di-on-accent:#fff2ec;
+  --di-sidebar-width:260px;
+  --di-sidebar-compact:78px;
+  color-scheme:dark;
+}
+
+body[data-book="dinastia-polar"]{
+  --di-accent:#dba857;
+  --di-accent-strong:#a8722e;
+  --di-accent-soft:#2a1c0f;
+  --di-text:#e8dcc3;
+  --di-muted:#b8a98c;
+  --di-heading:#f0dba8;
+  --di-surface:rgba(26,19,12,.94);
+  --di-surface-strong:#1a130c;
+  --di-surface-soft:rgba(232,220,195,.05);
+  --di-border:rgba(180,127,51,.28);
+  --di-border-strong:rgba(221,174,92,.5);
+  --di-on-accent:#160f08;
   --di-sidebar-width:260px;
   --di-sidebar-compact:78px;
   color-scheme:dark;
@@ -305,7 +323,7 @@ body[data-book] .mini-icon img{width:100%;height:100%;object-fit:cover}
 
 /* Heróis e páginas iniciais com peso equivalente. */
 body[data-book] .hero-map-card,body[data-book] .home-guide-hero{
-  position:relative;min-height:clamp(390px,54vh,570px);margin-top:20px;overflow:hidden;
+  position:relative;aspect-ratio:1/1;width:100%;max-height:90vh;margin-top:20px;overflow:hidden;
   border:1px solid var(--di-border-strong);border-radius:var(--di-radius-xl);box-shadow:var(--di-shadow-panel);isolation:isolate;
 }
 body[data-book] .hero-map-card>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -447,7 +465,7 @@ body.performance-mode[data-book="guerras-de-sangue"] #warParticleFront{display:n
   body[data-book] .selector-button>span:not(.selector-icon){display:none}
   body[data-book] .utility-controls{margin-left:auto;gap:5px}
   body[data-book] .music-dock{max-width:42px;overflow:hidden}
-  body[data-book] .hero-map-card,body[data-book] .home-guide-hero{min-height:410px;border-radius:18px}
+  body[data-book] .hero-map-card,body[data-book] .home-guide-hero{border-radius:18px}
   body[data-book] .hero-map-content{padding:22px 16px}
   body[data-book] .hero-logo{width:min(92%,360px)}
   body[data-book] .hero-actions{width:100%;display:grid;grid-template-columns:1fr;gap:8px}

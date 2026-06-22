@@ -96,7 +96,7 @@ window.PORTAL_DATA = {
         "#8f7544",
         "#c9b987"
       ],
-      "cover": null
+      "cover": "assets/books/ciclo-de-jesed/dinastia-polar/cover.png"
     },
     {
       "id": "herdeiros-das-cinzas",
