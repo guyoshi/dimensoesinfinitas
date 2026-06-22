@@ -1,2 +1,2 @@
 Executar a reorganização canónica de assets e a revisão de Guerras de Sangue.
-Tentativa 7 com conversão em fluxo e uso reduzido de memória.
+Tentativa 8 com preview preservado caso a validação falhe.
