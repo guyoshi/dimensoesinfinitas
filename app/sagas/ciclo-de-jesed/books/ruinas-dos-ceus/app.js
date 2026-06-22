@@ -1,6 +1,6 @@
 (()=>{
   const R=window.RS,{st,$,nav,err}=R,P=R.pages,BOOK_ID='ruinas-dos-ceus';
-  function render(){
+  function render(preserveScroll){
     const requested=location.hash.replace(/^#\/?/,'')||'inicio';
     const resolved=window.JESED_COMMON?.resolveLegacyRoute(requested,BOOK_ID)||requested;
     if(resolved!==requested) history.replaceState(null,'',`#/${resolved}`);
@@ -34,7 +34,7 @@
     if(base==='galeria') requestAnimationFrame(()=>window.DI_GALLERY?.mount($('#main')));
     if(base==='linha'&&!id){
       requestAnimationFrame(()=>document.querySelector('.rdc-timeline-card.selected')?.scrollIntoView({block:'center',behavior:(settings&&settings.motion)?'smooth':'auto'}));
-    }else{
+    }else if(!preserveScroll){
       scrollTo({top:0,behavior:(settings&&settings.motion)?'smooth':'auto'});
     }
   }

@@ -26,7 +26,7 @@ const charFiles={'Jokara Amaréa':'jokara','Nestira Amaréa':'nestira','Mirel Am
 const charImage=name=>`assets/books/ciclo-de-jesed/ruinas-dos-ceus/characters/${charFiles[name]||S(name)}.webp`;
 const placeImage=name=>`assets/books/ciclo-de-jesed/ruinas-dos-ceus/places/${S(name)}.webp`;
 const initials=name=>String(name).split(' ').map(x=>x[0]).filter(Boolean).slice(0,2).join('');
-const media=(src,alt,fallback,cls='')=>`<div class="${cls}"><img src="${E(src)}" alt="${E(alt)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><b class="media-fallback" hidden>${E(fallback)}</b></div>`;
+const media=(src,alt,fallback,cls='',extra='')=>`<div class="${cls}"${extra}><img src="${E(src)}" alt="${E(alt)}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><b class="media-fallback" hidden>${E(fallback)}</b></div>`;
 const st={route:'',tab:'geral',q:'',sort:'alpha',unused:false,mapPhase:'eterea'},H=(k,t,s='',x='')=>`<div class="head"><div><p class="eyebrow">${E(k)}</p><h1>${E(t)}</h1><p>${E(s)}</p></div>${x}</div>`,go=r=>location.hash='#/'+r,find=(a,id)=>a.find(x=>S(x.n)===id||x.n===id),err=()=>'<div class="empty"><h2>Página não encontrada</h2></div>';
 function crumbSegments(){
   const [b,id]=st.route.split('/');

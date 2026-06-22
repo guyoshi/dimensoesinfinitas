@@ -3,12 +3,14 @@ function synopsisHtml(value){return String(value||'').split(/\n\s*\n/).filter(Bo
 function livros(){
   return H('Ciclo de Jesed','Os cinco livros','Clique num livro para ver os detalhes.')+`<div class="bookshelf">${BOOKS.map(b=>{
     const active=b.status==='active';
+    const previewable=b.id==='dinastia-polar';
+    const clickable=active||previewable;
     const current=b.id==='ruinas-dos-ceus';
     const coverUrl=b.cover||BOOK_COVER_FALLBACK[b.id];
-    return `<article class="book-card ${b.status} ${current?'current':''} ${active?'click':''}" ${active?`data-go="livro/${b.id}"`:'disabled'}>
+    return `<article class="book-card ${b.status} ${current?'current':''} ${clickable?'click':''}" ${clickable?`data-go="livro/${b.id}"`:'disabled'}>
       <div class="book-card-cover-frame">${coverUrl?`<img class="book-card-cover" src="${E(coverUrl)}" alt="" onerror="this.remove()">`:''}<span class="book-number">Livro ${b.order}</span></div>
       <div class="book-card-copy"><h3>${E(b.name)}</h3><p>${E(b.teaser||b.visual)}</p></div>
-      <div class="book-status"><span>${active?'Livro concluído':'Bloqueado'}</span><span>${active?(current?'Você está aqui':'Ver detalhes'):'Em preparação'}</span></div>
+      <div class="book-status"><span>${active?'Livro concluído':'Em preparação'}</span><span>${active?(current?'Você está aqui':'Ver detalhes'):(clickable?'Ver detalhes':'Bloqueado')}</span></div>
     </article>`;
   }).join('')}</div>`;
 }
@@ -16,13 +18,15 @@ function livro(id){
   const b=BOOKS.find(x=>x.id===id);
   if(!b) return err();
   const current=b.id==='ruinas-dos-ceus';
-  const externalLinks={'guerras-de-sangue':'guerras.html'};
+  const externalLinks={'guerras-de-sangue':'guerras.html','dinastia-polar':'dinastia-polar.html'};
   const bookLogos={'guerras-de-sangue':'assets/branding/guerras-de-sangue/logo-light.webp'};
+  const previewable=b.id==='dinastia-polar';
   const href=!current?externalLinks[b.id]:null;
   const logo=bookLogos[b.id];
   const titleHtml=logo?`<img class="hero-logo" src="${E(logo)}" alt="${E(b.name)}">`:`<h1>${E(b.name)}</h1>`;
   const stats=current?`<div class="stats"><span class="stat">${D.chapters.length} capítulos</span><span class="stat">${D.characters.length} personagens</span><span class="stat">${D.places.length} lugares</span></div>`:'';
-  return `<button class="back" data-go="livros">← Voltar</button><section class="detailhero">${media(b.cover||BOOK_COVER_FALLBACK[b.id],`Capa de ${b.name}`,'✦','portrait avatar big')}<article class="panel"><p class="eyebrow">Livro ${b.order} · ${b.status==='active'?(current?'Você está aqui':'Disponível'):'Bloqueado nesta etapa'}</p>${titleHtml}<div class="lead book-full-synopsis">${synopsisHtml(b.synopsis||b.visual)}</div>${stats}${href?`<div class="hero-actions"><button class="primary-button" data-selector-href="${href}">Ir para a página do livro</button></div>`:''}</article></section>`;
+  const eyebrowState=b.status==='active'?(current?'Você está aqui':'Disponível'):previewable?'Em preparação':'Bloqueado nesta etapa';
+  return `<button class="back" data-go="livros">← Voltar</button><section class="detailhero">${media(b.cover||BOOK_COVER_FALLBACK[b.id],`Capa de ${b.name}`,'✦','portrait avatar big')}<article class="panel"><p class="eyebrow">Livro ${b.order} · ${eyebrowState}</p>${titleHtml}<div class="lead book-full-synopsis">${synopsisHtml(b.synopsis||b.visual)}</div>${stats}${href?`<div class="hero-actions"><button class="primary-button" data-selector-href="${href}">Ir para a página do livro</button></div>`:''}</article></section>`;
 }
 function inicio(){
   const focusDescriptors={'Jokara Amaréa':'Peso, verdade e sacrifício','Nestira Amaréa':'Sopro, fé e esperança','Marv':'Construção, cuidado e legado','Loutes':'Mistério além do tempo','Gabasteres':'Força transformada em domínio'};
@@ -44,14 +48,28 @@ function inicio(){
   <section class="section home-places-section"><div class="section-heading home-section-heading"><div><p class="eyebrow">Céu, queda e sobrevivência</p><h2>Lugares</h2><p>Espaços essenciais para orientar a leitura do Livro I.</p></div><button class="home-text-button" data-go="lugares">Ver todos os lugares</button></div><div class="home-place-grid">${selectedPlaces.map(placeCard).join('')}</div></section>`;
 }
 function capitulos(){let a=D.chapters.filter(x=>`${x.n} ${x.t} ${x.s}`.toLowerCase().includes(st.q.toLowerCase()));return H('História','Capítulos','Os 24 capítulos escritos.',`<input class="search" data-search placeholder="Pesquisar…" value="${E(st.q)}">`)+`<div class="grid">${a.map(x=>`<article class="card click" data-go="capitulo/${x.n}">${x.img?`<img class="chapter-thumb" src="${encodeURI(x.img)}" alt="" loading="lazy">`:''}<p class="meta">Capítulo ${x.n}</p><h3>${E(x.t)}</h3><p>${E(x.s)}</p></article>`).join('')}</div>`}
+function miniEntity(title,subtitle,route,stateText=''){
+  return `<button class="mini-related-button" data-go="${E(route)}"><strong>${E(title)}</strong>${subtitle?`<small>${E(subtitle)}</small>`:''}${stateText?`<small>${E(stateText)}</small>`:''}</button>`;
+}
 function capitulo(id){
   const c=D.chapters[Number(id)-1];if(!c)return err();
   const chars=D.characters.filter(x=>(AP[x.n]||[]).includes(c.n));
+  const places=(D.common?.entities?.places||[]).filter(p=>(p.chapterIds||[]).includes(c.id));
+  const events=(D.common?.entities?.timeline||[]).filter(ev=>(ev.chapterIds||[]).includes(c.id));
   const ev=EV.find(x=>x[0]===c.n);
   const idx=EV.findIndex(x=>x[0]===c.n);
   const causa=idx>0?EV[idx-1][1]:(idx===0?'A estabilidade aparente de Etérea.':null);
   const previous=D.chapters[c.n-2],next=D.chapters[c.n];
   const navigation=`<nav class="chapter-pagination chapter-pagination-top" aria-label="Navegação entre capítulos">${previous?`<button class="secondary-button" data-go="capitulo/${previous.n}">← Capítulo ${previous.n}<small>${E(previous.t)}</small></button>`:`<button class="secondary-button" disabled>Primeiro capítulo</button>`}${next?`<button class="primary-button" data-go="capitulo/${next.n}">Capítulo ${next.n} →<small>${E(next.t)}</small></button>`:`<button class="secondary-button" disabled>Último capítulo</button>`}</nav>`;
-  return `<button class="back" data-go="capitulos">← Voltar</button>${navigation}<article class="panel">${c.img?`<img class="chapter-hero-thumb" src="${encodeURI(c.img)}" alt="">`:''}<p class="eyebrow">Capítulo ${c.n}${ev?` · ${E(ev[1])}`:''}</p><h1>${E(c.t)}</h1><p class="lead">${linkify(c.s)}</p>${causa?`<div class="tags"><span class="tag">Vem de: ${E(causa)}</span></div>`:''}<h2>Personagens presentes</h2><div class="tags">${chars.map(x=>`<button class="tag" data-go="personagem/${S(x.n)}">${E(x.n)}</button>`).join('')}</div></article>`;
+  return `<button class="back" data-go="capitulos">← Voltar</button>${navigation}
+    <section class="chapter-hero-panel ${c.img?'has-art':''}">${c.img?`<img src="${encodeURI(c.img)}" alt="">`:''}<div><p class="eyebrow">Resumo rápido${ev?` · ${E(ev[1])}`:''}</p><h2>${E(c.s)}</h2>${causa?`<div class="tags"><span class="tag">Vem de: ${E(causa)}</span></div>`:''}</div></section>
+    <section class="chapter-layout">
+      <article class="panel chapter-longform"><div class="section-heading"><div><p class="eyebrow">Acontecimentos do capítulo</p><h2>Tudo o que acontece</h2></div></div><div class="chapter-prose">${(window.RUINAS_CHAPTER_DETAILS?.[c.n]||[c.s]).map(p=>`<p>${linkify(p)}</p>`).join('')}</div></article>
+      <aside class="chapter-context-column">
+        <article class="panel section-card"><h3>Personagens</h3><div class="social-member-row">${chars.length?chars.map(x=>`<button class="social-member" data-go="personagem/${S(x.n)}"><img src="${E(charImage(x.n))}" alt="${E(x.n)}" loading="lazy" onerror="this.hidden=true"><span>${E(x.n)}</span></button>`).join(''):'<p class="empty-inline">Nenhum personagem ligado.</p>'}</div></article>
+        <article class="panel section-card"><h3>Lugares</h3><div class="mini-related-list">${places.length?places.map(p=>miniEntity(p.name,p.type||'Lugar',`lugar/${p.slug}`)).join(''):'<p class="empty-inline">Nenhum lugar ligado.</p>'}</div></article>
+        ${events.length?`<article class="panel section-card"><h3>Linha do Tempo</h3><div class="mini-related-list">${events.map(e=>miniEntity(e.name,e.category||'Acontecimento',`linha/${e.slug}`)).join('')}</div></article>`:''}
+      </aside>
+    </section>`;
 }
 R.pages={inicio,capitulos,capitulo,livros,livro};})();

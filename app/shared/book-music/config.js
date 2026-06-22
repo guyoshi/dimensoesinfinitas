@@ -10,5 +10,11 @@ window.BOOK_MUSIC_CONFIG = Object.freeze({
     files: [
       "assets/books/ciclo-de-jesed/guerras-de-sangue/audio.mp3"
     ]
+  },
+  "dinastia-polar": {
+    title: "Dinastia Polar",
+    files: [
+      "assets/books/ciclo-de-jesed/dinastia-polar/cover.mp3"
+    ]
   }
 });

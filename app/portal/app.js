@@ -9,7 +9,8 @@
     books: document.getElementById('bookView'),
     detail: detailView
   };
-  const externalPages = { 'ruinas-dos-ceus': 'ruinas.html', 'guerras-de-sangue': 'guerras.html' };
+  const externalPages = { 'ruinas-dos-ceus': 'ruinas.html', 'guerras-de-sangue': 'guerras.html', 'dinastia-polar': 'dinastia-polar.html' };
+  const previewableBooks = new Set(['dinastia-polar']);
   const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/ruinas-dos-ceus/logo-light.webp', 'guerras-de-sangue': 'assets/branding/guerras-de-sangue/logo-light.webp' };
   const icons = { compass: '✦', journal: '✦', crown: '♕', stars: '✧', portal: '◎', eye: '◉', union: '⬡', wind: '☁', 'crossed-swords': '⚔', fortress: '⛁', embers: '♨', hourglass: '⏳' };
   const synopsisHtml = value => String(value || '').split(/\n\s*\n/).filter(Boolean).map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
@@ -33,9 +34,10 @@
 
   function renderBooks() {
     bookGrid.innerHTML = books.map(b => {
-      const href = b.status === 'active' ? externalPages[b.id] : '';
+      const href = (b.status === 'active' || previewableBooks.has(b.id)) ? externalPages[b.id] : '';
       const cover = b.cover ? `<img class="portal-book-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}" loading="lazy">` : `<div class="portal-book-cover portal-cover-placeholder">${icons[b.icon] || '✦'}</div>`;
-      const inner = `${cover}<div class="portal-book-overlay"></div><div class="portal-book-copy"><span>Livro ${b.order}</span><h3>${escapeHtml(b.name)}</h3><p>${escapeHtml(b.teaser || b.synopsis || b.visual)}</p><strong class="dim-state">${href ? 'Abrir livro' : 'Em preparação'}</strong></div>`;
+      const stateLabel = href ? (b.status === 'active' ? 'Abrir livro' : 'Em preparação') : 'Em preparação';
+      const inner = `${cover}<div class="portal-book-overlay"></div><div class="portal-book-copy"><span>Livro ${b.order}</span><h3>${escapeHtml(b.name)}</h3><p>${escapeHtml(b.teaser || b.synopsis || b.visual)}</p><strong class="dim-state">${stateLabel}</strong></div>`;
       return href ? `<a class="dim-card book-dim-card active" href="${href}#/${b.id === 'ruinas-dos-ceus' ? 'inicio' : 'dashboard'}">${inner}</a>` : `<article class="dim-card book-dim-card locked" aria-disabled="true">${inner}</article>`;
     }).join('');
   }

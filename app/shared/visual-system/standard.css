@@ -264,6 +264,7 @@ body[data-book] :where(.character-browser-card-media,.chapter-card-image,.home-p
 }
 body[data-book] .character-browser-card-media{aspect-ratio:4/5;min-height:0}
 body[data-book] .character-browser-row-media{width:112px;min-width:112px;aspect-ratio:4/5}
+body[data-book] .character-browser-card-media .portrait,body[data-book] .character-browser-row-media .portrait{width:100%;height:100%}
 body[data-book] .chapter-card-image,body[data-book] .chapter-thumb{aspect-ratio:16/10;min-height:0}
 body[data-book] .chapter-hero-thumb{aspect-ratio:16/8;min-height:240px}
 body[data-book] .lore-card-image,body[data-book] .lorepic{aspect-ratio:16/10;min-height:0}
@@ -276,6 +277,7 @@ body[data-book] .media-fallback{
     radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--di-accent) 15%,transparent),transparent 46%),
     linear-gradient(145deg,color-mix(in srgb,var(--di-surface-strong) 92%,#111),color-mix(in srgb,var(--di-accent-strong) 25%,#111));
 }
+body[data-book] .media-fallback[hidden],body[data-book] .di-auto-fallback[hidden]{display:none!important}
 body[data-book] img.di-image-error{display:none!important}
 body[data-book] .di-auto-fallback[hidden]{display:none!important}
 body[data-book] .di-auto-fallback::before{content:"◇";display:block;margin-bottom:7px;font-size:1.4rem;color:var(--di-accent)}

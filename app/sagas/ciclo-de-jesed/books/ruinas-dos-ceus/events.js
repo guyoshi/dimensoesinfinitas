@@ -1,10 +1,10 @@
 (()=>{const R=window.RS,{D,E,S,st,LORE,SAGAS,BOOKS,$,go,BOOK_COVER_FALLBACK}=R;
 function selectorCardHtml(item, books){
-  const active=item.status==='active';
-  const href=books?(item.id==='ruinas-dos-ceus'?'ruinas.html#/inicio':item.id==='guerras-de-sangue'?'guerras.html#/dashboard':''):item.id==='ciclo-de-jesed'?'index.html#/books':'';
+  const active=item.status==='active'||item.id==='dinastia-polar';
+  const href=books?(item.id==='ruinas-dos-ceus'?'ruinas.html#/inicio':item.id==='guerras-de-sangue'?'guerras.html#/dashboard':item.id==='dinastia-polar'?'dinastia-polar.html#/inicio':''):item.id==='ciclo-de-jesed'?'index.html#/books':'';
   const coverUrl=books?(item.cover||BOOK_COVER_FALLBACK[item.id]):null;
   const media=books?(coverUrl?`<span class="selector-cover"><img src="${E(coverUrl)}" alt="Capa de ${E(item.name)}" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="selector-cover-fallback" hidden>✦</span></span>`:`<span class="selector-cover symbol">✦</span>`):'';
-  const inner=`${media}<strong>${E(item.name)}</strong><small>${active&&href?'Disponível':'Bloqueado nesta etapa'}</small>`;
+  const inner=`${media}<strong>${E(item.name)}</strong><small>${active&&href?(item.status==='active'?'Disponível':'Em preparação'):'Bloqueado nesta etapa'}</small>`;
   return active&&href?`<a class="selector-card active" href="${href}">${inner}</a>`:`<button class="selector-card locked" disabled>${inner}</button>`;
 }
 function openSelector(type){
@@ -66,13 +66,29 @@ document.addEventListener('keydown',e=>{
   const card=e.target.closest?.('[role="link"][data-go], [data-timeline-card], .place-scene-card[data-go]');
   if(card&&(e.key==='Enter'||e.key===' ')&&!e.target.closest('button,a')){e.preventDefault();return go(card.dataset.go);}
   if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearch();}
-  if(e.key==='Escape'){closeSearch();closeSelector();closeSettingsDrawer();}
+  if(e.key==='Escape'){closeSearch();closeSelector();closeSettingsDrawer();closeLightbox();}
+  const lightboxCard=e.target.closest?.('[data-lightbox-image]');
+  if(lightboxCard&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openLightbox(lightboxCard.dataset.lightboxImage,lightboxCard.dataset.lightboxCaption);}
 });
+function openLightbox(src,caption){
+  let box=document.getElementById('imageLightbox');
+  if(!box){
+    box=document.createElement('div');box.id='imageLightbox';box.className='image-lightbox';
+    box.innerHTML='<div class="image-lightbox-backdrop" data-lightbox-close></div><figure><img alt=""><figcaption></figcaption><button type="button" class="image-lightbox-close" data-lightbox-close aria-label="Fechar">✕</button></figure>';
+    document.body.appendChild(box);
+  }
+  box.querySelector('img').src=src;
+  box.querySelector('figcaption').textContent=caption||'';
+  box.classList.add('open');
+}
+function closeLightbox(){document.getElementById('imageLightbox')?.classList.remove('open');}
 document.addEventListener('click',e=>{
+  if(e.target.closest('[data-lightbox-image]')){const t=e.target.closest('[data-lightbox-image]');openLightbox(t.dataset.lightboxImage,t.dataset.lightboxCaption);return;}
+  if(e.target.closest('[data-lightbox-close]'))return closeLightbox();
   if(e.target.closest('[data-selector-close]'))return closeSelector();
   let x=e.target.closest('[data-map-open]');if(x){st.mapPhase=x.dataset.mapOpen;closeSearch();closeSelector();closeSettingsDrawer();return go('mapa');}
-  x=e.target.closest('[data-character-view]');if(x){st.characterView=window.DI_CHARACTER_BROWSER?.writeView('ruinas-dos-ceus',x.dataset.characterView)||x.dataset.characterView;return R.render();}
-  x=e.target.closest('[data-go]');if(x){closeSearch();closeSelector();closeSettingsDrawer();return go(x.dataset.go);}x=e.target.closest('[data-map-phase]');if(x){st.mapPhase=x.dataset.mapPhase;return R.render();}x=e.target.closest('[data-tab]');if(x){st.tab=x.dataset.tab;return R.render()}x=e.target.closest('[data-sort]');if(x){st.sort=x.dataset.sort;return R.render()}x=e.target.closest('[data-export]');if(x){const kind=x.dataset.export==='alimentos'?'foods':x.dataset.export;const names=(D.common?.entities?.[kind]||[]).filter(item=>(item.citations||0)===0).map(item=>item.name);const file=new Blob([names.join('\n')],{type:'text/plain'}),link=document.createElement('a');link.href=URL.createObjectURL(file);link.download=`ruinas-${x.dataset.export}-nao-usados.txt`;link.click();URL.revokeObjectURL(link.href)}if(e.target.closest('#menu'))document.body.classList.toggle('menu');if(e.target.closest('[data-search-close]'))closeSearch()});document.addEventListener('input',e=>{if(e.target.matches('[data-search]')){st.q=e.target.value;const p=e.target.selectionStart;R.render();const n=$('[data-search]');n?.focus();n?.setSelectionRange(p,p)}});addEventListener('hashchange',()=>{st.tab='geral';st.q='';R.render()});document.body.dataset.book='ruinas-dos-ceus';
+  x=e.target.closest('[data-character-view]');if(x){st.characterView=window.DI_CHARACTER_BROWSER?.writeView('ruinas-dos-ceus',x.dataset.characterView)||x.dataset.characterView;return R.render(true);}
+  x=e.target.closest('[data-go]');if(x){closeSearch();closeSelector();closeSettingsDrawer();return go(x.dataset.go);}x=e.target.closest('[data-map-phase]');if(x){st.mapPhase=x.dataset.mapPhase;return R.render(true);}x=e.target.closest('[data-tab]');if(x){st.tab=x.dataset.tab;return R.render(true)}x=e.target.closest('[data-sort]');if(x){st.sort=x.dataset.sort;return R.render(true)}x=e.target.closest('[data-export]');if(x){const kind=x.dataset.export==='alimentos'?'foods':x.dataset.export;const names=(D.common?.entities?.[kind]||[]).filter(item=>(item.citations||0)===0).map(item=>item.name);const file=new Blob([names.join('\n')],{type:'text/plain'}),link=document.createElement('a');link.href=URL.createObjectURL(file);link.download=`ruinas-${x.dataset.export}-nao-usados.txt`;link.click();URL.revokeObjectURL(link.href)}if(e.target.closest('#menu'))document.body.classList.toggle('menu');if(e.target.closest('[data-search-close]'))closeSearch()});document.addEventListener('input',e=>{if(e.target.matches('[data-search]')){st.q=e.target.value;const p=e.target.selectionStart;R.render();const n=$('[data-search]');n?.focus();n?.setSelectionRange(p,p)}});addEventListener('hashchange',()=>{st.tab='geral';st.q='';R.render()});document.body.dataset.book='ruinas-dos-ceus';
 const storage={
   get(k){try{return localStorage.getItem(k)}catch{return null}},
   set(k,v){try{localStorage.setItem(k,v)}catch{}}

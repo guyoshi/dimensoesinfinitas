@@ -47,49 +47,79 @@
   if(cloudHost){new MutationObserver(()=>{if(!rebuilding&&!cloudHost.querySelector('.cloud-layer'))buildClouds()}).observe(cloudHost,{childList:true});}
 
   const phases={
-    dawn:{top:'#426d88',mid:'#aabfc6',bottom:'#e5b889',light:'#fff2d2',shadow:'#708c9b'},
-    day:{top:'#69a7c2',mid:'#b9d8df',bottom:'#e7dcc0',light:'#ffffff',shadow:'#7c9da8'},
-    dusk:{top:'#3d6681',mid:'#aa8990',bottom:'#e29b67',light:'#ffd8b2',shadow:'#6a7186'},
-    night:{top:'#081625',mid:'#193247',bottom:'#4b5061',light:'#7792a8',shadow:'#182b3d'}
+    dawn:{top:'#426d88',mid:'#aabfc6',bottom:'#e5b889',light:'#fff2d2',shadow:'#708c9b',stars:.12},
+    day:{top:'#69a7c2',mid:'#b9d8df',bottom:'#e7dcc0',light:'#ffffff',shadow:'#7c9da8',stars:0},
+    dusk:{top:'#3d6681',mid:'#aa8990',bottom:'#e29b67',light:'#ffd8b2',shadow:'#6a7186',stars:.12},
+    night:{top:'#081625',mid:'#193247',bottom:'#4b5061',light:'#7792a8',shadow:'#182b3d',stars:.72}
   };
+  const SKY_KEYFRAMES=[[300,'dawn'],[480,'day'],[990,'dusk'],[1200,'night']];
+  const hexToRgb=h=>{h=h.replace('#','');return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]};
+  const rgbToHex=([r,g,b])=>'#'+[r,g,b].map(v=>Math.round(Math.max(0,Math.min(255,v))).toString(16).padStart(2,'0')).join('');
+  const lerpColor=(a,b,t)=>{const ca=hexToRgb(a),cb=hexToRgb(b);return rgbToHex(ca.map((v,i)=>v+(cb[i]-v)*t))};
+  function skyBlend(minutes){
+    const n=SKY_KEYFRAMES.length;let curIdx=n-1;
+    for(let i=0;i<n;i++){if(minutes>=SKY_KEYFRAMES[i][0])curIdx=i}
+    const nextIdx=(curIdx+1)%n;
+    const curAt=SKY_KEYFRAMES[curIdx][0],nextAt=SKY_KEYFRAMES[nextIdx][0];
+    const span=nextAt>curAt?nextAt-curAt:nextAt+1440-curAt;
+    const pos=minutes>=curAt?minutes-curAt:minutes+1440-curAt;
+    const t=Math.max(0,Math.min(1,pos/span));
+    const curP=phases[SKY_KEYFRAMES[curIdx][1]],nextP=phases[SKY_KEYFRAMES[nextIdx][1]];
+    return{top:lerpColor(curP.top,nextP.top,t),mid:lerpColor(curP.mid,nextP.mid,t),bottom:lerpColor(curP.bottom,nextP.bottom,t),light:lerpColor(curP.light,nextP.light,t),shadow:lerpColor(curP.shadow,nextP.shadow,t),stars:curP.stars+(nextP.stars-curP.stars)*t};
+  }
   const session={get(key,fallback=null){try{const v=sessionStorage.getItem(key);return v===null?fallback:v}catch{return fallback}},set(key,value){try{sessionStorage.setItem(key,String(value))}catch{}}};
   const CYCLE_DURATION_MS=10*60*1000;
   let autoTime=session.get(P+'time-mode')!=='manual';
   let manualMinutes=Math.round(Number(session.get(P+'test-minutes',1110)||1110)/10)*10;
   let cycleAnchorReal=Number(session.get(P+'cycle-anchor-real',Date.now())||Date.now());
   let cycleAnchorMinutes=Number(session.get(P+'cycle-anchor-minutes',360)||360);
-  let timer=null;
+  let timer=null,dragging=false,paused=false,pausedAtMinutes=manualMinutes;
   const pad=n=>String(n).padStart(2,'0');
   const timeLabel=m=>{m=Math.floor(Number(m)||0);return `${pad(Math.floor(m/60)%24)}:${pad(m%60)}`};
   function currentMinutes(){const elapsed=((Date.now()-cycleAnchorReal)%CYCLE_DURATION_MS+CYCLE_DURATION_MS)%CYCLE_DURATION_MS;return (cycleAnchorMinutes+(elapsed/CYCLE_DURATION_MS)*1440)%1440}
   function anchorCycle(minutes){cycleAnchorMinutes=(Number(minutes)+1440)%1440;cycleAnchorReal=Date.now();session.set(P+'cycle-anchor-minutes',cycleAnchorMinutes);session.set(P+'cycle-anchor-real',cycleAnchorReal)}
+  function liveMinutes(){if(dragging)return manualMinutes;if(paused)return pausedAtMinutes;return autoTime?currentMinutes():manualMinutes}
   function phaseFor(m){if(m>=300&&m<480)return'dawn';if(m>=480&&m<990)return'day';if(m>=990&&m<1200)return'dusk';return'night'}
-  function updateSky(minutes=autoTime?currentMinutes():manualMinutes){
-    minutes=(minutes+1440)%1440;const phase=phaseFor(minutes),c=phases[phase],root=document.documentElement;
+  function updateSky(minutes=liveMinutes()){
+    minutes=(minutes+1440)%1440;const phase=phaseFor(minutes),c=skyBlend(minutes),root=document.documentElement;
     root.style.setProperty('--rdc-sky-top',c.top);root.style.setProperty('--rdc-sky-mid',c.mid);root.style.setProperty('--rdc-sky-bottom',c.bottom);root.style.setProperty('--rdc-cloud-light',c.light);root.style.setProperty('--rdc-cloud-shadow',c.shadow);
-    root.style.setProperty('--rdc-stars-opacity',phase==='night'?.72:phase==='dusk'?.12:0);
+    root.style.setProperty('--rdc-stars-opacity',c.stars);
     let sunOpacity=0,moonOpacity=0,sunX=50,sunY=70,moonX=50,moonY=70;
     if(minutes>=360&&minutes<=1200){const p=(minutes-360)/840;sunX=6+p*88;sunY=76-Math.sin(Math.PI*p)*62;sunOpacity=Math.min(1,Math.max(0,Math.sin(Math.PI*p)*1.45));}
     if(minutes>=1200||minutes<=360){const elapsed=minutes>=1200?minutes-1200:minutes+240;const p=elapsed/600;moonX=6+p*88;moonY=72-Math.sin(Math.PI*p)*55;moonOpacity=Math.min(1,Math.max(.15,Math.sin(Math.PI*p)*1.2));}
     root.style.setProperty('--rdc-sun-x',sunX+'%');root.style.setProperty('--rdc-sun-y',sunY+'%');root.style.setProperty('--rdc-sun-opacity',sunOpacity);
     root.style.setProperty('--rdc-moon-x',moonX+'%');root.style.setProperty('--rdc-moon-y',moonY+'%');root.style.setProperty('--rdc-moon-opacity',moonOpacity);
     document.body.dataset.skyPhase=phase;
-    document.querySelectorAll('[data-time-output]').forEach(o=>o.textContent=timeLabel(minutes));
-    document.querySelectorAll('[data-time-slider]').forEach(i=>{if(document.activeElement!==i)i.value=minutes});
-    document.querySelectorAll('[data-time-auto]').forEach(b=>{b.classList.toggle('active',autoTime);b.setAttribute('aria-pressed',String(autoTime))});
+    const displayMinutes=Math.round(minutes/10)*10%1440;
+    document.querySelectorAll('[data-time-output]').forEach(o=>o.textContent=timeLabel(displayMinutes));
+    document.querySelectorAll('[data-time-slider]').forEach(i=>{if(document.activeElement!==i)i.value=displayMinutes});
+    document.querySelectorAll('[data-time-auto]').forEach(b=>{b.classList.toggle('active',autoTime&&!paused);b.setAttribute('aria-pressed',String(autoTime&&!paused))});
+    document.querySelectorAll('[data-time-pause]').forEach(b=>{b.classList.toggle('active',paused);b.setAttribute('aria-pressed',String(paused));b.innerHTML=paused?'▶':'⏸';b.title=paused?'Retomar o relógio':'Pausar o relógio';b.setAttribute('aria-label',paused?'Retomar o relógio':'Pausar o relógio')});
   }
-  function timeControlHtml(){return `<div class="time-test-control" data-time-control><label>Horário de teste</label><input data-time-slider type="range" min="0" max="1430" step="10" value="${autoTime?currentMinutes():manualMinutes}" aria-label="Horário de teste"><output data-time-output>${timeLabel(autoTime?currentMinutes():manualMinutes)}</output><button class="time-auto-button ${autoTime?'active':''}" data-time-auto type="button" aria-pressed="${autoTime}" title="Ciclo automático: 24 horas em cerca de 10 minutos">Ciclo 10 min</button></div>`}
+  function timeControlHtml(){const m=liveMinutes();return `<div class="time-test-control" data-time-control><label>Hora do dia</label><input data-time-slider type="range" min="0" max="1430" step="10" value="${m}" aria-label="Hora do dia"><output data-time-output>${timeLabel(Math.round(m/10)*10%1440)}</output><button class="time-pause-button" data-time-pause type="button" aria-pressed="${paused}" title="${paused?'Retomar o relógio':'Pausar o relógio'}" aria-label="${paused?'Retomar o relógio':'Pausar o relógio'}">${paused?'▶':'⏸'}</button><button class="time-auto-button ${autoTime&&!paused?'active':''}" data-time-auto type="button" aria-pressed="${autoTime&&!paused}" title="Ciclo automático: 24 horas em cerca de 10 minutos">Ciclo 10 min</button></div>`}
   function ensureTimeControls(){
     const utility=document.querySelector('.utility-controls');if(!utility)return;
-    if(!utility.querySelector('[data-time-control]'))utility.insertAdjacentHTML('beforeend',timeControlHtml());
-    if(!utility.querySelector('.time-mobile-toggle'))utility.insertAdjacentHTML('beforeend','<button class="icon-btn time-mobile-toggle" type="button" data-time-mobile aria-label="Abrir relógio de teste" title="Horário de teste">◷</button>');
+    if(!utility.querySelector('[data-time-control]'))utility.insertAdjacentHTML('afterbegin',timeControlHtml());
+    if(!utility.querySelector('.time-mobile-toggle'))utility.querySelector('[data-time-control]')?.insertAdjacentHTML('afterend','<button class="icon-btn time-mobile-toggle" type="button" data-time-mobile aria-label="Abrir relógio do dia" title="Relógio do dia">◷</button>');
   }
-  document.addEventListener('input',e=>{if(!e.target.matches('[data-time-slider]'))return;autoTime=false;manualMinutes=Math.round(Number(e.target.value)/10)*10;session.set(P+'time-mode','manual');session.set(P+'test-minutes',manualMinutes);updateSky(manualMinutes)});
+  document.addEventListener('input',e=>{if(!e.target.matches('[data-time-slider]'))return;dragging=true;manualMinutes=Math.round(Number(e.target.value)/10)*10;updateSky(manualMinutes)});
+  document.addEventListener('change',e=>{
+    if(!e.target.matches('[data-time-slider]'))return;
+    dragging=false;
+    if(paused){pausedAtMinutes=manualMinutes}
+    else{anchorCycle(manualMinutes);autoTime=true;session.set(P+'time-mode','auto')}
+    updateSky();
+  });
   document.addEventListener('click',e=>{
-    if(e.target.closest('[data-time-auto]')){anchorCycle(manualMinutes);autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo acelerado do céu restaurado: uma volta em cerca de 10 minutos')}
+    if(e.target.closest('[data-time-auto]')){paused=false;anchorCycle(manualMinutes);autoTime=true;session.set(P+'time-mode','auto');updateSky();X.toast('Ciclo acelerado do céu restaurado: uma volta em cerca de 10 minutos')}
+    if(e.target.closest('[data-time-pause]')){
+      if(paused){anchorCycle(pausedAtMinutes);paused=false;autoTime=true;session.set(P+'time-mode','auto');X.toast('Relógio retomado')}
+      else{pausedAtMinutes=liveMinutes();paused=true;X.toast('Relógio pausado')}
+      updateSky();
+    }
     const mobile=e.target.closest('[data-time-mobile]');if(mobile){document.querySelector('.topbar [data-time-control]')?.classList.toggle('mobile-open')}
   });
-  function startClock(){clearInterval(timer);updateSky();timer=setInterval(()=>{if(autoTime&&!document.hidden)updateSky()},500)}
+  function startClock(){clearInterval(timer);updateSky();timer=setInterval(()=>{if(!document.hidden)updateSky()},500)}
 
   function applyVisualSettings(){
     const root=document.documentElement;
