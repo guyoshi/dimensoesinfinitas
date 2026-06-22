@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,7 @@ REPORT = ROOT / "data/common/asset-migration-report.json"
 spec = importlib.util.spec_from_file_location("asset_migration", ROOT / "scripts/migrate_assets.py")
 migration = importlib.util.module_from_spec(spec)
 assert spec.loader
+sys.modules[spec.name] = migration
 spec.loader.exec_module(migration)
 
 
