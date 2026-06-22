@@ -22,17 +22,17 @@ body[data-book="guerras-de-sangue"] .hero-map-card>img{width:100%;height:clamp(3
 
 /* Estante e selector: imagem real, link real e texto legível. */
 .enhanced-bookshelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(18px,2.5vw,32px);align-items:stretch}
-.cover-book-card{position:relative;display:flex;min-height:520px;overflow:hidden;border-radius:24px;text-decoration:none;color:#fff;isolation:isolate;background:linear-gradient(160deg,var(--book-a),var(--book-b))}
-.cover-book-card .book-card-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
-.cover-book-card .book-cover-placeholder{position:absolute;inset:0;z-index:-2;display:grid;place-items:center;font-size:70px;background:linear-gradient(160deg,var(--book-a),var(--book-b))}
-.cover-book-card .book-cover-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,7,6,.06) 18%,rgba(8,7,6,.88) 78%);z-index:-1}
-.cover-book-card .book-number{position:absolute;top:16px;left:16px;padding:7px 10px;border-radius:999px;background:rgba(10,8,6,.72);color:#fff}
-.cover-book-card .book-card-copy{margin-top:auto;padding:28px 24px 70px;text-shadow:0 2px 18px #000}
-.cover-book-card .book-card-copy h2{margin:0 0 10px;font-size:clamp(1.5rem,2.2vw,2.2rem)}
-.cover-book-card .book-card-copy p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;color:#f5eee4}
-.cover-book-card .book-status{position:absolute;left:22px;right:22px;bottom:18px;display:flex;justify-content:space-between;gap:12px;font-size:.84rem;color:#fff}
-.cover-book-card.active:hover{transform:translateY(-5px);box-shadow:0 24px 55px rgba(0,0,0,.38)}
-.cover-book-card.locked{filter:saturate(.45);opacity:.8}
+.cover-book-card{position:relative;display:flex;flex-direction:column;min-height:520px;overflow:hidden;border-radius:24px;text-decoration:none;color:#fff;background:linear-gradient(160deg,var(--book-a),var(--book-b));cursor:pointer}
+.book-card-cover-frame{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--book-a),var(--book-b))}
+.book-card-cover-frame .book-card-cover{display:block;width:100%;height:100%;object-fit:cover}
+.book-card-cover-frame .book-cover-placeholder{position:static;width:100%;height:100%;display:grid;place-items:center;font-size:70px}
+.book-card-cover-frame .book-number{position:absolute;top:16px;left:16px;padding:7px 10px;border-radius:999px;background:rgba(10,8,6,.72);color:#fff}
+.cover-book-card .book-card-copy{flex:1;padding:22px 24px;background:linear-gradient(165deg,rgba(20,15,11,.97),rgba(12,9,7,.99))}
+.cover-book-card .book-card-copy h2{margin:0 0 10px;font-size:clamp(1.3rem,2vw,1.8rem)}
+.cover-book-card .book-card-copy p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;color:#cbb89a}
+.cover-book-card .book-status{display:flex;justify-content:space-between;gap:12px;padding:0 24px 22px;font-size:.84rem;color:#fff;background:rgba(12,9,7,.99)}
+.cover-book-card.active:hover,.cover-book-card.active:focus-visible{transform:translateY(-5px);box-shadow:0 24px 55px rgba(0,0,0,.38);outline:none}
+.cover-book-card.locked{filter:saturate(.45);opacity:.8;cursor:default}
 body[data-book="guerras-de-sangue"] .selector-modal-panel{width:min(920px,calc(100% - 28px))}
 .selector-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:18px}
 .selector-card{display:grid;gap:10px;min-width:0;padding:14px;border-radius:18px;text-align:left;text-decoration:none;color:inherit}

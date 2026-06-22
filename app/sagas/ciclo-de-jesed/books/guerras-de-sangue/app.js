@@ -350,7 +350,7 @@
           const active=book.status === "active";
           const current=book.id === BOOK_ID;
           const media=bookCoverHtml(book, "book-card-cover");
-          const inner=`${media}<div class="book-cover-overlay"></div><span class="book-number readable-book-number">Livro ${book.order}</span><div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.teaser || book.synopsis || book.visual)}</p></div><div class="book-status"><span>${active ? "Livro concluído" : "Em preparação"}</span><span>${active ? (current ? "Você está aqui" : "Ver detalhes") : "Bloqueado"}</span></div>`;
+          const inner=`<div class="book-card-cover-frame">${media}<span class="book-number readable-book-number">Livro ${book.order}</span></div><div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.teaser || book.synopsis || book.visual)}</p></div><div class="book-status"><span>${active ? "Livro concluído" : "Em preparação"}</span><span>${active ? (current ? "Você está aqui" : "Ver detalhes") : "Bloqueado"}</span></div>`;
           return active?`<div class="book-card cover-book-card active has-cover" data-route="book/${book.id}" tabindex="0" role="link" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]}">${inner}</div>`:`<article class="book-card cover-book-card locked ${book.cover ? "has-cover" : ""}" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]}" aria-disabled="true">${inner}</article>`;
         }).join("")}
       </section>
