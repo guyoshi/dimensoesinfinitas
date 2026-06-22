@@ -1,0 +1,82 @@
+name: Reorganizar assets e corrigir site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/rebuild-site.yml
+      - scripts/migrate_assets.py
+      - scripts/dedupe_assets.py
+      - scripts/validate-assets.js
+      - scripts/patch-parts/**
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reorganizar-assets
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconstruir pacote de correções
+        shell: bash
+        run: |
+          cat scripts/patch-parts/part-* | base64 --decode | gzip --decompress > /tmp/site-fixes-0.17.patch
+          git apply --check --exclude=.github/workflows/site-validation.yml /tmp/site-fixes-0.17.patch
+          git apply --whitespace=fix --exclude=.github/workflows/site-validation.yml /tmp/site-fixes-0.17.patch
+          rm -rf scripts/patch-parts
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar conversor de imagens
+        run: python -m pip install Pillow==10.4.0
+
+      - name: Converter, renomear e reorganizar imagens
+        run: |
+          python scripts/migrate_assets.py
+          python scripts/dedupe_assets.py
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validar conteúdo, código e assets
+        run: npm run validate:all
+
+      - name: Verificações adicionais
+        shell: bash
+        run: |
+          test -f assets/books/ciclo-de-jesed/ruinas-dos-ceus/cover.webp
+          test -f assets/books/ciclo-de-jesed/guerras-de-sangue/cover.webp
+          test -f assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-07.webp
+          test -f assets/books/ciclo-de-jesed/guerras-de-sangue/chapters/chapter-25.webp
+          test -f assets/books/ciclo-de-jesed/ruinas-dos-ceus/maps/map-eterea.webp
+          test -f assets/books/ciclo-de-jesed/guerras-de-sangue/maps/map-jesed.webp
+          if find assets -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.tif' -o -iname '*.tiff' \) | grep -q .; then
+            echo 'Ainda existem imagens fora de WebP.' >&2
+            exit 1
+          fi
+          node --check app/sagas/ciclo-de-jesed/books/guerras-de-sangue/app.js
+          node --check app/portal/app.js
+
+      - name: Gravar reorganização no main
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: reorganiza assets e corrige Guerras de Sangue'
+          git push origin main
