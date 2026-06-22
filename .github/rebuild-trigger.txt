@@ -1,2 +1,2 @@
 Executar a reorganização canónica de assets e a revisão de Guerras de Sangue.
-Tentativa 5 com configuração Python corrigida.
+Tentativa 6 com fila de rebuilds limpa.
