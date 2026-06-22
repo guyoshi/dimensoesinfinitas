@@ -43,6 +43,7 @@ jobs:
             echo '== Partes disponíveis =='
             ls -l scripts/patch-parts/part-*
             wc -c scripts/patch-parts/part-*
+            sha256sum scripts/patch-parts/part-*
             cat scripts/patch-parts/part-* > /tmp/site-fixes-0.17.b64
             echo '== Base64 combinado =='
             wc -c /tmp/site-fixes-0.17.b64
