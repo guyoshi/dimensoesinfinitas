@@ -126,16 +126,17 @@ body.no-blur .transition-veil.active{animation-name:veilFadeOnly}
 .selector-cover img{width:100%;height:100%;object-fit:contain;background:#152638}
 .selector-cover-fallback{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
 .bookshelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
-.book-card{position:relative;min-height:280px;border-radius:18px;padding:18px;display:flex;flex-direction:column;color:#fff;background:linear-gradient(165deg,#3a5c68,#152b34);box-shadow:var(--shadow);overflow:hidden;border:1px solid #ffffff22}
-.book-card-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-.book-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,18,22,.15),rgba(8,14,18,.86));z-index:0}
+.book-card{position:relative;min-height:280px;border-radius:18px;display:flex;flex-direction:column;color:#fff;background:linear-gradient(165deg,#3a5c68,#152b34);box-shadow:var(--shadow);overflow:hidden;border:1px solid #ffffff22}
+.book-card-cover-frame{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(165deg,#3a5c68,#152b34)}
+.book-card-cover{display:block;width:100%;height:100%;object-fit:cover}
 .book-card[data-selector-href]{cursor:pointer;transition:.18s}
 .book-card[data-selector-href]:hover{transform:translateY(-4px)}
 .book-card.locked,.book-card:disabled{opacity:.55;filter:saturate(.4)}
 .book-card.current{border-color:var(--gold)}
-.book-number,.book-card-copy,.book-status{position:relative;z-index:1}
-.book-number{font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;opacity:.85}
-.book-card-copy{margin-top:auto}
+.book-card-copy,.book-status{padding-left:18px;padding-right:18px}
+.book-number{position:absolute;top:14px;left:14px;padding:6px 10px;border-radius:999px;background:rgba(8,14,18,.72);font-size:.7rem;text-transform:uppercase;letter-spacing:.16em}
+.book-card-copy{margin-top:14px}
+.book-status{padding-bottom:16px;margin-top:auto;padding-top:10px}
 .book-card-copy h3{color:#fff;margin:10px 0 6px}
 .book-card-copy p{font-size:.84rem;opacity:.85;line-height:1.45}
 .book-status{display:flex;justify-content:space-between;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;opacity:.85;margin-top:12px}
