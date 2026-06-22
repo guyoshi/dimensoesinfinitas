@@ -189,8 +189,8 @@
       if (document.hidden) context.suspend(); else context.resume();
     });
     // Browsers block sound without interaction. A saved preference is resumed on the first user gesture.
-    let preferred = false;
-    try { preferred = localStorage.getItem('di-portal-music') === '1'; } catch {}
+    let preferred = true;
+    try { const stored = localStorage.getItem('di-portal-music'); preferred = stored === null ? true : stored === '1'; } catch {}
     if (preferred) {
       const resumeOnce = () => { start(); document.removeEventListener('pointerdown', resumeOnce); document.removeEventListener('keydown', resumeOnce); };
       document.addEventListener('pointerdown', resumeOnce, { once: true });

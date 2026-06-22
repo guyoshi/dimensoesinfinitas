@@ -16,7 +16,7 @@
   audio.loop = true;
   audio.preload = 'metadata';
 
-  let enabled = read(storage.enabled, 'false') === 'true';
+  let enabled = read(storage.enabled, 'true') === 'true';
   let volume = clamp(read(storage.volume, '0.35'));
   let lastAudibleVolume = volume > 0 ? volume : 0.35;
   let currentBook = '';

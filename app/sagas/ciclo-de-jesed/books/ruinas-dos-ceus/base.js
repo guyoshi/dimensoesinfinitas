@@ -87,5 +87,6 @@ function linkify(text){
   out+=E(raw.slice(last));
   return out;
 }
-window.RS={D,$,E,S,AP,REL,EV,MYS,LORE,NAV,SAGAS,BOOKS,st,H,go,find,err,nav,charImage,placeImage,initials,media,linkify};
+const BOOK_COVER_FALLBACK={'ruinas-dos-ceus':'assets/books/ciclo-de-jesed/ruinas-dos-ceus/maps/map-eterea.webp','guerras-de-sangue':'assets/books/ciclo-de-jesed/guerras-de-sangue/maps/map-jesed.webp'};
+window.RS={D,$,E,S,AP,REL,EV,MYS,LORE,NAV,SAGAS,BOOKS,st,H,go,find,err,nav,charImage,placeImage,initials,media,linkify,BOOK_COVER_FALLBACK};
 })();

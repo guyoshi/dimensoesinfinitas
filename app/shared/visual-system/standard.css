@@ -285,7 +285,7 @@ body[data-book] :where(.character-browser-row,.guerras-character-row,.ruinas-cha
   min-width:0;
 }
 body[data-book] :where(.character-browser-row,.guerras-character-row,.ruinas-character-row){
-  display:grid;grid-template-columns:112px minmax(0,1fr) auto;align-items:center;gap:16px;overflow:hidden;
+  display:grid;grid-template-columns:112px minmax(130px,.8fr) minmax(220px,1.7fr) auto;align-items:center;gap:16px;overflow:hidden;
 }
 body[data-book] :where(.character-browser-row-name,.character-browser-card-copy h2,.character-browser-card-copy h3,.chapter-card-copy h2,.chapter-card-copy h3,.home-place-copy h3,.place-list-heading h2,.place-list-heading h3){overflow-wrap:anywhere}
 body[data-book] :where(.character-browser-row-description,.character-browser-description,.chapter-card-copy p,.home-place-copy p,.place-list-card p){min-width:0;color:var(--di-muted);line-height:1.5}

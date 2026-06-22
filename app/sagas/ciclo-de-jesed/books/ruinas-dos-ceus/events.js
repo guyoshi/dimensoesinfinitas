@@ -1,8 +1,9 @@
-(()=>{const R=window.RS,{D,E,S,st,LORE,SAGAS,BOOKS,$,go}=R;
+(()=>{const R=window.RS,{D,E,S,st,LORE,SAGAS,BOOKS,$,go,BOOK_COVER_FALLBACK}=R;
 function selectorCardHtml(item, books){
   const active=item.status==='active';
   const href=books?(item.id==='ruinas-dos-ceus'?'ruinas.html#/inicio':item.id==='guerras-de-sangue'?'guerras.html#/dashboard':''):item.id==='ciclo-de-jesed'?'index.html#/books':'';
-  const media=books?(item.cover?`<span class="selector-cover"><img src="${E(item.cover)}" alt="Capa de ${E(item.name)}"></span>`:`<span class="selector-cover symbol">✦</span>`):'';
+  const coverUrl=books?(item.cover||BOOK_COVER_FALLBACK[item.id]):null;
+  const media=books?(coverUrl?`<span class="selector-cover"><img src="${E(coverUrl)}" alt="Capa de ${E(item.name)}" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span class="selector-cover-fallback" hidden>✦</span></span>`:`<span class="selector-cover symbol">✦</span>`):'';
   const inner=`${media}<strong>${E(item.name)}</strong><small>${active&&href?'Disponível':'Bloqueado nesta etapa'}</small>`;
   return active&&href?`<a class="selector-card active" href="${href}">${inner}</a>`:`<button class="selector-card locked" disabled>${inner}</button>`;
 }
