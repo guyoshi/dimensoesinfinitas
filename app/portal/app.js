@@ -131,10 +131,22 @@
   function setupPortalMusic() {
     const button = document.getElementById('portalMusic');
     if (!button) return;
-    let context = null;
-    let master = null;
-    let nodes = [];
+    const audio = new Audio('assets/dimensoes-infinitas.mp3');
+    audio.loop = true;
+    audio.preload = 'auto';
+    audio.volume = 0.0001;
     let playing = false;
+    let fadeTimer = null;
+    const clearFade = () => { if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; } };
+    const fadeTo = (target, duration) => {
+      clearFade();
+      const start = audio.volume, startTime = performance.now();
+      fadeTimer = setInterval(() => {
+        const t = Math.min(1, (performance.now() - startTime) / duration);
+        audio.volume = start + (target - start) * t;
+        if (t >= 1) clearFade();
+      }, 30);
+    };
     const setState = value => {
       playing = value;
       button.setAttribute('aria-pressed', String(value));
@@ -143,52 +155,27 @@
       if (label) label.textContent = value ? 'Música ligada' : 'Música';
     };
     const stop = () => {
-      nodes.forEach(node => { try { node.stop?.(); } catch {} try { node.disconnect?.(); } catch {} });
-      nodes = [];
-      if (master && context) master.gain.setTargetAtTime(0.0001, context.currentTime, .35);
-      setTimeout(() => context?.suspend?.(), 650);
+      fadeTo(0.0001, 500);
+      setTimeout(() => audio.pause(), 550);
       setState(false);
       try { localStorage.setItem('di-portal-music', '0'); } catch {}
     };
-    const start = async () => {
-      const AudioContext = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContext) return;
-      if (!context) {
-        context = new AudioContext();
-        master = context.createGain();
-        master.gain.value = 0.0001;
-        master.connect(context.destination);
+    const start = () => {
+      const promise = audio.play();
+      if (promise && typeof promise.catch === 'function') {
+        promise.then(() => fadeTo(0.28, 1200)).catch(() => {});
+      } else {
+        fadeTo(0.28, 1200);
       }
-      await context.resume();
-      master.gain.cancelScheduledValues(context.currentTime);
-      master.gain.setTargetAtTime(0.09, context.currentTime, 1.2);
-      const base = [55, 82.41, 110];
-      base.forEach((frequency, index) => {
-        const oscillator = context.createOscillator();
-        const gain = context.createGain();
-        const filter = context.createBiquadFilter();
-        oscillator.type = index === 1 ? 'triangle' : 'sine';
-        oscillator.frequency.value = frequency;
-        oscillator.detune.value = index === 2 ? 4 : index === 0 ? -5 : 0;
-        filter.type = 'lowpass'; filter.frequency.value = 520 + index * 170; filter.Q.value = .5;
-        gain.gain.value = index === 0 ? .38 : .16;
-        oscillator.connect(filter); filter.connect(gain); gain.connect(master); oscillator.start();
-        nodes.push(oscillator, filter, gain);
-      });
-      const lfo = context.createOscillator();
-      const lfoGain = context.createGain();
-      lfo.frequency.value = .075; lfoGain.gain.value = .035;
-      lfo.connect(lfoGain); lfoGain.connect(master.gain); lfo.start();
-      nodes.push(lfo, lfoGain);
       setState(true);
       try { localStorage.setItem('di-portal-music', '1'); } catch {}
     };
     button.addEventListener('click', () => playing ? stop() : start());
     document.addEventListener('visibilitychange', () => {
-      if (!context || !playing) return;
-      if (document.hidden) context.suspend(); else context.resume();
+      if (!playing) return;
+      if (document.hidden) audio.pause(); else audio.play().catch(() => {});
     });
-    // Browsers block sound without interaction. A saved preference is resumed on the first user gesture.
+    // Navegadores bloqueiam som sem interação. A preferência salva é retomada no primeiro gesto do usuário.
     let preferred = true;
     try { const stored = localStorage.getItem('di-portal-music'); preferred = stored === null ? true : stored === '1'; } catch {}
     if (preferred) {
