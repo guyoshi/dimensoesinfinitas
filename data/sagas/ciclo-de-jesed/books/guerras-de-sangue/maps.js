@@ -67,7 +67,7 @@
   D.maps={
     main:{
       id:'guerras',title:'Jesed em Guerras de Sangue',shortTitle:'Jesed',
-      image:'assets/maps/guerras-de-sangue/mapa-geral.webp',ratio:'1536 / 1024',
+      image:'assets/books/ciclo-de-jesed/guerras-de-sangue/maps/map-jesed.webp',ratio:'1536 / 1024',
       description:'Territórios, cidades, passagens e forças políticas na época da guerra.',
       placeIds:Object.keys(placements),
       routeLines:[

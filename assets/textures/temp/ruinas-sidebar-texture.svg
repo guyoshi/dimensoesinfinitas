@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="640" height="1200" viewBox="0 0 640 1200">
-<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#75b6d0"/><stop offset=".55" stop-color="#44758a"/><stop offset="1" stop-color="#183b49"/></linearGradient><radialGradient id="sun"><stop stop-color="#fff3c4" stop-opacity=".55"/><stop offset="1" stop-color="#fff3c4" stop-opacity="0"/></radialGradient></defs>
-<rect width="640" height="1200" fill="url(#sky)"/><circle cx="500" cy="250" r="180" fill="url(#sun)"/>
-<g fill="#2c4c57" opacity=".48" stroke="#b8ecff" stroke-opacity=".18" stroke-width="5">
-<path d="M-60 180 130 95l165 82-45 122-205 36z"/><path d="M390 420 650 330l38 224-213 75-92-91z"/><path d="M-55 760 175 675l130 73-68 186-245 16z"/><path d="M410 980 655 900l70 170-250 85z"/></g>
-<g stroke="#d4f5ff" stroke-opacity=".25" fill="none" stroke-width="4"><path d="M126 148 182 215l-36 58 64 43"/><path d="M485 424 548 503l-44 62"/><path d="M117 744 182 803l-25 103"/></g>
-<g stroke="#8ba98d" stroke-opacity=".4" fill="none" stroke-width="7"><path d="M204 295c7 84-44 104-31 187s50 99 22 186"/><path d="M490 625c-33 70 34 115-11 190"/></g>
-<g fill="#fff" opacity=".08"><ellipse cx="190" cy="420" rx="180" ry="52"/><ellipse cx="485" cy="805" rx="220" ry="65"/></g>
-</svg>

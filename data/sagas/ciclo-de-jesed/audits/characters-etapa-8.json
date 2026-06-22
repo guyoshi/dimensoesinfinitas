@@ -1,7 +1,7 @@
 {
   "stage": "Etapa 8",
-  "version": "0.9.8",
-  "completedAt": "2026-06-21",
+  "version": "0.17.0",
+  "completedAt": "2026-06-22",
   "scope": "Padronização das páginas de Personagens, pesquisa, visualizações, trajetórias e imagens.",
   "shared": {
     "views": [
@@ -40,9 +40,9 @@
     "availableCharacterAssets": 42,
     "linkedCharacterAssets": 42,
     "alternateImagesLinked": [
-      "assets/characters/guerras-de-sangue/orionus-polar-2.webp"
+      "assets/books/ciclo-de-jesed/guerras-de-sangue/characters/orionus-polar-2.webp"
     ],
-    "trajectoryLinks": 293,
+    "trajectoryLinks": 291,
     "trajectoryEntries": 324,
     "missingTrajectoryEntries": 0,
     "subtitle": "Figuras de clãs, alianças e rivalidades que atravessam a guerra e disputam memória, território e poder.",
@@ -82,5 +82,5 @@
   },
   "canonicalChanges": 0,
   "idsChanged": 0,
-  "githubChanged": false
+  "githubChanged": true
 }

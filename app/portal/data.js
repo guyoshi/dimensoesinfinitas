@@ -64,7 +64,7 @@ window.PORTAL_DATA = {
         "#b9d9df",
         "#f3e7c0"
       ],
-      "cover": "assets/covers/ruinas-dos-ceus.webp",
+      "cover": "assets/books/ciclo-de-jesed/ruinas-dos-ceus/cover.webp",
       "synopsis": "Em Etérea, ilhas flutuam acima de um mundo que ninguém acredita existir. Entre rituais de leveza, correntes de vento e uma sociedade que aprendeu a tratar todo peso como ameaça, Jokara Amaréa percebe sinais que os Oradores preferem silenciar: pedras começam a cair, os ventos falham e uma criança encontrada no vazio pronuncia palavras que não deveria conhecer. Quando uma mulher condenada anuncia que os céus cairão, Jokara precisa decidir se continuará obedecendo a uma civilização construída sobre certezas ou se aceitará o fardo de uma verdade capaz de destruí-la.\n\nQuando Etérea finalmente se rompe, o povo que jamais tocou o chão desperta numa superfície desconhecida, onde fome, lama, animais e medo substituem os antigos rituais. Ferida e cercada por sobreviventes que disputam o significado de força, Jokara terá de enfrentar não apenas as criaturas da floresta, mas a possibilidade de que o maior perigo seja reconstruir, sob outro nome, as mesmas injustiças que fizeram o céu desabar.\n\nRuínas dos Céus é uma fantasia épica sobre fé, sobrevivência e o nascimento de um legado. Uma história em que leveza e peso deixam de ser opostos, a verdade exige sacrifício e toda queda pode esconder o primeiro passo de um novo ciclo.",
       "teaser": "Quando as ilhas de Etérea começam a cair, uma jovem desacreditada precisa carregar a verdade até uma superfície que seu povo jurava não existir."
     },
@@ -80,7 +80,7 @@ window.PORTAL_DATA = {
         "#2b2118",
         "#b6945e"
       ],
-      "cover": "assets/covers/guerras-de-sangue.webp",
+      "cover": "assets/books/ciclo-de-jesed/guerras-de-sangue/cover.webp",
       "synopsis": "Mais de duzentos ciclos depois da Queda, a Dinastia Polar mantém Kaendar unida por leis, memória e medo. Mas quando dois jovens Polar são encontrados mortos junto de um talismã Tondrar, a paz construída por Orionus começa a ruir. As soberanas gêmeas Kaelina e Alyra herdam o mesmo trono e respostas opostas: uma acredita que a verdade ainda pode impedir a guerra; a outra sabe que, em Jesed, hesitar pode parecer fraqueza.\n\nEnquanto os clãs medem fome, território e antigas humilhações, Rendar retorna da floresta carregando os nomes de sua família morta e uma vingança que pode incendiar o mundo. Buldar, Tondrar, Vendrar, Glydar, Cendar, Urtistar e Fendelar são arrastados para alianças frágeis, mentiras políticas e batalhas em que ninguém permanece inocente. Por trás dos exércitos, segredos enterrados na morte de Orionus revelam que a guerra talvez tenha sido construída muito antes do primeiro sangue.\n\nGuerras de Sangue é uma fantasia política sobre duas irmãs, um reino cercado e povos que aprenderam a sobreviver cobrando dívidas. Em Jesed, justiça e vingança caminham juntas, a paz também pode oprimir e toda escolha capaz de salvar um povo condena alguém a pagar o preço.",
       "teaser": "Um talismã junto a dois mortos rompe a paz de Jesed e coloca duas soberanas, oito clãs e uma vingança antiga no caminho da guerra."
     },

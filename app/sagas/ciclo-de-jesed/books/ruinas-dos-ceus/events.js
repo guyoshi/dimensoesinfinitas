@@ -1,12 +1,10 @@
 (()=>{const R=window.RS,{D,E,S,st,LORE,SAGAS,BOOKS,$,go}=R;
 function selectorCardHtml(item, books){
   const active=item.status==='active';
-  const isCurrent=books?item.id==='ruinas-dos-ceus':item.id==='ciclo-de-jesed';
-  let attrs='';
-  if(active&&isCurrent) attrs='data-selector-home';
-  else if(active&&!isCurrent) attrs=`data-selector-href="guerras.html"`;
-  const media=books?(item.cover?`<span class="selector-cover"><img src="${E(item.cover)}" alt=""></span>`:`<span class="selector-cover symbol">✦</span>`):'';
-  return `<button class="selector-card ${item.status}" ${active?'':'disabled'} ${attrs}>${media}<strong>${E(item.name)}</strong><small>${active?'Disponível':'Bloqueado nesta etapa'}</small></button>`;
+  const href=books?(item.id==='ruinas-dos-ceus'?'ruinas.html#/inicio':item.id==='guerras-de-sangue'?'guerras.html#/dashboard':''):item.id==='ciclo-de-jesed'?'index.html#/books':'';
+  const media=books?(item.cover?`<span class="selector-cover"><img src="${E(item.cover)}" alt="Capa de ${E(item.name)}"></span>`:`<span class="selector-cover symbol">✦</span>`):'';
+  const inner=`${media}<strong>${E(item.name)}</strong><small>${active&&href?'Disponível':'Bloqueado nesta etapa'}</small>`;
+  return active&&href?`<a class="selector-card active" href="${href}">${inner}</a>`:`<button class="selector-card locked" disabled>${inner}</button>`;
 }
 function openSelector(type){
   const modal=$('#selectorModal'),content=$('#selectorContent');
@@ -70,8 +68,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeSearch();closeSelector();closeSettingsDrawer();}
 });
 document.addEventListener('click',e=>{
-  if(e.target.closest('[data-selector-home]')){closeSelector();return go('inicio');}
-  const extLink=e.target.closest('[data-selector-href]');if(extLink){window.location.href=extLink.dataset.selectorHref;return;}
   if(e.target.closest('[data-selector-close]'))return closeSelector();
   let x=e.target.closest('[data-map-open]');if(x){st.mapPhase=x.dataset.mapOpen;closeSearch();closeSelector();closeSettingsDrawer();return go('mapa');}
   x=e.target.closest('[data-character-view]');if(x){st.characterView=window.DI_CHARACTER_BROWSER?.writeView('ruinas-dos-ceus',x.dataset.characterView)||x.dataset.characterView;return R.render();}

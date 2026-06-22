@@ -10,7 +10,7 @@
     detail: detailView
   };
   const externalPages = { 'ruinas-dos-ceus': 'ruinas.html', 'guerras-de-sangue': 'guerras.html' };
-  const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/Ruínas dos Céus white.png', 'guerras-de-sangue': 'assets/branding/Guerras de Sangue white.png' };
+  const bookLogos = { 'ruinas-dos-ceus': 'assets/branding/ruinas-dos-ceus/logo-light.webp', 'guerras-de-sangue': 'assets/branding/guerras-de-sangue/logo-light.webp' };
   const icons = { compass: '✦', journal: '✦', crown: '♕', stars: '✧', portal: '◎', eye: '◉', union: '⬡', wind: '☁', 'crossed-swords': '⚔', fortress: '⛁', embers: '♨', hourglass: '⏳' };
   const synopsisHtml = value => String(value || '').split(/\n\s*\n/).filter(Boolean).map(paragraph => `<p>${escapeHtml(paragraph)}</p>`).join('');
   const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -33,13 +33,10 @@
 
   function renderBooks() {
     bookGrid.innerHTML = books.map(b => {
-      const active = b.status === 'active';
-      const style = b.cover ? ` style="background-image:url('${escapeHtml(b.cover)}')"` : '';
-      return `<article class="dim-card book-dim-card ${active ? 'active' : 'locked'}"${style} ${active ? `data-book="${escapeHtml(b.id)}"` : ''}>
-        <h3>Livro ${b.order} — ${escapeHtml(b.name)}</h3>
-        <p>${escapeHtml(b.teaser || b.synopsis || b.visual)}</p>
-        <div class="dim-state">${active ? 'Disponível' : 'Em preparação'}</div>
-      </article>`;
+      const href = b.status === 'active' ? externalPages[b.id] : '';
+      const cover = b.cover ? `<img class="portal-book-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}" loading="lazy">` : `<div class="portal-book-cover portal-cover-placeholder">${icons[b.icon] || '✦'}</div>`;
+      const inner = `${cover}<div class="portal-book-overlay"></div><div class="portal-book-copy"><span>Livro ${b.order}</span><h3>${escapeHtml(b.name)}</h3><p>${escapeHtml(b.teaser || b.synopsis || b.visual)}</p><strong class="dim-state">${href ? 'Abrir livro' : 'Em preparação'}</strong></div>`;
+      return href ? `<a class="dim-card book-dim-card active" href="${href}#/${b.id === 'ruinas-dos-ceus' ? 'inicio' : 'dashboard'}">${inner}</a>` : `<article class="dim-card book-dim-card locked" aria-disabled="true">${inner}</article>`;
     }).join('');
   }
 
@@ -49,7 +46,7 @@
     const href = externalPages[b.id];
     const logo = bookLogos[b.id];
     const titleHtml = logo ? `<img class="detail-logo" src="${escapeHtml(logo)}" alt="${escapeHtml(b.name)}" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><h2 class="section-title detail-logo-fallback" hidden>${escapeHtml(b.name)}</h2>` : `<h2 class="section-title">${escapeHtml(b.name)}</h2>`;
-    detailView.innerHTML = `<button class="back-link" data-back="books">← Voltar</button><div class="detail-card">${b.cover ? `<img class="detail-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}">` : ''}<p class="kicker">Livro ${b.order} · Ciclo de Jesed</p>${titleHtml}<div class="subtitle book-full-synopsis">${synopsisHtml(b.synopsis || b.visual)}</div>${href ? `<button class="go-button" data-go-href="${href}">Ir para a página do livro</button>` : '<p class="subtitle">Ainda em preparação.</p>'}</div>`;
+    detailView.innerHTML = `<button class="back-link" data-back="books">← Voltar</button><div class="detail-card">${b.cover ? `<img class="detail-cover" src="${escapeHtml(b.cover)}" alt="Capa de ${escapeHtml(b.name)}">` : ''}<p class="kicker">Livro ${b.order} · Ciclo de Jesed</p>${titleHtml}<div class="subtitle book-full-synopsis">${synopsisHtml(b.synopsis || b.visual)}</div>${href ? `<a class="go-button" href="${href}#/${b.id === 'ruinas-dos-ceus' ? 'inicio' : 'dashboard'}">Ir para a página do livro</a>` : '<p class="subtitle">Ainda em preparação.</p>'}</div>`;
   }
 
   function route() {
@@ -64,8 +61,6 @@
   document.addEventListener('click', event => {
     const sagaCard = event.target.closest('[data-saga]');
     if (sagaCard) { location.hash = '#/books'; return; }
-    const bookCard = event.target.closest('[data-book]');
-    if (bookCard) { location.hash = '#/book/' + bookCard.dataset.book; return; }
     const back = event.target.closest('[data-back]');
     if (back) { location.hash = back.dataset.back === 'sagas' ? '#/' : '#/books'; return; }
     const goHref = event.target.closest('[data-go-href]');

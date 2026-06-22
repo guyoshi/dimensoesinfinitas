@@ -4,7 +4,7 @@
   "instructions": "Substitua qualquer placeholder pelo arquivo definitivo mantendo exatamente o mesmo caminho, nome, formato e proporção aproximada. O código já está ligado a estes caminhos.",
   "items": [
     {
-      "path": "assets/atmosphere/ruinas/sidebar-sky-stone.webp",
+      "path": "assets/shared/reference/sidebar-sky-stone.webp",
       "file": "sidebar-sky-stone.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1200,
@@ -15,7 +15,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/sidebar-roots-fragments.webp",
+      "path": "assets/shared/reference/sidebar-roots-fragments.webp",
       "file": "sidebar-roots-fragments.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1200,
@@ -26,7 +26,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/cloud-distant-01.webp",
+      "path": "assets/shared/reference/cloud-distant-01.webp",
       "file": "cloud-distant-01.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1600,
@@ -37,7 +37,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/cloud-distant-02.webp",
+      "path": "assets/shared/reference/cloud-distant-02.webp",
       "file": "cloud-distant-02.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1600,
@@ -48,7 +48,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/cloud-distant-03.webp",
+      "path": "assets/shared/reference/cloud-distant-03.webp",
       "file": "cloud-distant-03.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1600,
@@ -59,7 +59,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/cloud-mid-01.webp",
+      "path": "assets/shared/reference/cloud-mid-01.webp",
       "file": "cloud-mid-01.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1200,
@@ -70,7 +70,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/cloud-mid-02.webp",
+      "path": "assets/shared/reference/cloud-mid-02.webp",
       "file": "cloud-mid-02.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1200,
@@ -81,7 +81,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/cloud-mid-03.webp",
+      "path": "assets/shared/reference/cloud-mid-03.webp",
       "file": "cloud-mid-03.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1200,
@@ -92,7 +92,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/mist-near-01.webp",
+      "path": "assets/shared/reference/mist-near-01.webp",
       "file": "mist-near-01.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1920,
@@ -103,7 +103,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/mist-near-02.webp",
+      "path": "assets/shared/reference/mist-near-02.webp",
       "file": "mist-near-02.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1920,
@@ -114,7 +114,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/floating-fragments.webp",
+      "path": "assets/shared/reference/floating-fragments.webp",
       "file": "floating-fragments.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 900,
@@ -125,7 +125,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/sun-glow.webp",
+      "path": "assets/shared/reference/sun-glow.webp",
       "file": "sun-glow.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 512,
@@ -136,7 +136,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/moon-glow.webp",
+      "path": "assets/shared/reference/moon-glow.webp",
       "file": "moon-glow.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 512,
@@ -147,7 +147,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/eterea-contemplative.webp",
+      "path": "assets/shared/reference/eterea-contemplative.webp",
       "file": "eterea-contemplative.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 2560,
@@ -158,7 +158,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/ruinas/place-card-overlay.webp",
+      "path": "assets/shared/reference/place-card-overlay.webp",
       "file": "place-card-overlay.webp",
       "folder": "assets/atmosphere/ruinas",
       "width": 1600,
@@ -169,7 +169,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/sidebar-leather-map.webp",
+      "path": "assets/shared/reference/sidebar-leather-map.webp",
       "file": "sidebar-leather-map.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 1200,
@@ -180,7 +180,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/sidebar-clan-marks.webp",
+      "path": "assets/shared/reference/sidebar-clan-marks.webp",
       "file": "sidebar-clan-marks.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 1200,
@@ -191,7 +191,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/ember-sprite.webp",
+      "path": "assets/shared/reference/ember-sprite.webp",
       "file": "ember-sprite.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 192,
@@ -202,7 +202,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/spark-sprite.webp",
+      "path": "assets/shared/reference/spark-sprite.webp",
       "file": "spark-sprite.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 256,
@@ -213,7 +213,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/ash-sprite-01.webp",
+      "path": "assets/shared/reference/ash-sprite-01.webp",
       "file": "ash-sprite-01.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 160,
@@ -224,7 +224,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/ash-sprite-02.webp",
+      "path": "assets/shared/reference/ash-sprite-02.webp",
       "file": "ash-sprite-02.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 160,
@@ -235,7 +235,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/ash-sprite-03.webp",
+      "path": "assets/shared/reference/ash-sprite-03.webp",
       "file": "ash-sprite-03.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 160,
@@ -246,7 +246,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/hot-dust.webp",
+      "path": "assets/shared/reference/hot-dust.webp",
       "file": "hot-dust.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 1600,
@@ -257,7 +257,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/smoke-haze.webp",
+      "path": "assets/shared/reference/smoke-haze.webp",
       "file": "smoke-haze.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 1920,
@@ -268,7 +268,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/metal-glint.webp",
+      "path": "assets/shared/reference/metal-glint.webp",
       "file": "metal-glint.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 1024,
@@ -279,7 +279,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/kaendar-night.webp",
+      "path": "assets/shared/reference/kaendar-night.webp",
       "file": "kaendar-night.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 2560,
@@ -290,7 +290,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/map-grain.webp",
+      "path": "assets/shared/reference/map-grain.webp",
       "file": "map-grain.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 2048,
@@ -301,7 +301,7 @@
       "replace_in_place": true
     },
     {
-      "path": "assets/atmosphere/guerras/place-parchment-overlay.webp",
+      "path": "assets/shared/reference/place-parchment-overlay.webp",
       "file": "place-parchment-overlay.webp",
       "folder": "assets/atmosphere/guerras",
       "width": 1600,

@@ -196,7 +196,7 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 - O modo contemplativo deve poder ser fechado por botão e por `Escape`, sem prender o foco ou iniciar áudio contra a política do navegador.
 - Não remover ou contornar preferências de música, volume e silenciar.
 - O relógio visual de Ruínas é temporário e deve continuar identificado como ferramenta de teste até aprovação.
-- Não criar brasão Fendelar. `assets/clans/temp/fendelar-mark.webp` é somente uma marca neutra e não heráldica.
+- Não criar brasão Fendelar. `assets/shared/reference/fendelar-mark.webp` é somente uma marca neutra e não heráldica.
 - Recursos em `assets/**/temp/` são substituíveis, não canônicos e devem permanecer documentados.
 - Ao substituir um placeholder, preservar o caminho é preferível; se o caminho mudar, atualizar CSS, documentação e validação.
 - A Etapa 5.5 não autoriza mudanças de nomes, descrições ou informações canônicas.
@@ -276,9 +276,9 @@ Se a validação detectar corrupção, referência quebrada ou desaparecimento i
 - Personagens aparecem depois dos textos, em cartões clicáveis com foto, nome e função. Não inventar personagem para um clã sem figura individualizada.
 - É proibido restaurar “Lore relacionada” como bloco genérico. Manter Alimentos, Fauna e Flora em seções independentes.
 - Cartões de recursos devem apontar para fichas válidas e usar fallbacks locais quando a imagem não existir.
-- Preservar `assets/lore/temp/food-placeholder.webp`, `fauna-placeholder.webp` e `flora-placeholder.webp` enquanto não houver imagem canônica.
+- Preservar `assets/books/ciclo-de-jesed/shared/lore/temp/food-placeholder.webp`, `fauna-placeholder.webp` e `flora-placeholder.webp` enquanto não houver imagem canônica.
 - O Arquivo aprofundado do clã preserva o conteúdo extenso anterior e não pode ser apagado para simplificar a página.
-- Os Fendelar continuam sem brasão formal. `assets/clans/temp/fendelar-mark.webp` não é brasão e não pode ser promovido a símbolo canônico.
+- Os Fendelar continuam sem brasão formal. `assets/shared/reference/fendelar-mark.webp` não é brasão e não pode ser promovido a símbolo canônico.
 - A situação final de cada clã deve respeitar o encerramento de *Guerras de Sangue*; não retroceder para estados anteriores ao Capítulo 29.
 - O relatório `data/sagas/ciclo-de-jesed/audits/clans-etapa-10.json` deve continuar válido.
 
