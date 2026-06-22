@@ -1,2 +1,2 @@
 Executar a reorganização canónica de assets e a revisão de Guerras de Sangue.
-Tentativa 3 com checksums individuais.
+Tentativa 4 com patch íntegro restaurado.
