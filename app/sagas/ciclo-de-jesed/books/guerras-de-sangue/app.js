@@ -342,17 +342,16 @@
     return `<img class="${cls}" src="${escapeHtml(book.cover)}" alt="Capa de ${escapeHtml(book.name)}" onerror="${onerror}"><div class="${cls} book-cover-placeholder" hidden>${icon(book.icon)}</div>`;
   }
   function renderBooks() {
-    const hrefFor = book => book.id === "ruinas-dos-ceus" ? "ruinas.html#/inicio" : book.id === "guerras-de-sangue" ? "guerras.html#/dashboard" : "";
     refs.main.innerHTML = `<div class="page-enter books-page">
-      ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Abra os livros disponíveis ou consulte os volumes ainda em preparação.")}
+      ${pageHeader("Ciclo de Jesed", "Os cinco livros", "Abra um livro para ver os detalhes, ou consulte os volumes ainda em preparação.")}
       ${canonNotice()}
       <section class="bookshelf enhanced-bookshelf" aria-label="Livros do Ciclo de Jesed">
         ${D.books.map(book => {
-          const href=hrefFor(book), active=book.status === "active" && href;
-          const media=book.cover?"":`<div class="book-card-cover book-cover-placeholder">${icon(book.icon)}</div>`;
-          const coverVar=book.cover?`--book-cover:url('${escapeHtml(book.cover)}');`:"";
-          const inner=`${media}<div class="book-cover-overlay"></div><span class="book-number readable-book-number">Livro ${book.order}</span><div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.teaser || book.synopsis || book.visual)}</p></div><div class="book-status"><span>${active ? "Livro concluído" : "Em preparação"}</span><span>${active ? "Abrir livro" : "Bloqueado"}</span></div>`;
-          return active?`<a class="book-card cover-book-card active has-cover" href="${href}" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]};${coverVar}">${inner}</a>`:`<article class="book-card cover-book-card locked ${book.cover ? "has-cover" : ""}" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]};${coverVar}" aria-disabled="true">${inner}</article>`;
+          const active=book.status === "active";
+          const current=book.id === BOOK_ID;
+          const media=bookCoverHtml(book, "book-card-cover");
+          const inner=`${media}<div class="book-cover-overlay"></div><span class="book-number readable-book-number">Livro ${book.order}</span><div class="book-card-copy"><h2>${escapeHtml(book.name)}</h2><p>${escapeHtml(book.teaser || book.synopsis || book.visual)}</p></div><div class="book-status"><span>${active ? "Livro concluído" : "Em preparação"}</span><span>${active ? (current ? "Você está aqui" : "Ver detalhes") : "Bloqueado"}</span></div>`;
+          return active?`<div class="book-card cover-book-card active has-cover" data-route="book/${book.id}" tabindex="0" role="link" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]}">${inner}</div>`:`<article class="book-card cover-book-card locked ${book.cover ? "has-cover" : ""}" style="--book-a:${book.palette[0]};--book-b:${book.palette[1]};--book-c:${book.palette[2]}" aria-disabled="true">${inner}</article>`;
         }).join("")}
       </section>
     </div>`;
