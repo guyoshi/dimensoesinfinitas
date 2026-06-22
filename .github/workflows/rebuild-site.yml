@@ -101,7 +101,21 @@ jobs:
           node-version: '20'
 
       - name: Validar conteúdo, código e assets
-        run: npm run validate:all
+        shell: bash
+        run: |
+          set +e
+          npm run validate:all > .github/validation-diagnostics.txt 2>&1
+          STATUS=$?
+          cat .github/validation-diagnostics.txt
+          if [ "$STATUS" -ne 0 ]; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add -A
+            git commit -m 'ci: preserva preview da reorganização para diagnóstico'
+            git push --force origin HEAD:workflow-preview
+            exit "$STATUS"
+          fi
+          rm .github/validation-diagnostics.txt
 
       - name: Verificações adicionais
         shell: bash
