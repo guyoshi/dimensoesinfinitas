@@ -1,0 +1,134 @@
+/* Herdeiros das Cinzas — tema estrutural (cinza fria + brasa discreta + osso).
+   Azul reservado a seleções; brasa/cinza são a identidade visual. */
+body[data-book="herdeiros-das-cinzas"]{
+  --hc-bg-deepest:#0c0b0a;
+  --hc-ash:#1c1a19;
+  --hc-ash-elevated:#252221;
+  --hc-ash-bright:#312d2c;
+  --hc-ember:#a54b37;
+  --hc-ember-bright:#cf7355;
+  --hc-bone:#d4c4b8;
+  --hc-text-secondary:#8a8078;
+  --hc-soot:#4a3f3a;
+  --hc-select:#7eb8d4;
+  --hc-select-strong:#3a6880;
+  --hc-select-soft:rgba(126,184,212,.18);
+  --hc-effect-opacity:.88;
+  background:var(--hc-bg-deepest);
+}
+
+/* ===== Estrutura base do shell ===== */
+body[data-book="herdeiros-das-cinzas"] .app-shell{min-height:100vh}
+body[data-book="herdeiros-das-cinzas"] .sidebar{
+  position:fixed;inset:0 auto 0 0;width:var(--di-sidebar-width);z-index:60;
+  display:flex;flex-direction:column;color:var(--di-text);
+  background-color:var(--hc-ash);backdrop-filter:blur(14px);
+  transition:width .22s ease,transform .22s ease;
+}
+body[data-book="herdeiros-das-cinzas"] .sidebar-brand{
+  min-height:76px;padding:16px 15px;display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--di-border);
+}
+body[data-book="herdeiros-das-cinzas"] .brand-button{
+  flex:1;min-width:0;display:flex;align-items:center;gap:11px;padding:0;border:0;
+  background:transparent;color:inherit;text-align:left;cursor:pointer;
+}
+body[data-book="herdeiros-das-cinzas"] .brand-sigil{
+  width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:50%;
+  border:1px solid var(--di-border-strong);background:rgba(255,255,255,.04);
+}
+body[data-book="herdeiros-das-cinzas"] .brand-copy{display:flex;flex-direction:column;min-width:0}
+body[data-book="herdeiros-das-cinzas"] .brand-copy strong{font-size:1.02rem;white-space:nowrap;color:var(--di-heading)}
+body[data-book="herdeiros-das-cinzas"] .brand-copy small{font-size:.74rem;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+body[data-book="herdeiros-das-cinzas"] .sidebar-nav{flex:1;overflow:auto;padding:12px 11px 18px;scrollbar-width:thin}
+body[data-book="herdeiros-das-cinzas"] .nav-group{margin:10px 0 15px}
+body[data-book="herdeiros-das-cinzas"] .nav-group-title{
+  display:block;padding:0 11px 6px;color:var(--di-muted);font-size:.66rem;font-weight:800;
+  letter-spacing:.14em;text-transform:uppercase;opacity:.78;
+}
+body[data-book="herdeiros-das-cinzas"] .nav-item{
+  position:relative;width:100%;min-height:42px;display:flex;align-items:center;gap:10px;
+  padding:9px 11px;margin:2px 0;border:1px solid transparent;border-radius:11px;
+  background:transparent;color:var(--di-text);text-decoration:none;text-align:left;cursor:pointer;
+  transition:var(--di-transition);
+}
+body[data-book="herdeiros-das-cinzas"] .nav-item:hover{background:color-mix(in srgb,var(--di-accent) 10%,transparent);border-color:var(--di-border)}
+body[data-book="herdeiros-das-cinzas"] .nav-item.active{background:var(--hc-select-soft);color:var(--di-heading);border-color:var(--hc-select)}
+body[data-book="herdeiros-das-cinzas"] .nav-icon{width:20px;flex:0 0 20px;display:grid;place-items:center}
+body[data-book="herdeiros-das-cinzas"] .nav-icon svg,
+body[data-book="herdeiros-das-cinzas"] .selector-icon svg,
+body[data-book="herdeiros-das-cinzas"] .icon-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+body[data-book="herdeiros-das-cinzas"] .sidebar-footer{padding:13px;border-top:1px solid var(--di-border);display:grid;gap:8px}
+body[data-book="herdeiros-das-cinzas"] .status-stamp{display:flex;align-items:center;gap:8px;color:var(--di-muted);font-size:.75rem;opacity:.92}
+body[data-book="herdeiros-das-cinzas"] .status-dot{width:7px;height:7px;border-radius:50%;background:var(--di-accent);box-shadow:0 0 10px color-mix(in srgb,var(--di-accent) 55%,transparent)}
+body[data-book="herdeiros-das-cinzas"] .workspace{margin-left:var(--di-sidebar-width);min-height:100vh;transition:margin-left .22s ease}
+body[data-book="herdeiros-das-cinzas"] .topbar{
+  position:sticky;top:0;z-index:50;color:var(--di-text);
+  background:color-mix(in srgb,var(--hc-ash) 88%,transparent);border-bottom:1px solid var(--di-border);
+  backdrop-filter:blur(15px);
+}
+body[data-book="herdeiros-das-cinzas"] .topbar-main{min-height:64px;display:flex;align-items:center;padding:0 22px}
+body[data-book="herdeiros-das-cinzas"] .topbar-actions{width:100%;display:flex;align-items:center;gap:8px;min-width:0}
+body[data-book="herdeiros-das-cinzas"] .topbar-path{min-height:30px;display:flex;align-items:center;padding:4px 22px;border-top:1px solid var(--di-border);font-size:.77rem;color:var(--di-muted);background:rgba(255,255,255,.015)}
+body[data-book="herdeiros-das-cinzas"] .breadcrumbs{display:flex;align-items:center;gap:7px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+body[data-book="herdeiros-das-cinzas"] .main-content{padding:28px 32px 60px;max-width:1160px}
+body[data-book="herdeiros-das-cinzas"] .modal{
+  position:fixed;inset:0;z-index:100;display:grid;place-items:center;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(6px);
+}
+body[data-book="herdeiros-das-cinzas"] .drawer{
+  position:fixed;inset:0;z-index:100;
+}
+body[data-book="herdeiros-das-cinzas"] .exit-link{
+  font-size:.74rem;color:var(--di-muted);text-decoration:none;opacity:.72;
+}
+body[data-book="herdeiros-das-cinzas"] .exit-link:hover{opacity:1;color:var(--di-text)}
+
+/* App shell background */
+body[data-book="herdeiros-das-cinzas"] .app-shell{
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 20%, rgba(165,75,55,.06), transparent 58%),
+    radial-gradient(ellipse 55% 50% at 85% 80%, rgba(130,108,88,.05), transparent 62%),
+    var(--hc-bg-deepest);
+}
+
+/* Sidebar decorativa */
+body[data-book="herdeiros-das-cinzas"] .sidebar::before{
+  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+  background:radial-gradient(ellipse 140% 60% at 50% 0%, rgba(165,75,55,.09), transparent 55%);
+  z-index:0;
+}
+body[data-book="herdeiros-das-cinzas"] .sidebar::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(165,75,55,.4),transparent);
+}
+
+/* Seleções activas — azul */
+body[data-book="herdeiros-das-cinzas"] .filter-chip.active,
+body[data-book="herdeiros-das-cinzas"] .character-view-button.active,
+body[data-book="herdeiros-das-cinzas"] .preset-button.active,
+body[data-book="herdeiros-das-cinzas"] .book-step.active,
+body[data-book="herdeiros-das-cinzas"] .switch.on,
+body[data-book="herdeiros-das-cinzas"] .timeline-entry-card.selected,
+body[data-book="herdeiros-das-cinzas"] [aria-current="true"],
+body[data-book="herdeiros-das-cinzas"] button:focus-visible{
+  --di-accent:var(--hc-select);
+  --di-accent-strong:var(--hc-select-strong);
+  outline-color:var(--hc-select);
+}
+
+/* Mobile */
+@media(max-width:860px){
+  body[data-book="herdeiros-das-cinzas"] .sidebar{transform:translateX(-100%)}
+  body[data-book="herdeiros-das-cinzas"] .sidebar.mobile-open{transform:none}
+  body[data-book="herdeiros-das-cinzas"] .workspace{margin-left:0}
+  body[data-book="herdeiros-das-cinzas"] .main-content{padding:20px 16px 48px}
+}
+
+/* Sidebar collapsed */
+body[data-book="herdeiros-das-cinzas"] .sidebar.collapsed{width:var(--di-sidebar-compact)}
+body[data-book="herdeiros-das-cinzas"] .sidebar.collapsed .brand-copy,
+body[data-book="herdeiros-das-cinzas"] .sidebar.collapsed .nav-label,
+body[data-book="herdeiros-das-cinzas"] .sidebar.collapsed .nav-group-title,
+body[data-book="herdeiros-das-cinzas"] .sidebar.collapsed .sidebar-footer{display:none}
+body[data-book="herdeiros-das-cinzas"] .sidebar.collapsed~.workspace{margin-left:var(--di-sidebar-compact)}

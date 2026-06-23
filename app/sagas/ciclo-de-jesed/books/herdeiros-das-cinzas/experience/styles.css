@@ -1,0 +1,65 @@
+/* Herdeiros das Cinzas — atmosfera (cinzas a cair, brasas, sombras frias) */
+body[data-book="herdeiros-das-cinzas"]{--hc-effect-opacity:.88}
+
+#hcAshCanvas,#hcAshCanvasFront{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:var(--hc-effect-opacity)}
+#hcAshCanvas{z-index:2}
+#hcAshCanvasFront{z-index:40}
+body[data-book="herdeiros-das-cinzas"] .particle-layer{display:none!important}
+
+/* Sombras frias: gradiente de cinza que se desloca lentamente */
+body[data-book="herdeiros-das-cinzas"]::before{
+  content:"";position:fixed;inset:-10%;z-index:1;pointer-events:none;
+  background:radial-gradient(46% 38% at 22% 16%, rgba(0,0,0,.38), transparent 60%),
+             radial-gradient(50% 42% at 80% 80%, rgba(165,75,55,.08), transparent 62%);
+  opacity:calc(.65 * var(--hc-effect-opacity));
+  animation:hcShadowDrift 100s ease-in-out infinite alternate;
+}
+body[data-book="herdeiros-das-cinzas"].hc-no-shadow-drift::before{display:none}
+@keyframes hcShadowDrift{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(3%,2%)}
+  100%{transform:translate(-2%,-3%)}
+}
+
+/* Brasas distantes: pontos quentes que acendem e apagam devagar */
+#hcEmberLights{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+#hcEmberLights span{
+  position:absolute;width:var(--hc-light-size,2px);height:var(--hc-light-size,2px);
+  border-radius:50%;background:#cf7355;
+  box-shadow:0 0 6px 2px rgba(207,115,85,.5);
+  opacity:0;
+  animation:hcEmberFlicker var(--hc-light-duration,11s) ease-in-out infinite;
+  animation-delay:var(--hc-light-delay,0s);
+}
+@keyframes hcEmberFlicker{0%,100%{opacity:0}8%{opacity:.04}40%{opacity:.6}60%{opacity:.5}92%{opacity:.04}}
+
+/* Fumo frio de ruínas */
+#hcSmoke{position:fixed;inset:auto 0 0 0;height:42vh;z-index:1;pointer-events:none;opacity:.12;overflow:hidden}
+#hcSmoke::before,#hcSmoke::after{
+  content:"";position:absolute;width:60vw;height:100%;left:-65vw;
+  background:radial-gradient(ellipse at center, rgba(160,155,150,.20), transparent 72%);
+  filter:blur(24px);animation:hcSmokeDrift 150s linear infinite;
+}
+#hcSmoke::after{top:8%;animation-duration:195s;animation-delay:-70s;opacity:.6}
+@keyframes hcSmokeDrift{to{transform:translateX(180vw)}}
+
+/* Modo contemplativo */
+.hc-contemplative{background:#0a0908}
+.hc-contemplative .contemplative-scene{background:radial-gradient(120% 90% at 50% 20%, #1c1a19 0%, #0c0b0a 60%, #070605 100%)}
+.hc-contemplative canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hc-contemplative .contemplative-caption{color:var(--hc-bone,#d4c4b8)}
+
+/* Modo Desempenho */
+.performance-mode #hcAshCanvas,
+.performance-mode #hcAshCanvasFront,
+.performance-mode #hcEmberLights,
+.performance-mode #hcSmoke,
+.no-particles #hcAshCanvas,
+.no-particles #hcAshCanvasFront{display:none!important}
+.performance-mode #hcEmberLights span{animation:none;opacity:.2}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-book="herdeiros-das-cinzas"]::before{animation:none}
+  #hcEmberLights span{animation:none;opacity:.25}
+  #hcSmoke::before,#hcSmoke::after{animation:none}
+}

@@ -1,0 +1,72 @@
+/* Coração de Poeira — atmosfera (areia a derivar, espirais temporais, luz quase extinta) */
+body[data-book="coracao-de-poeira"]{--cp-effect-opacity:.88}
+
+#cpSandCanvas,#cpSandCanvasFront{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:var(--cp-effect-opacity)}
+#cpSandCanvas{z-index:2}
+#cpSandCanvasFront{z-index:40}
+body[data-book="coracao-de-poeira"] .particle-layer{display:none!important}
+
+/* Sombra dourada muito lenta — tempo suspenso */
+body[data-book="coracao-de-poeira"]::before{
+  content:"";position:fixed;inset:-10%;z-index:1;pointer-events:none;
+  background:radial-gradient(46% 38% at 18% 22%, rgba(0,0,0,.36), transparent 60%),
+             radial-gradient(50% 42% at 84% 76%, rgba(168,139,88,.06), transparent 62%);
+  opacity:calc(.62 * var(--cp-effect-opacity));
+  animation:cpShadowDrift 120s ease-in-out infinite alternate;
+}
+body[data-book="coracao-de-poeira"].cp-no-shadow-drift::before{display:none}
+@keyframes cpShadowDrift{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(5%,3%)}
+  100%{transform:translate(-4%,-2%)}
+}
+
+/* Luz quase extinta — pontos âmbar muito subtis */
+#cpDistantLights{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+#cpDistantLights span{
+  position:absolute;width:var(--cp-light-size,1.5px);height:var(--cp-light-size,1.5px);
+  border-radius:50%;background:#d7c59b;
+  box-shadow:0 0 5px 1px rgba(215,197,155,.45);
+  opacity:0;
+  animation:cpLightFlicker var(--cp-light-duration,14s) ease-in-out infinite;
+  animation-delay:var(--cp-light-delay,0s);
+}
+@keyframes cpLightFlicker{0%,100%{opacity:0}10%{opacity:.03}45%{opacity:.55}55%{opacity:.5}90%{opacity:.03}}
+
+/* Espiral temporal — anel que roda muitíssimo devagar */
+#cpTemporalRing{position:fixed;inset:0;z-index:1;pointer-events:none;display:grid;place-items:center;opacity:.07}
+#cpTemporalRing svg{width:min(100vmin,640px);height:auto;animation:cpRingSpin 220s linear infinite}
+@keyframes cpRingSpin{to{transform:rotate(360deg)}}
+
+/* Névoa de poeira horizontal */
+#cpHaze{position:fixed;inset:auto 0 0 0;height:50vh;z-index:1;pointer-events:none;opacity:.14;overflow:hidden}
+#cpHaze::before,#cpHaze::after{
+  content:"";position:absolute;width:70vw;height:100%;left:-75vw;
+  background:radial-gradient(ellipse at center, rgba(168,139,88,.18), transparent 72%);
+  filter:blur(28px);animation:cpHazeDrift 170s linear infinite;
+}
+#cpHaze::after{top:12%;animation-duration:220s;animation-delay:-80s;opacity:.7}
+@keyframes cpHazeDrift{to{transform:translateX(180vw)}}
+
+/* Modo contemplativo */
+.cp-contemplative{background:#0c0906}
+.cp-contemplative .contemplative-scene{background:radial-gradient(120% 90% at 50% 20%, #261d14 0%, #0f0c08 60%, #080503 100%)}
+.cp-contemplative canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.cp-contemplative .contemplative-caption{color:var(--cp-ivory,#ede3d0)}
+
+/* Modo Desempenho */
+.performance-mode #cpSandCanvas,
+.performance-mode #cpSandCanvasFront,
+.performance-mode #cpDistantLights,
+.performance-mode #cpHaze,
+.performance-mode #cpTemporalRing,
+.no-particles #cpSandCanvas,
+.no-particles #cpSandCanvasFront{display:none!important}
+.performance-mode #cpDistantLights span{animation:none;opacity:.2}
+
+@media(prefers-reduced-motion:reduce){
+  body[data-book="coracao-de-poeira"]::before{animation:none}
+  #cpDistantLights span{animation:none;opacity:.22}
+  #cpHaze::before,#cpHaze::after{animation:none}
+  #cpTemporalRing svg{animation:none}
+}

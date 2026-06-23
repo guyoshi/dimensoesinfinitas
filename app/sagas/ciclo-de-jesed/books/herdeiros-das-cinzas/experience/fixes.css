@@ -1,0 +1,99 @@
+/* Herdeiros das Cinzas — ajustes de componentes partilhados */
+
+/* Tipografia e superfícies */
+body[data-book="herdeiros-das-cinzas"] .panel{background:var(--hc-ash-elevated);border:1px solid var(--di-border)}
+body[data-book="herdeiros-das-cinzas"] .card{background:var(--hc-ash-elevated);border:1px solid var(--di-border)}
+body[data-book="herdeiros-das-cinzas"] .card:hover{border-color:var(--di-border-strong)}
+body[data-book="herdeiros-das-cinzas"] h1,
+body[data-book="herdeiros-das-cinzas"] h2,
+body[data-book="herdeiros-das-cinzas"] h3{color:var(--di-heading)}
+body[data-book="herdeiros-das-cinzas"] .eyebrow{color:var(--di-accent);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+body[data-book="herdeiros-das-cinzas"] .tag{background:rgba(165,75,55,.14);border:1px solid rgba(165,75,55,.28);color:var(--hc-ember-bright);font-size:.72rem;padding:3px 8px;border-radius:6px}
+body[data-book="herdeiros-das-cinzas"] .meta{color:var(--di-muted);font-size:.76rem}
+
+/* Botões */
+body[data-book="herdeiros-das-cinzas"] .primary-button{
+  background:var(--di-accent);color:var(--di-on-accent);border:none;
+  padding:10px 20px;border-radius:10px;font-weight:600;cursor:pointer;
+}
+body[data-book="herdeiros-das-cinzas"] .primary-button:hover{background:var(--hc-ember-bright)}
+body[data-book="herdeiros-das-cinzas"] .secondary-button{
+  background:transparent;color:var(--di-text);border:1px solid var(--di-border);
+  padding:9px 18px;border-radius:10px;cursor:pointer;
+}
+body[data-book="herdeiros-das-cinzas"] .secondary-button:hover{border-color:var(--di-border-strong);color:var(--di-heading)}
+body[data-book="herdeiros-das-cinzas"] .icon-btn{
+  width:38px;height:38px;display:grid;place-items:center;border-radius:9px;
+  border:1px solid transparent;background:transparent;color:var(--di-muted);cursor:pointer;
+}
+body[data-book="herdeiros-das-cinzas"] .icon-btn:hover{background:rgba(255,255,255,.06);color:var(--di-text);border-color:var(--di-border)}
+
+/* Selector de saga/livro */
+body[data-book="herdeiros-das-cinzas"] .selector-button{
+  display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:9px;
+  border:1px solid transparent;background:transparent;color:var(--di-text);cursor:pointer;font-size:.85rem;
+}
+body[data-book="herdeiros-das-cinzas"] .selector-button:hover{background:rgba(255,255,255,.05);border-color:var(--di-border)}
+body[data-book="herdeiros-das-cinzas"] .search-trigger{
+  flex:1;display:flex;align-items:center;gap:8px;padding:7px 12px;
+  border:1px solid var(--di-border);border-radius:9px;background:rgba(255,255,255,.03);
+  color:var(--di-muted);cursor:pointer;font-size:.84rem;min-width:0;
+}
+body[data-book="herdeiros-das-cinzas"] .search-trigger:hover{border-color:var(--di-border-strong);color:var(--di-text)}
+body[data-book="herdeiros-das-cinzas"] .utility-controls{display:flex;align-items:center;gap:4px;margin-left:auto;flex-shrink:0}
+
+/* Gaveta de configurações */
+body[data-book="herdeiros-das-cinzas"] .drawer-panel{
+  position:fixed;right:0;top:0;bottom:0;width:min(420px,95vw);
+  background:var(--hc-ash);border-left:1px solid var(--di-border);
+  overflow-y:auto;z-index:101;padding:24px;
+}
+body[data-book="herdeiros-das-cinzas"] .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.4)}
+body[data-book="herdeiros-das-cinzas"] .drawer-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
+body[data-book="herdeiros-das-cinzas"] .settings-group h3{color:var(--hc-bone);font-size:.92rem;margin:0 0 4px}
+body[data-book="herdeiros-das-cinzas"] .setting-copy strong{color:var(--hc-bone)}
+
+/* Linha do tempo */
+body[data-book="herdeiros-das-cinzas"] .timeline-phase>summary small{color:var(--hc-ember-bright)}
+body[data-book="herdeiros-das-cinzas"] .timeline-entry-card.selected{border-color:var(--hc-select)}
+body[data-book="herdeiros-das-cinzas"] .book-step.active{background:var(--hc-select-strong);color:#fff}
+
+/* Modal de pesquisa */
+body[data-book="herdeiros-das-cinzas"] .search-modal-panel{
+  background:var(--hc-ash-elevated);border:1px solid var(--di-border);
+  border-radius:16px;width:min(640px,92vw);max-height:80vh;overflow:hidden;display:flex;flex-direction:column;
+}
+body[data-book="herdeiros-das-cinzas"] .search-box-large{
+  display:flex;align-items:center;gap:10px;padding:16px 20px;border-bottom:1px solid var(--di-border);
+}
+body[data-book="herdeiros-das-cinzas"] .search-box-large input{
+  flex:1;background:transparent;border:none;outline:none;color:var(--di-text);font-size:1rem;
+}
+
+/* Perfis de desempenho */
+body[data-book="herdeiros-das-cinzas"] .preset-button{
+  padding:8px 14px;border-radius:8px;border:1px solid var(--di-border);
+  background:transparent;color:var(--di-muted);cursor:pointer;font-size:.82rem;
+}
+body[data-book="herdeiros-das-cinzas"] .preset-button.active{
+  background:var(--hc-select-soft);border-color:var(--hc-select);color:var(--di-heading);
+}
+
+/* Switch toggle */
+body[data-book="herdeiros-das-cinzas"] .switch{
+  width:38px;height:22px;border-radius:11px;border:none;
+  background:rgba(255,255,255,.12);cursor:pointer;position:relative;
+}
+body[data-book="herdeiros-das-cinzas"] .switch.on{background:var(--hc-select)}
+body[data-book="herdeiros-das-cinzas"] .switch::after{
+  content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;
+  background:#fff;transition:transform .18s;
+}
+body[data-book="herdeiros-das-cinzas"] .switch.on::after{transform:translateX(16px)}
+
+/* Transição de página */
+body[data-book="herdeiros-das-cinzas"] .transition-veil{
+  position:fixed;inset:0;z-index:90;background:var(--hc-bg-deepest);
+  opacity:0;pointer-events:none;transition:opacity .18s;
+}
+body[data-book="herdeiros-das-cinzas"] .transition-veil.active{opacity:1;pointer-events:all}

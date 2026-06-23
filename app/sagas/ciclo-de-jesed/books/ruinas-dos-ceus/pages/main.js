@@ -7,7 +7,7 @@ function livros(){
     const clickable=active||previewable;
     const current=b.id==='ruinas-dos-ceus';
     const coverUrl=b.cover||BOOK_COVER_FALLBACK[b.id];
-    return `<article class="book-card ${b.status} ${current?'current':''} ${clickable?'click':''}" ${clickable?`data-go="livro/${b.id}"`:'disabled'}>
+    return `<article class="book-card ${clickable?'active':'locked'} ${current?'current':''} ${clickable?'click':''}" ${clickable?`data-go="livro/${b.id}"`:'disabled'}>
       <div class="book-card-cover-frame">${coverUrl?`<img class="book-card-cover" src="${E(coverUrl)}" alt="" onerror="this.remove()">`:''}<span class="book-number">Livro ${b.order}</span></div>
       <div class="book-card-copy"><h3>${E(b.name)}</h3><p>${E(b.teaser||b.visual)}</p></div>
       <div class="book-status"><span>${active?'Livro concluído':'Em preparação'}</span><span>${active?(current?'Você está aqui':'Ver detalhes'):(clickable?'Ver detalhes':'Bloqueado')}</span></div>

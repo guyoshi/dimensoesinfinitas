@@ -1,9 +1,9 @@
-window.DI_DATA = {
+window.HC_DATA = {
   "meta": {
     "project": "Dimensões Infinitas",
     "phase": "Fundação do livro",
     "activeSagaId": "ciclo-de-jesed",
-    "activeBookId": "dinastia-polar"
+    "activeBookId": "herdeiros-das-cinzas"
   },
   "sagas": [
     { "id": "ciclo-de-jesed", "name": "Ciclo de Jesed", "status": "active", "theme": "Mapa de explorador", "symbol": "compass", "description": "Tudo nasce, cresce e morre. Para depois recomeçar." },
@@ -32,7 +32,7 @@ window.DI_DATA = {
       "synopsis": "Mais de duzentos ciclos depois da Queda, a Dinastia Polar mantém Kaendar unida por leis, memória e medo. Mas quando dois jovens Polar são encontrados mortos junto de um talismã Tondrar, a paz construída por Orionus começa a ruir. As soberanas gêmeas Kaelina e Alyra herdam o mesmo trono e respostas opostas: uma acredita que a verdade ainda pode impedir a guerra; a outra sabe que, em Jesed, hesitar pode parecer fraqueza.\n\nEnquanto os clãs medem fome, território e antigas humilhações, Rendar retorna da floresta carregando os nomes de sua família morta e uma vingança que pode incendiar o mundo. Buldar, Tondrar, Vendrar, Glydar, Cendar, Urtistar e Fendelar são arrastados para alianças frágeis, mentiras políticas e batalhas em que ninguém permanece inocente. Por trás dos exércitos, segredos enterrados na morte de Orionus revelam que a guerra talvez tenha sido construída muito antes do primeiro sangue.\n\nGuerras de Sangue é uma fantasia política sobre duas irmãs, um reino cercado e povos que aprenderam a sobreviver cobrando dívidas. Em Jesed, justiça e vingança caminham juntas, a paz também pode oprimir e toda escolha capaz de salvar um povo condena alguém a pagar o preço."
     },
     {
-      "id": "dinastia-polar", "order": 3, "name": "Dinastia Polar", "status": "locked", "icon": "fortress",
+      "id": "dinastia-polar", "order": 3, "name": "Dinastia Polar", "status": "active", "icon": "fortress",
       "visual": "Pedra azul-escura, ouro envelhecido, anéis concêntricos e peso institucional.",
       "palette": ["#0D1D2A", "#95743D", "#DDD6C5"],
       "cover": "assets/books/ciclo-de-jesed/dinastia-polar/cover.png",
@@ -70,9 +70,9 @@ window.DI_DATA = {
       ]
     },
     {
-      "group": "Dinastias",
+      "group": "Clãs",
       "items": [
-        { "id": "dynasties", "label": "Dinastias", "icon": "crown" }
+        { "id": "clans", "label": "Clãs", "icon": "crown" }
       ]
     },
     {
@@ -103,7 +103,7 @@ window.DI_DATA = {
     }
   ],
   "characters": [],
-  "dynasties": [],
+  "clans": [],
   "places": [],
   "chapters": [],
   "timeline": [],
