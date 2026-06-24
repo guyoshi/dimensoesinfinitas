@@ -234,29 +234,28 @@
   }
 
   function renderInicio() {
-    const plaques = [
+    const quick = [
       ["characters", "people", "Personagens", "Vozes ainda por registar dentro da hierarquia."],
       ["relationships", "network", "Relações", "Lealdade, vigilância e dívidas entre os anéis."],
       ["timeline", "timeline", "Linha do Tempo", "Cerimónia, ciclos e decretos do Conselho."],
       ["chapters", "chapter", "Capítulos", "Capítulos ainda por escrever."]
     ];
+    const map = D.maps?.main;
     refs.main.innerHTML = `<div class="page-enter">
-      <section class="dp-home-hero">
-        ${dpRingsSvg()}
-        <div class="dp-home-hero-content">
-          <p class="dp-eyebrow">Ciclo de Jesed — Guia do Livro</p>
-          <img class="dp-home-logo" src="assets/branding/dinastia-polar/logo-white.png" alt="Dinastia Polar" onerror="this.replaceWith(Object.assign(document.createElement('h1'),{className:'dp-home-title',textContent:'Dinastia Polar'}))">
-          <p class="dp-tagline">A raiz cresceu. Os anéis se fecharam. E agora até o poder precisa provar que merece permanecer.</p>
-          <div class="dp-hero-actions">
+      <section class="hero-map-card home-guide-hero">
+        ${map ? `<img src="${escapeHtml(map)}" alt="Mapa de Kaeliran e da Dinastia Polar" loading="eager">` : `<div class="dp-hero-map-placeholder">${dpRingsSvg()}</div>`}
+        <div class="hero-map-content">
+          <p class="eyebrow">Ciclo de Jesed — Guia do Livro</p>
+          <img class="hero-logo glow-title" src="assets/branding/dinastia-polar/logo-white.webp" alt="Dinastia Polar" onerror="this.replaceWith(Object.assign(document.createElement('h1'),{className:'hero-title',textContent:'Dinastia Polar'}))">
+          <p>A raiz cresceu. Os anéis se fecharam. E agora até o poder precisa provar que merece permanecer.</p>
+          <div class="hero-actions">
             <button class="primary-button" data-route="map">${icon("map")} Abrir mapa</button>
             <button class="secondary-button" data-route="books">${icon("books")} Ver os cinco livros</button>
             <button class="secondary-button contemplate-button" data-contemplative="polar">${icon("eye")} Modo contemplativo</button>
           </div>
         </div>
       </section>
-      <section class="dp-card-grid" aria-label="Caminhos principais">
-        ${plaques.map(([route, iconName, label, text]) => `<button class="dp-plaque" data-route="${route}"><span class="dp-plaque-icon">${icon(iconName)}</span><strong>${escapeHtml(label)}</strong><small>${escapeHtml(text)}</small></button>`).join("")}
-      </section>
+      <section class="quick-grid home-guide-grid">${quick.map(([route, iconName, label, text]) => `<button class="quick-card home-guide-card" data-route="${route}"><span class="quick-icon">${icon(iconName)}</span><strong>${escapeHtml(label)}</strong><small>${escapeHtml(text)}</small></button>`).join("")}</section>
       <section class="dp-home-footer">
         ${dpRingsSvg()}
         <div class="dp-home-footer-content">
@@ -469,11 +468,50 @@
 
   function renderMap() {
     const map = D.maps?.main;
-    refs.main.innerHTML = `<div class="page-enter map-page">${pageHeader("Mapa · Livro 3", "Kaeliran e a Dinastia Polar", "O mapa de Kaeliran ainda está por criar. Esta secção já está preparada para recebê-lo.")}
-      ${!map ? emptyPanel("Mapa ainda não disponível", "As muralhas tripartidas, distritos e arredores de Kaeliran aparecerão aqui, com o mesmo sistema de zoom e marcadores usado em Guerras de Sangue.") : ""}
+    refs.main.innerHTML = `<div class="page-enter map-page">${pageHeader("Mapa · Livro 3", "Kaeliran e a Dinastia Polar", map ? "O mapa de Kaeliran e dos territórios da Dinastia Polar." : "O mapa de Kaeliran ainda está por criar. Esta secção já está preparada para recebê-lo.")}
+      ${map ? `<div class="dp-map-viewer" id="dpMapViewer">
+        <div class="dp-map-controls">
+          <button class="icon-btn" id="dpMapZoomIn" title="Aproximar">${icon("zoomin")}</button>
+          <button class="icon-btn" id="dpMapZoomOut" title="Afastar">${icon("zoomout")}</button>
+          <button class="icon-btn" id="dpMapReset" title="Centrar">${icon("center")}</button>
+          <a class="icon-btn" href="${escapeHtml(map)}" download title="Descarregar mapa">${icon("copy")}</a>
+        </div>
+        <div class="dp-map-stage" id="dpMapStage">
+          <img id="dpMapImg" src="${escapeHtml(map)}" alt="Mapa de Kaeliran e da Dinastia Polar" draggable="false">
+        </div>
+      </div>` : emptyPanel("Mapa ainda não disponível", "As muralhas tripartidas, distritos e arredores de Kaeliran aparecerão aqui, com o mesmo sistema de zoom e marcadores usado em Guerras de Sangue.")}
       <div class="book-slider"><button class="book-step" onclick="location.href='ruinas.html#/mapa'"><small>Livro 1</small><strong>Ruínas dos Céus</strong></button><button class="book-step" onclick="location.href='guerras.html#/mapa'"><small>Livro 2</small><strong>Guerras de Sangue</strong></button><button class="book-step active" data-route="map"><small>Livro 3</small><strong>Dinastia Polar</strong></button><button class="book-step" disabled><small>Livro 4</small><strong>Herdeiros das Cinzas</strong></button><button class="book-step" disabled><small>Livro 5</small><strong>Coração de Poeira</strong></button></div>
     </div>`;
     setBreadcrumbs([{label:"Dimensões Infinitas",route:"portal"},{label:"Ciclo de Jesed",route:"inicio"},{label:"Mapa"}]);
+    if (map) initMapViewer();
+  }
+
+  function initMapViewer() {
+    const stage = document.getElementById("dpMapStage");
+    const img = document.getElementById("dpMapImg");
+    if (!stage || !img) return;
+    let scale = 1, ox = 0, oy = 0, dragging = false, startX = 0, startY = 0, lastOx = 0, lastOy = 0;
+    function applyTransform() { img.style.transform = `translate(${ox}px,${oy}px) scale(${scale})`; img.style.transformOrigin = "center center"; }
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+    function zoom(delta, cx, cy) {
+      const prev = scale;
+      scale = clamp(scale * (delta > 0 ? 1.18 : 0.85), 0.4, 6);
+      const ratio = scale / prev;
+      ox = cx - ratio * (cx - ox); oy = cy - ratio * (cy - oy);
+      applyTransform();
+    }
+    stage.addEventListener("wheel", e => { e.preventDefault(); const r = stage.getBoundingClientRect(); zoom(-e.deltaY, e.clientX - r.left - r.width/2, e.clientY - r.top - r.height/2); }, { passive: false });
+    stage.addEventListener("mousedown", e => { dragging = true; startX = e.clientX; startY = e.clientY; lastOx = ox; lastOy = oy; stage.style.cursor = "grabbing"; });
+    window.addEventListener("mousemove", e => { if (!dragging) return; ox = lastOx + e.clientX - startX; oy = lastOy + e.clientY - startY; applyTransform(); });
+    window.addEventListener("mouseup", () => { dragging = false; stage.style.cursor = "grab"; });
+    // Touch
+    let touches = [], pinchDist = 0;
+    stage.addEventListener("touchstart", e => { touches = [...e.touches]; if (touches.length === 1) { startX = touches[0].clientX; startY = touches[0].clientY; lastOx = ox; lastOy = oy; } if (touches.length === 2) pinchDist = Math.hypot(touches[0].clientX - touches[1].clientX, touches[0].clientY - touches[1].clientY); }, { passive: true });
+    stage.addEventListener("touchmove", e => { e.preventDefault(); if (e.touches.length === 1) { ox = lastOx + e.touches[0].clientX - startX; oy = lastOy + e.touches[0].clientY - startY; applyTransform(); } if (e.touches.length === 2) { const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY); const cx = (e.touches[0].clientX + e.touches[1].clientX)/2; const cy = (e.touches[0].clientY + e.touches[1].clientY)/2; const r = stage.getBoundingClientRect(); zoom(d - pinchDist, cx - r.left - r.width/2, cy - r.top - r.height/2); pinchDist = d; } }, { passive: false });
+    document.getElementById("dpMapZoomIn")?.addEventListener("click", () => zoom(1, 0, 0));
+    document.getElementById("dpMapZoomOut")?.addEventListener("click", () => zoom(-1, 0, 0));
+    document.getElementById("dpMapReset")?.addEventListener("click", () => { scale = 1; ox = 0; oy = 0; applyTransform(); });
+    stage.style.cursor = "grab"; applyTransform();
   }
 
   function loreKindInfo(kind) {
